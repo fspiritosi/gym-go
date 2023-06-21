@@ -1,0 +1,19 @@
+{
+  "name": "gy-go",
+  "version": "1.0.0",
+  "description": "backend para aplicación de manejo de gimnasio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fspiritosi/gym-go.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fspiritosi/gym-go/issues"
+  },
+  "homepage": "https://github.com/fspiritosi/gym-go#readme"
+}

@@ -25,7 +25,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     difficulty: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
+      values: ['easy', 'medium', 'hard'],
       allowNull: false,
     },
     isAcive: {

@@ -10,7 +10,7 @@ activitiesRouter.get("/", (req, res) => {
 });
 
 activitiesRouter.get("/:name", (req, res) => {
-  const { name } = req.query;
+  const { name } = req.params;
 
   res.status(200).send(`esta es la clase de: ${name}`);
 });

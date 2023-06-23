@@ -11,4 +11,8 @@ goalsRouter.get("/:name", (req, res) => {
   res.status(200).send(`esto es goals de: ${name}`);
 });
 
+goalsRouter.post("/", (req, res) => {
+  res.status(200).send("acá creo las goals");
+});
+
 module.exports = goalsRouter;

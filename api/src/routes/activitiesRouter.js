@@ -1,10 +1,6 @@
 const { Router } = require("express");
 const activitiesRouter = Router();
 
-// activitiesRouter.get("/", (req, res) => {
-//   res.status(200).send("esto es landing");
-// });
-
 activitiesRouter.get("/", (req, res) => {
   res.status(200).send("esto es clases");
 });

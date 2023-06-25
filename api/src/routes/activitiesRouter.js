@@ -3,6 +3,7 @@ const activitiesRouter = Router();
 const {
   postActivities,
   getActivitiesByName,
+  putActivitiesById,
 } = require("../handlers/activitiesHandler");
 
 activitiesRouter.get("/", (req, res) => {
@@ -16,6 +17,7 @@ activitiesRouter.get("/", (req, res) => {
 // });
 activitiesRouter.get("/:name", getActivitiesByName);
 activitiesRouter.post("/", postActivities);
+activitiesRouter.put("/:id", putActivitiesById);
 // activitiesRouter.post("/", (req, res) => {
 //   res.status(200).send("acá creo la clase");
 // });

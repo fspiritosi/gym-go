@@ -39,7 +39,38 @@ const findActivitiByName = async (name) => {
   console.log(nameDb);
   return nameDb;
 };
+
+const putActivities = async (
+  id,
+  title,
+  description,
+  image,
+  goals,
+  difficulty,
+  isActive
+) => {
+  const goalsBd = await Goals.findAll({
+    where: { name: goals },
+  });
+
+  if (goalsBd.length > 0) {
+    const updatedActivity = await Activities.update(
+      {
+        title,
+        description,
+        image,
+        goals: goalsBd,
+        difficulty,
+        isActive,
+      },
+      { where: { id } }
+    );
+    return updatedActivity;
+  }
+};
+
 module.exports = {
   createActivities,
   findActivitiByName,
+  putActivities,
 };

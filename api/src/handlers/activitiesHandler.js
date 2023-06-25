@@ -2,6 +2,7 @@ const {
   createActivities,
   findActivitiByName,
   putActivities,
+  deleteActivities,
 } = require("../controllers/activitiesControllers.js");
 
 const postActivities = async (req, res) => {
@@ -49,8 +50,19 @@ const putActivitiesById = async (req, res) => {
     return res.status(404).json({ message: error.message });
   }
 };
+
+const deleteActivitiesById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const delActivitie = await deleteActivities(id);
+    res.status(200).json(delActivitie);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
 module.exports = {
   postActivities,
   getActivitiesByName,
   putActivitiesById,
+  deleteActivitiesById,
 };

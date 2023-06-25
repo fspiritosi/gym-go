@@ -28,8 +28,6 @@ const createActivities = async (
   } else {
     return "debe ingresar una goals que exista";
   }
-  // console.log(goalsBd.name);
-  // newActivitie.addGoals(goalsBd.name);
 };
 
 const findActivitiByName = async (name) => {
@@ -69,8 +67,19 @@ const putActivities = async (
   }
 };
 
+const deleteActivities = async (id) => {
+  const activitie = await Activities.findByPk(id);
+
+  if (!activitie) {
+    return "no existe la actividad";
+  }
+  await Activities.destroy({ where: { id: id } });
+
+  return "elemento borrado";
+};
 module.exports = {
   createActivities,
   findActivitiByName,
   putActivities,
+  deleteActivities,
 };

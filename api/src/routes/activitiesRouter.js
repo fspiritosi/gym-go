@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const activitiesRouter = Router();
 
 activitiesRouter.get("/", (req, res) => {
@@ -7,12 +8,11 @@ activitiesRouter.get("/", (req, res) => {
 
 activitiesRouter.get("/:name", (req, res) => {
   const { name } = req.params;
-
   res.status(200).send(`esta es la clase de: ${name}`);
 });
 
 activitiesRouter.post("/", (req, res) => {
-  res.status(200).send("acá creo la clase");
+  res.status(200).send("esta es la ruta post");
 });
 
 module.exports = activitiesRouter;

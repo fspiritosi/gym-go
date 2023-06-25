@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 const { Activities, Goals } = require("../db");
 
 const createActivities = async (
@@ -32,6 +32,14 @@ const createActivities = async (
   // newActivitie.addGoals(goalsBd.name);
 };
 
+const findActivitiByName = async (name) => {
+  const nameDb = await Activities.findAll({
+    where: { title: { [Op.like]: `%${name}%` } },
+  });
+  console.log(nameDb);
+  return nameDb;
+};
 module.exports = {
   createActivities,
+  findActivitiByName,
 };

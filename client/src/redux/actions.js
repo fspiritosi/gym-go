@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const GET_ACTIVITIE_NAME = "GET_ACTIVITIE_NAME"
+export const GET_DETAILS_ID ='GET_DETAILS_ID'
 
 export const getActivities = () => {
     return async function (dispatch) {
@@ -28,3 +29,14 @@ export function searchActivitieName(title) {
         }
     };
 };
+
+export function getDetails(id){
+    return async function(dispatch){
+        try{
+            const json = await axios.get(`/activities/${id}`  )
+        return dispatch({type:GET_DETAILS_ID , payload: json.data,})
+        }catch(error){
+            console.log(error)
+        }   
+    }
+}

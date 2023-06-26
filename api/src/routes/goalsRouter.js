@@ -1,18 +1,15 @@
 const { Router } = require("express");
-const { postGoals } = require("../handlers/goalsHandler");
+const {
+  postGoals,
+  putGoalsById,
+  getGoals,
+  getGoalsById,
+} = require("../handlers/goalsHandler");
 const goalsRouter = Router();
 
-const {
-  getUserHandler,
-  postUserHandler,
-  getHandlerById,
-  putHandlerById,
-} = require("../handler/index");
-
-goalsRouter.get("/", getUserHandler);
-goalsRouter.get("/:id", getHandlerById);
-goalsRouter.post("/", postUserHandler);
-goalsRouter.put("/:id", putHandlerById);
-
+goalsRouter.get("/", getGoals);
+goalsRouter.get("/:id", getGoalsById);
+goalsRouter.post("/", postGoals);
+goalsRouter.put("/:id", putGoalsById);
 
 module.exports = goalsRouter;

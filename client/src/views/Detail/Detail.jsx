@@ -35,6 +35,7 @@ const Detail = () => {
                     <h3>Description {activities[0].description}</h3>
                     <h3>Dificultad: {activities[0].dificulty} </h3>
                     <h3>Goals: {activities[0].goals} </h3>
+                    <h3>Image: {activities[0].image}</h3>
                   </div>
               </div>
               :

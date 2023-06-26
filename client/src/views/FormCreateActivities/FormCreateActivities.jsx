@@ -17,7 +17,7 @@ const validationSubmit = Yup.object({
 const simulateGoals = ['resistencia', 'cardio', 'masa muscular', 'perder peso']
 
 function FormCreateActivities() {
-
+  const navigate = useNavigate();
   
   const [activity, setActivity] = useState({
     title: "",
@@ -34,13 +34,11 @@ function FormCreateActivities() {
     console.log('desde SaveImg',activity)
   }
 
-  const handleSubmit = async(val) => {
-
-
-    await axios.post("/activities", activity);
-    
-    
-  }
+  const handleSubmit = async (val) => {
+    await axios.post("/activities", activity)
+    .then(res => navigate(`activity-detail/${res.data.id}`))
+    .catch(res => alert(res));
+  };
   console.log('desde state',activity)
 
   return (

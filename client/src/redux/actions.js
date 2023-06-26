@@ -19,7 +19,7 @@ export function searchActivitieName(title) {
     return async function (dispatch) {
         try {
             const infoActivitieName = await axios.get("/activities?title=" + title);
-            return dispatch({
+            dispatch({
                 type: GET_ACTIVITIE_NAME,
                 payload: infoActivitieName.data,
             });
@@ -27,4 +27,4 @@ export function searchActivitieName(title) {
             return alert("Activitie Not Found");
         }
     };
-}
+};

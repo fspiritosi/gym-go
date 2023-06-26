@@ -11,7 +11,6 @@ const SearchBar = () => {
     const handlerInputChange = (e) =>{ 
         e.preventDefault()
         setTitle(e.target.value)
-        console.log(setTitle);
     }
     
     const handlerSubmit = (e) => {
@@ -23,8 +22,8 @@ const SearchBar = () => {
     return(
         <div>
             <button type="submit" onClick={handlerSubmit}>Search</button>
-                <input type="text" value={title} placeholder="Search Activitie" onChange={handlerInputChange}/>
-            </div>
+            <input type="text" value={title} placeholder="Search Activity" onChange={handlerInputChange}/>
+        </div>
     )
 }
 

@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const activitiesRouter = require("./activitiesRouter");
 const goalsRouter = require("./goalsRouter");
+
 const mainRouter = Router();
 
 mainRouter.use("/activities", activitiesRouter);

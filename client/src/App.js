@@ -1,18 +1,18 @@
 import './App.css';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './views/Landing/Landing';
 import Home from './views/Home/Home';
 import Detail from './views/Detail/Detail';
-
 import Nav from './components/Nav/Nav';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import Landing from './components/Landing/Landing';
 import FormCreateActivities from './views/FormCreateActivities/FormCreateActivities';
+
 
 function App() {
   let location = useLocation();
 
   return (
+
     <div className="App">
       {location.pathname !== "/" && <Nav />}
       <Routes>
@@ -22,6 +22,7 @@ function App() {
         <Route path="/create-activity" element={<FormCreateActivities />} />
       </Routes>
     </div>
+
   );
 }
 

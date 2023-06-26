@@ -1,4 +1,4 @@
-import { GET_ACTIVITIES } from "./actions";
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME } from "./actions";
 
 const initialState = {
     activities: [],
@@ -11,6 +11,12 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 activities: action.payload,
+            }
+
+        case GET_ACTIVITIE_NAME:
+            return {
+                ...state,
+                activities: action.payload
             }
 
         default:

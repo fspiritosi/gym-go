@@ -1,5 +1,6 @@
 import React from 'react';
 import CardActivities from '../CardActivities/CardActivities';
+import SearchBar from '../SearchBar/SearchBar';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getActivities } from '../../redux/actions'; 
@@ -17,8 +18,9 @@ const Activities = () => {
         <div>
             <h1>Activities</h1>
             <div>
-            {activities?.map((a,index) => {
-                return (
+                <SearchBar />
+                {activities?.map((a,index) => {
+                    return (
             <CardActivities
                 key={index}
                 image={a.image}

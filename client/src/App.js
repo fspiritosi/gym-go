@@ -1,24 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+<<<<<<< Updated upstream
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Landing from './views/Landing/Landing';
+import Home from './views/Home/Home';
+import Detail from './views/Detail/Detail';
+import Form from './views/Form/Form';
+import Nav from './components/Nav/Nav';
+=======
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Landing from './components/Landing/Landing';
+import FormCreateActivities from './components/FormCreateActivities/FormCreateActivities';
+>>>>>>> Stashed changes
 
 function App() {
+  let location = useLocation();
+
   return (
+<<<<<<< Updated upstream
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {location.pathname !== "/" && <Nav />}
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route path="/activities" element={<Home />} />
+        <Route path="/activity-detail" element={<Detail />} />
+        <Route path="/create-activity" element={<Form />} />
+      </Routes>
     </div>
+=======
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route exact path="/" element={<Landing />} />
+          <Route path="/createActivity" element={<FormCreateActivities />} />
+        </Routes>
+      </div>
+    </Router>
+>>>>>>> Stashed changes
   );
 }
 

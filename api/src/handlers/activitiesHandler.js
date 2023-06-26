@@ -29,14 +29,14 @@ const getActivityByIdHandler = async (req, res) => {
 
 const postActivitiesHandler = async (req, res) => {
   try {
-    const { title, description, image, goals, difficulty, isActive } = req.body;
+    const { title, description, image, goals, difficulty } = req.body;
     const newActivity = await createActivities(
       title,
       description,
       image,
       goals,
       difficulty,
-      isActive
+      //isActive
     );
     res.status(201).json(newActivity);
   } catch (error) {

@@ -4,7 +4,7 @@ import Landing from './views/Landing/Landing';
 import Home from './views/Home/Home';
 import Detail from './views/Detail/Detail';
 import Nav from './components/Nav/Nav';
-import Landing from './components/Landing/Landing';
+import Landing from './views/Landing/Landing';
 import FormCreateActivities from './views/FormCreateActivities/FormCreateActivities';
 
 

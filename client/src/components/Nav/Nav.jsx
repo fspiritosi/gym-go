@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link} from "react-router-dom";
 import "./Navbar.css"
 
 const Nav = () => {
@@ -13,7 +13,7 @@ const Nav = () => {
             >
                 <Link to="/" className="activities">
                     <li>Activities</li>
-                </Link>
+                </Link> 
                 <Link to="/create-activity/" className="create-activity">
                     <li>Create Classes</li>
                 </Link>         

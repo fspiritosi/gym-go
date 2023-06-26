@@ -1,21 +1,15 @@
 const { Router } = require("express");
-const { postGoals } = require("../handlers/goalsHandler");
+const {
+  postGoals,
+  putGoalsById,
+  getGoals,
+  getGoalsById,
+} = require("../handlers/goalsHandler");
 const goalsRouter = Router();
 
-goalsRouter.get("/", (req, res) => {
-  res.status(200).send("esto es goals");
-});
-
-goalsRouter.get("/:name", (req, res) => {
-  const { name } = req.params;
-
-  res.status(200).send(`esto es goals de: ${name}`);
-});
-
+goalsRouter.get("/", getGoals);
+goalsRouter.get("/:id", getGoalsById);
 goalsRouter.post("/", postGoals);
-
-// goalsRouter.post("/", (req, res) => {
-//   res.status(200).send("acá creo las goals");
-// });
+goalsRouter.put("/:id", putGoalsById);
 
 module.exports = goalsRouter;

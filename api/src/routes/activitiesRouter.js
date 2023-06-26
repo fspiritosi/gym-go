@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const {
   getActivitiesHandler,
   getActivityByIdHandler,
@@ -14,5 +15,6 @@ activitiesRouter.get("/:id", getActivityByIdHandler);
 activitiesRouter.post("/", postActivitiesHandler);
 activitiesRouter.put("/:id", putActivitiesByIdHandler);
 activitiesRouter.delete("/:id", deleteActivitiesByIdHandler);
+
 
 module.exports = activitiesRouter;

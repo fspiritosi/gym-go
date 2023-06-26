@@ -20,16 +20,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(1234),
       allowNull: false,
     },
-    goals: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false,
-    },
     difficulty: {
       type: DataTypes.ENUM,
       values: ['easy', 'medium', 'hard'],
       allowNull: false,
     },
-    isAcive: {
+    isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     }

@@ -24,9 +24,10 @@ const Activities = () => {
             <CardActivities
                 key={index}
                 image={a.image}
-                name={a.name}
-            />
-            )
+                title={a.title}
+                difficulty={a.difficulty}
+                />
+                )
             })}
             </div>
         </div>

@@ -1,8 +1,12 @@
 import React from 'react'
+import Activities from '../../components/Activities/Activities'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      {/* Home */}
+    <Activities />
+    </div>
   )
 }
 

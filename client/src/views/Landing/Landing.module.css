@@ -26,14 +26,16 @@
     width:358px;
 }
 
-.button
-{
-background-color:#ffffff;
-margin-top: 20px;
-height:82px;
-width:82px;
-border-radius:50%;
-border: 5px solid #e4b921;
-animation: jump 0.5s infinite;
+.button {
+  background-color:#ffffff;
+  color:#0a0716;
+  font-size:15px;
+  font-family:Bebas Neue;
+  margin-top: 20px;
+  height:82px;
+  width:82px;
+  border-radius:50%;
+  border: 5px solid #e4b921;
+  animation: jump 0.5s infinite;
 }
 

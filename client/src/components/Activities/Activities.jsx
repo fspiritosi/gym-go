@@ -17,14 +17,15 @@ const Activities = () => {
         <div>
             <h1>Activities</h1>
             <div>
-                {activities?.map((a,index) => {
-                    return (
+            {activities?.map((a,index) => {
+                return (
             <CardActivities
                 key={index}
                 image={a.image}
-                name={a.name}
-            />
-            )
+                title={a.title}
+                difficulty={a.difficulty}
+                />
+                )
             })}
             </div>
         </div>

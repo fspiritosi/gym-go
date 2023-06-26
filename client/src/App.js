@@ -5,6 +5,9 @@ import Home from './views/Home/Home';
 import Detail from './views/Detail/Detail';
 import Nav from './components/Nav/Nav';
 import FormCreateActivities from './views/FormCreateActivities/FormCreateActivities';
+import axios from 'axios'
+axios.defaults.baseURL = "http://localhost:3001"
+
 
 
 function App() {

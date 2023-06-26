@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING(1234),
+      type: DataTypes.ARRAY(DataTypes.STRING(1234)),
       allowNull: false,
     },
     difficulty: {

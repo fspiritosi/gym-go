@@ -1,38 +1,50 @@
 const {
+  searchActivitiesByName,
+  getAllActivities,
+  findActivityById,
   createActivities,
-  findActivitiByName,
   putActivities,
   deleteActivities,
 } = require("../controllers/activitiesControllers.js");
 
-const postActivities = async (req, res) => {
+const getActivitiesHandler = async (req, res) => {
+  const { title } = req.query;
   try {
-    const { title, description, image, goals, difficulty, isAcive } = req.body;
-    const newActivitie = await createActivities(
+    const results = title ? await searchActivitiesByName(title) : await getAllActivities();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const getActivityByIdHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const activity = await findActivityById(id);
+    res.status(200).json(activity);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
+const postActivitiesHandler = async (req, res) => {
+  try {
+    const { title, description, image, goals, difficulty, isActive } = req.body;
+    const newActivity = await createActivities(
       title,
       description,
       image,
       goals,
       difficulty,
-      isAcive
+      isActive
     );
-    res.status(201).json(newActivitie);
+    res.status(201).json(newActivity);
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
 };
 
-const getActivitiesByName = async (req, res) => {
-  try {
-    const { name } = req.params;
-    const getActivitie = await findActivitiByName(name);
-    res.status(200).json(getActivitie);
-  } catch (error) {
-    return res.status(404).json({ message: error.message });
-  }
-};
-
-const putActivitiesById = async (req, res) => {
+const putActivitiesByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, image, goals, difficulty, isActive } = req.body;
@@ -51,7 +63,7 @@ const putActivitiesById = async (req, res) => {
   }
 };
 
-const deleteActivitiesById = async (req, res) => {
+const deleteActivitiesByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const delActivitie = await deleteActivities(id);
@@ -61,8 +73,9 @@ const deleteActivitiesById = async (req, res) => {
   }
 };
 module.exports = {
-  postActivities,
-  getActivitiesByName,
-  putActivitiesById,
-  deleteActivitiesById,
+  getActivitiesHandler,
+  getActivityByIdHandler,
+  postActivitiesHandler,
+  putActivitiesByIdHandler,
+  deleteActivitiesByIdHandler
 };

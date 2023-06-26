@@ -1,41 +1,64 @@
-const { where, Op } = require("sequelize");
+const { Op } = require("sequelize");
 const { Activities, Goals } = require("../db");
 
-const createActivities = async (
-  title,
-  description,
-  image,
-  goals,
-  difficulty,
-  isAcive
-) => {
-  console.log(goals);
-  const goalsBd = await Goals.findAll({
-    where: { name: goals },
+const getAllActivities = async () => {
+  let activities = await Activities.findAll({
+    include: {
+      model: Goals,
+      attributes: ['name'],
+      through: { attributes: []}
+    }
   });
+  activities = activities.map(activity => {
+    const transformedGoals = activity.Goals.map(goal => goal.name);
+    return { ...activity.toJSON(), Goals: transformedGoals };
+  });
+  return activities;
+}
 
-  console.log("este es goalBd: " + goalsBd);
-  if (goalsBd.length > 0) {
-    const newActivitie = await Activities.create({
-      title,
-      description,
-      image,
-      goals: goalsBd,
-      difficulty,
-      isAcive,
-    });
-    return newActivitie;
-  } else {
-    return "debe ingresar una goals que exista";
-  }
+const searchActivitiesByName = async (title) => {
+  filteredActivities = await Activities.findAll({
+    include: {
+      model: Goals,
+      attributes: ['name'],
+      through: { attributes: [] }
+    },
+    where: {
+      title: {
+        [Op.iLike]: `%${title}%`
+      }
+    }
+  });
+  filteredActivities = filteredActivities.map(activity => {
+    const transformedGoals = activity.Goals.map(goal => goal.name);
+    return { ...activity.toJSON(), Goals: transformedGoals };
+  });
+  return filteredActivities;
+}
+
+const findActivityById = async (id) => {
+  let activity = await Activities.findByPk(id, {
+    include: {
+      model: Goals,
+      attributes: ['name'],
+      through: { attributes: [] }
+    }
+  });
+  activity = { ...activity.toJSON(), Goals: activity.Goals.map(goal => goal.name) };
+  return activity;
 };
 
-const findActivitiByName = async (name) => {
-  const nameDb = await Activities.findAll({
-    where: { title: { [Op.like]: `%${name}%` } },
-  });
-  console.log(nameDb);
-  return nameDb;
+const createActivities = async (title, description, image, goals, difficulty) => {
+  const newActivity = await Activities.create({ title, description, image, difficulty });
+  for (const goalStr of goals) {
+    const goal = await Goals.findAll({
+      where: {
+        name: goalStr
+      }
+    });
+    await newActivity.addGoals(goal);
+  };
+  return newActivity;
 };
 
 const putActivities = async (
@@ -68,18 +91,21 @@ const putActivities = async (
 };
 
 const deleteActivities = async (id) => {
-  const activitie = await Activities.findByPk(id);
+  const activity = await Activities.findByPk(id);
 
-  if (!activitie) {
+  if (!activity) {
     return "no existe la actividad";
   }
   await Activities.destroy({ where: { id: id } });
 
   return "elemento borrado";
 };
+
 module.exports = {
+  getAllActivities,
+  searchActivitiesByName,
+  findActivityById,
   createActivities,
-  findActivitiByName,
   putActivities,
   deleteActivities,
 };

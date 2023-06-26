@@ -1,27 +1,18 @@
 const { Router } = require("express");
-const activitiesRouter = Router();
 const {
-  postActivities,
-  getActivitiesByName,
-  putActivitiesById,
-  deleteActivitiesById,
+  getActivitiesHandler,
+  getActivityByIdHandler,
+  postActivitiesHandler,
+  putActivitiesByIdHandler,
+  deleteActivitiesByIdHandler,
 } = require("../handlers/activitiesHandler");
 
-activitiesRouter.get("/", (req, res) => {
-  res.status(200).send("esto es clases");
-});
+const activitiesRouter = Router();
 
-// activitiesRouter.get("/:name", (req, res) => {
-//   const { name } = req.params;
-
-//   res.status(200).send(`esta es la clase de: ${name}`);
-// });
-activitiesRouter.get("/:name", getActivitiesByName);
-activitiesRouter.post("/", postActivities);
-activitiesRouter.put("/:id", putActivitiesById);
-activitiesRouter.delete("/:id", deleteActivitiesById);
-// activitiesRouter.post("/", (req, res) => {
-//   res.status(200).send("acá creo la clase");
-// });
+activitiesRouter.get("/", getActivitiesHandler);
+activitiesRouter.get("/:id", getActivityByIdHandler);
+activitiesRouter.post("/", postActivitiesHandler);
+activitiesRouter.put("/:id", putActivitiesByIdHandler);
+activitiesRouter.delete("/:id", deleteActivitiesByIdHandler);
 
 module.exports = activitiesRouter;

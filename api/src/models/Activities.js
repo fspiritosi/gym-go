@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       values: ['easy', 'medium', 'hard'],
       allowNull: false,
     },
-    isAcive: {
+    isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     }

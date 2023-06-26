@@ -23,9 +23,11 @@ const Activities = () => {
                     return (
             <CardActivities
                 key={index}
+                id={a.id}
                 image={a.image}
                 title={a.title}
                 difficulty={a.difficulty}
+                Goals={a.Goals}
                 />
                 )
             })}

@@ -1,6 +1,7 @@
 import React from 'react';
 import CardActivities from '../CardActivities/CardActivities';
 import SearchBar from '../SearchBar/SearchBar';
+import FilterandSort from '../FilterandSort/FilterandSort';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getActivities } from '../../redux/actions'; 
@@ -19,6 +20,7 @@ const Activities = () => {
             <h1>Activities</h1>
             <div>
                 <SearchBar />
+                <FilterandSort />
                 {activities?.map((a,index) => {
                     return (
             <CardActivities

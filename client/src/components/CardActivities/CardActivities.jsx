@@ -6,7 +6,6 @@ const Card = ({id, title, image, difficulty, Goals }) => {
     return (
         <div>
             <div>
-            {/* <h5>{image}</h5> */}
             <Link to={`/activity-detail/${id}`}>
             <img src={image} alt='' />
             </Link>
@@ -16,7 +15,6 @@ const Card = ({id, title, image, difficulty, Goals }) => {
             {/* {Goals?.map((g, index) => (
                 <li key={index}>{g}</li>
             ))} */}
-            {/* <button>Detail</button> */}
             </div>
         </div>
     );

@@ -15,6 +15,7 @@ const Detail = () => {
     getActivityDetail();
   }, [id]);
 
+  
   return (
     <div>
       <Link to='/activities'> <button className='btn'><span>Volver</span></button></Link>

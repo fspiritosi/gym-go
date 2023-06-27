@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route path="/activities" element={<Home />} />
-        <Route path="/activity-detail" element={<Detail />} />
+        <Route path="/activity-detail/:id" element={<Detail />} />
         <Route path="/create-activity" element={<FormCreateActivities />} />
       </Routes>
     </div>

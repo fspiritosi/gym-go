@@ -1,49 +1,44 @@
-import React from 'react'
-import {Link, useParams, useNavigate} from 'react-router-dom'
-import {useDispatch, useSelector} from 'react-redux'
-import { getDetails } from '../../redux/actions'
-import { useEffect } from 'react'
-
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+import styles from './Detail.module.css';
 
 const Detail = () => {
-  const activities = useSelector((state)=> state.details)
-  console.log(activities)
-  const dispatch= useDispatch();
-
-  const{id} = useParams();
-  
-  const navigate = useNavigate();
+  const {id} = useParams();
+  const [activityDetail, setActivityDetail] = useState(null);
 
   useEffect(() => {
-   dispatch(getDetails(id));
-    console.log(activities);
-  }, [dispatch, id, activities]);
-        
-
-
+    const getActivityDetail = async () => {
+      const response = await axios.get(`/activities/${id}`);
+      setActivityDetail(response.data);
+    };
+    getActivityDetail();
+  }, [id]);
 
   return (
     <div>
-           <Link to='/home'> <button className='btn'><span>Volver</span></button></Link>
-        {
-         activities.length> 0 ?   
-            <div className='containerDetail'>
-                <div className='imgContainer'>
-                    <img src={activities[0].image} alt="Classe" width="300px" height="250px"/>
-                </div>
-                <div >
-                    <h1>Classe {activities[0].title}</h1>
-                    <h3>Description {activities[0].description}</h3>
-                    <h3>Dificultad: {activities[0].dificulty} </h3>
-                    <h3>Goals: {activities[0].goals} </h3>
-                    <h3>Image: {activities[0].image}</h3>
-                  </div>
-              </div>
-              :
-              null
-              }
+      <Link to='/activities'> <button className='btn'><span>Volver</span></button></Link>
+      <div>
+        {activityDetail ? (
+          <div className={styles.containerDetail}>
+            <h1 className={styles.title}>{activityDetail.title}</h1>
+            <img className={styles.image} src={activityDetail.image} alt={activityDetail.title}/>
+            <h3>{activityDetail.description}</h3>
+            <h3>Dificultad: {activityDetail.difficulty}</h3>
+            <h3>Objetivos:</h3>
+            <ul>
+              {activityDetail.Goals.map(goal => (
+                <li key={goal}>{goal}</li>
+              ))}
+            </ul>
+            {/* <h3>Image: {activityDetail.image}</h3> */}
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Detail

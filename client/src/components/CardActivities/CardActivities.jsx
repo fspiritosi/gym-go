@@ -10,12 +10,6 @@ const Card = ({ id, title, image, difficulty, goals }) => {
             <Link to={`/activity-detail/${id}`} key={id} className={styles.cardLink}>
                 <h2>{title}</h2>
             </Link>
-            {/* <p>{difficulty}</p>
-            <ul>
-                {goals.map(goal => (
-                    <li key={goal}>{goal}</li>
-                ))}
-            </ul> */}
         </div>
     );
 };

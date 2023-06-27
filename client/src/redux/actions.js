@@ -3,6 +3,8 @@ import axios from "axios";
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const GET_ACTIVITIE_NAME = "GET_ACTIVITIE_NAME"
 export const GET_DETAILS_ID ='GET_DETAILS_ID'
+export const ORDER_BY_NAME = 'ORDER_BY_NAME'
+export const FILTER_BY_DIFFICULTY = 'FILTER_BY_DIFFICULTY'
 
 export const getActivities = () => {
     return async function (dispatch) {
@@ -40,3 +42,18 @@ export function getDetails(id){
         }   
     }
 }
+
+export function orderByName(payload) {
+    return {
+        type: ORDER_BY_NAME,
+        payload,
+    }
+};
+
+export function filterByDifficulty(payload) {
+    return {
+        type: FILTER_BY_DIFFICULTY,
+        payload,
+    }
+}
+

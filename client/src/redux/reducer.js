@@ -1,7 +1,7 @@
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME,GET_DETAILS_ID } from "./actions";
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY } from "./actions";
 
 const initialState = {
-    activities: [],detail:[]
+    activities: [], detail: [], allActivities: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -11,6 +11,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 activities: action.payload,
+                allActivities: action.payload
             }
 
         case GET_ACTIVITIE_NAME:
@@ -19,15 +20,48 @@ const rootReducer = (state = initialState, action) => {
                 activities: action.payload
             }
 
+        case ORDER_BY_NAME:
+            const isAscending = action.payload === 'a';
+            const sortedActivities = [...state.activities].sort((a, b) => {
+                if (a.title > b.title) return isAscending ? 1 : -1;
+                if (a.title < b.title) return isAscending ? -1 : 1;
+                return 0;
+            });
+            return {
+                ...state,
+                activities:
+                    action.payload === 'all' ?
+                        state.allActivities : sortedActivities
+            };
+
+        case FILTER_BY_DIFFICULTY:
+            const { allActivities } = state; 
+            const diffToFilter = action.payload;
+            let diffFiltered = allActivities;
+
+            if (diffToFilter !== "diff") {
+                diffFiltered = allActivities.filter((el) => el.difficulty === diffToFilter);
+                if (diffFiltered.length === 0) {
+                    diffFiltered = allActivities;
+                }
+            }
+
+            return {
+                ...state,
+                activities: 
+                action.payload === 'diff' ?
+                    state.allActivities : diffFiltered
+            };
+
         default:
             return { ...state };
 
-         case GET_DETAILS_ID:
-            return{
+        case GET_DETAILS_ID:
+            return {
                 ...state,
                 detail: action.payload
             }
-        
+
     }
 
 }

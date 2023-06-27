@@ -1,6 +1,7 @@
 import React from 'react';
 import CardActivities from '../CardActivities/CardActivities';
 import SearchBar from '../SearchBar/SearchBar';
+import FilterandSort from '../FilterandSort/FilterandSort';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getActivities } from '../../redux/actions';
@@ -18,21 +19,23 @@ const Activities = () => {
     <div>
       <h1 className={styles.title}>Actividades</h1>
         <div>
-          <SearchBar />
-        </div>
-        <div className={styles.activitiesContainer}>
-          {activities?.map((activity,index) => {
-            return (
-              <CardActivities
+            <h1>Activities</h1>
+            <div>
+                <SearchBar />
+                <FilterandSort />
+                {activities?.map((a,index) => {
+                    return (
+            <CardActivities
                 key={index}
-                id={activity.id}
-                image={activity.image}
-                title={activity.title}
-                difficulty={activity.difficulty}
-                goals={activity.Goals}
-              />
-            )
-          })}
+                id={a.id}
+                image={a.image}
+                title={a.title}
+                difficulty={a.difficulty}
+                Goals={a.Goals}
+                />
+                )
+            })}
+            </div>
         </div>
     </div>
   )

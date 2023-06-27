@@ -10,7 +10,7 @@ import axios from 'axios'
 const validationSubmit = Yup.object({
   title: Yup.string().min(5).max(25).required('Required'),
   description: Yup.string().min(3).required('Required'),
-  goals: Yup.array().of(Yup.string()),
+  goals: Yup.array().of(Yup.string()).required('Select almost one'),
   difficulty: Yup.string(),
 })
 
@@ -72,7 +72,7 @@ function FormCreateActivities() {
         difficulty: "",
       }}
     >
-      <Form>
+      <Form className={styles.form}>
         <div className={styles.inputContainer}>
           <label htmlFor="description">Activity Title</label>
           <Field name="title" />
@@ -80,7 +80,7 @@ function FormCreateActivities() {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="description">Activity Description</label>
-          <Field name="description" as="textarea" />
+          <Field name="description" as="textarea" cols="80" rows="8" />
           <ErrorMessage name="description" />
         </div>
 
@@ -92,29 +92,34 @@ function FormCreateActivities() {
             <option value="hard">hard</option>
           </Field>
         </div>
-        <div id="checkbox-group">Goals</div>
-        <div role="group" aria-labelledby="checkbox-group">
+        <div className={styles.goalsTitle} id="checkbox-group">
+          Goals
+        </div>
+        <div className={styles.checkGroup} role="group" aria-labelledby="checkbox-group">
           {simulateGoals?.map((goal, index) => (
-            <label>
+            <div className={styles.checkContainer}>
               <Field type="checkbox" key={index} name="goals" value={goal} />
-              {goal}
-            </label>
+              <p className={styles.labelCheck}>{goal}</p>
+            </div>
           ))}
         </div>
 
-        <div className={styles.inputContainer}>
+        <div id="image" className={styles.imageContainer}>
           <label htmlFor="title">Images</label>
           <CludinatyUploadComponent />
           <img id="uploadedimage" src=""></img>
-          <button type="button" id="image" onClick={(e) => saveImage(e)}>
+          <button
+            className={styles.btnSave}
+            type="button"
+            id="image"
+            onClick={(e) => saveImage(e)}
+          >
             Save
           </button>
           <ErrorMessage name="image" />
         </div>
-          
-        
-          <button type="submit">Submit</button>
-        
+
+        <button type="submit">Submit</button>
       </Form>
     </Formik>
   );

@@ -4,8 +4,6 @@
     box-sizing: border-box;
 }
 
-
-
 .navbar{
     display: flex;
     justify-content: space-between;
@@ -13,19 +11,30 @@
     height: 75px;
     background:#2196f3 ;
     color: white;
+    background: #000;
     
 }
 
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+}
 
 .logo{
-    font-size: 30px;
+    width: 150px;
+    height: 60px;
 }
 
 .nav-links{
-    display: flex;
-    justify-content: flex-end;
-    list-style: none;
-    width: 75px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        list-style: none;
+        width: 100%;
+        
+        
 }
 
 .activities,
@@ -38,10 +47,10 @@
     transition:.4s ease all;
 }
 
-.activities{
+/* .activities{
     border: 1px solid yellow;
     border-radius: 5px;
-}
+} */
 
 .mobile-menu-icon {
     display: none;

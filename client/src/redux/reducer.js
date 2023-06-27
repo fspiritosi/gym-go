@@ -1,7 +1,7 @@
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME } from "./actions";
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME,GET_DETAILS_ID } from "./actions";
 
 const initialState = {
-    activities: [],
+    activities: [],detail:[]
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -21,6 +21,13 @@ const rootReducer = (state = initialState, action) => {
 
         default:
             return { ...state };
+
+         case GET_DETAILS_ID:
+            return{
+                ...state,
+                detail: action.payload
+            }
+        
     }
 
 }

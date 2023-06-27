@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link} from "react-router-dom";
-import "./Navbar.css"
+//import "./Navbar.css"
 
 const Nav = () => {
   const[isMobile, setIsMovile] = useState(false);

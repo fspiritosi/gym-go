@@ -1,8 +1,9 @@
 import React from 'react'
 import {Link, useParams, useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {getDetails} from  '../redux/actions'
+import { getDetails } from '../../redux/actions'
 import { useEffect } from 'react'
+
 
 const Detail = () => {
   const activities = useSelector((state)=> state.details)

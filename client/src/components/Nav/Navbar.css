@@ -1,103 +1,103 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-
-.navbar{
+.navbar {
+    background: #F4EFEF;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 75px;
-    background:#2196f3 ;
-    color: white;
-    
-}
-
-
-.logo{
-    font-size: 30px;
-}
-
-.nav-links{
+    padding: 10px;
+  }
+  
+  .navbar-logo a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .navbar-menu {
     display: flex;
     justify-content: flex-end;
-    list-style: none;
-    width: 75px;
-}
-
-.activities,
-.create-activity{
+    flex-grow: 1;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  .navbar-menu.open {
+    max-height: 500px; /* Adjust this value as needed */
+  }
+  
+  .navbar-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar-menu li {
+    margin: 10px;
+  }
+  
+  .navbar-menu li a {
     text-decoration: none;
-    color:white;
-    font-size: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition:.4s ease all;
-}
-
-.activities{
-    border: 1px solid yellow;
+    color: black;
     border-radius: 5px;
-}
-
-.mobile-menu-icon {
+    border: 1px solid #000;
+    background: #D9D9D9;
+    padding: 8px 15px;
+  }
+  
+  .navbar-create-class {
+    margin-left: auto;
+    display: flex;
+  }
+  
+  .navbar-create-class a {
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background: #D9D9D9;
+    padding: 8px 15px;
+  }
+  
+  .navbar-toggle {
     display: none;
-}
-
-@media screen and (max-width: 780px){
-    .log{
-        display: flex;
-        position: absolute;
-        top: 15px;
-        left:35px;
-        
-    }
-
-
-    .nav-links{
-    display: none;
-    }
-
-    .nav-links-mobile{
-    position: absolute;
+    cursor: pointer;
+  }
+  
+  .navbar-toggle span {
     display: block;
-    list-style: none;
-    background-color:#005469;
-    left: 0;
-    top: 75px;
-    transition: all 0.5s ease-out;
-    width: 100%;
+    width: 25px;
+    height: 3px;
+    background: black;
+    margin-bottom: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-logo {
+      display: none;
     }
-
-
-    
-    .create-activity,
-    .activities{
-    color: white;
-    text-align: center;
-    padding: 32px;
-    width: 100px;
-    transition: all 0.5s ease;
+  
+    .navbar-toggle {
+      display: block;
     }
-
-    .activities{
-    border: none;
-
+  
+    .navbar-menu {
+      display: none;
     }
-
-    .mobile-menu-icon{
-    display: block;
-    position: absolute;
-    font-size: 30px;
-    color: white;
-    border: none;
-    outline: none;
-    top: 15px;
-    right: 25px;
-
+  
+    .navbar-create-class {
+      display: none;
     }
-
-}
+  
+    .navbar-menu.open,
+    .navbar-create-class.open {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-height: none;
+    }
+  
+    .navbar-menu ul {
+      margin-top: 10px;
+    }
+  }
+  

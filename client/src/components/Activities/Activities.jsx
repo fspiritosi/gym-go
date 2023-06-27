@@ -17,26 +17,29 @@ const Activities = () => {
 
   return(
     <div>
-      <h1 className={styles.title}>Actividades</h1>
-        <div>
-            <h1>Activities</h1>
-            <div>
-                <SearchBar />
-                <FilterandSort />
-                {activities?.map((a,index) => {
-                    return (
+      <div className={styles.title}>
+        <h1>Actividades</h1>
+      </div>
+      <div>
+        <SearchBar />
+      </div>
+      <div>
+        <FilterandSort />
+      </div>
+      <div className={styles.activitiesContainer}>
+        {activities?.map((a,index) => {
+          return (
             <CardActivities
-                key={index}
-                id={a.id}
-                image={a.image}
-                title={a.title}
-                difficulty={a.difficulty}
-                Goals={a.Goals}
-                />
-                )
-            })}
-            </div>
-        </div>
+              key={index}
+              id={a.id}
+              image={a.image}
+              title={a.title}
+              difficulty={a.difficulty}
+              Goals={a.Goals}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 };

@@ -5,6 +5,7 @@ export const GET_ACTIVITIE_NAME = "GET_ACTIVITIE_NAME"
 export const GET_DETAILS_ID ='GET_DETAILS_ID'
 export const ORDER_BY_NAME = 'ORDER_BY_NAME'
 export const FILTER_BY_DIFFICULTY = 'FILTER_BY_DIFFICULTY'
+export const GET_GOALS = 'GET_GOALS'
 
 export const getActivities = () => {
     return async function (dispatch) {
@@ -56,4 +57,15 @@ export function filterByDifficulty(payload) {
         payload,
     }
 }
+
+export const getGoals = () => {
+  return async function (dispatch) {
+    const backGoals = await axios.get("/goals");
+    const goals = backGoals.data;
+    dispatch({
+      type: GET_GOALS,
+      payload: goals,
+    });
+  };
+};
 

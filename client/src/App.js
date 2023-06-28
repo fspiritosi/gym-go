@@ -6,6 +6,7 @@ import Detail from './views/Detail/Detail';
 import Nav from './components/Nav/Nav';
 import FormCreateActivities from './views/FormCreateActivities/FormCreateActivities';
 import axios from 'axios'
+import FormGoals from './views/FormGoals/FormGoals'
 axios.defaults.baseURL = "http://localhost:3001"
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/activities" element={<Home />} />
         <Route path="/activity-detail/:id" element={<Detail />} />
         <Route path="/create-activity" element={<FormCreateActivities />} />
+        <Route path='/create-goals' element={<FormGoals/>}/>
       </Routes>
     </div>
 

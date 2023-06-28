@@ -45,7 +45,6 @@ const rootReducer = (state = initialState, action) => {
             diffFiltered = allActivities;
           }
         }
-
         return {
           ...state,
           activities:

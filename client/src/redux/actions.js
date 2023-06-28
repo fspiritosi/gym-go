@@ -21,14 +21,31 @@ export const getActivities = () => {
 export function searchActivitieName(title) {
     title = title.toLowerCase();
     return async function (dispatch) {
+        // try {
+        //     const infoActivitieName = await axios.get("/activities?title=" + title);
+        //     return dispatch({
+        //         type: GET_ACTIVITIE_NAME,
+        //         payload: infoActivitieName.data,
+        //     });
+        // } catch (error) {
+        //     alert("Prueba");
+        // }
         try {
             const infoActivitieName = await axios.get("/activities?title=" + title);
-            dispatch({
+            const activities = infoActivitieName.data;
+
+            if (activities.length === 0) {
+                alert("Activity Not Found");
+                dispatch(getActivities());
+            }
+
+            return dispatch({
                 type: GET_ACTIVITIE_NAME,
-                payload: infoActivitieName.data,
+                payload: activities,
             });
         } catch (error) {
-            return alert("Activitie Not Found");
+            console.log(error);
+            dispatch(getActivities());
         }
     };
 };

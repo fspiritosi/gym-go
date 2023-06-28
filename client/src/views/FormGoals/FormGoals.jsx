@@ -19,12 +19,17 @@ function FormGoals() {
 
     const submitData = async (data) => {
         const noRepeatName = () => {
-            goals.filter(ele => ele.name !== data.name)
+            goals.filter(ele => ele.name !== data.name.toLowerCase())
         }
         if(noRepeatName.length > 0) {
             throw new Error('Name already exist')
+            
         }
-        await axios.post('goals', data)
+        const newGoal = {
+            name: data.name.toLowerCase(),
+            description: data.description
+        }
+        await axios.post('goals', newGoal)
     }
 
 

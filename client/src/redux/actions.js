@@ -1,4 +1,7 @@
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const GET_ACTIVITIE_NAME = "GET_ACTIVITIE_NAME"
@@ -22,13 +25,18 @@ export function searchActivitieName(title) {
     title = title.toLowerCase();
     return async function (dispatch) {
         try {
-            const infoActivitieName = await axios.get("/activities?title=" + title);
+            const infoActivitieName = await axios.get(`/activities?title=${title}`);
+            const activities = infoActivitieName.data;
+            if (activities.length === 0) {
+                toast.error("Activity Not Found");
+            }else{
             dispatch({
                 type: GET_ACTIVITIE_NAME,
-                payload: infoActivitieName.data,
+                payload: activities,
             });
+        }
         } catch (error) {
-            return alert("Activitie Not Found");
+            console.log(error);
         }
     };
 };

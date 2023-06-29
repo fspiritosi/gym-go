@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define("Activities", {
@@ -17,21 +17,17 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING(1234),
-      allowNull: false,
-    },
-    goals: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.STRING()),
       allowNull: false,
     },
     difficulty: {
       type: DataTypes.ENUM,
-      values: ['easy', 'medium', 'hard'],
+      values: ["easy", "medium", "hard"],
       allowNull: false,
     },
-    isAcive: {
+    isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-    }
+    },
   });
 };

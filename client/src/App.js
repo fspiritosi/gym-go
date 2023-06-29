@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Landing from './views/Landing/Landing';
+import Home from './views/Home/Home';
+import Detail from './views/Detail/Detail';
+import Nav from './components/Nav/Nav';
+import FormCreateActivities from './views/FormCreateActivities/FormCreateActivities';
+import axios from 'axios'
+import FormGoals from './views/FormGoals/FormGoals'
+axios.defaults.baseURL = "http://localhost:3001"
+
+
 
 function App() {
+  let location = useLocation();
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {location.pathname !== "/" && <Nav />}
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route path="/activities" element={<Home />} />
+        <Route path="/activity-detail/:id" element={<Detail />} />
+        <Route path="/create-activity" element={<FormCreateActivities />} />
+        <Route path='/create-goals' element={<FormGoals/>}/>
+      </Routes>
     </div>
+
   );
 }
 

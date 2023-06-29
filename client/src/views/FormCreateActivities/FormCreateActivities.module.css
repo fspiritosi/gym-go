@@ -1,0 +1,114 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin: 15px;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 15px;
+}
+
+
+.inputContainer {
+    /* border: 1px solid black; */
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.form label {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.form input{
+    font-size: 1.2rem;
+    border-radius: 7.5px;
+    padding: 10px;
+    
+}
+
+
+.form .inputContainer input, textarea {
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
+    
+}
+
+.form textarea {
+    font-size: 0.9rem;
+    border-radius: 7.5px;
+    resize: none;
+    padding: 10px;
+    width: 100%;
+}
+
+.form button {
+    border-radius: 5px;
+    background-color: #e4b921;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
+}
+
+.form button:hover {
+    background-color: #c99e02;
+    color: #fff;
+    
+}
+
+.form select {
+    font-size: 1.5rem;
+    border-radius: 7.5px;
+    padding: 8px;
+    background-color: #fff;
+    font-weight: 600;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.goalsTitle{
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    
+}
+
+.form .labelCheck input [type=checkbox]{
+    margin-right: 20px;
+    box-shadow: none;
+}
+
+.checkContainer {
+    display: flex;
+    width: 100%;
+}
+.labelCheck {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.imageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 600px;
+    align-items: center;
+}
+
+.imageContainer img {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.imageContainer .btnSave {
+    width: 400px;
+}

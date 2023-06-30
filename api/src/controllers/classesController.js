@@ -48,9 +48,16 @@ const putClasses = async (
     return updateClasses
 };
 
+const deleteClasses = async (id) => {
+    const classes = await Classes.findByPk(id);
+    !classes ? 'Class is not exist' : await Classes.destroy({where: {id: id}})
+    return 'Class delete successfully'
+}
+
 
 module.exports = {
   getAllClasses,
   createClasses,
-  putClasses
+  putClasses,
+  deleteClasses
 };

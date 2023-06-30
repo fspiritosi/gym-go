@@ -1,4 +1,4 @@
-const {getAllClasses, createClasses, putClasses} = require('../controllers/classesController')
+const {getAllClasses, createClasses, putClasses, deleteClasses} = require('../controllers/classesController')
 
 const getClasesHandler = async (req, res) => {
     try {
@@ -53,4 +53,14 @@ const putClassesHandler = async (req, res) => {
     }
 }
 
-module.exports = { getClasesHandler, postClassesHandler, putClassesHandler };
+const deleteClassesHandler = async (req, res) => {
+    try {
+        const {id} = req.params
+        const deleteClass = await deleteClasses(id);
+        res.status(200).json(deleteClass);
+    } catch (error) {
+        return res.status(404).json({ message: error.message });
+    }
+}
+
+module.exports = { getClasesHandler, postClassesHandler, putClassesHandler, deleteClassesHandler };

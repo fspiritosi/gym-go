@@ -1,11 +1,13 @@
 import React from 'react'
-import Activities from '../../components/Activities/Activities'
+import CardActivities from '../../components/CardsHome/CardsHome';
+
 
 const Home = () => {
   return (
     <div>
-      {/* Home */}
-    <Activities />
+      <div>
+      <CardActivities/>
+      </div>
     </div>
   )
 }

@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     dayOfWeek: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
       values: [1, 2, 3, 4, 5, 6, 7], // Assuming Monday is the first day of the week and Sunday is the last
       allowNull: true, // Only for weekly recurrence
     },

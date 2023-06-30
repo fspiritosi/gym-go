@@ -1,13 +1,20 @@
 const { Op } = require("sequelize");
-const { Activities, Goals } = require("../db");
+const { Activities, Goals, Classes } = require("../db");
+
 
 const getAllActivities = async () => {
   let activities = await Activities.findAll({
-    include: {
-      model: Goals,
-      attributes: ['name'],
-      through: { attributes: []}
-    }
+    include: [
+      {
+        model: Goals,
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+      {
+        model: Classes,
+        attributes: ["startDate", "startTime", "duration"],
+      },
+    ],
   });
   activities = activities.map(activity => {
     const transformedGoals = activity.Goals.map(goal => goal.name);

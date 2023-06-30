@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define("Classes", {
@@ -12,22 +12,35 @@ module.exports = (sequelize) => {
       values: ["easy", "medium", "hard"],
       allowNull: false,
     },
+    recurringPattern: {
+      type: DataTypes.ENUM,
+      values: ["does not repeat", "daily", "weekly"],
+      allowNull: false,
+    },
+    dayOfWeek: {
+      type: DataTypes.INTEGER,
+      values: [1, 2, 3, 4, 5, 6, 7], // Assuming Monday is the first day of the week and Sunday is the last
+      allowNull: true, // Only for weekly recurrence
+    },
     startDate: {
       type: DataTypes.DATEONLY, // '2018-06-01'
       allowNull: false,
+    },
+    endDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true, // users can configure recurring events with no end date
     },
     startTime: {
       type: DataTypes.STRING, // '19:00:00Z' Z means zero UTC offset
       allowNull: false,
     },
-    duration: {
-      type: DataTypes.STRING, // '02:00' means 2 hours
+    endTime: {
+      type: DataTypes.TIME,
       allowNull: false,
     },
-    recurringPattern: {
-      type: DataTypes.ENUM,
-      values: ["does not repeat", "daily", "weekly"],
-      allowNull: false,
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
     }
-  });
-};
+  })
+}

@@ -36,7 +36,7 @@ const { Activities, Goals, Classes, Coaches } = sequelize.models;
 Activities.belongsToMany(Goals, { through: 'Activities_Goals' });
 Goals.belongsToMany(Activities, { through: 'Activities_Goals' });
 
-Activities.hasMany(Classes, { foreignKey: "ActivityId" });
+Activities.hasMany(Classes);
 Classes.belongsTo(Activities);
 
 Coaches.hasMany(Classes);

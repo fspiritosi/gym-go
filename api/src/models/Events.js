@@ -1,34 +1,30 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define("Coaches", {
+  sequelize.define("Events", {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
     },
-    firstName: {
+    eventTitle: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
+    date: {
+      type: DataTypes.DATEONLY, // '2018-06-01'
+      allowNull: false,
+    },
+    startTime: {
+      type: DataTypes.STRING, // '19:00:00Z' Z means zero UTC offset
+      allowNull: false,
+    },
+    endTime: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    profilePicture: {
-      type: DataTypes.STRING(1234),
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING(1234),
-      allowNull: false,
-    },
-    education: {
-      type: DataTypes.STRING(1234),
-      allowNull: false,
-    },
-    workExperience: {
-      type: DataTypes.STRING(1234),
+    duration: {
+      type: DataTypes.STRING, // '02:00' means 2 hours
       allowNull: false,
     },
     isActive: {

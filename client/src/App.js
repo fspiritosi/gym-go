@@ -9,6 +9,7 @@ import Admin from './views/Admin/Admin';
 import FormCreateActivities from './views/FormCreateActivities/FormCreateActivities';
 import axios from 'axios'
 import FormGoals from './views/FormGoals/FormGoals'
+import Footer from './components/Footer/Footer';
 axios.defaults.baseURL = "http://localhost:3001"
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/create-activity" element={<FormCreateActivities />} />
         <Route path='/create-goals' element={<FormGoals/>}/>
       </Routes>
+      {location.pathname !== "/" && <Footer />}
     </div>
 
   );

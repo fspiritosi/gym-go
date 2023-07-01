@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
-const { Activities, Goals, Classes } = require("../db");
+const { Activities, Goals, Classes, Events } = require("../db");
+
 
 
 const getAllActivities = async () => {
@@ -13,6 +14,11 @@ const getAllActivities = async () => {
       {
         model: Classes,
         attributes: ["startDate", "startTime"],
+        include:[
+          {model: Events,
+          attributes: ['date', 'startTime', 'endTime', 'duration']
+        }
+        ]
       },
     ],
   });

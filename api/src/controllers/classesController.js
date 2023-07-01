@@ -1,9 +1,17 @@
 const {Op, where} = require("sequelize");
-const { Classes } = require("../db");
+const { Classes, Events } = require("../db");
 const { createEvent } = require("./eventController");
 
+
 const getAllClasses = async () => {
-    let classes = await Classes.findAll()
+    let classes = await Classes.findAll({
+        include: [
+            {
+                model: Events,
+                attributes: ['date', 'startTime', 'endTime', 'duration']
+            }
+        ]}
+    )
     return classes
 }
 

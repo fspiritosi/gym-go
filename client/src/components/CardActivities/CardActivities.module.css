@@ -39,24 +39,49 @@
   color: #e4b921;
 }
 
-.card ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.card .info {
+  margin-bottom: 10px;
 }
 
-.card li {
-  margin-right: 5px;
-  margin-bottom: 5px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
+.card .button {
+  padding: 10px 20px;
+  background-color: #e4b921;
+  color: white;
+  border: none;
   border-radius: 5px;
-  background-color: #f0f0f0;
-  font-size: 0.8rem;
   font-weight: bold;
-  text-transform: uppercase;
-  color: #666;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.card .button:hover {
+  background-color: #c9971d;
+}
+
+.card .back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #d1d1d1;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card.flipped .front {
+  transform: rotateY(180deg);
+}
+
+.card.flipped .back {
+  transform: rotateY(0deg);
 }

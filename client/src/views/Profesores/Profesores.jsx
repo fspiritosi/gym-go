@@ -1,22 +1,25 @@
 import React from "react";
 import CardProfesores from '../../components/CardProfesores/CardProfesores'
 // import { getCoaches } from '../../redux/actions';
+import Ejemplos from './ejemploprofesores.json'
 
 const Profesores = () => {
     return (
         <div>
-            <h1>Vista Profesores</h1>
+            <h1>Profesores</h1>
             <div>
-                {/* {coaches.map((c, index) => { */}
-                    {/* return ( */}
+                {Ejemplos.map((c, index) => {
+                    return ( 
                         <CardProfesores
-                            // key={index}
-                            // profilePicture={c.profilePicture}
-                            // firstName={c.firstName}
-                            // lastName={c.lastName}
+                            key={index}
+                            id={c.id}
+                            profilePicture={c.profilePicture}
+                            firstName={c.firstName}
+                            lastName={c.lastName}
+                            description={c.description}
                         />
-                    {/* ) */}
-                {/* })} */}
+                    ) 
+                })}
             </div>
         </div>
     )

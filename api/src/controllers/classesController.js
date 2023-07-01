@@ -1,5 +1,6 @@
 const {Op, where} = require("sequelize");
 const { Classes } = require("../db");
+const { createEvent } = require("./eventController");
 
 const getAllClasses = async () => {
     let classes = await Classes.findAll()
@@ -8,21 +9,25 @@ const getAllClasses = async () => {
 
 const createClasses = async (
   difficulty,
-  startDate,
-  startTime,
-  duration,
   recurringPattern,
+  startDate,
+  endDate,
+  startTime,
+  endTime,
   ActivityId
 ) => {
   const newClasses = await Classes.create({
     difficulty,
-    startDate,
-    startTime,
-    duration,
     recurringPattern,
+    startDate,
+    endDate,
+    startTime,
+    endTime,
     ActivityId,
     //   CoachId,
   });
+  //se ejecuta la función para crear eventos
+  const events = createEvent(newClasses)
   return newClasses;
 };
 

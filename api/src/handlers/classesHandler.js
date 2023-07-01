@@ -13,21 +13,23 @@ const postClassesHandler = async (req, res) => {
     try {
         const {
           difficulty,
-          startDate,
-          startTime,
-          duration,
           recurringPattern,
+          startDate,
+          endDate,
+          startTime,
+          endTime,
           ActivityId,
-        //   CoachId,
+          //   CoachId,
         } = req.body;
         const newClass = await createClasses(
           difficulty,
-          startDate,
-          startTime,
-          duration,
           recurringPattern,
-          ActivityId,
-        //   CoachId
+          startDate,
+          endDate,
+          startTime,
+          endTime,
+          ActivityId
+          //   CoachId
         );
         res.status(200).json(newClass)
     } catch (error) {

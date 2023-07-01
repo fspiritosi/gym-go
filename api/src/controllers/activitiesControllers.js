@@ -12,7 +12,7 @@ const getAllActivities = async () => {
       },
       {
         model: Classes,
-        attributes: ["startDate", "startTime", "duration"],
+        attributes: ["startDate", "startTime"],
       },
     ],
   });

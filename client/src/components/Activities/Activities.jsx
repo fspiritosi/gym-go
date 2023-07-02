@@ -2,8 +2,8 @@ import React from 'react';
 import CardActivities from '../CardActivities/CardActivities';
 import SearchBar from '../SearchBar/SearchBar';
 import FilterandSort from '../FilterandSort/FilterandSort';
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getActivities } from '../../redux/actions';
 import styles from './Activities.module.css';
 
@@ -15,7 +15,7 @@ const Activities = () => {
     dispatch(getActivities());
   }, [dispatch]);
 
-  return(
+  return (
     <div>
       <div className={styles.title}>
         <h1>Activities</h1>
@@ -27,7 +27,7 @@ const Activities = () => {
         <FilterandSort />
       </div>
       <div className={styles.activitiesContainer}>
-        {activities?.map((a,index) => {
+        {activities?.map((a, index) => {
           return (
             <CardActivities
               key={index}
@@ -35,13 +35,14 @@ const Activities = () => {
               image={a.image}
               title={a.title}
               difficulty={a.difficulty}
-              Goals={a.Goals}
+              goals={a.Goals}
             />
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 };
 
 export default Activities;
+

@@ -31,13 +31,13 @@ export function searchActivitieName(title) {
             const infoActivitieName = await axios.get(`/activities?title=${title}`);
             const activities = infoActivitieName.data;
             if (activities.length === 0) {
-                toast.error("Activity Not Found"); //Toastify!!!
-            } else {
-                dispatch({
-                    type: GET_ACTIVITIE_NAME,
-                    payload: activities,
-                });
-            }
+                toast.error("Actividad no encontrada");
+            }else{
+            dispatch({
+                type: GET_ACTIVITIE_NAME,
+                payload: activities,
+            });
+        }
         } catch (error) {
             console.log(error);
         }

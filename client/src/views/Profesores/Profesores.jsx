@@ -7,6 +7,7 @@ const Profesores = () => {
     return (
         <div>
             <h1>Profesores</h1>
+            <br/>
             <div>
                 {Ejemplos.map((c, index) => {
                     return ( 
@@ -21,6 +22,7 @@ const Profesores = () => {
                     ) 
                 })}
             </div>
+        <br/>
         </div>
     )
 };

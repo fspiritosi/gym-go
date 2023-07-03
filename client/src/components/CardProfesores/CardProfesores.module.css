@@ -1,7 +1,8 @@
 .profile {
     width: 90%;
-    height: 280px;
+    height: 290px;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 .cardContainer {

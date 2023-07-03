@@ -19,6 +19,7 @@ useEffect(() => {
             <br/>
             <h1>Nuestros Profesores</h1>
             <br/>
+            <br/>
             <div>
                 {coaches.map((c, index) => {
                     return ( 
@@ -33,6 +34,8 @@ useEffect(() => {
                     ) 
                 })}
             </div>
+        <br/>
+        <br/>
         <br/>
         </div>
     )

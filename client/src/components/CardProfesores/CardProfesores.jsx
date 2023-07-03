@@ -15,13 +15,13 @@ const Card = ({ id, firstName, profilePicture, description, lastName }) => {
         <div className={style.cardContainer}>
             <div className={`${style.card} ${isFlipped ? style.flipped : ''}`} onClick={handleFlip}>
                 <div className={style.front}>
-                    <h3>{firstName} {lastName}</h3>
                     <img src={profilePicture} alt='' className={style.profile} />
+                    <h3>{firstName} {lastName}</h3>
                 </div>
                 <div className={style.back}>
                 {/* <h3>{firstName}{lastName}</h3> */}
                 <br/>
-                    <h5>{description}</h5>
+                    <h5 className={style.text}>{description}</h5>
                 </div>
             </div>
         </div>

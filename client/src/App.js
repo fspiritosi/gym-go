@@ -5,6 +5,7 @@ import Home from "./views/Home/Home";
 import Detail from "./views/Detail/Detail";
 import Nav from "./components/Nav/Nav";
 import FormCreateActivities from "./views/FormCreateActivities/FormCreateActivities";
+import Profesores from './views/Profesores/Profesores';
 import axios from "axios";
 import FormGoals from "./views/FormGoals/FormGoals";
 import Footer from "./components/Footer/Footer";
@@ -22,6 +23,8 @@ function App() {
         <Route path="/activities" element={<Home />} />
         <Route path="/activity-detail/:id" element={<Detail />} />
         <Route path="/create-activity" element={<FormCreateActivities />} />
+        <Route path='/create-goals' element={<FormGoals/>}/>
+        <Route path='/coaches' element={<Profesores/>}/>
         <Route path="/create-goals" element={<FormGoals />} />
       </Routes>
       {location.pathname !== "/" && <Footer />}

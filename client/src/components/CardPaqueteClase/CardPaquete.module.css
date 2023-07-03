@@ -1,0 +1,21 @@
+.cardContainer {
+    perspective: 1000px;
+    width: 200px;
+    height: 220px;
+    background: none;
+    display: inline-block;
+    margin-right: 10px;
+    border: 1px solid #000;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+
+.comprar{
+    border-radius: 5px;
+    background-color: #e4b921; 
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
+}

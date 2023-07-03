@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Landing from "./views/Landing/Landing";
@@ -11,18 +10,11 @@ import axios from "axios";
 import FormGoals from "./views/FormGoals/FormGoals";
 import Footer from "./components/Footer/Footer";
 axios.defaults.baseURL = "http://localhost:3001";
-=======
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Landing from './components/Landing/Landing';
-import FormCreateActivities from './components/FormCreateActivities/FormCreateActivities';
->>>>>>> Stashed changes
 
 function App() {
   let location = useLocation();
 
   return (
-<<<<<<< Updated upstream
     <div className="App">
       {location.pathname !== "/" && <Nav />}
 
@@ -37,16 +29,6 @@ function App() {
       </Routes>
       {location.pathname !== "/" && <Footer />}
     </div>
-=======
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route path="/createActivity" element={<FormCreateActivities />} />
-        </Routes>
-      </div>
-    </Router>
->>>>>>> Stashed changes
   );
 }
 

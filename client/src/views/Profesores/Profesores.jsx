@@ -6,7 +6,7 @@ import Ejemplos from './ejemploprofesores.json'
 const Profesores = () => {
     return (
         <div>
-            <h1>Profesores</h1>
+            {/* <h1>Profesores</h1> */}
             <br/>
             <div>
                 {Ejemplos.map((c, index) => {

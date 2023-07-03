@@ -6,6 +6,8 @@ import LoginButton from "../Login/LoginButton";
 import LogoutButton from "../Login/LogoutButton";
 import Profile from "../Login/Profile";
 import { useAuth0 } from "@auth0/auth0-react";
+
+
 const Nav = () => {
   const [isMobile, setIsMovile] = useState(false);
   const { isAuthenticated } = useAuth0();
@@ -20,10 +22,13 @@ const Nav = () => {
           onClick={() => setIsMovile(false)}
         >
           <Link to="/activities" className="activities">
-            <li>Activities</li>
+            <li>Actividades</li>
+          </Link>
+          <Link to="/coaches" className="coaches">
+            <li>Profesores</li>
           </Link>
           <Link to="/create-activity/" className="create-activity">
-            <li>Create Classes</li>
+            <li>Crear Actividades</li>
           </Link>
           <li>
             {isAuthenticated ? (

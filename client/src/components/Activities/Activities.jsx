@@ -18,7 +18,7 @@ const Activities = () => {
   return (
     <div>
       <div className={styles.title}>
-        <h1>Activities</h1>
+        {/* <h1>Activities</h1> */}
       </div>
       <div>
         <SearchBar />

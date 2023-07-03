@@ -2,15 +2,15 @@
     { 
         "id": 1,
         "firstName": "Ashley",
-        "lastName": " Gomez",
+        "lastName": "Gomez",
         "profilePicture": "http://web-rockstars.com/sporty/wp-content/uploads/2014/05/team-6.jpg",
-        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+        "description": ""
     },
 
     {
         "id": 2,
         "firstName": "Amanda",
-        "lastName": " Lopez",
+        "lastName": "Lopez",
         "profilePicture": "http://web-rockstars.com/sporty/wp-content/uploads/2014/05/team-1.jpg",
         "description": "Ejemplo2"
     },
@@ -18,7 +18,7 @@
     {
         "id": 3,
         "firstName": "Agustin",
-        "lastName": " Romero",
+        "lastName": "Romero",
         "profilePicture": "http://web-rockstars.com/sporty/wp-content/uploads/2014/05/team-2.jpg",
         "description": "Ejemplo3"
     },
@@ -26,7 +26,7 @@
     {
         "id": 4,
         "firstName": "Alan",
-        "lastName": " Gonzalez",
+        "lastName": "Gonzalez",
         "profilePicture": "https://st4.depositphotos.com/10932024/25476/i/600/depositphotos_254769264-stock-photo-portrait-of-muscular-sporty-smiling.jpg",
         "description": "Ejemplo4"
     }

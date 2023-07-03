@@ -1,0 +1,21 @@
+.activitiesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 10px;
+}
+
+@media screen and (max-width: 620px) {
+  .activitiesContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    margin: 10px;
+  }
+}
+
+.title {
+  color: black;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}

@@ -1,14 +1,18 @@
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS } from "./actions";
+
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS,GET_COACHES } from "./actions";
+
 
 const initialState = {
   activities: [],
   detail: [],
   allActivities: [],
-  goals: []
+  goals: [],
+  coaches: []
 }
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+
     case GET_ACTIVITIES:
       return {
         ...state,
@@ -39,7 +43,6 @@ const rootReducer = (state = initialState, action) => {
       const { allActivities } = state; // Cambiado a desestructuración
       const diffToFilter = action.payload;
       let diffFiltered = allActivities;
-
       if (diffToFilter !== "diff") {
         diffFiltered = allActivities.filter(
           (el) => el.difficulty === diffToFilter
@@ -83,6 +86,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activities:
           action.payload === "all" ? state.allActivities : goalFiltered,
+      };
+        goals: action.payload
+      };
+    default:
+      return { ...state };
+  }
+ case GET_COACHES: //En espera de la Ruta 
+      return {
+        ...state,
+        coaches: action.payload,
       };
 
     default:

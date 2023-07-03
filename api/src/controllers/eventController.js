@@ -6,60 +6,52 @@ const createEvent = async (
   endDate,
   startTime,
   endTime,
+  quota,
   id
 }
 ) => {
 
-  console.log(id)
   const startDateInDate = new Date(startDate);
-  //console.log('StartDate',startDateInDate)
   const endDateInDate = new Date(endDate);
-  //console.log('EndDate',endDateInDate)
   const totalDays = (endDateInDate - startDateInDate) / 86400000;
-  //console.log('TotalDays',totalDays)
   const initTimeArr = startTime.split(':')
   const endTimeArr = endTime.split(':')
-
   const duration = parseInt(endTimeArr[0]) - parseInt(initTimeArr[0])
+  const maxQuota = quota
+  const eventQuota = Array(maxQuota).fill(undefined)
 
   if (recurringPattern === "does not repeat") {
     const date = startDate
-    const newEvent = await Events.create({date, startTime, endTime, duration, ClassId: id});
+    const newEvent = await Events.create({date, startTime, endTime, duration,eventQuota,ClassId: id});
   } 
   if (recurringPattern === "weekly") {
     const events = []
-    const intDay = startDateInDate.getDate();
-    //console.log('initDay',intDay)
     let i = 0
-
-    
-    while (i < totalDays){
-      //console.log('i:',i)
-      events.push({
-        date: new Date(
-          startDateInDate.setDate(startDateInDate.getDate() + i )
-        ),
-        //date: intDay +1 + i,
-        startTime,
-        endTime,
-        duration,
-        ClassId: id
-      });
-      i = i + 7
+    let date = new Date(startDateInDate.setDate(startDateInDate.getDate())+1);
+    while ( i <= Math.floor(totalDays/7) ) {
+      if(i === 0){
+        events.push({
+          date: date.setDate(date.getDate() + 1),
+          startTime,
+          endTime,
+          duration,
+          eventQuota,
+          ClassId: id
+        })
+      }else {
+        events.push({
+          date: date.setDate(date.getDate() + 7),
+          startTime,
+          endTime,
+          duration,
+          eventQuota,
+          ClassId: id
+      })}
+      i++
+      }
+      const newEvents = await Events.bulkCreate(events)
     }
-
-    const newEvents = await Events.bulkCreate(events)
-
-    console.log("Eventos Creados:", newEvents);
-   }
-
-//   }
-//return duration
-  
-};
-
-
-
+  }
 module.exports = {createEvent}
 
 

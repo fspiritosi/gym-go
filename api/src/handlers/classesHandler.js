@@ -18,8 +18,9 @@ const postClassesHandler = async (req, res) => {
           endDate,
           startTime,
           endTime,
+          quota,
           ActivityId,
-          //   CoachId,
+          CoachId,
         } = req.body;
         const newClass = await createClasses(
           difficulty,
@@ -28,8 +29,9 @@ const postClassesHandler = async (req, res) => {
           endDate,
           startTime,
           endTime,
-          ActivityId
-          //   CoachId
+          quota,
+          ActivityId,
+          CoachId
         );
         res.status(200).json(newClass)
     } catch (error) {
@@ -40,13 +42,14 @@ const postClassesHandler = async (req, res) => {
 const putClassesHandler = async (req, res) => {
     try {
         const {id} = req.params;
-        const { difficulty, startDate, startTime, duration, recurringPattern } = req.body;
+        const { difficulty, startDate, startTime, duration, recurringPattern, quota } = req.body;
         const updatedClass = await putClasses(
             id,
             difficulty,
             startDate,
             startTime,
-            duration, 
+            duration,
+            quota,
             recurringPattern
         )
         res.status(200).json(updatedClass);

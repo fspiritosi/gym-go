@@ -5,6 +5,7 @@ import { searchActivitieName } from "../../redux/actions";
 import styles from "./SearchBar.module.css"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = () => {
     const dispatch = useDispatch();
@@ -23,8 +24,8 @@ const SearchBar = () => {
 
     return(
         <div className={styles.searchbar}>
-            <button type="submit" onClick={handlerSubmit}>BUSCAR</button>
-            <input type="text" value={title} placeholder="BUSCAR ACTIVIDAD" onChange={handlerInputChange}/>
+            <input type="text" value={title} placeholder="Buscar Actividad" onChange={handlerInputChange}/>
+            <button type="submit" onClick={handlerSubmit}><FaSearch /></button>
             <ToastContainer
             position="top-center"   
             autoClose={2000}

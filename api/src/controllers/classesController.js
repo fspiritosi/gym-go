@@ -8,7 +8,7 @@ const getAllClasses = async () => {
         include: [
             {
                 model: Events,
-                attributes: ['date', 'startTime', 'endTime', 'duration']
+                attributes: ['date', 'startTime', 'endTime', 'duration', 'eventQuota']
             }
         ]}
     )
@@ -22,7 +22,9 @@ const createClasses = async (
   endDate,
   startTime,
   endTime,
-  ActivityId
+  quota,
+  ActivityId,
+  CoachId
 ) => {
   const newClasses = await Classes.create({
     difficulty,
@@ -31,8 +33,9 @@ const createClasses = async (
     endDate,
     startTime,
     endTime,
+    quota,
     ActivityId,
-    //   CoachId,
+    CoachId,
   });
   //se ejecuta la función para crear eventos
   const events = createEvent(newClasses)
@@ -40,25 +43,28 @@ const createClasses = async (
 };
 
 const putClasses = async (
-    id,
+  id,
   difficulty,
+  recurringPattern,
   startDate,
+  endDate,
   startTime,
-  duration,
-  recurringPattern
+  endTime,
+  quota
 ) => {
-    const updateClasses = await Classes.update(
-        {
-            difficulty,
-            startDate,
-            startTime,
-            duration,
-            recurringPattern
-        },
-        {where: {id}}
-    
-    );
-    return updateClasses
+  const updateClasses = await Classes.update(
+    {
+      difficulty,
+      recurringPattern,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      quota,
+    },
+    { where: { id } }
+  );
+  return updateClasses;
 };
 
 const deleteClasses = async (id) => {

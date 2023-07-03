@@ -4,74 +4,62 @@ import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import styles from './FormCreateActivities.module.css'
 import CludinatyUploadComponent from './CludinatyUploadComponent'
-import { useNavigate } from "react-router-dom";
-import axios from 'axios'
 
 const validationSubmit = Yup.object({
   title: Yup.string().min(5).max(25).required('Required'),
   description: Yup.string().min(3).required('Required'),
-  goals: Yup.array().of(Yup.string()).required('Select almost one'),
-  difficulty: Yup.string(),
+  goals: Yup.array().of(Yup.string()),
+  dificulty: Yup.string(),
 })
 
 const simulateGoals = ['resistencia', 'cardio', 'masa muscular', 'perder peso']
 
+
+
+
+
 function FormCreateActivities() {
 
-  
   const [activity, setActivity] = useState({
     title: "",
     description: "",
     image: [],
     goals: [],
-    difficulty: "",
+    dificulty: "",
   });
 
   //const [uploadingImage, setUploadingImage] = useState(true)
 
   const saveImage = (e) => {
     setActivity({ ...activity, image: [...activity.image ,e.target.value] });
-    console.log('desde SaveImg',activity)
+    //setUploadingImage()
   }
 
-  const handleSubmit = async(val) => {
+  console.log(activity)
 
-    await axios.post("/activities", activity);
-    
-    
-  }
-  console.log('desde state',activity)
-
-  return (
+  return (    
     <Formik
       initialValues={{
         title: "",
         description: "",
         goals: [],
-        image: [],
-        difficulty: "",
+        dificulty: "",
       }}
-      onSubmit={async (values) => {
+      onSubmit={(values, { setSubmitting }) => {
+        console.log(values);
         setActivity({
           ...activity,
           title: values.title,
           description: values.description,
           goals: values.goals,
-          difficulty: values.difficulty,
+          dificulty: values.dificulty,
         });
-        console.log("Desde On submit", activity);
-        await handleSubmit(activity);
+        setSubmitting(false);
       }}
+      validateOnChange={true}
       validationSchema={validationSubmit}
-      onReset={{
-        title: "",
-        description: "",
-        goals: [],
-        image: [],
-        difficulty: "",
-      }}
     >
-      <Form className={styles.form}>
+      <Form>
         <div className={styles.inputContainer}>
           <label htmlFor="description">Activity Title</label>
           <Field name="title" />
@@ -79,45 +67,38 @@ function FormCreateActivities() {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="description">Activity Description</label>
-          <Field name="description" as="textarea" cols="80" rows="8" />
+          <Field name="description" as="textarea" />
           <ErrorMessage name="description" />
         </div>
 
         <div className={styles.inputContainer}>
-          <Field as="select" name="difficulty">
-            <option value="">Select Difficulty</option>
+          <label htmlFor="title">Images</label>
+          <CludinatyUploadComponent />
+          <img id="uploadedimage" src=""></img>
+          <button type="button" id="image" onClick={(e) => saveImage(e)}>
+                Save
+          </button>
+      
+          <ErrorMessage name="image" />
+        </div>
+
+        <div className={styles.inputContainer}>
+          <Field as="select" name="dificulty">
+            <option value="">Select Dificulty</option>
             <option value="easy">easy</option>
             <option value="medium">medium</option>
             <option value="hard">hard</option>
           </Field>
         </div>
-        <div className={styles.goalsTitle} id="checkbox-group">
-          Goals
-        </div>
-        <div className={styles.checkGroup} role="group" aria-labelledby="checkbox-group">
+        <div id="checkbox-group">Goals</div>
+        <div role="group" aria-labelledby="checkbox-group">
           {simulateGoals?.map((goal, index) => (
-            <div className={styles.checkContainer}>
-              <Field type="checkbox" key={index} name="goals" value={goal} />
-              <p className={styles.labelCheck}>{goal}</p>
-            </div>
+            <label>
+              <Field type="checkbox" name="goals" value={goal} />
+              {goal}
+            </label>
           ))}
         </div>
-
-        <div className={styles.imageContainer}>
-          <label htmlFor="title">Images</label>
-          <CludinatyUploadComponent />
-          <img id="uploadedimage" src=""></img>
-          <button
-            className={styles.btnSave}
-            type="button"
-            id="image"
-            onClick={(e) => saveImage(e)}
-          >
-            Save
-          </button>
-          <ErrorMessage name="image" />
-        </div>
-
         <button type="submit">Submit</button>
       </Form>
     </Formik>

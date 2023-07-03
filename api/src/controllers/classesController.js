@@ -8,7 +8,7 @@ const getAllClasses = async () => {
         include: [
             {
                 model: Events,
-                attributes: ['date', 'startTime', 'endTime', 'duration']
+                attributes: ['date', 'startTime', 'endTime', 'duration', 'eventQuota']
             }
         ]}
     )
@@ -22,6 +22,7 @@ const createClasses = async (
   endDate,
   startTime,
   endTime,
+  quota,
   ActivityId
 ) => {
   const newClasses = await Classes.create({
@@ -31,6 +32,7 @@ const createClasses = async (
     endDate,
     startTime,
     endTime,
+    quota,
     ActivityId,
     //   CoachId,
   });
@@ -40,25 +42,28 @@ const createClasses = async (
 };
 
 const putClasses = async (
-    id,
+  id,
   difficulty,
+  recurringPattern,
   startDate,
+  endDate,
   startTime,
-  duration,
-  recurringPattern
+  endTime,
+  quota
 ) => {
-    const updateClasses = await Classes.update(
-        {
-            difficulty,
-            startDate,
-            startTime,
-            duration,
-            recurringPattern
-        },
-        {where: {id}}
-    
-    );
-    return updateClasses
+  const updateClasses = await Classes.update(
+    {
+      difficulty,
+      recurringPattern,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      quota,
+    },
+    { where: { id } }
+  );
+  return updateClasses;
 };
 
 const deleteClasses = async (id) => {

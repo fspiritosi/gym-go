@@ -13,12 +13,20 @@ const getAllActivities = async () => {
       },
       {
         model: Classes,
-        attributes: ["startDate", "startTime"],
-        include:[
-          {model: Events,
-          attributes: ['date', 'startTime', 'endTime', 'duration']
-        }
-        ]
+        attributes: ["startDate", "startTime", "difficulty", "quota"],
+        include: [
+          {
+            model: Events,
+            attributes: [
+              "id",
+              "date",
+              "startTime",
+              "endTime",
+              "duration",
+              "eventQuota",
+            ],
+          },
+        ],
       },
     ],
   });

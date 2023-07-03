@@ -28,7 +28,7 @@ const Nav = () => {
             <li>Profesores</li>
           </Link>
           <Link to="/prices" className="prices">
-            <li>Paquetes</li>
+            <li>Paquetes</li> 
           </Link>
           <Link to="/create-activity/" className="create-activity">
             <li>Crear Actividades</li>

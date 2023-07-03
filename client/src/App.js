@@ -8,6 +8,7 @@ import FormCreateActivities from './views/FormCreateActivities/FormCreateActivit
 import axios from 'axios'
 import FormGoals from './views/FormGoals/FormGoals'
 import Footer from './components/Footer/Footer';
+import ActivitiesV from './views/Activities/ActivitiesV';
 axios.defaults.baseURL = "http://localhost:3001"
 
 
@@ -21,7 +22,8 @@ function App() {
       {location.pathname !== "/" && <Nav />}
       <Routes>
         <Route exact path="/" element={<Landing />} />
-        <Route path="/activities" element={<Home />} />
+        <Route exact path="/home" element={<Home />} />
+        <Route path="/activities" element={<ActivitiesV />} />
         <Route path="/activity-detail/:id" element={<Detail />} />
         <Route path="/create-activity" element={<FormCreateActivities />} />
         <Route path='/create-goals' element={<FormGoals/>}/>

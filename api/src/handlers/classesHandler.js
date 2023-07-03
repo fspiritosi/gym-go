@@ -20,7 +20,7 @@ const postClassesHandler = async (req, res) => {
           endTime,
           quota,
           ActivityId,
-          //   CoachId,
+          CoachId,
         } = req.body;
         const newClass = await createClasses(
           difficulty,
@@ -30,8 +30,8 @@ const postClassesHandler = async (req, res) => {
           startTime,
           endTime,
           quota,
-          ActivityId
-          //   CoachId
+          ActivityId,
+          CoachId
         );
         res.status(200).json(newClass)
     } catch (error) {

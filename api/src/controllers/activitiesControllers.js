@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Activities, Goals, Classes, Events } = require("../db");
+const { Activities, Goals, Classes, Events, Coaches } = require("../db");
 
 
 
@@ -26,6 +26,12 @@ const getAllActivities = async () => {
               "eventQuota",
             ],
           },
+          {
+            model: Coaches,
+            attributes: [
+              'id'
+            ]
+          }
         ],
       },
     ],

@@ -2,6 +2,15 @@ import React from 'react';
 import './footer.css';
 
 const Footer = () => {
+  const designers = [
+    { name: 'David Marbello', linkedin: 'https://www.linkedin.com/designer1' },
+    { name: 'Dayhana Saldarriaga', linkedin: 'https://www.linkedin.com/designer2' },
+    { name: 'Diego Castillo', linkedin: 'https://www.linkedin.com/designer3' },
+    { name: 'Fabricio Spiritosi', linkedin: 'https://www.linkedin.com/designer4' },
+    { name: 'Juan Cruz Roldan', linkedin: 'https://www.linkedin.com/designer5' },
+    { name: 'Oscar Velazquez', linkedin: 'https://www.linkedin.com/designer6' },
+    { name: 'Sandra Astorga', linkedin: 'https://www.linkedin.com/designer7' }
+  ];
   return (
     <footer>
       <div className="upper-section">
@@ -12,31 +21,20 @@ const Footer = () => {
         </div>
 
         <div className="mapa-sitio">
-          <a href="/mapa-de-sitio">Mapa de Sitio</a>
+          <h3>Mapa del sitio</h3>
+          <img src= "ruta-a-la-imagen.jpg" href="/mapa-de-sitio"/>
         </div>
 
         <div className="fotos">
-          <a href="https://www.likending.com/designer1" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-a-la-imagen-designer1.jpg" alt="Diseñador 1" />
-          </a>
-          <a href="https://www.likending.com/designer2" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-a-la-imagen-designer2.jpg" alt="Diseñador 2" />
-          </a>
-          <a href="https://www.likending.com/designer3" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-a-la-imagen-designer3.jpg" alt="Diseñador 3" />
-          </a>
-          <a href="https://www.likending.com/designer4" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-a-la-imagen-designer4.jpg" alt="Diseñador 4" />
-          </a>
-          <a href="https://www.likending.com/designer5" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-a-la-imagen-designer5.jpg" alt="Diseñador 5" />
-          </a>
-          <a href="https://www.likending.com/designer6" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-a-la-imagen-designer6.jpg" alt="Diseñador 6" />
-          </a>
-          <a href="https://www.likending.com/designer7" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-a-la-imagen-designer7.jpg" alt="Diseñador 7" />
-          </a>
+          {designers.map((designer, index) => (
+            <div key={index}>
+              <p>{designer.name}</p>
+              <button onClick={() => window.open(designer.linkedin, '_blank')}>
+                <img src="ruta-al-icono-linkedin.png" alt="LinkedIn" />
+                Ver perfil
+              </button>
+            </div>
+          ))}
         </div>
 
         <div className="logo">

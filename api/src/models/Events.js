@@ -23,6 +23,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING, // '02:00' means 2 hours
       allowNull: false,
     },
+    eventQuota: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      default: [],
+      allowNull: false
+    },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,

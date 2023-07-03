@@ -34,7 +34,7 @@ const Activities = () => {
               id={a.id}
               image={a.image}
               title={a.title}
-              difficulty={a.difficulty}
+              difficulty={a.Classes.difficulty}
               goals={a.Goals}
             />
           );

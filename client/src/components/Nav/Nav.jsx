@@ -15,7 +15,7 @@ const Nav = () => {
     <nav className="navbar">
       {/* <h1 className="text-center">GYM GO</h1> */}
       <div className="nav-container">
-        <img src={Logo} alt="logo" className="logo" />
+        <img src={Logo} alt="logo"/>
         <ul
           //   className={isMobile ? "nav-links-mobile" : "nav-links"}
           className="nav-links"

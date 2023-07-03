@@ -27,6 +27,9 @@ const Nav = () => {
           <Link to="/coaches" className="coaches">
             <li>Profesores</li>
           </Link>
+          <Link to="/prices" className="prices">
+            <li>Paquetes</li>
+          </Link>
           <Link to="/create-activity/" className="create-activity">
             <li>Crear Actividades</li>
           </Link>

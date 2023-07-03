@@ -39,7 +39,8 @@
 
 .activities,
 .create-activity,
-.coaches {
+.coaches,
+.prices {
     text-decoration: none;
     color:white;
     font-size: 20px;

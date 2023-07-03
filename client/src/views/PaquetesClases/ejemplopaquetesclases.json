@@ -1,33 +1,32 @@
 [
     { 
         "id": 1,
-        "title": "Primera Clase",
-        "lastName": " Gomez",
-        "profilePicture": "",
-        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+        "title": "Clase",
+        "clases": [1],
+        "price": "$320.⁰⁰"
     },
-
-    {
+    { 
         "id": 2,
-        "title": "",
-        "lastName": " Lopez",
-        "profilePicture": "",
-        "description": "Ejemplo2"
+        "title": "Clases",
+        "clases": [5],
+        "price": "$1,550.⁰⁰"
     },
-
-    {
+    { 
         "id": 3,
-        "title": "",
-        "lastName": " Romero",
-        "profilePicture": "",
-        "description": "Ejemplo3"
+        "title": "Clases",
+        "clases": [10],
+        "price": "$3,000.⁰⁰"
     },
-
-    {
+    { 
         "id": 4,
-        "title": "",
-        "lastName": " Gonzalez",
-        "profilePicture": "",
-        "description": "Ejemplo4"
+        "title": "Clases",
+        "clases": [25],
+        "price": "$6,875.⁰⁰"
+    },
+    { 
+        "id": 5,
+        "title": "Clases",
+        "clases": [50],
+        "price": "$12,000.⁰⁰"
     }
 ]

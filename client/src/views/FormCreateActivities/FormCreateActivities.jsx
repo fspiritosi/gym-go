@@ -36,7 +36,6 @@ function FormCreateActivities() {
 
   const handleSubmit = async(val) => {
 
-
     await axios.post("/activities", activity);
     
     
@@ -61,7 +60,7 @@ function FormCreateActivities() {
           difficulty: values.difficulty,
         });
         console.log("Desde On submit", activity);
-        await handleSubmit(values);
+        await handleSubmit(activity);
       }}
       validationSchema={validationSubmit}
       onReset={{

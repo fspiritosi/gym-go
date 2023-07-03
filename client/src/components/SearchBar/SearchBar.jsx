@@ -23,8 +23,8 @@ const SearchBar = () => {
 
     return(
         <div className={styles.searchbar}>
-            <button type="submit" onClick={handlerSubmit}>Search</button>
-            <input type="text" value={title} placeholder="Search Activity" onChange={handlerInputChange}/>
+            <button type="submit" onClick={handlerSubmit}>BUSCAR</button>
+            <input type="text" value={title} placeholder="BUSCAR ACTIVIDAD" onChange={handlerInputChange}/>
             <ToastContainer
             position="top-center"   
             autoClose={2000}

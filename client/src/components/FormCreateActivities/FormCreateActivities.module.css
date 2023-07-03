@@ -1,0 +1,12 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputContainer {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 10px;
+}

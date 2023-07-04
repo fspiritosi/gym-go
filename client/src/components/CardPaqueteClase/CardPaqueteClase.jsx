@@ -12,7 +12,6 @@ const CardPaquete = ({ title, clases, price, comprar }) => {
     const [orderData, setOrderData] = useState({ description: title, price: Number(price), quantity: 1 });
 
     const handleBuy = async () => {
-        console.log(orderData);
         try {
             const response = await axios.post("http://localhost:3001/mercadopago/create_preference", orderData);
             const id = response.data.preferenceId;

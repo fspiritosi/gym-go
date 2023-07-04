@@ -10,6 +10,7 @@ import PaquetesClases from './views/PaquetesClases/PaquetesClases'
 import axios from "axios";
 import FormGoals from "./views/FormGoals/FormGoals";
 import Footer from "./components/Footer/Footer";
+import FormClasses from "./views/FormClasses/FormClasses";
 axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/create-goals' element={<FormGoals/>}/>
         <Route path='/coaches' element={<Profesores/>}/>
         <Route path="/create-goals" element={<FormGoals />} />
+        <Route path="/create-classes" element={<FormClasses/>}/>
         <Route path="/prices" element={<PaquetesClases/>} />
       </Routes>
       {location.pathname !== "/" && <Footer />}

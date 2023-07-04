@@ -9,7 +9,7 @@ const Landing = () => {
       <img className={styles.img} src={logo} alt="logo" />
       <h1 className={styles.text}>Comienza el Reto</h1>
       <Link to="/activities">
-        <button className={styles.button}>Home</button>
+        <button className={styles.button}>START</button>
       </Link>
     </div>
   );

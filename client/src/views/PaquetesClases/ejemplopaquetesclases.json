@@ -1,32 +1,32 @@
 [
     { 
         "id": 1,
-        "title": "Clase",
-        "clases": [1],
-        "price": "$320.⁰⁰"
+        "title": "1 clase",
+        "clases": 1,
+        "price": 320
     },
     { 
         "id": 2,
-        "title": "Clases",
-        "clases": [5],
-        "price": "$1,550.⁰⁰"
+        "title": "5 clases",
+        "clases": 5,
+        "price": 1550
     },
     { 
         "id": 3,
-        "title": "Clases",
-        "clases": [10],
-        "price": "$3,000.⁰⁰"
+        "title": "10 clases",
+        "clases": 10,
+        "price": 3000
     },
     { 
         "id": 4,
-        "title": "Clases",
-        "clases": [25],
-        "price": "$6,875.⁰⁰"
+        "title": "25 clases",
+        "clases": 25,
+        "price": 6875
     },
     { 
         "id": 5,
-        "title": "Clases",
-        "clases": [50],
-        "price": "$12,000.⁰⁰"
+        "title": "50 clases",
+        "clases": 50,
+        "price": 12000
     }
 ]

@@ -1,7 +1,8 @@
 .profile {
     width: 90%;
-    height: 280px;
+    height: 290px;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 .cardContainer {
@@ -22,6 +23,7 @@
     border-radius: 10px;
     transform-style: preserve-3d;
     transition: all 0.8s ease;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
 }
 
 /* .card:hover{
@@ -62,3 +64,7 @@
     transform: rotateY(180deg);
 }
 
+.text{
+    text-align:justify;
+    padding: 24px;
+}

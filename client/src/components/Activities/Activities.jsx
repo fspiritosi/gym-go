@@ -30,8 +30,11 @@ const Activities = () => {
         <div className={styles.filterContainer}>
           {/* <h3>Diversidad para tu entretenimiento</h3> */}
           <h3 className={styles.text2}>Utiliza los distintos filtros y descubre nuevas formas de ponerte en forma</h3>
+          <br/>
           <FilterandSort/>
         </div>
+        <br/>
+        <br/>
       </div>
       <div>
         {activities?.map((a, index) => {
@@ -41,7 +44,7 @@ const Activities = () => {
               id={a.id}
               image={a.image}
               title={a.title}
-              // difficulty={a.Classes.difficulty}
+              // difficulty={a.Classes.difficulty} //Se comento de momento para no lanzar error
               goals={a.Goals}
               description={a.description}
             />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../views/Landing/image/logo.png";
+import Logo from "../../assets/logo.png";
 import "./Navbar.css";
 import LoginButton from "../Login/LoginButton";
 import LogoutButton from "../Login/LogoutButton";
@@ -15,7 +15,7 @@ const Nav = () => {
     <nav className="navbar">
       {/* <h1 className="text-center">GYM GO</h1> */}
       <div className="nav-container">
-        <img src={Logo} alt="logo" className="logo" />
+        <img src={Logo} alt="logo" />
         <ul
           //   className={isMobile ? "nav-links-mobile" : "nav-links"}
           className="nav-links"
@@ -27,8 +27,14 @@ const Nav = () => {
           <Link to="/coaches" className="coaches">
             <li>Profesores</li>
           </Link>
+          <Link to="/prices" className="prices">
+            <li>Paquetes</li> 
+          </Link>
           <Link to="/create-activity/" className="create-activity">
             <li>Crear Actividades</li>
+          </Link>
+          <Link to="/create-classes/" className="create-activity">
+            <li>Crear Clases</li>
           </Link>
           <li>
             {isAuthenticated ? (

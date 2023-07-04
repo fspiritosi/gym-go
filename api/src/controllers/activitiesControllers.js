@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Activities, Goals, Classes, Events } = require("../db");
+const { Activities, Goals, Classes, Events, Coaches } = require("../db");
 
 
 
@@ -26,6 +26,12 @@ const getAllActivities = async () => {
               "eventQuota",
             ],
           },
+          {
+            model: Coaches,
+            attributes: [
+              'id'
+            ]
+          }
         ],
       },
     ],
@@ -69,8 +75,8 @@ const findActivityById = async (id) => {
   return activity;
 };
 
-const createActivities = async (title, description, image, goals, difficulty) => {
-  const newActivity = await Activities.create({ title, description, image, difficulty });
+const createActivities = async (title, description, image, goals) => {
+  const newActivity = await Activities.create({ title, description, image});
   for (const goalStr of goals) {
     const goal = await Goals.findAll({
       where: {
@@ -88,7 +94,6 @@ const putActivities = async (
   description,
   image,
   goals,
-  difficulty,
   isActive
 ) => {
   const goalsBd = await Goals.findAll({
@@ -102,7 +107,6 @@ const putActivities = async (
         description,
         image,
         goals: goalsBd,
-        difficulty,
         isActive,
       },
       { where: { id } }

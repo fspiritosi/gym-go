@@ -4,29 +4,26 @@ const bcrypt = require("bcryptjs");
 module.exports = (sequelize) => {
   const User = sequelize.define("User", {
     id: {
-       type: DataTypes.INTEGER,
-      //type: DataTypes.UUID,
+      type: DataTypes.UUID,
       primaryKey: true,
-      //defaultValue: DataTypes.UUIDV4,
-      autoIncrement: true,
-      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
     },
-    // username: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    //   validate: {
-    //     notNull: {
-    //       msg: "Nombre de usuario requerido",
-    //     },
-    //     notEmpty: {
-    //       msg: "El nombre de usuario no puede estar vacio",
-    //     },
-    //     len: {
-    //       args: [3 - 50],
-    //       msg: "Debe ser mayor a 3 caracteres ",
-    //     },
-    //   },
-    // },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Nombre de usuario requerido",
+        },
+        notEmpty: {
+          msg: "El nombre de usuario no puede estar vacio",
+        },
+        len: {
+          args: [3 - 50],
+          msg: "Debe ser mayor a 3 caracteres ",
+        },
+      },
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,

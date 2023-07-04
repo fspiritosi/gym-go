@@ -1,13 +1,15 @@
 .cardContainer {
     margin: 10px;
     perspective: 1000px;
-    width: 200px;
-    height: 220px;
+    font-size: 18px;
+    width: 290px;
+    height: 250px;
     background: none;
     display: inline-block;
-    border: 1px solid #000;
+    border: 1px solid gray;
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
-    border-radius: 5px;
+    border-radius: 20px;
+    margin-right: 25px;
 }
 
 .comprar{
@@ -16,5 +18,5 @@
     padding: 5px;
     font-size: 15px;
     font-weight: 600;
-    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
+    /* box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6); */
 }

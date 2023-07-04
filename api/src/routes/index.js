@@ -9,7 +9,7 @@ const mainRouter = Router();
 
 mainRouter.use("/activities", activitiesRouter);
 mainRouter.use("/goals", goalsRouter);
-mainRouter.use("/users", userRouter);
+mainRouter.use("/", userRouter);
 mainRouter.use("/classes", classesRouter);
 
 

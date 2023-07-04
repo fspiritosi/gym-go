@@ -1,8 +1,9 @@
 .activitiesContainer {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 1fr auto;
   gap: 20px;
   margin: 10px;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 620px) {

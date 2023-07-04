@@ -27,14 +27,15 @@ const CardPaquete = ({ title, clases, price, comprar }) => {
             <br/>
             {/* <h1>{clases}</h1> */}
             <h2>{title}</h2>
-            <br/>
             <h2>${price}</h2>
             <br/>
+            <div>
             <button
                 className={style.comprar}
                 onClick={handleBuy}
             >Comprar</button>
             {preferenceId && <MercadoPago preferenceId={preferenceId}/>}
+            </div>
             <br/>
         </div>
     );

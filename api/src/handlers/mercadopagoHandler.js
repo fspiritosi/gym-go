@@ -19,6 +19,12 @@ const createPreferenceHandler = async (req, res) => {
         quantity: Number(quantity),
       },
     ],
+    back_urls: {
+			"success": "http://localhost:3000/prices",
+			"failure": "http://localhost:3000/prices",
+			"pending": "http://localhost:3000/prices"
+		},
+		// auto_return: "approved",
   };
 
   mercadopago.preferences

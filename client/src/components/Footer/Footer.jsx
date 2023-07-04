@@ -1,5 +1,6 @@
 import React from 'react';
 import './footer.css';
+import footer from '../../assets/footer';
 
 const Footer = () => {
   const designers = [
@@ -22,7 +23,7 @@ const Footer = () => {
 
         <div className="mapa-sitio">
           <h3>Mapa del sitio</h3>
-          <img src= "ruta-a-la-imagen.jpg" href="/mapa-de-sitio"/>
+          <img src= {footer['mapa-gym']}/>
         </div>
 
         <div className="fotos">
@@ -30,7 +31,7 @@ const Footer = () => {
             <div key={index}>
               <p>{designer.name}</p>
               <button onClick={() => window.open(designer.linkedin, '_blank')}>
-                <img src="ruta-al-icono-linkedin.png" alt="LinkedIn" />
+                <img src={footer.linkedin} />
                 Ver perfil
               </button>
             </div>
@@ -38,18 +39,19 @@ const Footer = () => {
         </div>
 
         <div className="logo">
-          <img src="ruta-al-logo.png" alt="Logo del gimnasio" />
+          <img src={footer.logo} />
         </div>
 
         <div className="iconos-redes-sociales">
           <a href="https://www.facebook.com/gimgoo" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-al-icono-facebook.png" alt="Facebook" />
+            <img src={footer.facebook} />
           </a>
+          
           <a href="https://www.instagram.com/gimgo" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-al-icono-instagram.png" alt="Instagram" />
+            <img src={footer.instagram} />
           </a>
           <a href="https://www.twitter.com/gimgo" target="_blank" rel="noopener noreferrer">
-            <img src="ruta-al-icono-twitter.png" alt="Twitter" />
+            <img src={footer.twitter} />
           </a>
         </div>
       </div>

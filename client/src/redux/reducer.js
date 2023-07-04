@@ -76,9 +76,8 @@ const rootReducer = (state = initialState, action) => {
       let goalFiltered = allActivitiesGoals;
 
       if (goalToFilter !== "all") {
-        goalFiltered = allActivitiesGoals.filter(
-          (el) => el.goals.includes(goalToFilter)
-        );
+        goalFiltered = goalFiltered.filter(
+          (el) => el.Goals.includes(goalToFilter.toLowerCase()));
         if (goalFiltered.length === 0) {
           goalFiltered = allActivitiesGoals;
         }
@@ -87,14 +86,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activities:
           action.payload === "all" ? state.allActivities : goalFiltered,
-          goals: action.payload
-      };
+          // goals: action.payload
+      }; //Se corrigio esta funcion 
   
     case GET_COACHES: //En espera de la Ruta 
-           return {
-             ...state,
-             coaches: action.payload,
-           };
+          return {
+            ...state,
+            coaches: action.payload,
+          };
     default:
       return { ...state };
   }

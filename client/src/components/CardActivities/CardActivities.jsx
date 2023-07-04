@@ -22,10 +22,12 @@ const CardActivities = ({ id, title, image, difficulty, goals, description }) =>
         <br/>
         {/* <h3>{difficulty}</h3> */}
         {/* <h5 className={styles.text}>{description}</h5> */}
-          {/* <h3>Objetivo: {goals}</h3> */}
+          <h3>Objetivo: </h3>
+          {/* <ul> */}
           {goals?.map((g, index) => (
                     <li key={index}>{g}</li>
                 ))}
+                {/* </ul> */}
           <br/>
         <Link to={`/activity-detail/${id}`}>
         <button className={styles.buttonI}>Informacion Adicional</button>

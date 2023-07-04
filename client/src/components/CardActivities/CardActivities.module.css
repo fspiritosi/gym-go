@@ -11,7 +11,7 @@
   height: 320px;
   background: none;
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 18px;
 }
 
 .card{
@@ -23,6 +23,7 @@
   border-radius: 10px;
   transform-style: preserve-3d;
   transition: all 0.8s ease;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
 }
 
 /* .card:hover{

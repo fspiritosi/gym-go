@@ -6,6 +6,7 @@
 }
 
 .cardContainer {
+  margin: 10px;
   perspective: 1000px;
   width: 250px;
   height: 320px;

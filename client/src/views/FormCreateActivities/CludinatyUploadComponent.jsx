@@ -23,7 +23,7 @@ function CludinatyUploadComponent() {
   return (
     <div>
         <button onClick={() => widgetRef.current.open()}>
-            Upload Image
+            Subir imagen
         </button>
     </div>
   )

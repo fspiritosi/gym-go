@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import styles from './FormCreateActivities.module.css'
 import CludinatyUploadComponent from './CludinatyUploadComponent'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const validationSubmit = Yup.object({
   title: Yup.string().min(5).max(25).required('Required'),
@@ -16,7 +17,7 @@ const validationSubmit = Yup.object({
 const simulateGoals = ['resistencia', 'cardio', 'masa muscular', 'perder peso']
 
 function FormCreateActivities() {
-
+  const navigate = useNavigate();
   
   const [activity, setActivity] = useState({
     title: "",
@@ -32,11 +33,10 @@ function FormCreateActivities() {
     console.log('desde SaveImg',activity)
   }
 
-  const handleSubmit = async(val) => {
-
-    await axios.post("/activities", activity);
-    
-    
+  const handleSubmit = async (val) => {
+    await axios.post("/activities", val)
+    .then(res => navigate(`/activity-detail/${res.data.id}`))
+    .catch(res => alert(res));
   }
   console.log('desde state',activity)
 
@@ -66,6 +66,7 @@ function FormCreateActivities() {
         image: [],
       }}
     >
+      <div className={styles.container}>
       <Form className={styles.form}>
         <div className={styles.inputContainer}>
           <label htmlFor="description">Actividad</label>
@@ -73,7 +74,7 @@ function FormCreateActivities() {
           <ErrorMessage name="title" />
         </div>
         <div className={styles.inputContainer}>
-          <label htmlFor="description">Descripciónn</label>
+          <label htmlFor="description">Descripción</label>
           <Field name="description" as="textarea" cols="80" rows="8" />
           <ErrorMessage name="description" />
         </div>
@@ -100,7 +101,7 @@ function FormCreateActivities() {
             type="button"
             id="image"
             onClick={(e) => saveImage(e)}
-          >
+            >
             Guardar Imagen
           </button>
           <ErrorMessage name="image" />
@@ -108,6 +109,7 @@ function FormCreateActivities() {
 
         <button type="submit">Crear Actividad</button>
       </Form>
+      </div>
     </Formik>
   );
   

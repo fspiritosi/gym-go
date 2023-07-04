@@ -4,6 +4,9 @@ footer {
   background-color: black;
   color: white;
   padding: 20px;
+  width: 100%;
+ 
+  
 }
 
 .upper-section {
@@ -11,7 +14,8 @@ footer {
   flex-wrap: wrap;
   background-color: yellow;
   color: black;
-  padding: 20px;
+  padding: 1px;
+  justify-content: space-between;
 }
 
 .contacto,
@@ -19,17 +23,21 @@ footer {
 .fotos,
 .logo,
 .iconos-redes-sociales {
-  flex: 1 1 50%;
+  flex: 1 1 15vh;
 }
 
 .contacto {
+  background-position: right top;
   display: flex;
   flex-direction: column;
+  align-self: center; 
+
 }
 
-.mapa-sitio {
-  display: flex;
-  align-items: flex-end;
+ 
+
+.mapa-sitio img{
+  width: 200px;
 }
 
 .fotos {
@@ -64,22 +72,35 @@ footer {
   flex-direction: column;
   align-items: flex-start;
   margin-top: 20px;
+  order: -1; 
+  align-items: center;
 }
 
 .logo img {
-  width: 100px;
+  width: 300px;
 }
 
-.iconos-redes-sociales {
+.mapa-sitio{
+  background-position: right top;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  align-self: center; 
+}
+
+
+.iconos-redes-sociales {
+  
+  background-position: right;
   margin-top: 20px;
+  align-self: center; 
+  
 }
 
 .iconos-redes-sociales img {
-  width: 30px;
-  height: 30px;
-  margin: 5px;
+  width: 37px;
+  height: 37px;
+  flex-shrink: 0;
 }
 
 .lower-section {

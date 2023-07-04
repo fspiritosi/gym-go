@@ -18,21 +18,22 @@ const Activities = () => {
 
   return (
     <div>
+      <br/>
       <div className={styles.title}>
-        <h1>Actividades</h1>
-        <p>Bienvenido a las actividades de nuestro gimnasio. ¡Aquí puedes explorar y encontrar varias actividades físicas para mantenerte en forma y divertirte!</p>
-      </div>
-      <div>
-        <SearchBar />
+        {/* <h1 className={styles.title2}>Actividades</h1> */}
+        <br/>
+        <h1 className={styles.text}> Bienvenido a las actividades de nuestro gimnasio.</h1>
+        <p className={styles.text2}>¡Aquí puedes explorar y encontrar varias actividades físicas para mantenerte en forma y divertirte!</p>
+        <SearchBar /> 
       </div>
       <div>
         <div className={styles.filterContainer}>
-          <h2>DIVERSIDAD PARA TU ENTRENAMIENTO </h2>
-          <h3>Utiliza los distintos filtros y descubre nuevas formas de ponerte en forma</h3>
-          <FilterandSort />
+          {/* <h3>Diversidad para tu entretenimiento</h3> */}
+          <h3 className={styles.text2}>Utiliza los distintos filtros y descubre nuevas formas de ponerte en forma</h3>
+          <FilterandSort/>
         </div>
       </div>
-      <div className={styles.activitiesContainer}>
+      <div>
         {activities?.map((a, index) => {
           return (
             <CardActivities
@@ -40,12 +41,15 @@ const Activities = () => {
               id={a.id}
               image={a.image}
               title={a.title}
-              difficulty={a.Classes.difficulty}
+              // difficulty={a.Classes.difficulty}
               goals={a.Goals}
+              description={a.description}
             />
           );
         })}
       </div>
+      <br/>
+      <br/>
     </div>
   );
 };

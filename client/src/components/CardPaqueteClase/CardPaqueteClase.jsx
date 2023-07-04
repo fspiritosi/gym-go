@@ -15,7 +15,6 @@ const CardPaquete = ({ title, clases, price, comprar }) => {
             <br/>
             {/* <h1>{clases}</h1> */}
             <h2>{title}</h2>
-            <br/>
             <h2>${price}</h2>
             <br/>
             <button

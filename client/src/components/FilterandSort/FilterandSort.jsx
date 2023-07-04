@@ -33,7 +33,7 @@ const FilterandSort = () => {
         </select>
       </div>
       <div className={styles.filterSection}>
-        <h3 className={styles.text}>No hay límites para ti: ¡Selecciona la dificultad y muestra tu determinación!</h3>
+        <h3 className={styles.text}>¡Selecciona la dificultad y muestra tu determinación!</h3>
         <select className={styles.select} onChange={handlerFilterDifficulty}>
           <option value="diff">All</option>
           <option value="easy">Easy</option>
@@ -42,7 +42,7 @@ const FilterandSort = () => {
         </select>
       </div>
       <div className={styles.filterSection}>
-        <h3 className={styles.text}>Desafía tus límites, alcanza tus metas: Encuentra actividades diseñadas para cada objetivo</h3>
+        <h3 className={styles.text}>Encuentra actividades diseñadas para cada objetivo</h3>
         <select className={styles.select} onChange={handlerFilterGoals}>
           <option value="all">All</option>
           {goals.map((goal) => (

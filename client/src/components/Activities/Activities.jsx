@@ -23,15 +23,13 @@ const Activities = () => {
         {/* <h1 className={styles.title2}>Actividades</h1> */}
         <br/>
         <h1 className={styles.text}> Bienvenido a las actividades de nuestro gimnasio.</h1>
-        <h2 className={styles.text}>¡Aquí puedes explorar y encontrar varias actividades físicas para mantenerte en forma y divertirte!</h2>
-      </div>
-      <div>
+        <p className={styles.text2}>¡Aquí puedes explorar y encontrar varias actividades físicas para mantenerte en forma y divertirte!</p>
         <SearchBar /> 
       </div>
       <div>
         <div className={styles.filterContainer}>
-          <h3>Diversidad para tu entretenimiento</h3>
-          <h3>Utiliza los distintos filtros y descubre nuevas formas de ponerte en forma</h3>
+          {/* <h3>Diversidad para tu entretenimiento</h3> */}
+          <h3 className={styles.text2}>Utiliza los distintos filtros y descubre nuevas formas de ponerte en forma</h3>
           <FilterandSort/>
         </div>
       </div>

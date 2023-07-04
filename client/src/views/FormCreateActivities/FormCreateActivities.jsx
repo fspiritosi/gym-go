@@ -24,7 +24,6 @@ function FormCreateActivities() {
     description: "",
     image: [],
     goals: [],
-    difficulty: "",
   });
 
   //const [uploadingImage, setUploadingImage] = useState(true)
@@ -49,7 +48,6 @@ function FormCreateActivities() {
         description: "",
         goals: [],
         image: [],
-        difficulty: "",
       }}
       onSubmit={async (values) => {
         setActivity({
@@ -57,7 +55,6 @@ function FormCreateActivities() {
           title: values.title,
           description: values.description,
           goals: values.goals,
-          difficulty: values.difficulty,
         });
         console.log("Desde On submit", activity);
         await handleSubmit(activity);
@@ -68,31 +65,23 @@ function FormCreateActivities() {
         description: "",
         goals: [],
         image: [],
-        difficulty: "",
       }}
     >
       <Form className={styles.form}>
         <div className={styles.inputContainer}>
-          <label htmlFor="description">Activity Title</label>
+          <label htmlFor="description">Actividad</label>
           <Field name="title" />
           <ErrorMessage name="title" />
         </div>
         <div className={styles.inputContainer}>
-          <label htmlFor="description">Activity Description</label>
+          <label htmlFor="description">Descripciónn</label>
           <Field name="description" as="textarea" cols="80" rows="8" />
           <ErrorMessage name="description" />
         </div>
 
-        <div className={styles.inputContainer}>
-          <Field as="select" name="difficulty">
-            <option value="">Select Difficulty</option>
-            <option value="easy">easy</option>
-            <option value="medium">medium</option>
-            <option value="hard">hard</option>
-          </Field>
-        </div>
+
         <div className={styles.goalsTitle} id="checkbox-group">
-          Goals
+          Objetivos
         </div>
         <div className={styles.checkGroup} role="group" aria-labelledby="checkbox-group">
           {simulateGoals?.map((goal, index) => (
@@ -104,7 +93,7 @@ function FormCreateActivities() {
         </div>
 
         <div className={styles.imageContainer}>
-          <label htmlFor="title">Images</label>
+          <label htmlFor="title">Imagenes</label>
           <CludinatyUploadComponent />
           <img id="uploadedimage" src=""></img>
           <button
@@ -113,12 +102,12 @@ function FormCreateActivities() {
             id="image"
             onClick={(e) => saveImage(e)}
           >
-            Save
+            Guardar Imagen
           </button>
           <ErrorMessage name="image" />
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Crear Actividad</button>
       </Form>
     </Formik>
   );

@@ -59,57 +59,86 @@ function FormClasses() {
 
   return (
     <form className={styles.formContainer} onSubmit={formik.handleSubmit}>
-      <label htmlFor="">Actividad:</label>
-      <select name="ActivityId" id="" onChange={formik.handleChange}>
-        <option value="">Seleccionar Actividad</option>
-        {allActivities?.map((act) => (
-          <option name="ActivityId" key={act.id} value={act.id}>
-            {act.title}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="">Profesor</label>
-      <select name="CoachId" id="" onChange={formik.handleChange}>
-        <option value="">Seleccionar Profesor</option>
-        {coaches?.map((coach) => (
-          <option name="ActivityId" key={coach.id} value={coach.id}>
-            {coach.firtName}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="">Dificultad</label>
-      <select name="difficulty" onChange={formik.handleChange}>
-        <option value="">Seleccionar Dificultad</option>
-        <option value="easy">Facil</option>
-        <option value="medium">Intermedio</option>
-        <option value="hard">Dificil</option>
-      </select>
-      <label htmlFor="">Inicio</label>
-      <input
-        type="date"
-        name="startDate"
-        id=""
-        onChange={formik.handleChange}
-      />
-      <label htmlFor="">Fin</label>
-      <input type="date" name="endDate" id="" onChange={formik.handleChange} />
-      <label htmlFor="">Hora inicio</label>
-      <input
-        type="time"
-        name="startTime"
-        id=""
-        onChange={formik.handleChange}
-      />
-      <label htmlFor="">Hora Fin</label>
-      <input type="time" name="endTime" id="" onChange={formik.handleChange} />
-      <label htmlFor="">Cupo de la Clase</label>
-      <input type="number" name="quota" onChange={formik.handleChange} />
-      <label htmlFor="">Recurrencia</label>
-      <select name="recurringPattern" onChange={formik.handleChange}>
-        <option value="">Seleccionar Recurrencia</option>
-        <option value="weekly">Semanal</option>
-        <option value="does not repeat">Unico</option>
-      </select>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Actividad:</label>
+        <select name="ActivityId" id="" onChange={formik.handleChange}>
+          <option value="">Seleccionar Actividad</option>
+          {allActivities?.map((act) => (
+            <option name="ActivityId" key={act.id} value={act.id}>
+              {act.title}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Profesor</label>
+        <select name="CoachId" id="" onChange={formik.handleChange}>
+          <option value="">Seleccionar Profesor</option>
+          {coaches?.map((coach) => (
+            <option name="ActivityId" key={coach.id} value={coach.id}>
+              {coach.firtName}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Dificultad</label>
+        <select name="difficulty" onChange={formik.handleChange}>
+          <option value="">Seleccionar Dificultad</option>
+          <option value="easy">Facil</option>
+          <option value="medium">Intermedio</option>
+          <option value="hard">Dificil</option>
+        </select>
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Fecha Inicio</label>
+        <input
+          type="date"
+          name="startDate"
+          id=""
+          onChange={formik.handleChange}
+        />
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Fecha Fin</label>
+        <input
+          type="date"
+          name="endDate"
+          id=""
+          onChange={formik.handleChange}
+        />
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Hora inicio</label>
+        <input
+          type="time"
+          name="startTime"
+          id=""
+          onChange={formik.handleChange}
+        />
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Hora Fin</label>
+        <input
+          type="time"
+          name="endTime"
+          id=""
+          onChange={formik.handleChange}
+        />
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Cupo de la Clase</label>
+        <input className={styles.numberInput} type="number" name="quota" onChange={formik.handleChange} />
+      </div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="">Recurrencia</label>
+        <select name="recurringPattern" onChange={formik.handleChange}>
+          <option value="">Seleccionar Recurrencia</option>
+          <option value="weekly">Semanal</option>
+          <option value="does not repeat">Unico</option>
+        </select>
+      </div>
+
       <button type="submit">Crear Clase</button>
     </form>
   );

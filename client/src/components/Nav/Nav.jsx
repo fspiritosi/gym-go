@@ -33,6 +33,9 @@ const Nav = () => {
           <Link to="/create-activity/" className="create-activity">
             <li>Crear Actividades</li>
           </Link>
+          <Link to="/create-classes/" className="create-activity">
+            <li>Crear Clases</li>
+          </Link>
           <li>
             {isAuthenticated ? (
               <>

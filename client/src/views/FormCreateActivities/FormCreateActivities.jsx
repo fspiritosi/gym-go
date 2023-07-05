@@ -4,7 +4,6 @@ import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import styles from './FormCreateActivities.module.css'
 import CludinatyUploadComponent from './CludinatyUploadComponent'
-import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 
 const validationSubmit = Yup.object({
@@ -107,7 +106,7 @@ function FormCreateActivities() {
         <div className={styles.imageContainer}>
           <label htmlFor="title">Images</label>
           <CludinatyUploadComponent />
-          <img id="uploadedimage" src=""></img>
+          <img id="uploadedimage" src="" alt='img'></img>
           <button
             className={styles.btnSave}
             type="button"

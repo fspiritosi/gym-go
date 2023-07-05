@@ -1,8 +1,9 @@
 import React from "react";
-import logo from '../../Assets/Logos/Logo.ico'
-import backgroundImage from '../../Assets/backgraund/Fondo2.jpg';
-import landing from '../../Assets/backgraund/landing.jpg'
+import logo from '../../assets/Logos/Logo.ico'
+import backgroundImage from '../../assets/backgraund/Fondo2.jpg';
+import landing from '../../assets/backgraund/landing.jpg'
 import { Link } from "react-router-dom";
+import Nav from "../../components/Nav/Nav";
 import 'tailwindcss/tailwind.css';
 
 
@@ -10,6 +11,7 @@ const Landing = () => {
   
   return (
     <div className="container min-w-full min-h-screen bg-center bg-cover px-8 grid place-items-left relative" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      {/* <Nav /> */}
       <nav className=" md:flex md:items-center justify-between w-full fixed top-0 left-0">
         <img className=" flex justify-between w-40 cursor-pointer" src={logo} alt="logo"/>
         

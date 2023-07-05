@@ -94,7 +94,7 @@ function FormCreateActivities() {
         <div className={styles.imageContainer}>
           <label htmlFor="title">Imagenes</label>
           <CludinatyUploadComponent />
-          <img id="uploadedimage" src=""></img>
+          <img id="uploadedimage" src="" alt='img'></img>
           <button
             className={styles.btnSave}
             type="button"

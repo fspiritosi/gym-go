@@ -29,13 +29,13 @@ const getActivityByIdHandler = async (req, res) => {
 
 const postActivitiesHandler = async (req, res) => {
   try {
-    const { title, description, image, goals, difficulty } = req.body;
+    const { title, description, image, goals } = req.body;
     const newActivity = await createActivities(
       title,
       description,
       image,
       goals,
-      difficulty,
+
       //isActive
     );
     res.status(201).json(newActivity);
@@ -47,14 +47,13 @@ const postActivitiesHandler = async (req, res) => {
 const putActivitiesByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, image, goals, difficulty, isActive } = req.body;
+    const { title, description, image, goals, isActive } = req.body;
     const updatedActivity = await putActivities(
       id,
       title,
       description,
       image,
       goals,
-      difficulty,
       isActive
     );
     res.status(200).json(updatedActivity);

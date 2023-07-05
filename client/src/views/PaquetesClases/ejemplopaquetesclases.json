@@ -1,0 +1,32 @@
+[
+    { 
+        "id": 1,
+        "title": "1 clase",
+        "clases": 1,
+        "price": 320
+    },
+    { 
+        "id": 2,
+        "title": "5 clases",
+        "clases": 5,
+        "price": 1550
+    },
+    { 
+        "id": 3,
+        "title": "10 clases",
+        "clases": 10,
+        "price": 3000
+    },
+    { 
+        "id": 4,
+        "title": "25 clases",
+        "clases": 25,
+        "price": 6875
+    },
+    { 
+        "id": 5,
+        "title": "50 clases",
+        "clases": 50,
+        "price": 12000
+    }
+]

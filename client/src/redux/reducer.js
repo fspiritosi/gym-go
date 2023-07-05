@@ -1,12 +1,7 @@
-import {
-  GET_ACTIVITIES,
-  GET_ACTIVITIE_NAME,
-  GET_DETAILS_ID,
-  ORDER_BY_NAME,
-  FILTER_BY_DIFFICULTY,
-  GET_GOALS,
-  GET_COACHES
-} from "./actions";
+
+
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS,GET_COACHES } from "./actions";
+
 
 const initialState = {
   activities: [],
@@ -46,10 +41,9 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_DIFFICULTY:
-      const { allActivities } = state;
+      const { allActivities } = state; // Cambiado a desestructuración
       const diffToFilter = action.payload;
       let diffFiltered = allActivities;
-
       if (diffToFilter !== "diff") {
         diffFiltered = allActivities.filter(
           (el) => el.difficulty === diffToFilter
@@ -73,19 +67,39 @@ const rootReducer = (state = initialState, action) => {
     case GET_GOALS:
       return {
         ...state,
-        goals: action.payload
+        goals: action.payload,
       };
 
-    case GET_COACHES: //En espera de la Ruta 
+    case FILTER_BY_GOALS:
+      const { allActivities: allActivitiesGoals } = state; // Cambiado a desestructuración
+      const goalToFilter = action.payload;
+      let goalFiltered = allActivitiesGoals;
+
+      if (goalToFilter !== "all") {
+        goalFiltered = goalFiltered.filter(
+          (el) => el.Goals.includes(goalToFilter.toLowerCase()));
+        if (goalFiltered.length === 0) {
+          goalFiltered = allActivitiesGoals;
+        }
+      }
       return {
         ...state,
-        coaches: action.payload,
-      };
-
+        activities:
+          action.payload === "all" ? state.allActivities : goalFiltered,
+          // goals: action.payload
+      }; //Se corrigio esta funcion 
+  
+    case GET_COACHES: //En espera de la Ruta 
+          return {
+            ...state,
+            coaches: action.payload,
+          };
     default:
       return { ...state };
   }
+};
 
-}
+
 
 export default rootReducer;
+

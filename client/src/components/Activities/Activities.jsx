@@ -1,10 +1,10 @@
 import React from 'react';
-import CardActivities from '../CardActivities/CardActivities';
-import SearchBar from '../SearchBar/SearchBar';
-import FilterandSort from '../FilterandSort/FilterandSort';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivities } from '../../redux/actions';
+import { getActivities, getGoals } from '../../redux/actions';
+import SearchBar from '../SearchBar/SearchBar';
+import CardActivities from '../CardActivities/CardActivities'
+import FilterandSort from '../FilterandSort/FilterandSort';
 import styles from './Activities.module.css';
 
 const Activities = () => {
@@ -13,20 +13,30 @@ const Activities = () => {
 
   useEffect(() => {
     dispatch(getActivities());
+    dispatch(getGoals());
   }, [dispatch]);
 
   return (
     <div>
+      <br/>
       <div className={styles.title}>
-        {/* <h1>Activities</h1> */}
+        {/* <h1 className={styles.title2}>Actividades</h1> */}
+        <br/>
+        <h1 className={styles.text}> Bienvenido a las actividades de nuestro gimnasio.</h1>
+        <p className={styles.text2}>¡Aquí puedes explorar y encontrar varias actividades físicas para mantenerte en forma y divertirte!</p>
+        <SearchBar /> 
       </div>
       <div>
-        <SearchBar />
+        <div className={styles.filterContainer}>
+          {/* <h3>Diversidad para tu entretenimiento</h3> */}
+          <h3 className={styles.text2}>Utiliza los distintos filtros y descubre nuevas formas de ponerte en forma</h3>
+          <br/>
+          <FilterandSort/>
+        </div>
+        <br/>
+        <br/>
       </div>
       <div>
-        <FilterandSort />
-      </div>
-      <div className={styles.activitiesContainer}>
         {activities?.map((a, index) => {
           return (
             <CardActivities
@@ -34,15 +44,17 @@ const Activities = () => {
               id={a.id}
               image={a.image}
               title={a.title}
-              difficulty={a.Classes.difficulty}
+              // difficulty={a.Classes.difficulty} //Se comento de momento para no lanzar error
               goals={a.Goals}
+              description={a.description}
             />
           );
         })}
       </div>
+      <br/>
+      <br/>
     </div>
   );
 };
 
 export default Activities;
-

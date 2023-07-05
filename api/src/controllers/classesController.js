@@ -23,7 +23,8 @@ const createClasses = async (
   startTime,
   endTime,
   quota,
-  ActivityId
+  ActivityId,
+  CoachId
 ) => {
   const newClasses = await Classes.create({
     difficulty,
@@ -34,7 +35,7 @@ const createClasses = async (
     endTime,
     quota,
     ActivityId,
-    //   CoachId,
+    CoachId,
   });
   //se ejecuta la función para crear eventos
   const events = createEvent(newClasses)

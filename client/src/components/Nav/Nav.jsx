@@ -21,35 +21,55 @@ const Nav = () => {
           className="nav-links"
           onClick={() => setIsMovile(false)}
         >
-          <Link to="/activities" className="activities">
+          {/* <Link to="/activities" className="activities">
             <li>Actividades</li>
           </Link>
           <Link to="/coaches" className="coaches">
             <li>Profesores</li>
           </Link>
           <Link to="/prices" className="prices">
-            <li>Paquetes</li> 
-          </Link>
-          <Link to="/create-activity/" className="create-activity">
+            <li>Paquetes</li>
+          </Link> */}
+          {/* <Link to="/create-activity/" className="create-activity">
             <li>Crear Actividades</li>
           </Link>
           <Link to="/create-classes/" className="create-activity">
             <li>Crear Clases</li>
+          </Link> */}
+          {/* <li> */}
+          {isAuthenticated ? (
+            <>
+              <Link to="/create-activity/" className="create-activity">
+                <li>Crear Actividades</li>
+              </Link>
+              <Link to="/create-classes/" className="create-activity">
+                <li>Crear Clases</li>
+              </Link>
+              <Link to="/create-goals/" className="create-activity">
+                <li>Crear Goals</li>
+              </Link>
+              <li>
+                <Profile />
+              </li>
+              <li>
+                <LogoutButton />
+              </li>
+            </>
+          ) : (
+            <>
+            <Link to="/activities" className="activities">
+            <li>Actividades</li>
           </Link>
-          <li>
-            {isAuthenticated ? (
-              <>
-                <li>
-                  <Profile />
-                </li>
-                <li>
-                  <LogoutButton />
-                </li>
-              </>
-            ) : (
-              <LoginButton />
-            )}
-          </li>
+          <Link to="/coaches" className="coaches">
+            <li>Profesores</li>
+          </Link>
+          <Link to="/prices" className="prices">
+            <li>Paquetes</li>
+          </Link>
+            <LoginButton />
+            </>
+          )}
+          {/* </li> */}
         </ul>
       </div>
       <button

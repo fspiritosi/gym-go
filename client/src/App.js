@@ -9,8 +9,8 @@ import Profesores from "./views/Profesores/Profesores";
 import axios from "axios";
 import FormGoals from "./views/FormGoals/FormGoals";
 import Footer from "./components/Footer/Footer";
-axios.defaults.baseURL = "http://localhost:3001";
-
+//axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 function App() {
   let location = useLocation();
 

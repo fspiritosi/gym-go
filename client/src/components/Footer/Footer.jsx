@@ -1,6 +1,6 @@
 import React from 'react';
 import './footer.css';
-import footer from '../../assets/footer';
+// import footer from '../../assets/footer';
 
 const Footer = () => {
   const designers = [
@@ -23,7 +23,7 @@ const Footer = () => {
 
         <div className="mapa-sitio">
           <h3>Mapa del sitio</h3>
-          <img src= {footer['mapa-gym']}/>
+          {/* <img src= {footer['mapa-gym']}/> */}
         </div>
 
         <div className="fotos">
@@ -31,7 +31,7 @@ const Footer = () => {
             <div key={index}>
               <p>{designer.name}</p>
               <button onClick={() => window.open(designer.linkedin, '_blank')}>
-                <img src={footer.linkedin} />
+                {/* <img src={footer.linkedin} /> */}
                 Ver perfil
               </button>
             </div>
@@ -39,19 +39,19 @@ const Footer = () => {
         </div>
 
         <div className="logo">
-          <img src={footer.logo} />
+          {/* <img src={footer.logo} /> */}
         </div>
 
         <div className="iconos-redes-sociales">
           <a href="https://www.facebook.com/gimgoo" target="_blank" rel="noopener noreferrer">
-            <img src={footer.facebook} />
+            {/* <img src={footer.facebook} /> */}
           </a>
           
           <a href="https://www.instagram.com/gimgo" target="_blank" rel="noopener noreferrer">
-            <img src={footer.instagram} />
+            {/* <img src={footer.instagram} /> */}
           </a>
           <a href="https://www.twitter.com/gimgo" target="_blank" rel="noopener noreferrer">
-            <img src={footer.twitter} />
+            {/* <img src={footer.twitter} /> */}
           </a>
         </div>
       </div>

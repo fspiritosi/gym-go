@@ -9,7 +9,7 @@ import Profesores from './views/Profesores/Profesores';
 import PaquetesClases from './views/PaquetesClases/PaquetesClases'
 import axios from "axios";
 import FormGoals from "./views/FormGoals/FormGoals";
-import Footer from "./components/Footer/Footer";
+//import Footer from "./components/Footer/Footer";
 import FormClasses from "./views/FormClasses/FormClasses";
 axios.defaults.baseURL = "http://localhost:3001";
 
@@ -31,7 +31,7 @@ function App() {
         <Route path="/create-classes" element={<FormClasses/>}/>
         <Route path="/prices" element={<PaquetesClases/>} />
       </Routes>
-      {location.pathname !== "/" && <Footer />}
+      {/* {location.pathname !== "/" && <Footer />} */}
     </div>
   );
 }

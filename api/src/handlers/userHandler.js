@@ -10,10 +10,10 @@ const userRegister = async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const newUser = await userRegisterCtrl(username, email, password);
-    const token = jwt.sign({ id: newUser.id }, process.env.SECRET, {
-      expiresIn: "1h", //24horas
-    });
-    res.status(200).json({ token });
+    // const token = jwt.sign({ id: newUser.id }, process.env.SECRET, {
+    //   expiresIn: "1h", //24horas
+    // });
+    res.status(200).json( newUser );
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

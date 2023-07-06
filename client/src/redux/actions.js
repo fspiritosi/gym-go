@@ -27,14 +27,13 @@ export const getActivities = () => {
 
 //Busqueda de Actividades
 export function searchActivitieName(title) {
-
   title = title.toLowerCase();
   return async function (dispatch) {
     try {
       const infoActivitieName = await axios.get(`/activities?title=${title}`);
       const activities = infoActivitieName.data;
       if (activities.length === 0) {
-        toast.error("Activity Not Found");
+        toast.error("Actividad no encontrada");
       } else {
         dispatch({
           type: GET_ACTIVITIE_NAME,

@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-// import { Formik, useFormik } from 'formik'
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import styles from './FormCreateActivities.module.css'
@@ -13,9 +12,6 @@ const validationSubmit = Yup.object({
 })
 
 const simulateGoals = ['resistencia', 'cardio', 'masa muscular', 'perder peso']
-
-
-
 
 
 function FormCreateActivities() {

@@ -5,6 +5,12 @@ module.exports = {
     './public/index.html',
     './src/views/Landing/Landing.jsx',
     './src/components/Nav/Nav.jsx',
+    './src/components/Footer/Footer.jsx',
+    './src/components/Login/LoginButton.js',
+    './src/components/Login/LogoutButton.js',
+    './src/components/Login/Profile.js',
+    './src/views/Landing/Landing.jsx',
+    
   ],
   theme: {
     colors: {

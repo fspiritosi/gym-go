@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClassess } from '../../redux/actions';
-import CardClasses from "../CardClasses/CardClasses";
+import CardClasses from "../../components/CardClasses/CardClasses";
 
 
 const Classes = () => {

@@ -1,0 +1,41 @@
+.formContainer{
+    width: 50vw;
+    height: 80vh;
+    margin: 15px;
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #202020;
+    color: #fff;
+    
+}
+
+.formContainer label {
+    font-size: 1.2rem;
+}
+
+.formContainer input{
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.formContainer select {
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.formContainer .inputContainer {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.numberInput {
+    width: 30%;
+}

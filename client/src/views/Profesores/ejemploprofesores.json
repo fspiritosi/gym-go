@@ -1,0 +1,33 @@
+[
+    { 
+        "id": 1,
+        "firstName": "Ashley",
+        "lastName": "Gomez",
+        "profilePicture": "http://web-rockstars.com/sporty/wp-content/uploads/2014/05/team-6.jpg",
+        "description": "Un entrenador de gimnasio debe tener un amplio conocimiento en diversas áreas relacionadas con el ejercicio físico, como la anatomía, fisiología, nutrición y técnicas de entrenamiento. También es importante contar con experiencia práctica en el diseño y la implementación de programas de entrenamiento efectivos."
+    },
+
+    {
+        "id": 2,
+        "firstName": "Amanda",
+        "lastName": "Lopez",
+        "profilePicture": "http://web-rockstars.com/sporty/wp-content/uploads/2014/05/team-1.jpg",
+        "description": "Un buen entrenador de gimnasio debe tener habilidades de comunicación efectivas para poder entender las necesidades y objetivos individuales de cada cliente. Debe ser capaz de transmitir información de manera clara y motivadora, así como escuchar y responder a las preocupaciones y preguntas de los clientes."
+    },
+
+    {
+        "id": 3,
+        "firstName": "Agustin",
+        "lastName": "Romero",
+        "profilePicture": "http://web-rockstars.com/sporty/wp-content/uploads/2014/05/team-2.jpg",
+        "description": "Cada persona es única y tiene diferentes necesidades y capacidades físicas. Un entrenador de gimnasio debe ser capaz de adaptar los programas de entrenamiento a las características individuales de cada cliente, teniendo en cuenta su nivel de condición física, lesiones previas, objetivos específicos y preferencias personales."
+    },
+
+    {
+        "id": 4,
+        "firstName": "Alan",
+        "lastName": "Gonzalez",
+        "profilePicture": "https://st4.depositphotos.com/10932024/25476/i/600/depositphotos_254769264-stock-photo-portrait-of-muscular-sporty-smiling.jpg",
+        "description": "Un buen entrenador de gimnasio es un motivador y un apoyo constante para sus clientes. Debe ser capaz de inspirar y alentar a sus clientes a superar los desafíos, mantener la constancia en el entrenamiento y adoptar hábitos saludables a largo plazo."
+    }
+]

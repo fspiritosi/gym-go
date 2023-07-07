@@ -1,6 +1,5 @@
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
-import styles from './FormGoals.module.css'
 import axios from 'axios'
 import { useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
@@ -15,7 +14,7 @@ function FormGoals() {
 
     useEffect(()=> {
         dispatch(getGoals());
-    }, [])
+    }, [dispatch])
 
     const submitData = async (data) => {
         const noRepeatName = () => {

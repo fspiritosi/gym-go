@@ -1,0 +1,71 @@
+const {getAllClasses, createClasses, putClasses, deleteClasses} = require('../controllers/classesController')
+
+const getClasesHandler = async (req, res) => {
+    try {
+        const classes = await getAllClasses();
+        res.status(200).json(classes)
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
+}
+
+const postClassesHandler = async (req, res) => {
+    try {
+        const {
+          difficulty,
+          recurringPattern,
+          startDate,
+          endDate,
+          startTime,
+          endTime,
+          quota,
+          ActivityId,
+          CoachId,
+        } = req.body;
+        const newClass = await createClasses(
+          difficulty,
+          recurringPattern,
+          startDate,
+          endDate,
+          startTime,
+          endTime,
+          quota,
+          ActivityId,
+          CoachId
+        );
+        res.status(200).json(newClass)
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
+}
+
+const putClassesHandler = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const { difficulty, startDate, startTime, duration, recurringPattern, quota } = req.body;
+        const updatedClass = await putClasses(
+            id,
+            difficulty,
+            startDate,
+            startTime,
+            duration,
+            quota,
+            recurringPattern
+        )
+        res.status(200).json(updatedClass);
+    } catch (error) {
+        return res.status(404).json({ message: error.message });
+    }
+}
+
+const deleteClassesHandler = async (req, res) => {
+    try {
+        const {id} = req.params
+        const deleteClass = await deleteClasses(id);
+        res.status(200).json(deleteClass);
+    } catch (error) {
+        return res.status(404).json({ message: error.message });
+    }
+}
+
+module.exports = { getClasesHandler, postClassesHandler, putClassesHandler, deleteClassesHandler };

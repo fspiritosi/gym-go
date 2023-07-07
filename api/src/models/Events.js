@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
     },
     eventQuota: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      default: [],
+      defaultValue: [],
       allowNull: false
     },
     isActive: {

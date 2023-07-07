@@ -6,6 +6,7 @@ const {
   userUpdateCtrl,
   userDeleteCtrl,
 } = require("../controllers/userController");
+
 const userRegister = async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -32,7 +33,7 @@ const userLogin = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
     const { username, email } = req.body;
     const user = await getUserCtrl(username, email);
@@ -64,4 +65,4 @@ const userDelete = async (req, res) => {
   }
 };
 
-module.exports = { userRegister, userLogin, getUser, userUpdate, userDelete };
+module.exports = { userRegister, userLogin, getAllUsers, userUpdate, userDelete };

@@ -25,11 +25,8 @@ function App() {
         <Route path="/activities" element={<ActivitiesV />} />
         <Route path="/activity-detail/:id" element={<Detail />} />
         <Route path="/create-activity" element={<FormCreateActivities />} />
-        <Route path='/create-goals' element={<FormGoals/>}/>
-        <Route path='/coaches' element={<Profesores/>}/>
         <Route path="/create-goals" element={<FormGoals />} />
         <Route path="/create-classes" element={<FormClasses/>}/>
-        <Route path="/prices" element={<PaquetesClases/>} />
       </Routes>
       {/* {location.pathname !== "/" && <Footer />} */}
     </div>

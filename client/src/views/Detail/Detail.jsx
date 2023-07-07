@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Classes from '../../components/Classes/Classes';
 import axios from 'axios';
 import styles from './Detail.module.css';
 
@@ -33,7 +32,6 @@ const Detail = () => {
                 <li key={goal}>{goal}</li>
               ))}
             </ul>
-            <Classes/>
             {/* <h3>Image: {activityDetail.image}</h3> */}
           </div>
         ) : (

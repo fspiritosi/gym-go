@@ -8,8 +8,7 @@ import LoginButton from '../../components/Login/LoginButton';
 
 Modal.setAppElement('#root');
 
-const CardClasses = ({id, difficulty, recurringPattern, startDate, startTime, endTime, quota, duration }) => {
-    // const duration = classes.data[0].Events[0].duration
+const CardClasses = ({id, title, difficulty, CoachId, date, startTime, endTime, eventQuota, quota, duration }) => {
     const [showModal, setShowModal] = useState(false);
     const [isClassReserved, setIsClassReserved] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
@@ -34,12 +33,15 @@ const CardClasses = ({id, difficulty, recurringPattern, startDate, startTime, en
     return (
         <div >
             <br />
-            {/* <h4>Dificultad: {difficulty}</h4> */}
-            <h4>Recurrecncia: {recurringPattern}</h4>
-            <h4>Fecha: {startDate}</h4>
+            <h4>Actividad: {title}</h4>
+            <h4>Profesor: {CoachId}</h4>
+            <h4>Fecha: {date}</h4>
             <h4>Horario: {startTime} - {endTime}</h4>
+            <h4>Dificultad: {difficulty}</h4>
+            {/* <h4>Recurrencia: {recurringPattern}</h4> */}
             <h4>Duracion: {duration} hora(s)</h4>
             <h4>Cupo: {quota} espacios</h4>
+            <h4>Disponibilidad: {eventQuota}</h4>
 
             <br />
             <button onClick={handleReserva}>Reservar Clase</button>

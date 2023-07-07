@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
     },
     quota:{
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     isActive: {
       type: DataTypes.BOOLEAN,

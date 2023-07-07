@@ -22,7 +22,7 @@ function FormClasses() {
 
     useEffect(() => {
         dispatch(getActivities())
-    }, [])
+    }, [dispatch])
 
     const formik = useFormik({
       initialValues: {

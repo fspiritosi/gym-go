@@ -19,7 +19,7 @@ const MercadoPago = ({ orderData }) => {
       }
     };
     getPreferenceId();
-  }, [])
+  }, [orderData,preferenceId])
 
   return (
     <>

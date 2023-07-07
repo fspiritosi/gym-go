@@ -8,11 +8,11 @@ import LoginButton from '../../components/Login/LoginButton';
 
 Modal.setAppElement('#root');
 
-const CardClasses = ({id, title, difficulty, CoachId, date, startTime, endTime, eventQuota, quota, duration }) => {
+const CardClasses = ({ id, title, difficulty, CoachId, date, startTime, endTime, eventQuota, quota, duration, coachName }) => {
     const [showModal, setShowModal] = useState(false);
     const [isClassReserved, setIsClassReserved] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
-    
+
     const handleReserva = () => {
         if (isAuthenticated) {
             setShowModal(false)
@@ -34,29 +34,31 @@ const CardClasses = ({id, title, difficulty, CoachId, date, startTime, endTime, 
         <div >
             <br />
             <h4>Actividad: {title}</h4>
-            <h4>Profesor: {CoachId}</h4>
-            <h4>Fecha: {date}</h4>
-            <h4>Horario: {startTime} - {endTime}</h4>
-            <h4>Dificultad: {difficulty}</h4>
-            {/* <h4>Recurrencia: {recurringPattern}</h4> */}
-            <h4>Duracion: {duration} hora(s)</h4>
-            <h4>Cupo: {quota} espacios</h4>
-            <h4>Disponibilidad: {eventQuota}</h4>
-
-            <br />
-            <button onClick={handleReserva}>Reservar Clase</button>
-            <Modal 
-            isOpen={showModal} 
-            onRequestClose={closeModal}
-            className={`${style.modalContent} ${style.modalOverlay}`}
-            >
-                <h2>Debes iniciar sesión o Registrarte para reservar</h2>
-                <button onClick={handleModalLogin} className={style.modalButton}>Iniciar sesión</button>
-                <button onClick={handleModalLogin} className={style.modalButton}>Registrarse</button>
-                <button onClick={closeModal} className={style.modalButton}>Cerrar</button>
-            </Modal>
-            {isClassReserved && <p>Clase reservada</p>}
-            <br />
+            <h4>Profesor: {coachName}</h4>
+            {date && startTime && endTime && (
+                <div>
+                    <h4>Fecha: {date}</h4>
+                    <h4>Horario: {startTime} - {endTime}</h4>
+                    <h4>Dificultad: {difficulty}</h4>
+                    <h4>Duracion: {duration} hora(s)</h4>
+                    <h4>Cupo: {quota} espacios</h4>
+                    {/* <h4>Disponibilidad: {eventQuota[index]}</h4> */}
+                    <br />
+                    <button onClick={handleReserva}>Reservar Clase</button>
+                    <Modal
+                        isOpen={showModal}
+                        onRequestClose={closeModal}
+                        className={`${style.modalContent} ${style.modalOverlay}`}
+                    >
+                        <h2>Debes iniciar sesión o Registrarte para reservar</h2>
+                        <button onClick={handleModalLogin} className={style.modalButton}>Iniciar sesión</button>
+                        <button onClick={handleModalLogin} className={style.modalButton}>Registrarse</button>
+                        <button onClick={closeModal} className={style.modalButton}>Cerrar</button>
+                    </Modal>
+                    {isClassReserved && <p>Clase reservada</p>}
+                    <br />
+                </div>
+            )}
         </div>
     );
 };

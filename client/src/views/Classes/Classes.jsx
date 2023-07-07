@@ -9,13 +9,13 @@ import CardClasses from "../../components/CardClasses/CardClasses";
 const Classes = () => {
     const dispatch = useDispatch();
     const activities = useSelector((state) => state.activities);
+    const coaches = useSelector((state) => state.coaches);
     // const classes = useSelector((state) => state.classes);
-    // const coaches = useSelector((state) => state.coaches);
 
     useEffect(() => {
         dispatch(getActivities());
-        // dispatch(getClassess());
-        // dispatch(getCoaches());
+        dispatch(getClassess());
+        dispatch(getCoaches());
     }, [dispatch]);
 
     return (
@@ -23,25 +23,27 @@ const Classes = () => {
             <br />
             <h1>Clases</h1>
             <div>
-                {activities?.map((c, index) => {
-                    return (
-                        <CardClasses
-                            key={index}
-                            id={c.id}
-                            difficulty={c.Classes.difficulty} 
-                            title={c.title} 
-                            CoachId={c.Classes.CoachId} 
-                            date={c.Classes.Events.date} 
-                            startTime={c.Classes.Events[0].startTime} 
-                            endTime={c.Classes.Events[0].endTime} 
-                            duration={c.Classes.Events[0].duration}
-                            quota={c.Classes.quota}
-                            eventQuot={c.Classes.Events[0].eventQuota.length}
-                        />
-                    );
+                {activities?.map((activity) => {
+                    return activity.Classes.map((clase, index) => {
+                        const coach = coaches.find(coach => coach.id === clase.Coach.id);
+                        const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
+                        return clase.Events.map((event, index) => (
+                            <CardClasses
+                                key={index}
+                                id={activity.id}
+                                difficulty={clase.difficulty}
+                                title={activity.title}
+                                date={event.date}
+                                startTime={event.startTime}
+                                endTime={event.endTime}
+                                duration={event.duration}
+                                quota={clase.quota}
+                                coachName={coachName}
+                            />
+                        ));
+                    });
                 })}
             </div>
-            
         </div>
     )
 

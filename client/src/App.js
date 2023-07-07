@@ -12,6 +12,7 @@ import Footer from "./components/Footer/Footer";
 import FormClasses from "./views/FormClasses/FormClasses";
 import ActivitiesV from "./views/ActivitiesV/ActivitiesV";
 axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
 
 function App() {
   let location = useLocation();

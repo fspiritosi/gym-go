@@ -2,6 +2,8 @@ import React from "react";
 import CardPaquete from "../../components/CardPaqueteClase/CardPaqueteClase";
 import EjemploPC from "./ejemplopaquetesclases.json"
 
+
+
 const PaqueteClases = () => {
     return (
         <div>

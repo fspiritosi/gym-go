@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import style from "./CardClasses.module.css";
 import Modal from 'react-modal';
 import { useAuth0 } from '@auth0/auth0-react';
+import styles from './CardClasses.module.css';
 import LoginButton from '../../components/Login/LoginButton';
 
 Modal.setAppElement('#root');
@@ -31,7 +32,7 @@ const CardClasses = ({ id, title, difficulty, CoachId, date, startTime, endTime,
     };
 
     return (
-        <div >
+        <div className={styles.cardContainer}>
             <br />
             <h4>Actividad: {title}</h4>
             <h4>Profesor: {coachName}</h4>

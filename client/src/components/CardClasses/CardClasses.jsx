@@ -45,13 +45,13 @@ const CardClasses = ({ id, title, difficulty, CoachId, date, startTime, endTime,
                     <h4>Cupo: {quota} espacios</h4>
                     {/* <h4>Disponibilidad: {eventQuota[index]}</h4> */}
                     <br />
-                    <button onClick={handleReserva}>Reservar Clase</button>
+                    <button onClick={handleReserva}>Suscribirse a Evento</button>
                     <Modal
                         isOpen={showModal}
                         onRequestClose={closeModal}
                         className={`${style.modalContent} ${style.modalOverlay}`}
                     >
-                        <h2>Debes iniciar sesión o Registrarte para reservar</h2>
+                        <h2>Debes iniciar sesión o Registrarte para suscribirte</h2>
                         <button onClick={handleModalLogin} className={style.modalButton}>Iniciar sesión</button>
                         <button onClick={handleModalLogin} className={style.modalButton}>Registrarse</button>
                         <button onClick={closeModal} className={style.modalButton}>Cerrar</button>

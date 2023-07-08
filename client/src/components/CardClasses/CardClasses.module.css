@@ -1,0 +1,39 @@
+.cardContainer {
+    perspective: 1000px;
+    width: 250px;
+    height: 320px;
+    background: none;
+    display: inline-block;
+    margin-right: 18px;
+}
+
+.modalContent {
+    /* Estilos para el contenido del modal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.modalOverlay {
+    /* Estilos para el fondo oscuro del modal */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+}
+
+.modalButton {
+    /* Estilos para los botones del modal */
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}

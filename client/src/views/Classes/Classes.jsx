@@ -29,6 +29,11 @@ const Classes = () => {
                 const activitieName = activity ? `${activity.title}` : '';
                 const coach = coaches.find((coach) => coach.id === clase.CoachId);
                 const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
+
+                if (!clase.isActive) {
+                    return null; // No mostrar la clase si isActive es false
+                }
+
                 return (
                     <CardClasses
                     key={index}

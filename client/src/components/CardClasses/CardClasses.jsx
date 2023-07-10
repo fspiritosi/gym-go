@@ -41,9 +41,7 @@ const CardClasses = ({ id, title, classes, image, difficulty, CoachId, date, sta
             <div className={styles.cardContainer}>
                 {date.map((event) => (
                     <div key={event.id}>
-                        <button onClick={handleReserva} className={style.eventButton}>
-                            {event}
-                        </button>
+                        <button onClick={handleReserva} className={style.eventButton}>{event}</button>
                         <br />
                         <Modal
                             isOpen={showModal}

@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
-
 export const GET_ACTIVITIE_NAME = "GET_ACTIVITIE_NAME";
 export const GET_DETAILS_ID = "GET_DETAILS_ID";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
@@ -11,6 +10,7 @@ export const FILTER_BY_DIFFICULTY = "FILTER_BY_DIFFICULTY";
 export const GET_GOALS = "GET_GOALS";
 export const FILTER_BY_GOALS = "FILTER_BY_GOALS";
 export const GET_COACHES = 'GET_COACHES'
+export const GET_CLASSES = "GET_CLASSES";
 
 
 //All Activities
@@ -92,7 +92,7 @@ export function filterByGoals(payload) {
   };
 }
 
-//All Coaches **En espera de la Ruta
+//All Coaches 
 export const getCoaches = () => {
     return async function (dispatch) {
         const backCoaches = await axios.get("/coaches");
@@ -102,4 +102,16 @@ export const getCoaches = () => {
             payload: coaches,
         });
     };
+};
+
+//All Classes
+export const getClassess = () => {
+  return async function (dispatch) {
+    const backClasses = await axios.get("/classes");
+    const classes = backClasses.data;
+    dispatch({
+      type: GET_CLASSES,
+      payload: classes,
+    });
+  };
 };

@@ -1,10 +1,10 @@
 const {
-  searchActivitiesByName,
   getAllActivities,
+  searchActivitiesByName,
   findActivityById,
-  createActivities,
-  putActivities,
-  deleteActivities,
+  createActivity,
+  updateActivity,
+  deleteActivity,
 } = require("../controllers/activitiesControllers.js");
 
 const getActivitiesHandler = async (req, res) => {
@@ -27,54 +27,42 @@ const getActivityByIdHandler = async (req, res) => {
   }
 };
 
-const postActivitiesHandler = async (req, res) => {
+const createActivityHandler = async (req, res) => {
   try {
     const { title, description, image, goals } = req.body;
-    const newActivity = await createActivities(
-      title,
-      description,
-      image,
-      goals,
-
-      //isActive
-    );
+    const newActivity = await createActivity(title, description, image, goals);
     res.status(201).json(newActivity);
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
 };
 
-const putActivitiesByIdHandler = async (req, res) => {
+const updateActivityByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, image, goals, isActive } = req.body;
-    const updatedActivity = await putActivities(
-      id,
-      title,
-      description,
-      image,
-      goals,
-      isActive
-    );
+    const updatedActivity = await updateActivity(id, title, description, image, goals, isActive);
     res.status(200).json(updatedActivity);
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
 };
 
-const deleteActivitiesByIdHandler = async (req, res) => {
+const deleteActivityByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const delActivitie = await deleteActivities(id);
-    res.status(200).json(delActivitie);
+    const response = await deleteActivity(id);
+    if(!response) res.status(404).json({ msg: `Activity with id ${id} not found` });
+    res.status(200).json(response);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    return res.status(404).json({ error: error.message });
   }
 };
+
 module.exports = {
   getActivitiesHandler,
   getActivityByIdHandler,
-  postActivitiesHandler,
-  putActivitiesByIdHandler,
-  deleteActivitiesByIdHandler
+  createActivityHandler,
+  updateActivityByIdHandler,
+  deleteActivityByIdHandler
 };

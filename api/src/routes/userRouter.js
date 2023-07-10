@@ -2,7 +2,7 @@ const { Router } = require("express");
 const {
   userRegister,
   userLogin,
-  getUser,
+  getAllUsers,
   userUpdate,
   userDelete,
 } = require("../handlers/userHandler");

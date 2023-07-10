@@ -9,9 +9,9 @@ const {
 
 const userRouter = Router();
 
-userRouter.post("/register", userRegister);
-userRouter.post("/login", userLogin);
-userRouter.get("/users", getAllUsers);
+userRouter.post("/users/register", userRegister);
+userRouter.post("/users/login", userLogin);
+userRouter.get("/users", getUser);
 userRouter.put("/users/:id", userUpdate);
 userRouter.delete("/users/:id", userDelete);
 

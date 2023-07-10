@@ -10,13 +10,16 @@ module.exports = {
     './src/components/Login/LogoutButton.js',
     './src/components/Login/Profile.js',
     './src/views/Landing/Landing.jsx',
-    
+    './src/components/Activities/Activities.jsx',
+    './src/components/FilterandSort/FilterandSort.jsx',
+    './src/components/SearchBar/SearchBar.jsx',
   ],
   theme: {
     colors: {
       'black': '#030712',
       'white': '#f9fafb',
       'green-neon': '#a3e635',
+      'green.claro': '#c4ee72',
       'gray-claro': '#d1d5db',
       'gray-dark': '#1f2937',
       'gray': '#595959',

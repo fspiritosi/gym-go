@@ -1,63 +1,68 @@
 const {
-  createGoals,
-  updateGoalsById,
-  getGoalsFind,
-  getGoalsByIdFind,
+  getAllGoals,
+  getGoalById,
+  createGoal,
+  updateGoalById,
+  deleteGoalById
 } = require("../controllers/goalsControllers");
 
-const postGoals = async (req, res) => {
+const getAllGoalsHandler = async (req, res) => {
   try {
+    const allGoals = await getAllGoals();
+    res.status(200).json(allGoals);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const getGoalByIdHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const goal = await getGoalById(id);
+    if (!goal) return res.status(404).json({ msg: `Goal with id ${id}not found` });
+    res.status(200).json(goal);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const createGoalHandler = async (req, res) => {
+  try {
+    const { name, description } = req.body;
+    const newGoal = await createGoal(name, description);
+    res.status(201).json(newGoal);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+};
+
+const updateGoalByIdHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
     const { name, description, isActive } = req.body;
-    const newGoals = await createGoals(name, description, isActive);
-    res.status(201).json(newGoals);
+    const updatedGoal = await updateGoalById(id, name, description, isActive);
+    if (!updatedGoal) return res.status(404).json(`Goal with id ${id} not found`);
+    res.status(200).json(updatedGoal);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
-  }
+    res.status(400).json({ error: error.message });
+  };
 };
 
-const putGoalsById = async (req, res) => {
+const deleteGoalByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(req.params);
-    const data = req.body;
-    console.log(data);
-    const userUpdate = await updateGoalsById(id, data);
-    if (!userUpdate) {
-      res.status(404).json(`${userUpdate} not found`);
-      return;
-    }
-    res.status(200).json(`Successfully updated registration`);
+    const response = await deleteGoalById(id);
+    if(!response) return res.status(404).json({ msg: `Goal with id ${id} not found` });
+    res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({ msg: error.message });
-  }
-};
-
-const getGoals = async (req, res) => {
-  try {
-    const { name } = req.query;
-    const goal = await getGoalsFind(name);
-    res.status(200).json(goal);
-  } catch (error) {
-    res.status(500).json({ msg: error.message });
-  }
-};
-
-const getGoalsById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const goal = await getGoalsByIdFind(id);
-    if (!goal) {
-      return res.status(404).json({ msg: "Goal not found" });
-    }
-    res.status(200).json(goal);
-  } catch (error) {
-    res.status(500).json({ msg: error.message });
-  }
+    res.status(400).json({ error: error.message });
+  };
 };
 
 module.exports = {
-  postGoals,
-  putGoalsById,
-  getGoals,
-  getGoalsById,
+  getAllGoalsHandler,
+  getGoalByIdHandler,
+  createGoalHandler,
+  updateGoalByIdHandler,
+  deleteGoalByIdHandler
 };

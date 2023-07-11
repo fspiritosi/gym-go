@@ -1,19 +1,18 @@
 const { Router } = require('express')
 const {
-  getClasesHandler,
-  postClassesHandler,
-  putClassesHandler,
-  deleteClassesHandler
+  getAllClassesHandler,
+  getClassByIdHandler,
+  createClassHandler,
+  updateClassByIdHandler,
+  deleteClassByIdHandler
 } = require("../handlers/classesHandler");
-
-
 
 const classesRouter = Router();
 
-classesRouter.get('/', getClasesHandler);
-classesRouter.post('/', postClassesHandler);
-classesRouter.put('/:id', putClassesHandler);
-classesRouter.delete('/:id', deleteClassesHandler)
+classesRouter.get('/', getAllClassesHandler);
+classesRouter.get('/:id', getClassByIdHandler);
+classesRouter.post('/', createClassHandler);
+classesRouter.put('/:id', updateClassByIdHandler);
+classesRouter.delete('/:id', deleteClassByIdHandler)
 
-
-module.exports = classesRouter
+module.exports = classesRouter;

@@ -8,7 +8,7 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../adminComponentes/Header";
 
-const Team = () => {
+const Users = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
 
@@ -62,7 +62,7 @@ const Team = () => {
 
     return (
       <Box m="20px">
-        <Header title="TEAM" subtitle="Managing the Team Members" />
+        <Header title="USUARIOS" subtitle="Usuarios del sistema" />
         <Box
           m="40px 0 0 0"
           height="75vh"
@@ -104,4 +104,4 @@ const Team = () => {
     );
 }
 
-export default Team
+export default Users

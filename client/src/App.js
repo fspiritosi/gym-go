@@ -7,19 +7,22 @@ import FormCreateActivities from "./views/FormCreateActivities/FormCreateActivit
 import Profesores from './views/Profesores/Profesores';
 import PaquetesClases from './views/PaquetesClases/PaquetesClases'
 import FormGoals from "./views/FormGoals/FormGoals";
-//import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer";
 import FormClasses from "./views/FormClasses/FormClasses";
 import ActivitiesV from "./views/ActivitiesV/ActivitiesV";
 import Admin from "./views/Admin/Admin";
 import Dashboard from "./views/Admin/scenes/Dashboard/Dashboard"
-import Team from "./views/Admin/scenes/Team/Team";
+import Users from "./views/Admin/scenes/Users/Users";
+import Activities from "./views/Admin/scenes/Tables/ActivitiesData";
+import Coaches from "./views/Admin/scenes/Tables/CoachesData";
 import Form from "./views/Admin/scenes/Forms/Form";
 import ClassesForm from "./views/Admin/scenes/Forms/creteClases";
 import Classes from "./views/Classes/Classes";
 
 import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:3001";
-axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
+import CreateGoals from "./views/Admin/scenes/Forms/createGoals";
+axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
 
 function App() {
   let location = useLocation();
@@ -43,13 +46,15 @@ function App() {
         <Route path="/create-goals" element={<FormGoals />} />
         <Route path="/create-classes" element={<FormClasses />} />
         <Route path="/prices" element={<PaquetesClases />} />
-        <Route path="/classes" element={<Classes/>}/>
+        <Route path="/classes" element={<Classes />} />
         <Route path="/admin" element={<Admin />}>
           <Route path="" element={<Dashboard />} />
-          <Route path="team" element={<Team />} />
-          <Route path="contact" element={<Admin />} />
+          <Route path="users" element={<Users />} />
+          <Route path="activities" element={<Activities />} />
+          <Route path="coaches" element={<Coaches />} />
           <Route path="usersCreate" element={<Form />} />
           <Route path="classesCreate" element={<ClassesForm />} />
+          <Route path="goalsCreate" element={<CreateGoals />} />
         </Route>
       </Routes>
       {location.pathname !== "/" &&

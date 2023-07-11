@@ -48,13 +48,13 @@ const findActivityById = async (id) => {
     include: [
       {
         model: Goals,
-        attributes: ['id', 'name', 'description'],
+        attributes: ["id", "name", "description"],
         through: { attributes: [] },
       },
       {
         model: Coaches,
-        attributes: ['id', 'firstName', 'lastName'],
-        through: { attributes: [] }
+        attributes: ["id", "firstName", "lastName"],
+        through: { attributes: [] },
       },
       {
         model: Classes,
@@ -73,10 +73,8 @@ const findActivityById = async (id) => {
           },
           {
             model: Coaches,
-            attributes: [
-              'id'
-            ]
-          }
+            attributes: ["id", "firtName", "lastName", "profilePicture"]
+          },
         ],
       },
     ],
@@ -107,21 +105,7 @@ const updateActivity = async (id, title, description, image, goals, isActive) =>
       },
     ]
   });
-  if(title) activity.title = title;
-  if(description) activity.description = description;
-  if(image) activity.image = image;
-  if(isActive) activity.isActive = isActive;
-  if(goals) {
-    for (const goalStr of goals) {
-      const goal = await Goals.findAll({
-        where: {
-          name: goalStr
-        }
-      });
-      await activity.addGoals(goal);
-    };
-  };
-  await activity.save();
+  await activity.update({title, description, image, goals, isActive })
   return activity;
 };
 

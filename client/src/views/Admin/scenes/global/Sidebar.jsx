@@ -17,6 +17,9 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import StorageIcon from "@mui/icons-material/Storage";
+import SchoolIcon from "@mui/icons-material/School";
+import SportsScoreIcon from "@mui/icons-material/SportsScore";
 
 
 const Item =({title, to, icon, selected, setSelected}) =>{
@@ -135,26 +138,26 @@ function SidebarMenu() {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Data
+              Información
             </Typography>
             <Item
-              title="Manage Team"
-              to="team"
+              title="Usuarios"
+              to="users"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Contact"
-              to="contact"
-              icon={<ContactsOutlinedIcon />}
+              title="Actividates"
+              to="activities"
+              icon={<StorageIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Invoices Balances"
-              to="invoices"
-              icon={<ReceiptOutlinedIcon />}
+              title="Profesores"
+              to="coaches"
+              icon={<SchoolIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -180,9 +183,9 @@ function SidebarMenu() {
               setSelected={setSelected}
             />
             <Item
-              title="Calendar"
-              to="calendar"
-              icon={<CalendarTodayOutlinedIcon />}
+              title="Crear Objetivos"
+              to="goalsCreate"
+              icon={<SportsScoreIcon />}
               selected={selected}
               setSelected={setSelected}
             />

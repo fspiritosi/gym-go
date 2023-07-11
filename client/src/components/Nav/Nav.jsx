@@ -42,7 +42,7 @@ const Nav = () => {
             <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/coaches'>Profesores</Link>
           </li>
           <li className='mx-4 my-6 md:my-0'>
-            <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/activities'>Paquetes</Link>
+            <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/prices'>Paquetes</Link>
           </li> 
           
           <div className="md:items-center mx-4 my-6 md:my-0">

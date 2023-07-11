@@ -1,41 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './CardActivities.module.css';
 
-const CardActivities = ({ id, title, image, difficulty, goals, description }) => {
+
+const CardActivities = ({ id, title, image, goals,}) => {
   
-  const [flipped, setFlipped] = useState(false);
-
-  const handleFlip = () => {
-    setFlipped(!flipped);
-  };
-
-  return (
-    <div className={styles.cardContainer}>
-      <div className={`${styles.card} ${flipped ? styles.flipped : ''}`} onClick={handleFlip}>
-        <div className={styles.front}>
-        <img src={image} alt='' className={styles.profile}/>
-        <h2>{title}</h2>
+   return (    
+      <div class=" max-w-sm block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-green-neon hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring">
+        
+        <div>
+        <img  src={image} alt='' className='inline-block rounded-t-lg p-3'/>
+        <h2 class="mt-2 font-bold">{title}</h2>
         </div>
-        <div className={styles.back}>
-        <br/>
-        <br/>
-        {/* <h3>{difficulty}</h3> */}
-        {/* <h5 className={styles.text}>{description}</h5> */}
-          <h3>Objetivo: </h3>
-          {/* <ul> */}
+        
+        <div >       
+          <h3 class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600"> Objetivos </h3>          
           {goals?.map((g, index) => (
                     <li key={index}>{g}</li>
                 ))}
-                {/* </ul> */}
+                
           <br/>
         <Link to={`/activity-detail/${id}`}>
-        <button className={styles.buttonI}>Informacion Adicional</button>
+        <button className='bg-green-neon hover:bg-gray-claro text-white px-2 py-1  rounded-xl'> Más Información </button>
         </Link>
         </div>
-      </div>
-    </div>
+      </div>    
   );
 };
 
 export default CardActivities;
+
+

@@ -43,15 +43,8 @@ const Nav = () => {
           </li>
           <li className='mx-4 my-6 md:my-0'>
             <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/prices'>Paquetes</Link>
-          </li> 
-          
-          <div className="md:items-center mx-4 my-6 md:my-0">
-
-            <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/prices'>Paquetes</Link>
-            {/* Se cambio la ruta a la vista Paquetes ya que no la mostraba */}
-          </li>          
-        </ul>
-        <div className=" items-center ml-auto mr-8 mb-4 md:mb-0">
+          </li>
+           <div className=" items-center ml-auto mr-8 mb-4 md:mb-0">
 
         {isAuthenticated ? (
           <>
@@ -61,10 +54,10 @@ const Nav = () => {
         ) : (
           <LoginButton loginWithRedirect={loginWithRedirect} />
         )}
-        </div> 
-        </ul>
-             
-      </nav>
+        </div>                
+        </ul>       
+        </nav>  
+      
   );
 };
 

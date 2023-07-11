@@ -31,6 +31,7 @@ function App() {
         <Route path="/create-classes" element={<FormClasses/>}/>
         <Route path="/prices" element={<PaquetesClases/>} />
         <Route path="/classes" element={<Classes/>}/>
+        <Route path="/coaches" element={<Profesores/>}/>
       </Routes>
       {/* {location.pathname !== "/" && <Footer />} */}
     </div>

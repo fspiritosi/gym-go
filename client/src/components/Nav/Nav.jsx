@@ -16,7 +16,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className=" bg-gray md:flex md:items-center w-full fixed pt-4 pb-4 top-0 left-0">
+    <nav className=" bg-gray md:flex md:items-center md:mb-2 w-full fixed pt-4 pb-4 top-0 left-0">
         <Link to='/'>
         <img className=" pl-8 flex justify-between w-40 cursor-pointer" src={Logo} alt="logo"/>
         </Link>
@@ -41,12 +41,16 @@ const Nav = () => {
           <li className='mx-4 my-6 md:my-0'>
             <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/coaches'>Profesores</Link>
           </li>
-          <li className='mx-4 my-6 md:my-0'>
+          <li className='mx-4 my-6 md:my-0'>           
+          
+          <div className="md:items-center mx-4 my-6 md:my-0">
+
             <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/prices'>Paquetes</Link>
             {/* Se cambio la ruta a la vista Paquetes ya que no la mostraba */}
           </li>          
         </ul>
         <div className=" items-center ml-auto mr-8 mb-4 md:mb-0">
+
         {isAuthenticated ? (
           <>
             <Profile user={user} />
@@ -55,7 +59,9 @@ const Nav = () => {
         ) : (
           <LoginButton loginWithRedirect={loginWithRedirect} />
         )}
-      </div>       
+        </div> 
+        </ul>
+             
       </nav>
   );
 };

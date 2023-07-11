@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderByName, filterByDifficulty, filterByGoals } from '../../redux/actions';
-import styles from './FilterandSort.module.css';
+import { orderByName, filterByGoals } from '../../redux/actions';
+import 'tailwindcss/tailwind.css';
+import SearchBar from '../SearchBar/SearchBar';
 
 const FilterandSort = () => {
   const dispatch = useDispatch();
@@ -10,12 +11,7 @@ const FilterandSort = () => {
   const handlerSort = (e) => {
     e.preventDefault();
     dispatch(orderByName(e.target.value));
-  };
-
-  const handlerFilterDifficulty = (e) => {
-    e.preventDefault();
-    dispatch(filterByDifficulty(e.target.value));
-  };
+  };  
 
   const handlerFilterGoals = (e) => {
     e.preventDefault();
@@ -23,38 +19,34 @@ const FilterandSort = () => {
   };
 
   return (
-    <div>
-      <div className={styles.filterSection}>
-        {/* <h3 className={styles.text}>Ordenamiento</h3> */}
-        <select className={styles.select} onChange={handlerSort}>
-          <option value="all">Ordenamiento</option>
-          <option value="a">A - Z</option>
-          <option value="z">Z - A</option>
-        </select>
-      </div>
-      <div className={styles.filterSection}>
-        {/* <h3 className={styles.text}>¡Selecciona la dificultad y muestra tu determinación!</h3> */}
-        <select className={styles.select} onChange={handlerFilterDifficulty}>
-          <option value="diff">¡Selecciona la dificultad y muestra tu determinación!</option>
-          <option value="easy">Facil</option>
-          <option value="medium">Medio</option>
-          <option value="hard">Avanzado</option>
-        </select>
-      </div>
-      <div className={styles.filterSection}>
-        {/* <h3 className={styles.text}>Encuentra actividades diseñadas para cada objetivo</h3> */}
-        <select className={styles.select} onChange={handlerFilterGoals}>
-          <option value="all">Encuentra actividades diseñadas para cada objetivo</option>
+    <div class="mb-2 w-full md:w-2/3 py-3 px-2 rounded-lg">
+	
+	  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">    
+
+    <select class="px-1 py-1 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" onChange={handlerSort}>
+      <option value="all">Ordena</option>
+      <option value="a">A - Z</option>
+      <option value="z">Z - A</option>
+		</select>
+
+		<select class="px-1 py-1 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" onChange={handlerFilterGoals}>
+       <option value="all">Elige tu actividad </option>
           {goals?.map((goal, index) => (
-            <option key={index} value={goal.name}> 
-            {/* Aqui habia un eror en key y value de estaba llamando por id  */}
-              {goal.name}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
+          <option key={index} value={goal.name}>            
+            {goal.name}
+          </option>
+         ))}
+		</select>
+    
+    <div>
+      <SearchBar/>	  
+	  </div>
+	  </div>
+	</div>
+  
+    
   );
 };
 
 export default FilterandSort;
+

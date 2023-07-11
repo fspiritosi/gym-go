@@ -6,7 +6,8 @@ import style from "./CardClasses.module.css";
 import Modal from 'react-modal';
 import { useAuth0 } from '@auth0/auth0-react';
 import styles from './CardClasses.module.css';
-import LoginButton from '../../components/Login/LoginButton';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 Modal.setAppElement('#root');
 
@@ -15,13 +16,14 @@ const CardClasses = ({ id, title, classes, image, difficulty, CoachId, date, sta
     const [isClassReserved, setIsClassReserved] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
 
-    const handleReserva = () => {
-        if (isAuthenticated) {
+    const handleReserva = (index) => {
+        // if (isAuthenticated) {
             setShowModal(false)
-            setIsClassReserved(true); // Se marca la clase como reservada
-        } else {
-            setShowModal(true);
-        }
+            setIsClassReserved(index); // Se marca la clase como reservada
+            toast.success('Evento reservado exitosamente✅');
+        // } else {
+        //     setShowModal(true);
+        // }
     };
 
     const closeModal = () => { setShowModal(false); };
@@ -39,9 +41,9 @@ const CardClasses = ({ id, title, classes, image, difficulty, CoachId, date, sta
             <h4>Cupo: {quota} espacios por evento</h4>
             <h1>Eventos</h1>
             <div className={styles.cardContainer}>
-                {date.map((event) => (
+                {date.map((event, index) => (
                     <div key={event.id}>
-                        <button onClick={handleReserva} className={style.eventButton}>{event}</button>
+                        <button onClick={() => handleReserva(index)} className={style.eventButton}>{event}</button>
                         <br />
                         <Modal
                             isOpen={showModal}
@@ -52,11 +54,15 @@ const CardClasses = ({ id, title, classes, image, difficulty, CoachId, date, sta
                             <button onClick={handleModalLogin} className={style.modalButton}>Registrarse</button>
                             <button onClick={closeModal} className={style.modalButton}>Cerrar</button>
                         </Modal>
-                        {isClassReserved && <p>Clase reservada</p>}
+                        {/* {isClassReserved === index && <p>Clase reservada</p>} */}
                         <br />
                     </div>
                 ))}
             </div>
+                {/* <ToastContainer 
+                autoClose={2000}
+                theme="dark"
+                /> */}
         </div>
     );
 };

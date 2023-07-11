@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivities, getClassess, getCoaches } from '../../redux/actions';
 import CardClasses from "../../components/CardClasses/CardClasses";
+import { ToastContainer } from 'react-toastify';
 
 const Classes = () => {
     const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const Classes = () => {
                     />
                 );
             })}
+            <ToastContainer autoClose={2000} theme="dark" />
         </div>
     )
 };

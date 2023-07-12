@@ -4,7 +4,7 @@ import Landing from "./views/Landing/Landing";
 import Detail from "./views/Detail/Detail";
 import Nav from "./components/Nav/Nav";
 import FormCreateActivities from "./views/FormCreateActivities/FormCreateActivities";
-import Profesores from './views/Profesores/Profesores';
+import Profesores from './views/Profesores/Profesores'; //Se volvio a agregar la ruta profesores por que no estaba
 import PaquetesClases from './views/PaquetesClases/PaquetesClases'
 import FormGoals from "./views/FormGoals/FormGoals";
 import Footer from "./components/Footer/Footer";

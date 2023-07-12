@@ -2,10 +2,9 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivities, getGoals, searchActivitieName } from '../../redux/actions';
-import SearchBar from '../SearchBar/SearchBar';
+// import SearchBar from '../SearchBar/SearchBar';
 import CardActivities from '../CardActivities/CardActivities'
 import FilterandSort from '../FilterandSort/FilterandSort';
-import CardActivities from '../CardActivities/CardActivities';
 import 'tailwindcss/tailwind.css';
 
 
@@ -47,6 +46,10 @@ const Activities = () => {
 
       <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 h-96">
       {activities?.map((a, index) => {
+        if (a.isActive === false) { 
+          //no muestra las actividades si esta en false, revisar ya que si se busca o filtra se muestra en blanco 
+          return null; 
+        }
           return (
             <CardActivities
               key={index}

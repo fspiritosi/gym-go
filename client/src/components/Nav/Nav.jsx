@@ -42,15 +42,13 @@ const Nav = () => {
             <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/coaches'>Profesores</Link>
           </li>
           <li className='mx-4 my-6 md:my-0'>           
-          
-          <div className="md:items-center mx-4 my-6 md:my-0">
-
+          {/* <div className="md:items-center mx-4 my-6 md:my-0"> */} 
+          {/* Se comento este div por que causaba conflicto */}
             <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/prices'>Paquetes</Link>
             {/* Se cambio la ruta a la vista Paquetes ya que no la mostraba */}
           </li>          
         </ul>
         <div className=" items-center ml-auto mr-8 mb-4 md:mb-0">
-
         {isAuthenticated ? (
           <>
             <Profile user={user} />
@@ -60,8 +58,8 @@ const Nav = () => {
           <LoginButton loginWithRedirect={loginWithRedirect} />
         )}
         </div> 
-        </ul>
-             
+        {/* </ul> */} 
+        {/* Se comento este ul por que causaba error              */}
       </nav>
   );
 };

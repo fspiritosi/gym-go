@@ -4,17 +4,17 @@ import Landing from "./views/Landing/Landing";
 import Detail from "./views/Detail/Detail";
 import Nav from "./components/Nav/Nav";
 import FormCreateActivities from "./views/FormCreateActivities/FormCreateActivities";
-import Profesores from './views/Profesores/Profesores';
+import Profesores from './views/Profesores/Profesores'; //Se volvio a agregar la ruta profesores por que no estaba
 import PaquetesClases from './views/PaquetesClases/PaquetesClases'
 import FormGoals from "./views/FormGoals/FormGoals";
-//import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer"; //Se descomento footer por que estaba comentado
 import FormClasses from "./views/FormClasses/FormClasses";
 import ActivitiesV from "./views/ActivitiesV/ActivitiesV";
 import Classes from "./views/Classes/Classes";
 
 import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:3001";
-axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
+axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
 
 function App() {
   let location = useLocation();
@@ -31,8 +31,9 @@ function App() {
         <Route path="/create-classes" element={<FormClasses/>}/>
         <Route path="/prices" element={<PaquetesClases/>} />
         <Route path="/classes" element={<Classes/>}/>
+        <Route path="/coaches" element={<Profesores/>}/> 
       </Routes>
-      {/* {location.pathname !== "/" && <Footer />} */}
+      {location.pathname !== "/" && <Footer />}
     </div>
   );
 }

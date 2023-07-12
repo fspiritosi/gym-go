@@ -2,7 +2,7 @@
 import React from "react";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivities, getClassess, getCoaches } from '../../redux/actions';
+import { getActivities, getClassess, getCoaches, putEvents } from '../../redux/actions';
 import CardClasses from "../../components/CardClasses/CardClasses";
 import { ToastContainer } from 'react-toastify';
 
@@ -16,6 +16,7 @@ const Classes = () => {
         dispatch(getActivities());
         dispatch(getClassess());
         dispatch(getCoaches());
+        // dispatch(putEvents());
     }, [dispatch]);
 
     return (
@@ -23,7 +24,7 @@ const Classes = () => {
             <br />
             <br />
             <br />
-            <h1>Clases</h1>
+            <h1>Nuestras Clases</h1>
             <br />
             {classes?.map((clase,index) => {
                 const activity = activities.find(act => act.id === clase.ActivityId);
@@ -42,7 +43,7 @@ const Classes = () => {
                     difficulty={clase.difficulty}  //classes
                     startTime={clase.Events[0].startTime} //classes
                     endTime={clase.Events[0].endTime} //classes
-                    duration={clase.Events[0].duration} //classes
+                    // duration={clase.Events[0].duration} //classes
                     quota= {clase.quota}
                     date={clase.Events.map((d) => d.date)}
                     coachName={coachName}

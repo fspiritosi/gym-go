@@ -47,14 +47,13 @@ const Nav = () => {
             <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/prices'>Paquetes</Link>
             {/* Se cambio la ruta a la vista Paquetes ya que no la mostraba */}
           </li>          
+            <li className='mx-4 my-6 md:my-0'>
+            <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/classes'>Clases</Link>
+            </li> 
         </ul>
         <div className=" items-center ml-auto mr-8 mb-4 md:mb-0">
         {isAuthenticated ? (
           <>
-            <li className='mx-4 my-6 md:my-0'>
-            <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/classes'>Clases</Link>
-            </li> 
-            {/* Agrege la ruta classes para que se visualice solo si se esta logueado */}
             <Profile user={user} />
             <LogoutButton logout={logout} />
           </>
@@ -63,7 +62,7 @@ const Nav = () => {
         )}
         </div> 
         {/* </ul> */} 
-        {/* Se comento este ul por que causaba error              */}
+        {/* Se comento este ul por que causaba error */}
       </nav>
   );
 };

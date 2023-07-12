@@ -2,7 +2,7 @@
 import React from "react";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivities, getClassess, getCoaches, putEvents } from '../../redux/actions';
+import { getActivities, getClassess, getCoaches } from '../../redux/actions';
 import CardClasses from "../../components/CardClasses/CardClasses";
 import { ToastContainer } from 'react-toastify';
 
@@ -16,7 +16,6 @@ const Classes = () => {
         dispatch(getActivities());
         dispatch(getClassess());
         dispatch(getCoaches());
-        // dispatch(putEvents());
     }, [dispatch]);
 
     return (
@@ -32,7 +31,7 @@ const Classes = () => {
                 const coach = coaches.find((coach) => coach.id === clase.CoachId);
                 const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
 
-                if (!clase.isActive) {
+                if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false
                 }
 
@@ -43,10 +42,10 @@ const Classes = () => {
                     difficulty={clase.difficulty}  //classes
                     startTime={clase.Events[0].startTime} //classes
                     endTime={clase.Events[0].endTime} //classes
-                    // duration={clase.Events[0].duration} //classes
                     quota= {clase.quota}
                     date={clase.Events.map((d) => d.date)}
                     coachName={coachName}
+                    // duration={clase.Events[0].duration} //classes
                     />
                 );
             })}

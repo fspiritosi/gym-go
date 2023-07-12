@@ -1,8 +1,8 @@
 import React from "react";
-import backgroundImage from '../../assets/backgraund/Fondo2.jpg';
-import landing from '../../assets/backgraund/fitnes.png'
-import coaches  from '../../assets/Cards/profesores.jpg'
-import activities from '../../assets/Cards/actividades.jpg'
+import backgroundImage from '../../Assets/backgraund/Fondo2.jpg';
+import landing from '../../Assets/backgraund/fitnes.png'
+import coaches  from '../../Assets/Cards/profesores.jpg'
+import activities from '../../Assets/Cards/actividades.jpg'
 import 'tailwindcss/tailwind.css';
 import { Link } from 'react-router-dom';
 import Nav from "../../components/Nav/Nav";

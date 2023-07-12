@@ -25,11 +25,11 @@ module.exports = (sequelize) => {
     },
     education: {
       type: DataTypes.STRING(1234),
-      allowNull: false,
+      allowNull: true,
     },
     workExperience: {
       type: DataTypes.STRING(1234),
-      allowNull: false,
+      allowNull: true,
     },
     isActive: {
       type: DataTypes.BOOLEAN,

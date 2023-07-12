@@ -1,24 +1,10 @@
 .cardContainer {
-    margin: 10px;
-    perspective: 1000px;
-    font-size: 18px;
-    width: 290px;
-    height: 250px;
+    width: 800px;
+    height: 180px;
     background: none;
-    display: inline-block;
-    border: 1px solid gray;
-    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6);
-    border-radius: 20px;
-    margin-right: 25px;
-}
-
-.comprar {
-    border-radius: 5px;
-    background-color: #a3e635;
-    padding: 5px;
-    font-size: 15px;
-    font-weight: 600;
-    /* box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.6); */
+    display: flex; 
+    flex-direction: row; 
+    /* border: 2px solid black; */
 }
 
 .modalContent {
@@ -50,4 +36,10 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.eventButton {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #a3e635;
 }

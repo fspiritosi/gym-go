@@ -1,6 +1,6 @@
 
 
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS,GET_COACHES } from "./actions";
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES } from "./actions";
 
 
 const initialState = {
@@ -8,7 +8,8 @@ const initialState = {
   detail: [],
   allActivities: [],
   goals: [],
-  coaches: []
+  coaches: [],
+  classes: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -86,14 +87,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activities:
           action.payload === "all" ? state.allActivities : goalFiltered,
-          // goals: action.payload
+        // goals: action.payload
       }; //Se corrigio esta funcion 
-  
+
     case GET_COACHES: //En espera de la Ruta 
-          return {
-            ...state,
-            coaches: action.payload,
-          };
+      return {
+        ...state,
+        coaches: action.payload,
+      };
+
+    case GET_CLASSES:
+      return {
+        ...state,
+        classes: action.payload,
+      };
+
     default:
       return { ...state };
   }

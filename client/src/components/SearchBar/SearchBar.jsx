@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { searchActivitieName } from "../../redux/actions";
-import styles from "./SearchBar.module.css";
+import { useLocalStorage } from "../../redux/useLocalStotage";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaSearch } from 'react-icons/fa';
-import { useLocalStorage } from "../../redux/useLocalStotage";
+import 'tailwindcss/tailwind.css';
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -31,28 +31,27 @@ const SearchBar = () => {
     dispatch(searchActivitieName(searchTerm));
   };
 
- //useEffect(() => {
- //   window.localStorage.setItem("searchBarTitle", title);
- //}, [title]);
 
-  return (
-    <div className={styles.searchbar}>
-      <input
-        type="text"
-        value={searchTerm}
-        placeholder="Buscar Actividad"
-        onChange={handlerInputChange}
-      />
-      <button type="submit" onClick={handlerSubmit}>
-        <FaSearch />
-      </button>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        theme="dark"
-      />
-    </div>
-  );
-};
+    return(
+        
+      <div class= "max-w-2xl px-1 mr-0 sm:px-1">	     
+        <div class="flex items-center ml-2 h-full">
+        <input
+          type="text"
+          placeholder="Busca tu Actividad..."
+          class="px-2 py-2 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          value={searchTerm}
+          onChange={handlerInputChange}
+        />
+          <button class=' ml-3' type="submit" onClick={handlerSubmit}><FaSearch /></button>
+            <ToastContainer
+            position="top-center"   
+            autoClose={2000}
+            theme="dark"
+            />	  
+	      </div>
+      </div>        
+    )
+}
 
 export default SearchBar;

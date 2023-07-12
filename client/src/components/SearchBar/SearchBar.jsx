@@ -9,23 +9,26 @@ import { useLocalStorage } from "../../redux/useLocalStotage";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useLocalStorage("searchTitle", "");
+  const [searchTerm, setSearchTerm] = useState("");
+  // const [title, setTitle] = useLocalStorage("searchTitle", "");
 
   useEffect(() => {
-    const storedTitle = window.localStorage.getItem("searchTitle");
-    if (storedTitle) {
-      setTitle(storedTitle);
+    const storedSearchTerm = window.localStorage.getItem("searchBar");
+    if (storedSearchTerm) {
+      setSearchTerm(storedSearchTerm);
+      dispatch(searchActivitieName(storedSearchTerm));
     }
-  }, [setTitle]);
+  }, [dispatch]);
 
   const handlerInputChange = (e) => {
     //e.preventDefault();
-    setTitle(e.target.value);
+    setSearchTerm(e.target.value);
+    window.localStorage.setItem("searchBar", e.target.value);
   };
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(searchActivitieName(title));
+    dispatch(searchActivitieName(searchTerm));
   };
 
  //useEffect(() => {
@@ -36,7 +39,7 @@ const SearchBar = () => {
     <div className={styles.searchbar}>
       <input
         type="text"
-        value={title}
+        value={searchTerm}
         placeholder="Buscar Actividad"
         onChange={handlerInputChange}
       />

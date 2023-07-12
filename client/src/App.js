@@ -7,14 +7,14 @@ import FormCreateActivities from "./views/FormCreateActivities/FormCreateActivit
 import Profesores from './views/Profesores/Profesores';
 import PaquetesClases from './views/PaquetesClases/PaquetesClases'
 import FormGoals from "./views/FormGoals/FormGoals";
-//import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer";
 import FormClasses from "./views/FormClasses/FormClasses";
 import ActivitiesV from "./views/ActivitiesV/ActivitiesV";
 import Classes from "./views/Classes/Classes";
 
 import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:3001";
-axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
+axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
 
 function App() {
   let location = useLocation();
@@ -33,7 +33,7 @@ function App() {
         <Route path="/classes" element={<Classes/>}/>
         <Route path="/coaches" element={<Profesores/>}/>
       </Routes>
-      {/* {location.pathname !== "/" && <Footer />} */}
+      {location.pathname !== "/" && <Footer />}
     </div>
   );
 }

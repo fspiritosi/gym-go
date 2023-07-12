@@ -13,6 +13,7 @@ module.exports = {
     './src/components/Activities/Activities.jsx',
     './src/components/FilterandSort/FilterandSort.jsx',
     './src/components/SearchBar/SearchBar.jsx',
+    './src/components/CardActivities/CardActivities.jsx'
   ],
   theme: {
     colors: {

@@ -51,6 +51,10 @@ const Nav = () => {
         <div className=" items-center ml-auto mr-8 mb-4 md:mb-0">
         {isAuthenticated ? (
           <>
+            <li className='mx-4 my-6 md:my-0'>
+            <Link className=" text-l hover:text-green-neon duration-500 text-white px-2" to='/classes'>Clases</Link>
+            </li> 
+            {/* Agrege la ruta classes para que se visualice solo si se esta logueado */}
             <Profile user={user} />
             <LogoutButton logout={logout} />
           </>

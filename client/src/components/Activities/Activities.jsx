@@ -7,6 +7,7 @@ import CardActivities from '../CardActivities/CardActivities'
 import FilterandSort from '../FilterandSort/FilterandSort';
 import styles from './Activities.module.css';
 
+
 const Activities = () => {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activities);

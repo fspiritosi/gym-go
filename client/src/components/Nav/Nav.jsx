@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
-import Logo from '../../Assets/Logos/Logo.svg';
+import Logo from '../../assets/Logos/Logo.svg';
 import LoginButton from "../Login/LoginButton";
 import LogoutButton from "../Login/LogoutButton";
 import Profile from "../Login/Profile";

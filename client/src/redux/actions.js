@@ -28,6 +28,7 @@ export const getActivities = () => {
 
 //Busqueda de Actividades
 export function searchActivitieName(title) {
+  //console.log("se ejecuta activityname")
   title = title.toLowerCase();
   return async function (dispatch) {
     try {

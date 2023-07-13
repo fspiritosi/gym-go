@@ -23,7 +23,7 @@ const Classes = () => {
             <br />
             <br />
             <br />
-            <h1>Clases</h1>
+            <h1>Nuestras Clases</h1>
             <br />
             {classes?.map((clase,index) => {
                 const activity = activities.find(act => act.id === clase.ActivityId);
@@ -31,7 +31,7 @@ const Classes = () => {
                 const coach = coaches.find((coach) => coach.id === clase.CoachId);
                 const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
 
-                if (!clase.isActive) {
+                if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false
                 }
 
@@ -42,10 +42,10 @@ const Classes = () => {
                     difficulty={clase.difficulty}  //classes
                     startTime={clase.Events[0].startTime} //classes
                     endTime={clase.Events[0].endTime} //classes
-                    duration={clase.Events[0].duration} //classes
                     quota= {clase.quota}
                     date={clase.Events.map((d) => d.date)}
                     coachName={coachName}
+                    // duration={clase.Events[0].duration} //classes
                     />
                 );
             })}

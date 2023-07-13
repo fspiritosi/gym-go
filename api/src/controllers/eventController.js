@@ -67,7 +67,7 @@ const updateEventById = async (id, date, startTime, endTime, userId, isActive) =
   if(isActive) event.isActive = isActive;
   if(userId) {
     if(event.eventQuota.includes(userId)) return "User ya anotado";
-    if(event.eventQuota.length + 1 < clas.quota) {
+    if(event.eventQuota.length + 1 <= eventClass.quota) { // se puso (eventClass <=) ya que solo decia clas.quota
       const newEventQuota = [...event.eventQuota, userId];
       event.eventQuota = newEventQuota;
     } else {

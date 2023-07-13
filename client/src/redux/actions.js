@@ -11,6 +11,7 @@ export const GET_GOALS = "GET_GOALS";
 export const FILTER_BY_GOALS = "FILTER_BY_GOALS";
 export const GET_COACHES = 'GET_COACHES'
 export const GET_CLASSES = "GET_CLASSES";
+export const PUT_EVENTS = "PUT_EVENTS";
 
 
 //All Activities
@@ -27,6 +28,7 @@ export const getActivities = () => {
 
 //Busqueda de Actividades
 export function searchActivitieName(title) {
+  //console.log("se ejecuta activityname")
   title = title.toLowerCase();
   return async function (dispatch) {
     try {
@@ -112,6 +114,18 @@ export const getClassess = () => {
     dispatch({
       type: GET_CLASSES,
       payload: classes,
+    });
+  };
+};
+
+//Put Events update
+export const putEvents = (id) => {
+  return async function (dispatch) {
+    const backEvents = await axios.put(`/event/${id}`, { userId: id });
+    const events = backEvents.data;
+    dispatch({
+      type: PUT_EVENTS,
+      payload: events,
     });
   };
 };

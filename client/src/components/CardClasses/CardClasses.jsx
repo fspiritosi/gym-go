@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-lone-blocks */
 import React, { useState, useEffect } from 'react';
-import { getEvents, putEvents } from '../../redux/actions';
+import { getEvents, getUsers, putEvents } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'react-toastify';
@@ -11,30 +11,36 @@ import styles from './CardClasses.module.css';
 
 Modal.setAppElement('#root');
 
-const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, image, eventQuota, quota, coachName}) => {
+const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eventQuota, quota, coachName, imageA, imageC }) => {
     const dispatch = useDispatch();
-
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
-
+    // const user = useSelector((state) => state.users);
+    
     const handleReserva = (eventId, index) => {
-        if (isAuthenticated) {
+        // if (isAuthenticated) {
         // setShowModal(false);
-        // const d = date[index]
-        // console.log(d);
         const event = eventQuota[index]
-        // console.log(event);
+        const userId = '37085418-97cd-4287-b672-33d7b7c5e77c';
+        const isAlreadySubscribed = event.some(subscription => subscription.userId === userId);
+        // console.log(eventId[index]);
+        // console.log(user);
+        console.log(userId);
 
-        console.log(eventId[index]);
         if (event.length < quota) {
-            toast.success('Registro a Evento Exitoso✅');
-            dispatch(putEvents(eventId[index], {userId: '37085418-97cd-4287-b672-33d7b7c5e77c' }));
+            if(isAlreadySubscribed){ //revisar
+            toast.error('Ya estás suscrito a este evento');
+            } else{
+                toast.success('Registro a evento exitoso✅');
+            dispatch(putEvents(eventId[index], { userId }));
+            }
+            window.location.reload(); //mala practica 
         } else {
             toast.error('Cupo lleno');
         }
-        } else {
-            setShowModal(true);
-        }
+        // } else {
+        //     setShowModal(true);
+        // }
     };
 
     const closeModal = () => { setShowModal(false); };
@@ -44,22 +50,36 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, ima
 
     return (
         <div className={styles.cardContainer}>
-            <h4>Actividad: {title}</h4>
-            <h4>Profesor: {coachName}</h4>
-            <h4>Dificultad: {difficulty}</h4>
-            <h4>Horario: {startTime} - {endTime}</h4>
-            <h4>Cupo: {quota} espacios por evento</h4>
+            <div className={styles.divs}>
+            <h4>{title}</h4>
+            <img src={imageA} alt='' className={styles.image}/>
+            </div>
+            <div className={styles.divs}>
+            <h4>{coachName}</h4>
+            <img src={imageC} alt='' className={styles.image}/>
+            </div>
+            <div className={styles.divs}>
+            <h4>{difficulty}</h4>
+            </div>
+            <div className={styles.divs}>
+            <h4>{startTime} - {endTime}</h4>
+            </div>
+            {/* <h4>Cupo: {quota} espacios por evento</h4> */}
             {/* <h4>Duracion: {duration} hora(s)</h4> */}
-            <h1>Eventos</h1>
-            <div className={styles.cardContainer}>
+            <div>
+            {/* <h1>Eventos</h1> */}
+            <div>
                 {date.map((event, index) => (
-                    <div key={index}>
+                    <div key={index} className={styles.divbuttons}>
                         {/* <h4>{event}</h4> */}
                         <button onClick={() => handleReserva(eventId,index)} className={styles.eventButton}>{event}</button>
-                        <h4>Espacios disponibles: {quota - eventQuota[index].length}</h4>
+                        {/* {isAuthenticated && ( */}
+                        <h4>Cupo {quota - eventQuota[index].length} disponibles</h4>
+                        {/* )} */}
                         <br />
                     </div>
                 ))}
+            </div>
             </div>
             <Modal
                 isOpen={showModal}

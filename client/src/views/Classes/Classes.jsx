@@ -18,6 +18,10 @@ const Classes = () => {
         dispatch(getCoaches());
     }, [dispatch]);
 
+    const sortedClasses = [...classes].sort(
+        (a, b) => new Date(a.Events[0].date) - new Date(b.Events[0].date)
+    );
+
     return (
         <div>
             <br />
@@ -25,11 +29,14 @@ const Classes = () => {
             <br />
             <h1>Nuestras Clases</h1>
             <br />
-            {classes?.map((clase,index) => {
+            {sortedClasses?.map((clase,index) => {
                 const activity = activities.find(act => act.id === clase.ActivityId);
                 const activitieName = activity ? `${activity.title}` : '';
                 const coach = coaches.find((coach) => coach.id === clase.CoachId);
                 const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
+                const imageA = activity ? activity.image : '';
+                const imageC = coach ? coach.profilePicture : '';
+                const sortedEventIds = clase.Events.map((e) => e.id).sort((a, b) => new Date(a) - new Date(b));
                 // const sortedDates = clase.Events.map((d) => d.date).sort((a, b) => new Date(a) - new Date(b));
 
                 if (clase.isActive === false) {
@@ -44,10 +51,14 @@ const Classes = () => {
                     startTime={clase.Events[0].startTime} //classes
                     endTime={clase.Events[0].endTime} //classes
                     quota= {clase.quota}
-                    date={clase.Events.map((d) => d.date)}
                     coachName={coachName}
                     eventQuota={clase.Events.map((q) => q.eventQuota)}
-                    eventId={clase.Events.map((i) => i.id)}
+                    date={clase.Events.map((d) => d.date)}
+                    eventId={sortedEventIds}
+                    imageA={imageA}
+                    imageC={imageC}
+                    // eventId={clase.Events.map((i) => i.id)}
+                    // date={sortedDates}
                     // duration={clase.Events[0].duration} //classes
                     />
                 );

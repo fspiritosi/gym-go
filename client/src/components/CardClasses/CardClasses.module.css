@@ -1,10 +1,29 @@
 .cardContainer {
-    width: 800px;
-    height: 180px;
     background: none;
     display: flex; 
     flex-direction: row; 
-    /* border: 2px solid black; */
+    border: 2px solid black;
+}
+
+.divs{
+    width: 100px;
+    height: 150px;
+    border: 2px solid black;
+}
+
+.divevents{
+    width: 250px;
+    height: 150px;
+    border: 2px solid black;
+}
+
+.divbuttons{
+    display: inline-block;
+    margin-right: 10px;
+}
+.image{
+    width: 70px;
+    height: 70px;
 }
 
 .modalContent {

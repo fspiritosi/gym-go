@@ -1,6 +1,6 @@
 
 
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES, PUT_EVENTS } from "./actions";
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES, GET_EVENTS, PUT_EVENTS } from "./actions";
 
 
 const initialState = {
@@ -10,7 +10,9 @@ const initialState = {
   goals: [],
   coaches: [],
   classes: [],
-  events: []
+  putEvents: [],
+  allEvents:[]
+
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -106,7 +108,13 @@ const rootReducer = (state = initialState, action) => {
     case PUT_EVENTS:
       return {
         ...state,
-        events: action.payload,
+        putEvents: action.payload,
+      };
+
+    case GET_EVENTS:
+      return {
+        ...state,
+        allEvents: action.payload,
       };
 
     default:

@@ -45,6 +45,7 @@ const Classes = () => {
                     quota= {clase.quota}
                     date={clase.Events.map((d) => d.date)}
                     coachName={coachName}
+                    eventQuota={clase.Events.map((q) => q.eventQuota)}
                     // duration={clase.Events[0].duration} //classes
                     />
                 );

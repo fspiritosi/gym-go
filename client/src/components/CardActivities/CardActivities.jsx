@@ -14,7 +14,7 @@ const CardActivities = ({ id, title, image, goals,}) => {
         <div className="w-full h-full object-cover">
       <h3 className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600"></h3>
        <p className="text-l text-gray-600">{goals?.join(" - ")}</p>
-     <br />
+     <br/>
       <Link to={`/activity-detail/${id}`}>
      <button className="bg-green-neon hover:bg-gray-claro text-white px-2 py-2 mb-3 rounded-xl">
       Más Información

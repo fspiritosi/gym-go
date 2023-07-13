@@ -7,19 +7,44 @@ import CardActivities from '../CardActivities/CardActivities';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import FilterandSort from '../FilterandSort/FilterandSort';
 
 
 const Activities = () => {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activities);
+
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "green" }}
+        onClick={onClick}
+      />
+    );
+  }
+  
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "green" }}
+        onClick={onClick}
+      />
+    );
+  }
   
   const settings = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 2,
     initialSlide: 0,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -55,13 +80,13 @@ const Activities = () => {
 
   return (
     <div className="max-w-screen-xl min-h-screen mt-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-      
+      <FilterandSort/>
         <div className=" pt-9 lg:items-center">
           <div className=" pb-10">
             <h2 className="text-3xl font-bold sm:text-4xl">Encuentra tu pasión por el fitness en nuestras diversas actividades</h2>
           </div>
           
-          <div>
+          <div>            
             <Slider {...settings}              
             >
               {activities?.map((a, index) => (

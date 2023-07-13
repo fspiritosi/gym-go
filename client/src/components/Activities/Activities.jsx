@@ -1,12 +1,16 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActivities, getGoals } from '../../redux/actions';
+import { getActivities, getGoals, searchActivitieName } from '../../redux/actions';
+// import SearchBar from '../SearchBar/SearchBar';
+import CardActivities from '../CardActivities/CardActivities'
+import FilterandSort from '../FilterandSort/FilterandSort';
 import 'tailwindcss/tailwind.css';
 import CardActivities from '../CardActivities/CardActivities';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+
 
 
 const Activities = () => {
@@ -51,6 +55,10 @@ const Activities = () => {
   useEffect(() => {
     dispatch(getActivities());
     dispatch(getGoals());
+    const storedSearchTerm = window.localStorage.getItem("searchBar");
+    if (storedSearchTerm) {
+      dispatch(searchActivitieName(storedSearchTerm));
+    }
   }, [dispatch]);
 
   return (

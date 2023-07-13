@@ -7,22 +7,25 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Profesores = () => {
 
-const dispatch = useDispatch();
-const coaches= useSelector((state) => state.coaches);
+    const dispatch = useDispatch();
+    const coaches = useSelector((state) => state.coaches);
 
-useEffect(() => {
-    dispatch(getCoaches());
-}, [dispatch]);
+    useEffect(() => {
+        dispatch(getCoaches());
+    }, [dispatch]);
 
     return (
         <div>
-            <br/>
+            <br />
             <h1>Nuestros Profesores</h1>
-            <br/>
-            <br/>
+            <br />
+            <br />
             <div>
                 {coaches.map((c, index) => {
-                    return ( 
+                    if (c.isActive === false) {
+                        return null; //no muestra los profesores si esta en false
+                    }
+                    return (
                         <CardProfesores
                             key={index}
                             id={c.id}
@@ -31,12 +34,12 @@ useEffect(() => {
                             lastName={c.lastName}
                             description={c.description}
                         />
-                    ) 
+                    )
                 })}
             </div>
-        <br/>
-        <br/>
-        <br/>
+            <br />
+            <br />
+            <br />
         </div>
     )
 };

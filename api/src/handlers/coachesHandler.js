@@ -39,8 +39,8 @@ const createCoachHandler = async (req, res) => {
 const updateCoachByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const { firstName, lastName, profilePicture, description, education, workExperience, activities } = req.body;
-    const updatedCoach = await updateCoachById(firstName, lastName, profilePicture, description, education, workExperience, activities);
+    const { firstName, lastName, profilePicture, description, education, workExperience, activities, isActive } = req.body;
+    const updatedCoach = await updateCoachById(id,firstName, lastName, profilePicture, description, education, workExperience, activities, isActive);
     if(!updatedCoach) res.status(404).json({ msg: `Coach with id ${id} not found` });
     res.status(200).json(updatedCoach);
   } catch (error) {

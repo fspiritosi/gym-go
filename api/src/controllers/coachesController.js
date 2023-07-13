@@ -50,42 +50,39 @@ const getCoachById = async (id) => {
 
 const createCoach = async (firstName, lastName, profilePicture, description, education, workExperience, activities) => {
   const newCoach = await Coaches.create({ firstName, lastName, profilePicture, description, education, workExperience});
-  for (const activityStr of activities) {
-    const activity = await Activities.findAll({
-      where: {
-        title: activityStr
-      }
-    });
-    await newCoach.addActivities(activity);
-  };
+  if (activities){
+    for (const activityStr of activities) {
+      const activity = await Activities.findAll({
+        where: {
+          title: activityStr
+        }
+      });
+      await newCoach.addActivities(activity);
+    };
+  }
   return newCoach;
 };
 
-const updateCoachById = async (id, firstName, lastName, profilePicture, description, education, workExperience, activities) => {
+const updateCoachById = async (id, firstName, lastName, profilePicture, description, education, workExperience, activities, isActive) => {
   const coach = await Coaches.findByPk(id, {
     include: [
       {
         model: Activities,
-        attributes: ['name'],
+        attributes: ['title'],
         through: { attributes: [] }
       }
     ]
   });
-  if(firstName) coach.firstName = firstName;
-  if(lastName) coach.lastName = lastName;
-  if(profilePicture) coach.profilePicture = profilePicture;
-  if(description) coach.description = description;
-  if(education) coach.education = education;
-  if(workExperience) coach.workExperience = workExperience;
-  for (const activityStr of activities) {
+  if(activities) {
+    for (const activityStr of activities) {
     const activity = await Activities.findAll({
       where: {
         title: activityStr
       }
     });
     await coach.addActivities(activity);
-  }
-  await coach.save();
+  }}
+  await coach.update({firstName, lastName, profilePicture, description, education, workExperience, isActive})
   return coach;
 };
 

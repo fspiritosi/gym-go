@@ -161,6 +161,18 @@ function SidebarMenu() {
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="Clases"
+              to="classes"
+              icon={<CalendarTodayOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            ></Typography>
             <Typography
               variant="h6"
               color={colors.grey[300]}

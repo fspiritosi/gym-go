@@ -18,6 +18,7 @@ import Coaches from "./views/Admin/scenes/Tables/CoachesData";
 import Form from "./views/Admin/scenes/Forms/Form";
 import ClassesForm from "./views/Admin/scenes/Forms/creteClases";
 import Classes from "./views/Classes/Classes";
+import ClassesAdm from "./views/Admin/scenes/Tables/ClassesData";
 
 import axios from "axios";
 import CreateGoals from "./views/Admin/scenes/Forms/createGoals";
@@ -29,9 +30,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* {location.pathname !== "/" &&
-        location.pathname !== "/admin" &&
-        location.pathname !== "/admin/team" && <Nav />} */}
       {location.pathname === "/" ||
       location.pathname.includes("/admin") ? undefined : (
         <Nav />
@@ -51,15 +49,17 @@ function App() {
           <Route path="" element={<Dashboard />} />
           <Route path="users" element={<Users />} />
           <Route path="activities" element={<Activities />} />
+          <Route path="classes" element={<ClassesAdm />} />
           <Route path="coaches" element={<Coaches />} />
           <Route path="usersCreate" element={<Form />} />
           <Route path="classesCreate" element={<ClassesForm />} />
           <Route path="goalsCreate" element={<CreateGoals />} />
         </Route>
       </Routes>
-      {location.pathname !== "/" &&
-        location.pathname !== "/admin/" &&
-        location.pathname !== "/admin/team" && <Footer />}
+      {location.pathname === "/" ||
+      location.pathname.includes("/admin") ? undefined : (
+        <Footer />
+      )}
     </div>
   );
 }

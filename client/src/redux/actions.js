@@ -13,6 +13,7 @@ export const GET_COACHES = 'GET_COACHES'
 export const GET_CLASSES = "GET_CLASSES";
 export const PUT_EVENTS = "PUT_EVENTS";
 export const GET_EVENTS = "GET_EVENTS";
+export const GET_USERS = "GET_USERS";
 
 
 //All Activities
@@ -120,9 +121,9 @@ export const getClassess = () => {
 };
 
 //Put Events update
-export const putEvents = (id) => {
+export const putEvents = (id, userId) => {
   return async function (dispatch) {
-    const backEvents = await axios.put(`/events/${id}`, { userId: id });
+    const backEvents = await axios.put(`/events/${id}`, { userId });
     const events = backEvents.data;
     dispatch({
       type: PUT_EVENTS,
@@ -132,13 +133,25 @@ export const putEvents = (id) => {
 };
 
 //get Events
-export const getEvents = (id) => {
+export const getEvents = () => {
   return async function (dispatch) {
-    const backEvents = await axios.put(`/events/${id}`);
+    const backEvents = await axios.get("/events");
     const events = backEvents.data;
     dispatch({
       type: GET_EVENTS,
       payload: events,
+    });
+  };
+};
+
+//get Users
+export const getUsers = () => {
+  return async function (dispatch) {
+    const backUsers = await axios.get("/users");
+    const users = backUsers.data;
+    dispatch({
+      type: GET_USERS,
+      payload: users,
     });
   };
 };

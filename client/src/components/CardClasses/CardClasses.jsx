@@ -1,50 +1,41 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-lone-blocks */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getEvents, putEvents } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from 'react-modal';
 import { useAuth0 } from '@auth0/auth0-react';
-import styles from './CardClasses.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import Modal from 'react-modal';
+import styles from './CardClasses.module.css';
 
 Modal.setAppElement('#root');
 
-const CardClasses = ({ id, title, difficulty, date, startTime, endTime, image, eventQuota, quota, coachName }) => {
-    const allEvents = useSelector((state) => state.allEvents);
-
-    const [showModal, setShowModal] = useState(false);
-    const [isClassReserved, setIsClassReserved] = useState(false);
-    const { isAuthenticated, loginWithRedirect } = useAuth0();
+const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, image, eventQuota, quota, coachName}) => {
     const dispatch = useDispatch();
 
-    const handleReserva = (index) => {
-        // if (isAuthenticated) {
+    const [showModal, setShowModal] = useState(false);
+    const { isAuthenticated, loginWithRedirect } = useAuth0();
+
+    const handleReserva = (eventId, index) => {
+        if (isAuthenticated) {
         // setShowModal(false);
+        // const d = date[index]
+        // console.log(d);
         const event = eventQuota[index]
-        console.log(event);
+        // console.log(event);
+
+        console.log(eventId[index]);
         if (event.length < quota) {
             toast.success('Registro a Evento Exitoso✅');
-            // dispatch(putEvents('33c96dbf-5c9f-4585-bc53-335ff066d74',['66ad9b29-4d57-43eb-9208-602c928bcab1']))
-            axios.put(`http://localhost:3001/events/${id}`, {
-                userId: '66ad9b29-4d57-43eb-9208-602c928bcab1'
-            })
-                .then(response => {
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            dispatch(putEvents(eventId[index], {userId: '37085418-97cd-4287-b672-33d7b7c5e77c' }));
         } else {
             toast.error('Cupo lleno');
         }
-        // } else {
-        //     setShowModal(true);
-        //}
+        } else {
+            setShowModal(true);
+        }
     };
-
 
     const closeModal = () => { setShowModal(false); };
     const handleModalLogin = () => {
@@ -63,9 +54,9 @@ const CardClasses = ({ id, title, difficulty, date, startTime, endTime, image, e
             <div className={styles.cardContainer}>
                 {date.map((event, index) => (
                     <div key={index}>
-                        <h4>{event}</h4>
-                        <h4>Espacios ocupados: {eventQuota[index].length}</h4>
-                        <button onClick={() => handleReserva(index)} className={styles.eventButton}>Reservar</button>
+                        {/* <h4>{event}</h4> */}
+                        <button onClick={() => handleReserva(eventId,index)} className={styles.eventButton}>{event}</button>
+                        <h4>Espacios disponibles: {quota - eventQuota[index].length}</h4>
                         <br />
                     </div>
                 ))}

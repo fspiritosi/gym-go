@@ -30,11 +30,12 @@ const Classes = () => {
                 const activitieName = activity ? `${activity.title}` : '';
                 const coach = coaches.find((coach) => coach.id === clase.CoachId);
                 const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
+                // const sortedDates = clase.Events.map((d) => d.date).sort((a, b) => new Date(a) - new Date(b));
 
                 if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false
                 }
-
+ 
                 return (
                     <CardClasses
                     key={index}
@@ -46,6 +47,7 @@ const Classes = () => {
                     date={clase.Events.map((d) => d.date)}
                     coachName={coachName}
                     eventQuota={clase.Events.map((q) => q.eventQuota)}
+                    eventId={clase.Events.map((i) => i.id)}
                     // duration={clase.Events[0].duration} //classes
                     />
                 );

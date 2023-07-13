@@ -21,6 +21,7 @@ import Classes from "./views/Classes/Classes";
 
 import axios from "axios";
 import CreateGoals from "./views/Admin/scenes/Forms/createGoals";
+
 axios.defaults.baseURL = "http://localhost:3001";
 // axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
 
@@ -60,6 +61,7 @@ function App() {
       {location.pathname !== "/" &&
         location.pathname !== "/admin/" &&
         location.pathname !== "/admin/team" && <Footer />}
+
     </div>
   );
 }

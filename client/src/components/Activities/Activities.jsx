@@ -82,6 +82,7 @@ const Activities = () => {
   }, [dispatch]);
 
   return (
+<<<<<<<<< Temporary merge branch 1
    
  <section>
   <div class="max-w-screen-xl  mt-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
@@ -126,6 +127,7 @@ const Activities = () => {
  </section>
     
 )
+
 
 };
 

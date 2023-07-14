@@ -60,6 +60,7 @@ const createCoach = async (firstName, lastName, profilePicture, description, edu
       }
     ]
   })
+
   return newCoach;
 };
 

@@ -136,6 +136,7 @@ const updateEventById = async (
     if (event.eventQuota.length < eventClass.quota) {
       await event.addUsers(user);
       const newEventQuota = [...event.eventQuota, user.id];
+
       event.eventQuota = newEventQuota;
       user.credits--;
       await user.save();

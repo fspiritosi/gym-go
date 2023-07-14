@@ -21,7 +21,7 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
         // if (isAuthenticated) {
         // setShowModal(false);
         const event = eventQuota[index]
-        const userId = '37085418-97cd-4287-b672-33d7b7c5e77c';
+        const userId = 'e905f679-7e28-48e3-ba0e-e1e95d28425c';
         const isAlreadySubscribed = event.some(subscription => subscription.userId === userId);
         // console.log(eventId[index]);
         // console.log(user);
@@ -32,7 +32,9 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
             toast.error('Ya estás suscrito a este evento');
             } else{
                 toast.success('Registro a evento exitoso✅');
-            dispatch(putEvents(eventId[index], { userId }));
+            dispatch(putEvents(eventId[index], userId )).then(() => {
+                dispatch(getEvents(eventId[index])); // Obtener los eventos actualizados
+            });
             }
             window.location.reload(); //mala practica 
         } else {

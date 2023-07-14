@@ -129,11 +129,12 @@ export const putEvents = (id, userId) => {
       type: PUT_EVENTS,
       payload: events,
     });
+    return backEvents;
   };
 };
 
 //get Events
-export const getEvents = () => {
+export const getEvents = (id) => {
   return async function (dispatch) {
     const backEvents = await axios.get("/events");
     const events = backEvents.data;

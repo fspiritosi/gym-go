@@ -58,7 +58,7 @@ const findActivityById = async (id) => {
       },
       {
         model: Classes,
-        attributes: ["startDate", "startTime", "difficulty", "quota"],
+        attributes: ["startDate", "endDate", "startTime", "endTime", "difficulty", "quota", "ActivityId", "CoachId"],
         include: [
           {
             model: Events,
@@ -71,12 +71,6 @@ const findActivityById = async (id) => {
               "eventQuota",
             ],
           },
-          {
-            model: Coaches,
-            attributes: [
-              'id'
-            ]
-          }
         ],
       },
     ],

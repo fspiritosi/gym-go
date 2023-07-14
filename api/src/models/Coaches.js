@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
     },
     description: {
       type: DataTypes.STRING(1234),
-      allowNull: false,
+      allowNull: true,
     },
     education: {
       type: DataTypes.STRING(1234),

@@ -30,6 +30,7 @@ const createClassHandler = async (req, res) => {
   try {
     const { difficulty, recurringPattern, startDate, endDate, startTime, endTime, quota, ActivityId, CoachId } = req.body;
     const newClass = await createClass(difficulty, recurringPattern, startDate, endDate, startTime, endTime, quota, ActivityId, CoachId);
+    if (!newClass) return res.status(409).json({ msg: `The activity ${ActivityId} doesn't have the coach ${CoachId}` });
     res.status(200).json(newClass);
   } catch (error) {
     res.status(400).json({ error: error.message });

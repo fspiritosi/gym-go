@@ -20,9 +20,9 @@ const createPreferenceHandler = async (req, res) => {
       },
     ],
 		back_urls: {
-			"success": "http://localhost:8080/feedback",
-			"failure": "http://localhost:8080/feedback",
-			"pending": "http://localhost:8080/feedback"
+			"success": "http://localhost:3001/prices",
+			"failure": "http://localhost:3001/prices",
+			"pending": "http://localhost:3001/prices"
 		},
 		auto_return: "approved",
   };

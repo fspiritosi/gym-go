@@ -23,7 +23,7 @@ const getCoachById = async (id) => {
       },
       {
         model: Classes,
-        attributes: ['id', 'difficulty', 'ActivityId'],
+        attributes: ['id', 'difficulty', 'ActivityId', 'startDate', 'endDate'],
         include: [
           {
             model: Events,
@@ -43,12 +43,8 @@ const getCoachById = async (id) => {
 
 const createCoach = async (firstName, lastName, profilePicture, description, education, workExperience, activities) => {
   let newCoach = await Coaches.create({ firstName, lastName, profilePicture, description, education, workExperience});
-  for (const activityStr of activities) {
-    const activity = await Activities.findAll({
-      where: {
-        title: activityStr
-      }
-    });
+  for (const activityId of activities) {
+    const activity = await Activities.findByPk(activityId);
     await newCoach.addActivities(activity);
   };
   newCoach = await Coaches.findByPk(newCoach.id, {
@@ -69,36 +65,22 @@ const updateCoachById = async (id, firstName, lastName, profilePicture, descript
     include: [
       {
         model: Activities,
-        attributes: ['id', 'title', 'description'],
+        attributes: ['title'],
         through: { attributes: [] }
       }
     ]
   });
-  if(!coach) return null;
-  if(firstName) coach.firstName = firstName;
-  if(lastName) coach.lastName = lastName;
-  if(profilePicture) coach.profilePicture = profilePicture;
-  if(description) coach.description = description;
-  if(education) coach.education = education;
-  if(workExperience) coach.workExperience = workExperience;
-  if(isActive || !isActive) coach.isActive = isActive;
   if(activities) {
-    if (coach.Activities) {
-      for (const activity of coach.Activities) {
-        const activityInstance = await Activities.findByPk(activity.id);
-        await coach.removeActivities(activityInstance);
-      };
-    };
-    for (const activityStr of activities) {
-      const activity = await Activities.findAll({
-        where: {
-          title: activityStr
-        }
-      });
+    for (const activity of coach.Activities) {
+      const activityInstance = await Activities.findByPk(activity.id);
+      await coach.removeActivities(activityInstance);
+    }
+    for (const activityId of activities) {
+      const activity = await Activities.findByPk(activityId);
       await coach.addActivities(activity);
     }
   }
-  await coach.save();
+  await coach.update({firstName, lastName, profilePicture, description, education, workExperience, isActive})
   return coach;
 };
 

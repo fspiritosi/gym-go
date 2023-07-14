@@ -3,6 +3,7 @@ const {
   userLogin,
   getAllUsers,
   getUserById,
+  getUserByEmail,
   updateUserById,
   deleteUserById,
 } = require("../controllers/userController");
@@ -11,10 +12,6 @@ const userRegisterHandler = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const newUser = await userRegister(username, email, password);
-    if (!newUser)
-      return res
-        .status(409)
-        .json({ msg: `User with email ${email} already exists` });
     res.status(201).json(newUser);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -35,11 +32,11 @@ const userLoginHandler = async (req, res) => {
 
 const getAllUsersHandler = async (req, res) => {
   try {
-    const { username, email } = req.body;
-    const allUsers = await getAllUsers(username, email);
-    res.status(200).json(allUsers);
+    const { email } = req.query;
+    const results = email ? await getUserByEmail(email) : await getAllUsers();
+    res.status(200).json(results);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -47,10 +44,9 @@ const getUserByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const userDetail = await getUserById(id);
-    if (!userDetail)
-      res.status(404).json({ msg: `User with id ${id} not found` });
     res.status(200).json(userDetail);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };
@@ -58,8 +54,8 @@ const getUserByIdHandler = async (req, res) => {
 const updateUserByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const body = req.body;
-    const updatedUser = await updateUserById(id, body);
+    const { username, purchase, credits, role, isActive, events } = req.body;
+    const updatedUser = await updateUserById(id, username, purchase, credits, role, isActive, events);
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(400).json({ error: error.message });

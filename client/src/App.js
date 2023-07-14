@@ -29,11 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* {location.pathname !== "/" &&
-        location.pathname !== "/admin" &&
-        location.pathname !== "/admin/team" && <Nav />} */}
-      {location.pathname === "/" ||
-      location.pathname.includes("/admin") ? undefined : (
+      {location.pathname.includes("/admin") ? undefined : (
         <Nav />
       )}
       <Routes>
@@ -57,9 +53,9 @@ function App() {
           <Route path="goalsCreate" element={<CreateGoals />} />
         </Route>
       </Routes>
-      {location.pathname !== "/" &&
-        location.pathname !== "/admin/" &&
-        location.pathname !== "/admin/team" && <Footer />}
+      {location.pathname.includes("/admin") ? undefined : (
+        <Footer />
+      )}
     </div>
   );
 }

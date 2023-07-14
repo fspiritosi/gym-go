@@ -10,13 +10,11 @@ import Footer from "../../components/Footer/Footer";
 
 
 const Landing = () => {
-  
   return (
 
    <section>
    
-   <div className="container min-w-full min-h-screen bg-center bg-cover px-8 grid place-items-left relative" style={{ backgroundImage: `url(${backgroundImage})` }}>
-      <Nav/>
+   <div className="container min-w-full min-h-screen bg-center bg-cover px-8 grid place-items-left" style={{ backgroundImage: `url(${backgroundImage})` }}>
        <div className=" text-white mt-40 max-w-lg">
         <h1 className=" font-semibold  text-5xl leading-normal">Tu tiempo, tu poder: entrena a tu ritmo en el horario que elijas</h1>
         <p className=" mt-4" >¡Bienvenido al gimnasio que te lleva a lo más alto en salud y bienestar!
@@ -48,7 +46,6 @@ const Landing = () => {
         </div>
         </div>
     </div>
-    <Footer/>    
     </section>    
   )
 };

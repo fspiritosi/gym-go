@@ -18,10 +18,6 @@ const Classes = () => {
         dispatch(getCoaches());
     }, [dispatch]);
 
-    // const sortedClasses = [...classes].sort(
-    //     (a, b) => new Date(a.Events[0].date) - new Date(b.Events[0].date)
-    // );
-
     return (
         <div>
             <br />
@@ -36,13 +32,11 @@ const Classes = () => {
                 const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
                 const imageA = activity ? activity.image : '';
                 const imageC = coach ? coach.profilePicture : '';
-                // const sortedEventIds = clase.Events.map((e) => e.id).sort((a, b) => new Date(a) - new Date(b));
-                // const sortedDates = clase.Events.map((d) => d.date).sort((a, b) => new Date(a) - new Date(b));
-
+                
                 if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false
                 }
- 
+
                 return (
                     <CardClasses
                     key={index}
@@ -52,14 +46,11 @@ const Classes = () => {
                     endTime={clase.Events[0].endTime} //classes
                     quota= {clase.quota}
                     coachName={coachName}
+                    imageA={imageA}
+                    imageC={imageC}
                     eventQuota={clase.Events.map((q) => q.eventQuota)}
                     date={clase.Events.map((d) => d.date)}
                     eventId={clase.Events.map((i) => i.id)}
-                    imageA={imageA}
-                    imageC={imageC}
-                    // date={sortedDates}
-                    // eventId={sortedEventIds}
-                    // duration={clase.Events[0].duration} //classes
                     />
                 );
             })}

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-lone-blocks */
 import React, { useState, useEffect } from 'react';
-import { getClassess, getEvents, getUsers, putEvents } from '../../redux/actions';
+import { getClassess, getUsers, putEvents } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'react-toastify';
@@ -15,14 +15,21 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
+    const userId = 'b59cbfc1-f5f3-4c87-97b7-b3cfa3609287'; //ejemplo para userid
+    
+    useEffect(() => {
+        dispatch(getUsers());
+    }, [dispatch]);
+    
     const user = useSelector((state) => state.users);
-
+    console.log(user);
+    
+    
     const handleReserva = (eventId, index) => {
-        // if (isAuthenticated) {
-        // setShowModal(false);
+        if (isAuthenticated) {
+        setShowModal(false);
         const event = eventQuota[index]
         const d = date[index]
-        const userId = 'db0736df-b1cb-42d8-ad9c-bee762cf8f21';
         // const isAlreadySubscribed = eventQuota[index].some(s => s.userId === userId);
         console.log(`fecha ${d}`);
         console.log(`evento id ${eventId[index]}`);
@@ -30,40 +37,22 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
         console.log(`array de usuarios inscritos ${event}`);
         // console.log(isAlreadySubscribed)
 
-        // if (event.length < quota) {
-        //     if(isAlreadySubscribed){ //revisar
-        //         toast.error('Ya estás suscrito a este evento');
-        //     } else{
-        //         toast.success(`Registro a evento ${d} exitoso✅`);
-        //     dispatch(putEvents(eventId[index], userId))
-        //     .then(() => {
-        //         dispatch(getClassess(eventId[index])) // Obtener las classes actualizados
-        //     })
-        //     .catch(error => {
-        //         toast.error('Ocurrió un error al suscribirte al evento. Por favor, intenta nuevamente.');
-        //         console.error(error);
-        //     });;
-        //     }
-        // } else {
-        //     toast.error('Cupo lleno');
-        // }
         if (event.length < quota) {
             dispatch(putEvents(eventId[index], userId))
-                .then(() => {
-                    dispatch(getClassess(eventId[index])); // Obtener las clases actualizadas
-                    toast.success(`Registro a evento ${d} exitoso✅`);
-                })
-                .catch(error => {
-                    toast.error('Ya estás suscrito a este evento');
-                    console.error(error);
-                });
+            .then(() => {
+                dispatch(getClassess(eventId[index])); // Obtener las clases actualizadas
+                toast.success(`Registro a evento ${d} exitoso✅`);
+            })
+            .catch(error => {
+                toast.error('Ya estás suscrito a este evento');
+                console.error(error);
+            });
         } else {
             toast.error('Cupo lleno');
         }
-
-        // } else {
-        //     setShowModal(true);
-        // }
+        } else {
+                setShowModal(true);
+            }
     };
 
     const closeModal = () => { setShowModal(false); };
@@ -97,24 +86,26 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
             <div className={styles.divs}>
                 <h4>{startTime} - {endTime}</h4>
             </div>
-            {/* <h4>Cupo: {quota} espacios por evento</h4> */}
-            {/* <h4>Duracion: {duration} hora(s)</h4> */}
             <div>
-                {/* <h1>Eventos</h1> */}
                 <div>
                     {date.map((event, index) => (
-                        <div key={index} className={styles.divbuttons}>
-                            {/* <h4>{event}</h4> */}
-                            <button onClick={() => handleReserva(eventId, index)} className={styles.eventButton}>{event}</button>
-                            {/* {isAuthenticated && ( */}
-                            <h4>Cupo {quota - eventQuota[index].length} disponibles</h4>
-                            {/* )} */}
-                            <br />
-                        </div>
+                            <div key={index} className={styles.divbuttons}>
+                                {isAuthenticated && eventQuota[index].includes(userId) ? (
+                                    <div>
+                                        <h4>Suscrito</h4>
+                                        <button onClick={() => handleReserva(eventId, index)} className={styles.eventButton}>{event}</button>
+                                        <h4>{quota - eventQuota[index].length} lugares disponibles</h4>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <button onClick={() => handleReserva(eventId, index)} className={styles.eventButton}>{event}</button>
+                                    </div>
+                                )}
+                            </div>
                     ))}
-                </div>
-            </div>
-            <Modal
+                    </div>
+                    </div>
+                    <Modal
                 isOpen={showModal}
                 onRequestClose={closeModal}
                 className={`${styles.modalContent} ${styles.modalOverlay}`}>
@@ -128,3 +119,11 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
 };
 
 export default CardClasses;
+
+{/* {date.map((event, index) => (
+                            <div key={index} className={styles.divbuttons}>
+                                <button onClick={() => handleReserva(eventId, index)} className={styles.eventButton}>{event}</button>
+                                <h4>{quota - eventQuota[index].length} espacios disponibles</h4>
+                                <br />
+                            </div>
+                        ))} */}

@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
     },
     endDate: {
       type: DataTypes.STRING,
-      allowNull: true, // users can configure recurring events with no end date
+      allowNull: true, // in case there is not recurring pattern
     },
     startTime: {
       type: DataTypes.STRING, // '19:00:00Z' Z means zero UTC offset

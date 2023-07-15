@@ -18,7 +18,7 @@ const getCoachById = async (id) => {
     include: [
       {
         model: Activities,
-        attributes: ['id', 'title'],
+        attributes: ['id', 'title', 'description'],
         through: { attributes: [] }
       },
       {
@@ -27,18 +27,11 @@ const getCoachById = async (id) => {
         include: [
           {
             model: Events,
-            attributes: [
-              "id",
-              "date",
-              "startTime",
-              "endTime",
-            ],
+            attributes: ["id", "date", "startTime", "endTime",],
           },
           {
             model: Coaches,
-            attributes: [
-              'id'
-            ]
+            attributes: ['id'],
           }
         ]
       }
@@ -49,17 +42,25 @@ const getCoachById = async (id) => {
 };
 
 const createCoach = async (firstName, lastName, profilePicture, description, education, workExperience, activities) => {
-  const newCoach = await Coaches.create({ firstName, lastName, profilePicture, description, education, workExperience});
-  if (activities){
-    for (const activityStr of activities) {
-      const activity = await Activities.findAll({
-        where: {
-          title: activityStr
-        }
-      });
-      await newCoach.addActivities(activity);
-    };
-  }
+  let newCoach = await Coaches.create({ firstName, lastName, profilePicture, description, education, workExperience});
+  for (const activityStr of activities) {
+    const activity = await Activities.findAll({
+      where: {
+        title: activityStr
+      }
+    });
+    await newCoach.addActivities(activity);
+  };
+  newCoach = await Coaches.findByPk(newCoach.id, {
+    include: [
+      {
+        model: Activities,
+        attributes: ['id', 'title', 'description'],
+        through: { attributes: [] }
+      }
+    ]
+  })
+
   return newCoach;
 };
 
@@ -68,21 +69,36 @@ const updateCoachById = async (id, firstName, lastName, profilePicture, descript
     include: [
       {
         model: Activities,
-        attributes: ['title'],
+        attributes: ['id', 'title', 'description'],
         through: { attributes: [] }
       }
     ]
   });
+  if(!coach) return null;
+  if(firstName) coach.firstName = firstName;
+  if(lastName) coach.lastName = lastName;
+  if(profilePicture) coach.profilePicture = profilePicture;
+  if(description) coach.description = description;
+  if(education) coach.education = education;
+  if(workExperience) coach.workExperience = workExperience;
+  if(isActive || !isActive) coach.isActive = isActive;
   if(activities) {
+    if (coach.Activities) {
+      for (const activity of coach.Activities) {
+        const activityInstance = await Activities.findByPk(activity.id);
+        await coach.removeActivities(activityInstance);
+      };
+    };
     for (const activityStr of activities) {
-    const activity = await Activities.findAll({
-      where: {
-        title: activityStr
-      }
-    });
-    await coach.addActivities(activity);
-  }}
-  await coach.update({firstName, lastName, profilePicture, description, education, workExperience, isActive})
+      const activity = await Activities.findAll({
+        where: {
+          title: activityStr
+        }
+      });
+      await coach.addActivities(activity);
+    }
+  }
+  await coach.save();
   return coach;
 };
 
@@ -93,13 +109,8 @@ const deleteCoachById = async (id) => {
   const remainingCoaches = await Coaches.findAll({
     include: [
       {
-        model: Classes,
-        attributes: ["startDate", "recurringPattern"],
-        through: { attributes: [] }
-      },
-      {
         model: Activities,
-        attributes: ["name"],
+        attributes: ['id', 'title'],
         through: { attributes: [] }
       }
     ],

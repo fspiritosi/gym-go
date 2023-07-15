@@ -17,13 +17,19 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     purchases: {
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: true,
+    },
+    credits: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    role: {
+      type: DataTypes.ENUM,
+      values: ["user", "admin"],
+      allowNull: false,
+      defaultValue: "user",
     },
     isActive: {
       type: DataTypes.BOOLEAN,

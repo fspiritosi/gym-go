@@ -83,22 +83,11 @@ const updateCoachById = async (id, firstName, lastName, profilePicture, descript
   if(workExperience) coach.workExperience = workExperience;
   if(isActive || !isActive) coach.isActive = isActive;
   if(activities) {
-    if (coach.Activities) {
-      for (const activity of coach.Activities) {
-        const activityInstance = await Activities.findByPk(activity.id);
-        await coach.removeActivities(activityInstance);
-      };
-    };
-    for (const activityStr of activities) {
-      const activity = await Activities.findAll({
-        where: {
-          title: activityStr
-        }
-      });
-      await coach.addActivities(activity);
-    }
-  }
-  await coach.save();
+    for (const activityId of activities) {
+    const activity = await Activities.findByPk(activityId);
+    await coach.addActivities(activity);
+  }}
+  await coach.update({firstName, lastName, profilePicture, description, education, workExperience, isActive})
   return coach;
 };
 

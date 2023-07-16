@@ -125,7 +125,6 @@ const ClassesForm = () => {
      const selectActivitie = (values) => {
       const selectedActivity = activities.find((act) => act.id === values.target.value);
       setSelectActivity(selectedActivity);
-      
      }
 
      useEffect( () => {

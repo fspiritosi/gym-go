@@ -10,58 +10,29 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import Header from "../../adminComponentes/Header";
 
-const ClassesAdm = () => {
-  const [classes, setClasses] = useState([]);
+const GoalsData = () => {
+  const [goals, setGoals] = useState([]);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   const changeIsActive = async (id, isActive) => {
-    await axios.put(`/classes/${id}`, { isActive });
-    getClasses();
+    console.log("desde la función", `is active es ${isActive}`);
+    await axios.put(`/goals/${id}`, { isActive });
+    getGoals();
   };
+
   const colums = [
-    // { field: "id", headerName: "ID" },
     {
-      field: "Activity",
-      headerName: "Actividad",
+      field: "name",
+      headerName: "Nombre",
       flex: 1,
       cellClassName: "name-column--cell",
-      renderCell: ({ row: { Activity } }) => {
-        return <Box>{Activity.title}</Box>;
-      },
     },
     {
-      field: "Coach",
-      headerName: "Profesor",
-      flex: 1,
-      renderCell: ({ row: { Coach } }) => {
-        return <Box>{`${Coach.firstName} ${Coach.lastName}`}</Box>;
-      },
+      field: "description",
+      headerName: "Descripción",
+      flex: 6,
+      cellClassName: "name-column--cell",
     },
-    {
-      field: "difficulty",
-      headerName: "Dificultad",
-      flex: 1,
-    },
-    // {
-    //   field: "image",
-    //   headerName: "Imagen",
-    //   flex: 1,
-    //   headerAlign: "center",
-    //   align: "center",
-    //   renderCell: ({ row: { image, title } }) => {
-    //     return (
-    //       <Box width="50px">
-    //         <img src={image} alt={title} />
-    //       </Box>
-    //     );
-    //   },
-    // },
-    { field: "startDate", headerName: "Fecha Inicio", flex: 1 },
-    { field: "endDate", headerName: "Fecha de Fin", flex: 1 },
-    { field: "startTime", headerName: "Hora de Inicio", flex: 1 },
-    { field: "endTime", headerName: "Hora de Fin", flex: 1 },
-    { field: "quota", headerName: "Cupo", flex: 1 },
     {
       field: "isActive",
       headerName: "Estado",
@@ -93,6 +64,10 @@ const ClassesAdm = () => {
                 }}
                 onClick={() => {
                   changeIsActive(id, !isActive);
+                  console.log(`isActive esta en ${isActive} y el id es ${id}`);
+                  console.log(
+                    `isActive esta en ${isActive} y se envió a la f() ${!isActive}`
+                  );
                 }}
               >
                 <ThumbUpOffAltIcon />
@@ -108,6 +83,10 @@ const ClassesAdm = () => {
                 }}
                 onClick={() => {
                   changeIsActive(id, !isActive);
+                  console.log(`isActive esta en ${isActive} y el id es ${id}`);
+                  console.log(
+                    `isActive esta en ${isActive} y se envió a la f() ${!isActive}`
+                  );
                 }}
               >
                 <RemoveCircleOutlineIcon />
@@ -118,7 +97,10 @@ const ClassesAdm = () => {
       },
     },
     {
+      field: "edit",
       headerName: "Acciones",
+      headerAlign: "center",
+      align: "center",
       renderCell: ({ row: { id } }) => {
         return (
           <Box sx={{ cursor: "pointer" }}>
@@ -130,17 +112,18 @@ const ClassesAdm = () => {
     },
   ];
 
-  const getClasses = async () => {
-    const allClasses = await axios.get("/classes");
-    setClasses(allClasses.data);
+  const getGoals = async () => {
+    const allGoals = await axios.get("/goals");
+    setGoals(allGoals.data);
   };
+
   useEffect(() => {
-    getClasses();
+    getGoals();
   }, []);
 
   return (
     <Box m="20px">
-      <Header title="CLASES" subtitle="Gestion de Clases" />
+      <Header title="OBJETIVOS" subtitle="Administra los Objetivos" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -173,14 +156,10 @@ const ClassesAdm = () => {
           },
         }}
       >
-        {!classes ? (
-          "...Cargando"
-        ) : (
-          <DataGrid rows={classes} columns={colums} />
-        )}
+        <DataGrid rows={goals} columns={colums} />
       </Box>
     </Box>
   );
 };
 
-export default ClassesAdm;
+export default GoalsData;

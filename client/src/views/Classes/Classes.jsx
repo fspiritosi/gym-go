@@ -23,6 +23,12 @@ const Classes = () => {
             <br />
             <br />
             <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <h1>Nuestras Clases</h1>
             <br />
             {classes?.map((clase,index) => {

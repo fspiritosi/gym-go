@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-lone-blocks */
-import React, { useState, useEffect } from 'react';
-import { getClassess, getUsers, putEvents } from '../../redux/actions';
+import React, { useState } from 'react';
+import { getClassess, getEvents, getUsers, putEvents } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'react-toastify';
@@ -15,44 +13,49 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
-    const userId = 'b59cbfc1-f5f3-4c87-97b7-b3cfa3609287'; //ejemplo para userid
-    
-    useEffect(() => {
-        dispatch(getUsers());
-    }, [dispatch]);
-    
+    const userId = '30c491d2-35e0-47d1-8039-12ed6902e5b9'; //ejemplo para userid
+
     const user = useSelector((state) => state.users);
-    console.log(user);
-    
-    
+    const userm = user.flatMap((u) => u);
+
     const handleReserva = (eventId, index) => {
         if (isAuthenticated) {
-        setShowModal(false);
-        const event = eventQuota[index]
-        const d = date[index]
-        // const isAlreadySubscribed = eventQuota[index].some(s => s.userId === userId);
-        console.log(`fecha ${d}`);
-        console.log(`evento id ${eventId[index]}`);
-        console.log(`user id ${userId}`);
-        console.log(`array de usuarios inscritos ${event}`);
-        // console.log(isAlreadySubscribed)
+            setShowModal(false);
+            const event = eventQuota[index];
+            const d = date[index];
+            const isNotCredits = userm.some(s => s.credits === 0);
+            const suscribed = eventQuota[index].includes(userId);
 
-        if (event.length < quota) {
-            dispatch(putEvents(eventId[index], userId))
-            .then(() => {
-                dispatch(getClassess(eventId[index])); // Obtener las clases actualizadas
-                toast.success(`Registro a evento ${d} exitoso✅`);
-            })
-            .catch(error => {
+            console.log(`fecha ${d}`);
+            console.log(`evento id ${eventId[index]}`);
+            console.log(`user id ${userId}`);
+            console.log(`array de usuarios inscritos ${event}`);
+            console.log(isNotCredits);
+            console.log(suscribed);
+
+            if (event.length < quota && !suscribed) {
+                if (isNotCredits) {
+                    toast.error('No tienes suficientes créditos');
+                } else {
+                    dispatch(putEvents(eventId[index], userId))
+                        .then(() => {
+                            dispatch(getClassess(eventId[index])); // Obtener las clases actualizadas
+                            dispatch(getUsers())
+                            dispatch(getEvents())
+                            toast.success(`Registro a evento ${d} exitoso✅`);
+                        })
+                        .catch(error => {
+                            toast.error('Ocurrio un error');
+                        });
+                }
+            } else if (suscribed) {
                 toast.error('Ya estás suscrito a este evento');
-                console.error(error);
-            });
-        } else {
-            toast.error('Cupo lleno');
-        }
-        } else {
-                setShowModal(true);
+            } else {
+                toast.error('Cupo lleno');
             }
+        } else {
+            setShowModal(true);
+        }
     };
 
     const closeModal = () => { setShowModal(false); };
@@ -61,7 +64,6 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     };
 
     let difficultyText = '';
-
     if (difficulty === 'easy') {
         difficultyText = 'Fácil';
     } else if (difficulty === 'medium') {
@@ -87,28 +89,36 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                 <h4>{startTime} - {endTime}</h4>
             </div>
             <div>
-                <div>
-                    {date.map((event, index) => (
-                            <div key={index} className={styles.divbuttons}>
-                                {isAuthenticated && eventQuota[index].includes(userId) ? (
-                                    <div>
-                                        <h4>Suscrito</h4>
-                                        <button onClick={() => handleReserva(eventId, index)} className={styles.eventButton}>{event}</button>
-                                        <h4>{quota - eventQuota[index].length} lugares disponibles</h4>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <button onClick={() => handleReserva(eventId, index)} className={styles.eventButton}>{event}</button>
-                                    </div>
-                                )}
+                {date.map((event, index) => (
+                    <div key={index} className={styles.divbuttons}>
+                        {isAuthenticated && eventQuota[index].includes(userId) ? (
+                            <div>
+                                <h4>Suscrito</h4>
+                                <button
+                                    onClick={() => handleReserva(eventId, index)}
+                                    className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}
+                                    disabled={quota - eventQuota[index].length <= 0}
+                                >{event}</button>
+                                {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
                             </div>
-                    ))}
+                        ) : (
+                            <div>
+                                <button
+                                    onClick={() => handleReserva(eventId, index)}
+                                    className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}
+                                    disabled={quota - eventQuota[index].length <= 0}
+                                >{event}</button>
+                                {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
+                            </div>
+                        )}
                     </div>
-                    </div>
-                    <Modal
+                ))}
+            </div>
+            <Modal
                 isOpen={showModal}
                 onRequestClose={closeModal}
-                className={`${styles.modalContent} ${styles.modalOverlay}`}>
+                className={`${styles.modalContent} ${styles.modalOverlay}`}
+            >
                 <h2>Debes iniciar sesión o registrarte para suscribirte a este evento</h2>
                 <button onClick={handleModalLogin} className={styles.modalButton}>Iniciar sesión</button>
                 <button onClick={handleModalLogin} className={styles.modalButton}>Registrarse</button>
@@ -119,11 +129,3 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
 };
 
 export default CardClasses;
-
-{/* {date.map((event, index) => (
-                            <div key={index} className={styles.divbuttons}>
-                                <button onClick={() => handleReserva(eventId, index)} className={styles.eventButton}>{event}</button>
-                                <h4>{quota - eventQuota[index].length} espacios disponibles</h4>
-                                <br />
-                            </div>
-                        ))} */}

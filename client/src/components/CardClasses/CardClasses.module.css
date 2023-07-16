@@ -62,3 +62,8 @@
     padding: 10px 20px;
     background-color: #a3e635;
 }
+
+.disabledButton{
+    background-color: #d1d5db;
+    color: #595959;
+}

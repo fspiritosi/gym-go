@@ -1,67 +1,37 @@
-import { Box, Button, Typography,  useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../../theme";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import Header from "../../adminComponentes/Header";
 
-const Activities = () => {
-  const [activities, setActivities] = useState([])
+const GoalsData = () => {
+  const [goals, setGoals] = useState([]);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const changeIsActive = async (id, isActive) => {
+    console.log("desde la función", `is active es ${isActive}`);
+    await axios.put(`/goals/${id}`, { isActive });
+    getGoals();
+  };
 
-    const changeIsActive = async (id, isActive) => {
-      await axios.put(`/activities/${id}`, {isActive});
-      getActivities()
-    };
   const colums = [
     {
-      field: "title",
-      headerName: "Titulo",
+      field: "name",
+      headerName: "Nombre",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "image",
-      headerName: "Imagen",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      renderCell: ({ row: { image, title } }) => {
-        return (
-          <Box width="50px">
-            <img src={image} alt={title} />
-          </Box>
-        );
-      },
-    },
-    { field: "Goals", headerName: "Objetivos", flex: 1 },
-    // { field: "Coaches", headerName: "Profesores", flex: 1 },
-    {
-      field: "Coaches",
-      headerName: "Profesores",
-      headerAlign: "center",
-      align: "center",
-      flex: 1,
-      renderCell: ({ row: { Coaches } }) => {
-        return (
-          <Box>
-            <ul>
-              {Coaches?.map((coach) => (
-                <li key={coach.id}>
-                  {coach.firstName} {coach.lastName}
-                </li>
-              ))}
-            </ul>
-          </Box>
-        );
-      },
+      field: "description",
+      headerName: "Descripción",
+      flex: 6,
+      cellClassName: "name-column--cell",
     },
     {
       field: "isActive",
@@ -94,6 +64,10 @@ const Activities = () => {
                 }}
                 onClick={() => {
                   changeIsActive(id, !isActive);
+                  console.log(`isActive esta en ${isActive} y el id es ${id}`);
+                  console.log(
+                    `isActive esta en ${isActive} y se envió a la f() ${!isActive}`
+                  );
                 }}
               >
                 <ThumbUpOffAltIcon />
@@ -109,6 +83,10 @@ const Activities = () => {
                 }}
                 onClick={() => {
                   changeIsActive(id, !isActive);
+                  console.log(`isActive esta en ${isActive} y el id es ${id}`);
+                  console.log(
+                    `isActive esta en ${isActive} y se envió a la f() ${!isActive}`
+                  );
                 }}
               >
                 <RemoveCircleOutlineIcon />
@@ -119,7 +97,10 @@ const Activities = () => {
       },
     },
     {
+      field: "edit",
       headerName: "Acciones",
+      headerAlign: "center",
+      align: "center",
       renderCell: ({ row: { id } }) => {
         return (
           <Box sx={{ cursor: "pointer" }}>
@@ -131,19 +112,18 @@ const Activities = () => {
     },
   ];
 
+  const getGoals = async () => {
+    const allGoals = await axios.get("/goals");
+    setGoals(allGoals.data);
+  };
 
-  const getActivities = async () => {
-    const allActivities = await axios.get('/activities')
-    setActivities(allActivities.data)
-  }
   useEffect(() => {
-    getActivities()
-  },[])
-
+    getGoals();
+  }, []);
 
   return (
     <Box m="20px">
-      <Header title="ACTIVIDADES" subtitle="Gestion de Actividades" />
+      <Header title="OBJETIVOS" subtitle="Administra los Objetivos" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -176,14 +156,10 @@ const Activities = () => {
           },
         }}
       >
-        {!activities ? (
-          "...Cargando"
-        ) : (
-          <DataGrid rows={activities} columns={colums} />
-        )}
+        <DataGrid rows={goals} columns={colums} />
       </Box>
     </Box>
   );
 };
 
-export default Activities;
+export default GoalsData;

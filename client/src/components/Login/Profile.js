@@ -5,9 +5,8 @@ import 'tailwindcss/tailwind.css';
 
 
 
-const Profile = (props) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-const Profile = () => {
+const Profile = (props) => { 
+ 
   const [isOpen, setIsOpen] = useState(false);
   const { user, isAuthenticated, isLoading, logout, loginWithRedirect } = useAuth0();
   if (isLoading) {
@@ -55,7 +54,7 @@ const Profile = () => {
       )}
     </div>
   );
+ 
 };
-
 export default Profile;
   

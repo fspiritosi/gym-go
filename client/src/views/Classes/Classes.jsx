@@ -1,16 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivities, getClassess, getCoaches } from '../../redux/actions';
 import CardClasses from "../../components/CardClasses/CardClasses";
 import { ToastContainer } from 'react-toastify';
+import Sidebar from "../../components/sidebarcoaches/sidebar2";
+
 
 const Classes = () => {
     const dispatch = useDispatch();
     const activities = useSelector((state) => state.activities);
     const coaches = useSelector((state) => state.coaches);
     const classes = useSelector((state) => state.classes);
+
+    
 
     useEffect(() => {
         dispatch(getActivities());
@@ -20,17 +24,9 @@ const Classes = () => {
 
     return (
         <div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <h1>Nuestras Clases</h1>
-            <br />
+            <div className=" p-7 text-2xl font-semibold flex-3 h-screen">
+                <h1>Nuestras Clases</h1>
+                <Sidebar/>         
             {classes?.map((clase,index) => {
                 const activity = activities.find(act => act.id === clase.ActivityId);
                 const activitieName = activity ? `${activity.title}` : '';
@@ -59,8 +55,10 @@ const Classes = () => {
                     eventId={clase.Events.map((i) => i.id)}
                     />
                 );
-            })}
-            <ToastContainer autoClose={2000} theme="dark" />
+                })}
+                <ToastContainer autoClose={2000} theme="dark" />
+            </div>
+            
         </div>
     )
 };

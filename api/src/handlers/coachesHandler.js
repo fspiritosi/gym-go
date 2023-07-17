@@ -19,7 +19,7 @@ const getCoachByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const coach = await getCoachById(id);
-    if(!coach) res.status(404).json({ msg: `Coach with id ${id} not found` });
+    if(!coach) return res.status(404).json({ msg: `Coach with id ${id} not found` });
     res.status(200).json(coach);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -40,8 +40,8 @@ const updateCoachByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const { firstName, lastName, profilePicture, description, education, workExperience, activities, isActive } = req.body;
-    const updatedCoach = await updateCoachById(id,firstName, lastName, profilePicture, description, education, workExperience, activities, isActive);
-    if(!updatedCoach) res.status(404).json({ msg: `Coach with id ${id} not found` });
+    const updatedCoach = await updateCoachById(id, firstName, lastName, profilePicture, description, education, workExperience, activities, isActive);
+    if(!updatedCoach) return res.status(404).json({ msg: `Coach with id ${id} not found` });
     res.status(200).json(updatedCoach);
   } catch (error) {
     res.status(400).json({ error: error.message });

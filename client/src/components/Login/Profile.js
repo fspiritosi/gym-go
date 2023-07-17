@@ -5,6 +5,8 @@ import 'tailwindcss/tailwind.css';
 
 
 
+const Profile = (props) => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, isAuthenticated, isLoading, logout, loginWithRedirect } = useAuth0();

@@ -1,68 +1,67 @@
-import { Box, Button, Typography,  useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../../theme";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import Header from "../../adminComponentes/Header";
 
-const Activities = () => {
-  const [activities, setActivities] = useState([])
+const ClassesAdm = () => {
+  const [classes, setClasses] = useState([]);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-    const changeIsActive = async (id, isActive) => {
-      await axios.put(`/activities/${id}`, {isActive});
-      getActivities()
-    };
+  const changeIsActive = async (id, isActive) => {
+    await axios.put(`/classes/${id}`, { isActive });
+    getClasses();
+  };
   const colums = [
+    // { field: "id", headerName: "ID" },
     {
-      field: "title",
-      headerName: "Titulo",
+      field: "Activity",
+      headerName: "Actividad",
       flex: 1,
       cellClassName: "name-column--cell",
-    },
-    {
-      field: "image",
-      headerName: "Imagen",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      renderCell: ({ row: { image, title } }) => {
-        return (
-          <Box width="50px">
-            <img src={image} alt={title} />
-          </Box>
-        );
+      renderCell: ({ row: { Activity } }) => {
+        return <Box>{Activity.title}</Box>;
       },
     },
-    { field: "Goals", headerName: "Objetivos", flex: 1 },
-    // { field: "Coaches", headerName: "Profesores", flex: 1 },
     {
-      field: "Coaches",
-      headerName: "Profesores",
-      headerAlign: "center",
-      align: "center",
+      field: "Coach",
+      headerName: "Profesor",
       flex: 1,
-      renderCell: ({ row: { Coaches } }) => {
-        return (
-          <Box>
-            <ul>
-              {Coaches?.map((coach) => (
-                <li key={coach.id}>
-                  {coach.firstName} {coach.lastName}
-                </li>
-              ))}
-            </ul>
-          </Box>
-        );
+      renderCell: ({ row: { Coach } }) => {
+        return <Box>{`${Coach.firstName} ${Coach.lastName}`}</Box>;
       },
     },
+    {
+      field: "difficulty",
+      headerName: "Dificultad",
+      flex: 1,
+    },
+    // {
+    //   field: "image",
+    //   headerName: "Imagen",
+    //   flex: 1,
+    //   headerAlign: "center",
+    //   align: "center",
+    //   renderCell: ({ row: { image, title } }) => {
+    //     return (
+    //       <Box width="50px">
+    //         <img src={image} alt={title} />
+    //       </Box>
+    //     );
+    //   },
+    // },
+    { field: "startDate", headerName: "Fecha Inicio", flex: 1 },
+    { field: "endDate", headerName: "Fecha de Fin", flex: 1 },
+    { field: "startTime", headerName: "Hora de Inicio", flex: 1 },
+    { field: "endTime", headerName: "Hora de Fin", flex: 1 },
+    { field: "quota", headerName: "Cupo", flex: 1 },
     {
       field: "isActive",
       headerName: "Estado",
@@ -131,19 +130,17 @@ const Activities = () => {
     },
   ];
 
-
-  const getActivities = async () => {
-    const allActivities = await axios.get('/activities')
-    setActivities(allActivities.data)
-  }
+  const getClasses = async () => {
+    const allClasses = await axios.get("/classes");
+    setClasses(allClasses.data);
+  };
   useEffect(() => {
-    getActivities()
-  },[])
-
+    getClasses();
+  }, []);
 
   return (
     <Box m="20px">
-      <Header title="ACTIVIDADES" subtitle="Gestion de Actividades" />
+      <Header title="CLASES" subtitle="Gestion de Clases" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -176,14 +173,14 @@ const Activities = () => {
           },
         }}
       >
-        {!activities ? (
+        {!classes ? (
           "...Cargando"
         ) : (
-          <DataGrid rows={activities} columns={colums} />
+          <DataGrid rows={classes} columns={colums} />
         )}
       </Box>
     </Box>
   );
 };
 
-export default Activities;
+export default ClassesAdm;

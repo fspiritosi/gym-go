@@ -1,5 +1,5 @@
 const { Op, where } = require("sequelize");
-const { Classes, Events } = require("../db");
+const { Classes, Events, Activities, Coaches } = require("../db");
 const { createEvent, deleteEventsByClassId } = require("./eventController");
 const { start } = require("repl");
 
@@ -8,10 +8,20 @@ const getAllClasses = async () => {
     include: [
       {
         model: Events,
-        attributes: ['id', 'date', 'startTime', 'endTime', 'eventQuota']
-      }
-    ]}
-  );
+        attributes: ["id", "date", "startTime", "endTime", "eventQuota"],
+      },
+      {
+        model: Activities,
+        attributes: ["id", "title"],
+       
+      },
+      {
+        model: Coaches,
+        attributes: ["id", "firstName", "lastName"],
+        
+      },
+    ],
+  });
   return allClasses;
 };
 
@@ -21,6 +31,16 @@ const getClassById = async (id) => {
 }
 
 const createClass = async (difficulty, recurringPattern, startDate, endDate, startTime, endTime, quota, ActivityId, CoachId) => {
+  let activity = await Activities.findByPk(ActivityId, {
+    include: {
+      model: Coaches,
+      attributes: ['id'],
+      through: { attributes: [] },
+    }
+  });
+  activity.Coaches = activity.Coaches.map(obj => obj.id);
+  console.log(activity.Coaches);
+  if (!activity.Coaches.includes(CoachId)) return null;
   const newClasses = await Classes.create({
     difficulty,
     recurringPattern,

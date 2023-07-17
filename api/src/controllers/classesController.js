@@ -17,7 +17,7 @@ const getAllClasses = async () => {
       },
       {
         model: Coaches,
-        attributes: ["id", "firstName", "lastName", 'pictureProfile'],
+        attributes: ["id", "firstName", "lastName", 'profilePicture'],
         
       },
     ],

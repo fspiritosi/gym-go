@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/fspiritosi/gym-go#readme",
   "dependencies": {
+    "@mui/icons-material": "^5.14.0",
+    "@mui/material": "^5.14.0",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -36,6 +38,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
+    "react-pro-sidebar": "^1.1.0-alpha.1",
     "sequelize": "^6.32.1"
   }
 }

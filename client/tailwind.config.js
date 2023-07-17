@@ -13,7 +13,8 @@ module.exports = {
     './src/components/Activities/Activities.jsx',
     './src/components/FilterandSort/FilterandSort.jsx',
     './src/components/SearchBar/SearchBar.jsx',
-    './src/components/CardActivities/CardActivities.jsx'
+    './src/components/CardActivities/CardActivities.jsx',
+    './src/components/FilterandSort/GoalFilterDropdown.jsx',
   ],
   theme: {
     colors: {
@@ -25,6 +26,14 @@ module.exports = {
       'gray-dark': '#1f2937',
       'gray': '#595959',
       'gray-light': '#f3f4f6',
+      'yellow': '#facc15',
+      'lima': '#ecfccb',      
+    },
+    
+    fontFamily: {
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+      poppins: ['Poppins', 'sans-serif'],
     },
     extend: {},
   plugins: [],

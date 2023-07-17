@@ -44,7 +44,8 @@ const searchActivitiesByName = async (title) => {
 }
 
 const findActivityById = async (id) => {
-  const activity = await Activities.findByPk(id, {
+  const activity =  await Activities.findByPk(id, {
+    
     include: [
       {
         model: Goals,
@@ -73,7 +74,7 @@ const findActivityById = async (id) => {
           },
           {
             model: Coaches,
-            attributes: ["id", "firtName", "lastName", "profilePicture"]
+            attributes: ["id", "firstName", "lastName", "profilePicture"]
           },
         ],
       },

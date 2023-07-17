@@ -62,6 +62,7 @@ const Nav = () => {
               Clases
             </Link>
           </li>
+          {isAuthenticated && 
           <li className="mx-4 my-6 md:my-0">
             <Link
               className=" text-l hover:text-green-neon duration-500 text-white px-2"
@@ -72,6 +73,7 @@ const Nav = () => {
               </button>
             </Link>
           </li>
+          }
         </ul>
         <div className="hidden xl:flex items-center space-x-5 hover:text-yellow">
           {isAuthenticated ? (

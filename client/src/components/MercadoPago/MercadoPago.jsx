@@ -10,11 +10,12 @@ const MercadoPago = ({ orderData }) => {
   useEffect(() => {
     const getPreferenceId = async () => {
       try {
-        const response = await axios.post("http://localhost:3001/mercadopago/create_preference", orderData);
-        const id = response.data.preferenceId;
-        setPreferenceId(id);
+        const response = await axios.post("http://localhost:3001/mercadopago/create-preference", orderData);
+        console.log(response.data);
+        const preferenceId = response.data.id;
+        setPreferenceId(preferenceId);
         console.log(preferenceId);
-        return id;
+        return preferenceId;
       } catch (error) {
         alert(error);
       }

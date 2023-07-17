@@ -20,9 +20,9 @@ const createPreferenceHandler = async (req, res) => {
       },
     ],
 		back_urls: {
-			"success": "http://localhost:8080/feedback",
-			"failure": "http://localhost:8080/feedback",
-			"pending": "http://localhost:8080/feedback"
+			"success": "http://localhost:3000/prices",
+			"failure": "http://localhost:3000/prices",
+			"pending": "http://localhost:3000/prices"
 		},
 		auto_return: "approved",
   };
@@ -30,12 +30,10 @@ const createPreferenceHandler = async (req, res) => {
   mercadopago.preferences
     .create(preference)
     .then(function (response) {
-      res.status(200).json({
-				preferenceId: response.body.id
-			});
+      res.status(200).json(response.body);
     })
     .catch(function (error) {
-      res.status(400).json({ message: error });
+      res.status(400).json({ error: error.message });
     });
 }
 

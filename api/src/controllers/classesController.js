@@ -9,7 +9,14 @@ const getAllClasses = async () => {
       {
         model: Events,
         attributes: ['id', 'date', 'startTime', 'endTime', 'eventQuota']
-      }
+      },
+      {
+        model: Activities,
+        attributes: ['id', 'title', 'image']
+      },
+      { model: Coaches,         
+        attributes: ["id", "firstName", "lastName", "profilePicture"],                
+      },
     ]}
   );
   return allClasses;

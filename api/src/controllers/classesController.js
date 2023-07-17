@@ -12,12 +12,12 @@ const getAllClasses = async () => {
       },
       {
         model: Activities,
-        attributes: ["id", "title"],
+        attributes: ["id", "title", 'image'],
        
       },
       {
         model: Coaches,
-        attributes: ["id", "firstName", "lastName"],
+        attributes: ["id", "firstName", "lastName", 'pictureProfile'],
         
       },
     ],

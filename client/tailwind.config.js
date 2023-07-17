@@ -13,8 +13,10 @@ module.exports = {
     './src/components/Activities/Activities.jsx',
     './src/components/FilterandSort/FilterandSort.jsx',
     './src/components/SearchBar/SearchBar.jsx',
+    './src/**/*.{js,jsx,ts,tsx}'
     './src/components/CardActivities/CardActivities.jsx',
     './src/components/FilterandSort/GoalFilterDropdown.jsx',
+    './src/components/FilterandSort/Siderbar.jsx',
   ],
   theme: {
     colors: {
@@ -26,16 +28,18 @@ module.exports = {
       'gray-dark': '#1f2937',
       'gray': '#595959',
       'gray-light': '#f3f4f6',
+      'lighter-white':'rgba(255,255,255,0.17)',
       'yellow': '#facc15',
       'lima': '#ecfccb',      
     },
-    
+    },
+  extend: {},  
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
       poppins: ['Poppins', 'sans-serif'],
     },
     plugins: [],
-  },
 };
+
 

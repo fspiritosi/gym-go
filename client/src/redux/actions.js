@@ -54,7 +54,8 @@ export function getDetails(id) {
   return async function (dispatch) {
     try {
       const json = await axios.get(`/activities/${id}`);
-      return dispatch({ type: GET_DETAILS_ID, payload: json.data });
+      const activity = json.data
+      return dispatch({ type: GET_DETAILS_ID, payload: activity });
     } catch (error) {
       console.log(error);
     }
@@ -89,10 +90,10 @@ export const getGoals = () => {
 };
 
 
-export function filterByGoals(payload) {
+export function filterByGoals(selectedGoals) {
   return {
     type: FILTER_BY_GOALS,
-    payload,
+    payload: selectedGoals,
   };
 }
 

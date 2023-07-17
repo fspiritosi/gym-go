@@ -75,25 +75,27 @@ const rootReducer = (state = initialState, action) => {
         goals: action.payload,
       };
 
-    case FILTER_BY_GOALS:
-      const { allActivities: allActivitiesGoals } = state; // Cambiado a desestructuración
-      const goalToFilter = action.payload;
-      let goalFiltered = allActivitiesGoals;
+      case FILTER_BY_GOALS:
+      const { allActivities: allActivitiesGoals } = state;
+      const selectedGoals = action.payload;
 
-      if (goalToFilter !== "all") {
-        goalFiltered = goalFiltered.filter(
-          (el) => el.Goals.includes(goalToFilter.toLowerCase()));
-        if (goalFiltered.length === 0) {
-          goalFiltered = allActivitiesGoals;
-        }
+      if (selectedGoals.includes("all")) {
+        return {
+          ...state,
+          activities: allActivitiesGoals,
+        };
       }
-      return {
-        ...state,
-        activities:
-          action.payload === "all" ? state.allActivities : goalFiltered,
-        // goals: action.payload
-      }; //Se corrigio esta funcion 
 
+     const goalFiltered = allActivitiesGoals.filter((el) =>
+    el.Goals.some((goal) => selectedGoals.includes(goal))
+      );
+
+     return {
+    ...state,
+    activities: goalFiltered,
+     };  
+
+   
     case GET_COACHES: //En espera de la Ruta 
       return {
         ...state,

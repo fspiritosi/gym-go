@@ -18,9 +18,13 @@ const getActivitiesHandler = async (req, res) => {
 };
 
 const getActivityByIdHandler = async (req, res) => {
+    
+  const {id} = req.params; 
+
   try {
-    const { id } = req.params;
+
     const activity = await findActivityById(id);
+    
     res.status(200).json(activity);
   } catch (error) {
     return res.status(400).json({ error: error.message });

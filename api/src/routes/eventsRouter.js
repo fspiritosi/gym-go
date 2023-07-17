@@ -5,7 +5,7 @@ const {
   createEventHandler,
   updateEventByIdHandler,
   deleteEventByIdHandler,
-  deleteAllEventsHandler
+  deleteAllEventsHandler,
 } = require("../handlers/eventsHandler");
 
 const eventsRouter = Router();

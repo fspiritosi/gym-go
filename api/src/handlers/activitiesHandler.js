@@ -8,8 +8,8 @@ const {
 } = require("../controllers/activitiesControllers.js");
 
 const getActivitiesHandler = async (req, res) => {
-  const { title } = req.query;
   try {
+    const { title } = req.query;
     const results = title ? await searchActivitiesByName(title) : await getAllActivities();
     res.status(200).json(results);
   } catch (error) {
@@ -18,12 +18,16 @@ const getActivitiesHandler = async (req, res) => {
 };
 
 const getActivityByIdHandler = async (req, res) => {
+    
+  const {id} = req.params; 
+
   try {
-    const { id } = req.params;
+
     const activity = await findActivityById(id);
+    
     res.status(200).json(activity);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 

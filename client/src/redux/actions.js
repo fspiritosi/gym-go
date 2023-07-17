@@ -17,6 +17,9 @@ export const FILTER_BY_TITLE = "FILTER_BY_TITLE";
 export const FILTER_BY_START_TIME = "FILTER_BY_START_TIME";
 export const FILTER_BY_DATE = "FILTER_BY_DATE";
 export const FILTER_BY_COACH_NAME = "FILTER_BY_COACH_NAME";
+export const GET_EVENTS = "GET_EVENTS";
+export const GET_USERS = "GET_USERS";
+
 
 
 //All Activities
@@ -57,7 +60,8 @@ export function getDetails(id) {
   return async function (dispatch) {
     try {
       const json = await axios.get(`/activities/${id}`);
-      return dispatch({ type: GET_DETAILS_ID, payload: json.data });
+      const activity = json.data
+      return dispatch({ type: GET_DETAILS_ID, payload: activity });
     } catch (error) {
       console.log(error);
     }
@@ -92,10 +96,10 @@ export const getGoals = () => {
 };
 
 
-export function filterByGoals(payload) {
+export function filterByGoals(selectedGoals) {
   return {
     type: FILTER_BY_GOALS,
-    payload,
+    payload: selectedGoals,
   };
 }
 
@@ -124,13 +128,38 @@ export const getClassess = () => {
 };
 
 //Put Events update
-export const putEvents = (id) => {
+export const putEvents = (id, userId) => {
   return async function (dispatch) {
-    const backEvents = await axios.put(`/event/${id}`, { userId: id });
+    const backEvents = await axios.put(`/events/${id}`, { userId });
     const events = backEvents.data;
     dispatch({
       type: PUT_EVENTS,
       payload: events,
+    });
+    return backEvents;
+  };
+};
+
+//get Events
+export const getEvents = (id) => {
+  return async function (dispatch) {
+    const backEvents = await axios.get("/events");
+    const events = backEvents.data;
+    dispatch({
+      type: GET_EVENTS,
+      payload: events,
+    });
+  };
+};
+
+//get Users
+export const getUsers = () => {
+  return async function (dispatch) {
+    const backUsers = await axios.get("/users");
+    const users = backUsers.data;
+    dispatch({
+      type: GET_USERS,
+      payload: users,
     });
   };
 };

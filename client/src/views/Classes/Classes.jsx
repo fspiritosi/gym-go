@@ -24,18 +24,18 @@ const Classes = () => {
 
     return (
         <div>
-            
             <div className=" p-7 text-2xl font-semibold flex-3 h-screen">
                 <h1>Nuestras Clases</h1>
-                <Sidebar/>
-            
-                {classes?.map((clase,index) => {
-                    const activity = activities.find(act => act.id === clase.ActivityId);
-                    const activitieName = activity ? `${activity.title}` : '';
-                    const coach = coaches.find((coach) => coach.id === clase.CoachId);
-                    const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
-
-                    if (clase.isActive === false) {
+                <Sidebar/>         
+            {classes?.map((clase,index) => {
+                const activity = activities.find(act => act.id === clase.ActivityId);
+                const activitieName = activity ? `${activity.title}` : '';
+                const coach = coaches.find((coach) => coach.id === clase.CoachId);
+                const coachName = coach ? `${coach.firstName} ${coach.lastName}` : '';
+                const imageA = activity ? activity.image : '';
+                const imageC = coach ? coach.profilePicture : '';
+                
+                if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false
                 }
 
@@ -47,9 +47,12 @@ const Classes = () => {
                     startTime={clase.Events[0].startTime} //classes
                     endTime={clase.Events[0].endTime} //classes
                     quota= {clase.quota}
-                    date={clase.Events.map((d) => d.date)}
                     coachName={coachName}
-                    // duration={clase.Events[0].duration} //classes
+                    imageA={imageA}
+                    imageC={imageC}
+                    eventQuota={clase.Events.map((q) => q.eventQuota)}
+                    date={clase.Events.map((d) => d.date)}
+                    eventId={clase.Events.map((i) => i.id)}
                     />
                 );
                 })}

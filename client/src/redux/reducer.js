@@ -1,6 +1,8 @@
 
 
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES, FILTER_BY_COACH, PUT_EVENTS, FILTER_BY_TITLE, FILTER_BY_START_TIME, FILTER_BY_DATE, FILTER_BY_COACH_NAME } from "./actions";
+
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES, FILTER_BY_COACH, PUT_EVENTS, FILTER_BY_TITLE, FILTER_BY_START_TIME, FILTER_BY_DATE, FILTER_BY_COACH_NAME, GET_EVENTS, GET_USERS, PUT_EVENTS } from "./actions";
+
 
 
 const initialState = {
@@ -10,7 +12,10 @@ const initialState = {
   goals: [],
   coaches: [],
   classes: [],
-  events: []
+  putEvents: [],
+  allEvents:[],
+  users:[]
+
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -72,25 +77,27 @@ const rootReducer = (state = initialState, action) => {
         goals: action.payload,
       };
 
-    case FILTER_BY_GOALS:
-      const { allActivities: allActivitiesGoals } = state; // Cambiado a desestructuración
-      const goalToFilter = action.payload;
-      let goalFiltered = allActivitiesGoals;
+      case FILTER_BY_GOALS:
+      const { allActivities: allActivitiesGoals } = state;
+      const selectedGoals = action.payload;
 
-      if (goalToFilter !== "all") {
-        goalFiltered = goalFiltered.filter(
-          (el) => el.Goals.includes(goalToFilter.toLowerCase()));
-        if (goalFiltered.length === 0) {
-          goalFiltered = allActivitiesGoals;
-        }
+      if (selectedGoals.includes("all")) {
+        return {
+          ...state,
+          activities: allActivitiesGoals,
+        };
       }
-      return {
-        ...state,
-        activities:
-          action.payload === "all" ? state.allActivities : goalFiltered,
-        // goals: action.payload
-      }; //Se corrigio esta funcion 
 
+     const goalFiltered = allActivitiesGoals.filter((el) =>
+    el.Goals.some((goal) => selectedGoals.includes(goal))
+      );
+
+     return {
+    ...state,
+    activities: goalFiltered,
+     };  
+
+   
     case GET_COACHES: //En espera de la Ruta 
       return {
         ...state,
@@ -125,11 +132,22 @@ const rootReducer = (state = initialState, action) => {
     case PUT_EVENTS:
       return {
         ...state,
-        events: action.payload,
+        putEvents: action.payload,
       };
 
-    default:
-      return { ...state };
+    case GET_EVENTS:
+      return {
+        ...state,
+        allEvents: action.payload,
+      };
+    
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
+
+   
 
       case FILTER_BY_TITLE:
         const { allActivities: allActivitiesTitle } = state;
@@ -192,6 +210,9 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           activities: coachNameFiltered,
         };
+      
+       default:
+      return { ...state };
   }
 };
 

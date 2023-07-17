@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   
   return(
-    <footer class="bg-black pb-5">
-    <div class="max-w-screen-xl px-4 pt-8 mx-auto sm:px-6 lg:px-8">
+    <footer class="bg-black pb-1 pt-1 items-center h-10">
+    <div class="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center sm:justify-between">
       <div class="flex justify-center text-teal-300 sm:justify-start">
       <Link to='/'>
@@ -16,11 +16,11 @@ const Footer = () => {
       </div>
 
       <p class="mt-4 text-sm text-center text-white lg:text-right lg:mt-0">
-        T&C &nbsp; Developers; Privacy & Policy &nbsp; Developers
+        T&C &nbsp; Developers &nbsp; Privacy & Policy &nbsp;
       </p>
     </div>
     </div>
-     </footer>  
+     </footer>
   )
 } 
 

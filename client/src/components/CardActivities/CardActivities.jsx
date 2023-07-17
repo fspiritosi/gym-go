@@ -23,7 +23,7 @@ const CardActivities = (props) => {
           </button>
         </Link>
        </div>       
-      </div>  
+      </div> 
   );
 };
 

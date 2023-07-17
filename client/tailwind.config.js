@@ -15,6 +15,7 @@ module.exports = {
     './src/components/SearchBar/SearchBar.jsx',
     './src/components/CardActivities/CardActivities.jsx',
     './src/components/FilterandSort/GoalFilterDropdown.jsx',
+    './src/components/FilterandSort/Siderbar.jsx',
   ],
   theme: {
     colors: {

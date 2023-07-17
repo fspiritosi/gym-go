@@ -23,7 +23,7 @@ const Profile = (props) => {
       {isAuthenticated ? (
         <>
           <button onClick={toggleDropdown} className="flex items-center space-x-2">
-            <img className="w-8 h-8 rounded-full" src={user.picture} alt="user photo" />          
+            <img className="w-8 h-8 rounded-full" src={user.picture} alt='usuario' />         
           </button>
           {isOpen && (
             <div className=" origin-top-right absolute mt-2 z-10 top-10 right-0 text-gray-dark bg-white divide-y divide-gray-100 rounded-lg shadow w-44" role="menu"
@@ -54,7 +54,6 @@ const Profile = (props) => {
       )}
     </div>
   );
- 
-};
+ };
 export default Profile;
   

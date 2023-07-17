@@ -13,6 +13,7 @@ module.exports = {
     './src/components/Activities/Activities.jsx',
     './src/components/FilterandSort/FilterandSort.jsx',
     './src/components/SearchBar/SearchBar.jsx',
+    './src/**/*.{js,jsx,ts,tsx}'
   ],
   theme: {
     colors: {
@@ -24,8 +25,10 @@ module.exports = {
       'gray-dark': '#1f2937',
       'gray': '#595959',
       'gray-light': '#f3f4f6',
+      'lighter-white':'rgba(255,255,255,0.17)',
+      
     },
-    extend: {},
+  extend: {},
   plugins: [],
 }
 }

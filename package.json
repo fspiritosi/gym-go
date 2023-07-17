@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "bundle": "^2.1.0",
-    "nodemailer": "^6.9.3"
-  }
-}

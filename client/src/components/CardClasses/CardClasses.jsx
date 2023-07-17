@@ -13,7 +13,7 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
-    const userId = 'b59cbfc1-f5f3-4c87-97b7-b3cfa3609287'; //ejemplo para userid
+    const userId = 'db0736df-b1cb-42d8-ad9c-bee762cf8f21'; //ejemplo para userid
 
     const user = useSelector((state) => state.users);
     const userm = user.flatMap((u) => u);
@@ -103,7 +103,7 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
                                     className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}
-                                    disabled={quota - eventQuota[index].length <= 0}
+                                    // disabled={quota - eventQuota[index].length <= 0}
                                 >{event}</button>
                                 {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
                             </div>
@@ -111,10 +111,9 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                             <div>
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
-                                    className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}
-                                    disabled={quota - eventQuota[index].length <= 0}
+                                    className={styles.eventButton}
+                                    // disabled={quota - eventQuota[index].length <= 0}
                                 >{event}</button>
-                                {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
                             </div>
                         )}
                     </div>

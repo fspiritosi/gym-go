@@ -1,31 +1,46 @@
-const {Op, where} = require("sequelize");
-const { Classes, Events } = require("../db");
-const { createEvent } = require("./eventController");
-
+const { Op, where } = require("sequelize");
+const { Classes, Events, Activities, Coaches } = require("../db");
+const { createEvent, deleteEventsByClassId } = require("./eventController");
+const { start } = require("repl");
 
 const getAllClasses = async () => {
-    let classes = await Classes.findAll({
-        include: [
-            {
-                model: Events,
-                attributes: ['date', 'startTime', 'endTime', 'duration', 'eventQuota']
-            }
-        ]}
-    )
-    return classes
+  const allClasses = await Classes.findAll({
+    include: [
+      {
+        model: Events,
+        attributes: ["id", "date", "startTime", "endTime", "eventQuota"],
+      },
+      {
+        model: Activities,
+        attributes: ["id", "title"],
+       
+      },
+      {
+        model: Coaches,
+        attributes: ["id", "firstName", "lastName"],
+        
+      },
+    ],
+  });
+  return allClasses;
+};
+
+const getClassById = async (id) => {
+  const getClass = await Classes.findByPk(id);
+  return getClass;
 }
 
-const createClasses = async (
-  difficulty,
-  recurringPattern,
-  startDate,
-  endDate,
-  startTime,
-  endTime,
-  quota,
-  ActivityId,
-  CoachId
-) => {
+const createClass = async (difficulty, recurringPattern, startDate, endDate, startTime, endTime, quota, ActivityId, CoachId) => {
+  let activity = await Activities.findByPk(ActivityId, {
+    include: {
+      model: Coaches,
+      attributes: ['id'],
+      through: { attributes: [] },
+    }
+  });
+  activity.Coaches = activity.Coaches.map(obj => obj.id);
+  console.log(activity.Coaches);
+  if (!activity.Coaches.includes(CoachId)) return null;
   const newClasses = await Classes.create({
     difficulty,
     recurringPattern,
@@ -38,45 +53,51 @@ const createClasses = async (
     CoachId,
   });
   //se ejecuta la función para crear eventos
-  const events = createEvent(newClasses)
+  createEvent(newClasses);
   return newClasses;
 };
 
-const putClasses = async (
-  id,
-  difficulty,
-  recurringPattern,
-  startDate,
-  endDate,
-  startTime,
-  endTime,
-  quota
-) => {
-  const updateClasses = await Classes.update(
-    {
-      difficulty,
-      recurringPattern,
-      startDate,
-      endDate,
-      startTime,
-      endTime,
-      quota,
-    },
-    { where: { id } }
-  );
+const updateClassById = async (id, difficulty, startDate, endDate, startTime, endTime, quota) => {
+  const getClass = await Classes.findByPk(id);
+  console.log(getClass.toJSON());
+  if(!getClass) return null;
+  if(difficulty) getClass.difficulty = difficulty;
+  if(startDate) {
+    getClass.startDate = startDate;
+    // Hay que modificar el date de los eventos asociados a la clase
+  };
+  if(endDate) {
+    getClass.endDate = endDate;
+    // Idem arriba
+  };
+  if(startTime) {
+    getClass.startTime = startTime;
+
+  }
   return updateClasses;
 };
 
-const deleteClasses = async (id) => {
-    const classes = await Classes.findByPk(id);
-    !classes ? 'Class is not exist' : await Classes.destroy({where: {id: id}})
-    return 'Class delete successfully'
-}
+const deleteClassById = async (id) => {
+  const classToDestroy = await Classes.findByPk(id, {
+    include: [
+      {
+        model: Events,
+        attributes: ['id']
+      }
+    ]
+  });
+  if(!classToDestroy) return null;
+  const eventsToDestroy = classToDestroy.Events.map(event => event.id);
+  deleteEventsByClassId(eventsToDestroy);
+  await classToDestroy.destroy();
+  return `Class with id ${id} delete successfully and events associated`;
+};
 
 
 module.exports = {
   getAllClasses,
-  createClasses,
-  putClasses,
-  deleteClasses
+  getClassById,
+  createClass,
+  updateClassById,
+  deleteClassById
 };

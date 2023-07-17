@@ -1,18 +1,20 @@
 const { Router } = require("express");
 const {
-  userRegister,
-  userLogin,
-  getUser,
-  userUpdate,
-  userDelete,
+  userRegisterHandler,
+  userLoginHandler,
+  getAllUsersHandler,
+  getUserByIdHandler,
+  updateUserByIdHandler,
+  deleteUserByIdHandler
 } = require("../handlers/userHandler");
 
 const userRouter = Router();
 
-userRouter.post("/register", userRegister);
-userRouter.post("/login", userLogin);
-userRouter.get("/users", getUser);
-userRouter.put("/users/:id", userUpdate);
-userRouter.delete("/users/:id", userDelete);
+userRouter.post("/register", userRegisterHandler);
+userRouter.post("/login", userLoginHandler);
+userRouter.get("/", getAllUsersHandler);
+userRouter.get("/:id", getUserByIdHandler);
+userRouter.put("/:id", updateUserByIdHandler);
+userRouter.delete("/:id", deleteUserByIdHandler);
 
 module.exports = userRouter;

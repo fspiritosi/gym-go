@@ -1,72 +1,79 @@
-const { User } = require("../db");
+const { users, Events } = require("../db");
+const { token } = require("../utils/jwt");
+const { registerEmail } = require("../utils/nodemailer");
 
-async function userRegisterCtrl(username, email, password) {
-  const userFound = await User.findOne({ where: { email: email } });
-  if (!userFound) {
-    const user = await User.create({
+const userRegister = async (username, email) => {
+  const userFound = await users.findOne({ where: { email: email } });
+  if (userFound) {
+    return null;
+  } else {
+    const newUser = await users.create({
       username,
       email,
-      password,
     });
-    return user;
-  } else {
-    throw new Error("Usuario existe");
-    // user.set("password", undefined, { strict: false });
+    await registerEmail(`${email}`);
+    return newUser;
   }
-}
-async function userLoginCtrl(email) {
-  const userFound = await User.findOne({ where: { email: email } });
-  if (!userFound) throw new Error("User no existe");
-  return userFound;
-}
-
-async function getUserCtrl() {
-  const findUSer = await User.findAll();
-  if (!findUSer) throw new Error({ msg: error.message });
-  return findUSer;
-}
-
-async function userUpdateCtrl(id, username, email) {
-  const user = await User.findByPk(id);
-  if (!user) {
-    throw new Error("User no existe");
-  }
-  user.username = username;
-  user.email = email;
-  await user.save();
-  return user;
-}
-
-async function userDeleteCtrl(id) {
-  const user = await User.findByPk(id);
-  if (!user) {
-    throw new Error("Delete user succesfull");
-  }
-  await user.destroy();
-  return user;
-}
-
-module.exports = {
-  userRegisterCtrl,
-  userLoginCtrl,
-  getUserCtrl,
-  userUpdateCtrl,
-  userDeleteCtrl,
 };
 
-/**
- * 
- * 
- * console.log(user);
+const userLogin = async (email) => {
+  const user = await users.findOne({ where: { email: email } });
   if (!user) {
-    throw new Error("Usuario no encontrado");
+    return null;
+  } else {
+    const jwt = token({ email: user.email });
+    return jwt;
   }
-  if (username) {
-    user.username = data.username;
-  }
-  if (data.email) {
-    user.email = data.email;
-  }
-  await user.save();
+};
+
+const getAllUsers = async () => {
+  const allUsers = await users.findAll({
+    include: {
+        model: Events,
+        attributes: ['id', 'date', 'startTime', 'endTime', 'ClassId'],
+        through: { attributes: [] }
+    },
+  });
+  return allUsers;
+};
+
+const getUserById = async (id) => {
+  const user = await users.findByPk(id, {
+    include: {
+      model: Events,
+      attributes: ['id', 'date', 'startTime', 'endTime', 'ClassId'],
+      through: { attributes: [] }
+    }
+  });
   return user;
- */
+};
+
+const updateUserById = async (id, body) => {
+  const userToUpdate = await users.findByPk(id, {
+    include: {
+      model: Events,
+      attributes: ['id', 'date', 'startTime', 'endTime', 'ClassId'],
+      through: { attributes: [] }
+    }
+  });
+  if (!users) return null;
+  await userToUpdate.update(body);
+  return userToUpdate;
+};
+
+const deleteUserById = async (id) => {
+  const userToDestroy = await users.findByPk(id);
+  if (!userToDestroy) return null;
+  await userToDestroy.destroy();
+  const remainingUsers = await users.findAll();
+  return remainingUsers;
+};
+
+module.exports = {
+  userRegister,
+  userLogin,
+  getAllUsers,
+  getUserById,
+  updateUserById,
+  deleteUserById,
+};

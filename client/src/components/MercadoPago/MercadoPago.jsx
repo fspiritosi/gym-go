@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
@@ -19,7 +20,8 @@ const MercadoPago = ({ orderData }) => {
       }
     };
     getPreferenceId();
-  }, [orderData,preferenceId])
+  }, [orderData]) 
+  //Se quito preferenceId por que estaba generando un loop cuando se renderizaba el boton de mercado pago en CardPaquetes
 
   return (
     <>

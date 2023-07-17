@@ -23,12 +23,12 @@ module.exports = (sequelize) => {
     //   allowNull: true, // Only for weekly recurrence
     // },
     startDate: {
-      type: DataTypes.DATEONLY, // '2018-06-01'
+      type: DataTypes.STRING, // '2018-06-01'
       allowNull: false,
     },
     endDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false, // users can configure recurring events with no end date
+      type: DataTypes.STRING,
+      allowNull: true, // in case there is not recurring pattern
     },
     startTime: {
       type: DataTypes.STRING, // '19:00:00Z' Z means zero UTC offset
@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
     },
     quota:{
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     isActive: {
       type: DataTypes.BOOLEAN,

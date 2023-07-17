@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
-
 export const GET_ACTIVITIE_NAME = "GET_ACTIVITIE_NAME";
 export const GET_DETAILS_ID = "GET_DETAILS_ID";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
@@ -11,6 +10,10 @@ export const FILTER_BY_DIFFICULTY = "FILTER_BY_DIFFICULTY";
 export const GET_GOALS = "GET_GOALS";
 export const FILTER_BY_GOALS = "FILTER_BY_GOALS";
 export const GET_COACHES = 'GET_COACHES'
+export const GET_CLASSES = "GET_CLASSES";
+export const PUT_EVENTS = "PUT_EVENTS";
+export const GET_EVENTS = "GET_EVENTS";
+export const GET_USERS = "GET_USERS";
 
 
 //All Activities
@@ -27,6 +30,7 @@ export const getActivities = () => {
 
 //Busqueda de Actividades
 export function searchActivitieName(title) {
+  //console.log("se ejecuta activityname")
   title = title.toLowerCase();
   return async function (dispatch) {
     try {
@@ -92,7 +96,7 @@ export function filterByGoals(payload) {
   };
 }
 
-//All Coaches **En espera de la Ruta
+//All Coaches 
 export const getCoaches = () => {
     return async function (dispatch) {
         const backCoaches = await axios.get("/coaches");
@@ -102,4 +106,53 @@ export const getCoaches = () => {
             payload: coaches,
         });
     };
+};
+
+//All Classes
+export const getClassess = () => {
+  return async function (dispatch) {
+    const backClasses = await axios.get("/classes");
+    const classes = backClasses.data;
+    dispatch({
+      type: GET_CLASSES,
+      payload: classes,
+    });
+  };
+};
+
+//Put Events update
+export const putEvents = (id, userId) => {
+  return async function (dispatch) {
+    const backEvents = await axios.put(`/events/${id}`, { userId });
+    const events = backEvents.data;
+    dispatch({
+      type: PUT_EVENTS,
+      payload: events,
+    });
+    return backEvents;
+  };
+};
+
+//get Events
+export const getEvents = (id) => {
+  return async function (dispatch) {
+    const backEvents = await axios.get("/events");
+    const events = backEvents.data;
+    dispatch({
+      type: GET_EVENTS,
+      payload: events,
+    });
+  };
+};
+
+//get Users
+export const getUsers = () => {
+  return async function (dispatch) {
+    const backUsers = await axios.get("/users");
+    const users = backUsers.data;
+    dispatch({
+      type: GET_USERS,
+      payload: users,
+    });
+  };
 };

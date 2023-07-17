@@ -12,8 +12,14 @@ export const FILTER_BY_GOALS = "FILTER_BY_GOALS";
 export const GET_COACHES = 'GET_COACHES'
 export const GET_CLASSES = "GET_CLASSES";
 export const PUT_EVENTS = "PUT_EVENTS";
+export const FILTER_BY_COACH = "FILTER_BY_COACH";
+export const FILTER_BY_TITLE = "FILTER_BY_TITLE";
+export const FILTER_BY_START_TIME = "FILTER_BY_START_TIME";
+export const FILTER_BY_DATE = "FILTER_BY_DATE";
+export const FILTER_BY_COACH_NAME = "FILTER_BY_COACH_NAME";
 export const GET_EVENTS = "GET_EVENTS";
 export const GET_USERS = "GET_USERS";
+
 
 
 //All Activities
@@ -54,7 +60,8 @@ export function getDetails(id) {
   return async function (dispatch) {
     try {
       const json = await axios.get(`/activities/${id}`);
-      return dispatch({ type: GET_DETAILS_ID, payload: json.data });
+      const activity = json.data
+      return dispatch({ type: GET_DETAILS_ID, payload: activity });
     } catch (error) {
       console.log(error);
     }
@@ -89,10 +96,10 @@ export const getGoals = () => {
 };
 
 
-export function filterByGoals(payload) {
+export function filterByGoals(selectedGoals) {
   return {
     type: FILTER_BY_GOALS,
-    payload,
+    payload: selectedGoals,
   };
 }
 
@@ -156,3 +163,38 @@ export const getUsers = () => {
     });
   };
 };
+
+export function filterByCoach(payload) {
+  return {
+    type: FILTER_BY_COACH,
+    payload,
+  };
+}
+
+export function filterByTitle(payload) {
+  return {
+    type: FILTER_BY_TITLE,
+    payload,
+  };
+}
+
+export function filterByStartTime(payload) {
+  return {
+    type: FILTER_BY_START_TIME,
+    payload,
+  };
+}
+
+export function filterByDate(payload) {
+  return {
+    type: FILTER_BY_DATE,
+    payload,
+  };
+}
+
+export function filterByCoachName(payload) {
+  return {
+    type: FILTER_BY_COACH_NAME,
+    payload,
+  };
+}

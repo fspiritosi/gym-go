@@ -1,6 +1,8 @@
 
 
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES, GET_EVENTS, GET_USERS, PUT_EVENTS } from "./actions";
+
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES, FILTER_BY_COACH, PUT_EVENTS, FILTER_BY_TITLE, FILTER_BY_START_TIME, FILTER_BY_DATE, FILTER_BY_COACH_NAME, GET_EVENTS, GET_USERS, PUT_EVENTS } from "./actions";
+
 
 
 const initialState = {
@@ -102,6 +104,25 @@ const rootReducer = (state = initialState, action) => {
         coaches: action.payload,
       };
 
+      case FILTER_BY_COACH:
+        const { allActivities: allActivitiesCoaches } = state;
+        const coachToFilter = action.payload;
+        let coachFiltered = allActivitiesCoaches;
+  
+        if (coachToFilter !== "all") {
+          coachFiltered = coachFiltered.filter((el) =>
+            el.Coach === coachToFilter
+          );
+          if (coachFiltered.length === 0) {
+            coachFiltered = allActivitiesCoaches;
+          }
+        }
+        return {
+          ...state,
+          activities:
+            action.payload === "all" ? state.allActivities : coachFiltered,
+        };
+
     case GET_CLASSES:
       return {
         ...state,
@@ -126,7 +147,71 @@ const rootReducer = (state = initialState, action) => {
         users: action.payload,
       };
 
-    default:
+   
+
+      case FILTER_BY_TITLE:
+        const { allActivities: allActivitiesTitle } = state;
+        const titleToFilter = action.payload;
+        let titleFiltered = allActivitiesTitle;
+  
+        if (titleToFilter !== "") {
+          titleFiltered = titleFiltered.filter(
+            (el) => el.title.toLowerCase().includes(titleToFilter.toLowerCase())
+          );
+        }
+        return {
+          ...state,
+          activities: titleFiltered,
+        };
+  
+      case FILTER_BY_START_TIME:
+        const { allActivities: allActivitiesStartTime } = state;
+        const startTimeToFilter = action.payload;
+        let startTimeFiltered = allActivitiesStartTime;
+  
+        if (startTimeToFilter !== "") {
+          startTimeFiltered = startTimeFiltered.filter(
+            (el) => el.startTime.toLowerCase().includes(startTimeToFilter.toLowerCase())
+          );
+        }
+        return {
+          ...state,
+          activities: startTimeFiltered,
+        };
+  
+      case FILTER_BY_DATE:
+        const { allActivities: allActivitiesDate } = state;
+        const dateToFilter = action.payload;
+        let dateFiltered = allActivitiesDate;
+  
+        if (dateToFilter !== "") {
+          dateFiltered = dateFiltered.filter((el) => {
+            const eventDates = el.date.map((d) => new Date(d));
+            const filterDate = new Date(dateToFilter);
+            return eventDates.some((eventDate) => eventDate.getTime() === filterDate.getTime());
+          });
+        }
+        return {
+          ...state,
+          activities: dateFiltered,
+        };
+  
+      case FILTER_BY_COACH_NAME:
+        const { allActivities: allActivitiesCoachName } = state;
+        const coachNameToFilter = action.payload;
+        let coachNameFiltered = allActivitiesCoachName;
+  
+        if (coachNameToFilter !== "") {
+          coachNameFiltered = coachNameFiltered.filter(
+            (el) => el.coachName.toLowerCase().includes(coachNameToFilter.toLowerCase())
+          );
+        }
+        return {
+          ...state,
+          activities: coachNameFiltered,
+        };
+      
+       default:
       return { ...state };
   }
 };

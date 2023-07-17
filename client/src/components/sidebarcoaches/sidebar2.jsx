@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import vector from "../../assets/sidebar/Vector.png"
-import filtro from "../../assets/sidebar/filtro.png"
-import Actividad from "../../assets/sidebar/actividad.png"
-import Profesor from "../../assets/sidebar/teacher.png"
-import Calendario from "../../assets/sidebar/fecha.png"
-import Reloj from "../../assets/sidebar/hora.png"
+import vector from "../../Assets/sidebar/Vector.png"
+import filtro from "../../Assets/sidebar/filtro.png"
+import Actividad from "../../Assets/sidebar/actividad.png"
+import Profesor from "../../Assets/sidebar/teacher.png"
+import Calendario from "../../Assets/sidebar/fecha.png"
+import Reloj from "../../Assets/sidebar/hora.png"
 import SearchBar from '../SearchBar/SearchBar';
 import { filterByDifficulty, filterByCoach, filterByTitle, filterByStartTime, filterByDate, filterByCoachName } from "../../redux/actions"
 

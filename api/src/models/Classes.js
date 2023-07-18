@@ -38,13 +38,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    quota:{
+    quota: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-    }
-  })
-}
+    },
+  });
+};

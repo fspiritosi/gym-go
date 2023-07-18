@@ -11,41 +11,40 @@ const getAllActivities = async () => {
       },
       {
         model: Coaches,
-        attributes: ['id', 'firstName', 'lastName'],
-        through: { attributes: [] }
-      }
+        attributes: ["id", "firstName", "lastName"],
+        through: { attributes: [] },
+      },
     ],
   });
-  activities = activities.map(activity => {
-    const transformedGoals = activity.Goals.map(goal => goal.name);
+  activities = activities.map((activity) => {
+    const transformedGoals = activity.Goals.map((goal) => goal.name);
     return { ...activity.toJSON(), Goals: transformedGoals };
   });
   return activities;
-}
+};
 
 const searchActivitiesByName = async (title) => {
   filteredActivities = await Activities.findAll({
     include: {
       model: Goals,
-      attributes: ['id', 'name', 'description'],
-      through: { attributes: [] }
+      attributes: ["id", "name", "description"],
+      through: { attributes: [] },
     },
     where: {
       title: {
-        [Op.iLike]: `%${title}%`
-      }
-    }
+        [Op.iLike]: `%${title}%`,
+      },
+    },
   });
-  filteredActivities = filteredActivities.map(activity => {
-    const transformedGoals = activity.Goals.map(goal => goal.name);
+  filteredActivities = filteredActivities.map((activity) => {
+    const transformedGoals = activity.Goals.map((goal) => goal.name);
     return { ...activity.toJSON(), Goals: transformedGoals };
   });
   return filteredActivities;
-}
+};
 
 const findActivityById = async (id) => {
-  const activity =  await Activities.findByPk(id, {
-    
+  const activity = await Activities.findByPk(id, {
     include: [
       {
         model: Goals,
@@ -59,7 +58,16 @@ const findActivityById = async (id) => {
       },
       {
         model: Classes,
-        attributes: ["startDate", "endDate", "startTime", "endTime", "difficulty", "quota", "ActivityId", "CoachId"],
+        attributes: [
+          "startDate",
+          "endDate",
+          "startTime",
+          "endTime",
+          "difficulty",
+          "quota",
+          "ActivityId",
+          "CoachId",
+        ],
         include: [
           {
             model: Events,
@@ -74,12 +82,13 @@ const findActivityById = async (id) => {
           },
           {
             model: Coaches,
-            attributes: ["id", "firstName", "lastName", "profilePicture"]
+            attributes: ["id", "firstName", "lastName", "profilePicture"],
           },
         ],
       },
     ],
   });
+  if (!activity) throw new Error(`Activity with id ${id} not found`);
   return activity;
 };
 
@@ -88,25 +97,32 @@ const createActivity = async (title, description, image, goals) => {
   for (const goalStr of goals) {
     const goal = await Goals.findAll({
       where: {
-        name: goalStr
-      }
+        name: goalStr,
+      },
     });
     await newActivity.addGoals(goal);
-  };
+  }
   return newActivity;
 };
 
-const updateActivity = async (id, title, description, image, goals, isActive) => {
+const updateActivity = async (
+  id,
+  title,
+  description,
+  image,
+  goals,
+  isActive
+) => {
   const activity = await Activities.findByPk(id, {
     include: [
       {
-      model: Goals,
-      attributes: ['id', 'name', 'description'],
-      through: { attributes: [] },
+        model: Goals,
+        attributes: ["id", "name", "description"],
+        through: { attributes: [] },
       },
-    ]
+    ],
   });
-  await activity.update({title, description, image, goals, isActive })
+  await activity.update({ title, description, image, goals, isActive });
   return activity;
 };
 
@@ -116,13 +132,13 @@ const deleteActivity = async (id) => {
   await activity.destroy();
   let remainingActivites = await Activities.findAll({
     include: {
-        model: Goals,
-        attributes: ["name"],
-        through: { attributes: [] },
-    }
+      model: Goals,
+      attributes: ["name"],
+      through: { attributes: [] },
+    },
   });
-  remainingActivites = remainingActivites.map(activity => {
-    const transformedGoals = activity.Goals.map(goal => goal.name);
+  remainingActivites = remainingActivites.map((activity) => {
+    const transformedGoals = activity.Goals.map((goal) => goal.name);
     return { ...activity.toJSON(), Goals: transformedGoals };
   });
   return remainingActivites;

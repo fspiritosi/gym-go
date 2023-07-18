@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { MP_ACCESS_TOKEN } = process.env;
+const { createPreference } = require("../controllers/mercadopagoController");
 
 // SDK de Mercado Pago
 const mercadopago = require("mercadopago");
@@ -10,22 +11,7 @@ mercadopago.configure({
 
 const createPreferenceHandler = async (req, res) => {
   const { description, price, quantity } = req.body;
-  // Crea un objeto de preferencia
-  let preference = {
-    items: [
-      {
-        title: description,
-        unit_price: Number(price),
-        quantity: Number(quantity),
-      },
-    ],
-		back_urls: {
-			"success": "http://localhost:3000/prices",
-			"failure": "http://localhost:3000/prices",
-			"pending": "http://localhost:3000/prices"
-		},
-		auto_return: "approved",
-  };
+  const preference = createPreference(description, price, quantity);
 
   mercadopago.preferences
     .create(preference)
@@ -35,8 +21,8 @@ const createPreferenceHandler = async (req, res) => {
     .catch(function (error) {
       res.status(400).json({ error: error.message });
     });
-}
+};
 
 module.exports = {
-  createPreferenceHandler
-}
+  createPreferenceHandler,
+};

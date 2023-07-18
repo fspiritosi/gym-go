@@ -5,7 +5,8 @@ const {
   getAllUsersHandler,
   getUserByIdHandler,
   updateUserByIdHandler,
-  deleteUserByIdHandler
+  updateUserByEmailHandler,
+  deleteUserByIdHandler,
 } = require("../handlers/userHandler");
 
 const userRouter = Router();
@@ -15,7 +16,7 @@ userRouter.post("/login", userLoginHandler);
 userRouter.get("/", getAllUsersHandler);
 userRouter.get("/:id", getUserByIdHandler);
 userRouter.put("/:id", updateUserByIdHandler);
+userRouter.put("/", updateUserByEmailHandler);
 userRouter.delete("/:id", deleteUserByIdHandler);
-
 
 module.exports = userRouter;

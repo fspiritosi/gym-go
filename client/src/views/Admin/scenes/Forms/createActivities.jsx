@@ -266,8 +266,6 @@ const CreateActivitie = () => {
                 </Button>
               </Box>
             </Box>
-            {/* Agregamos un console.log para mostrar los valores */}
-            <pre>{JSON.stringify(values, null, 2)}</pre>
           </form>
         )}
       </Formik>

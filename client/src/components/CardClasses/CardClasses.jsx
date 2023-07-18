@@ -1,6 +1,8 @@
+//NO MOVER NADA DE LA LOGICA DE ESTE COMPONENTE 
+//NO MOVER NADA DE LA LOGICA DE ESTE COMPONENTE 
 import React, { useState } from 'react';
-import { getClassess, getEvents, getUsers, putEvents } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { putEvents } from '../../redux/actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,24 +11,21 @@ import styles from './CardClasses.module.css';
 
 Modal.setAppElement('#root');
 
-const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eventQuota, quota, coachName, imageA, imageC }) => {
+const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eventQuota, quota, coachName, imageA, imageC, handleUpdateClasses }) => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
-    const userId = 'b59cbfc1-f5f3-4c87-97b7-b3cfa3609287'; //ejemplo para userid
+    const userId = 'b59cbfc1-f5f3-4c87-97b7-b3cfa3609287'; // Ejemplo de userID
 
     const user = useSelector((state) => state.users);
     const userm = user.flatMap((u) => u);
 
     const handleReserva = (eventId, index) => {
         if (isAuthenticated) {
-            dispatch(getClassess())
-            dispatch(getEvents())   
-            dispatch(getUsers())
             setShowModal(false);
             const event = eventQuota[index];
             const d = date[index];
-            const isNotCredits = userm.find(s => s.id === userId && s.credits === 0) !== undefined;
+            const isNotCredits = userm.find((s) => s.id === userId && s.credits === 0) !== undefined;
             const suscribed = eventQuota[index].includes(userId);
 
             console.log(`fecha ${d}`);
@@ -40,15 +39,13 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                 if (isNotCredits) {
                     toast.error('No tienes suficientes créditos');
                 } else {
-                    dispatch(putEvents())
+                    dispatch(putEvents(eventId[index], userId))
                         .then(() => {
-                            dispatch(getClassess()); // Obtener las clases actualizadas
-                            dispatch(getUsers())
-                            dispatch(getEvents())
+                            handleUpdateClasses(); // Llamada a la función de actualización del componente padre
                             toast.success(`Registro a evento ${d} exitoso✅`);
                         })
-                        .catch(error => {
-                            toast.error('Ocurrio un error vuelve a intentar');
+                        .catch((error) => {
+                            toast.error('Ocurrió un error, vuelve a intentarlo');
                         });
                 }
             } else if (suscribed) {
@@ -61,7 +58,10 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
         }
     };
 
-    const closeModal = () => { setShowModal(false); };
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     const handleModalLogin = () => {
         loginWithRedirect(); // Redirige al usuario a la página de auth0
     };
@@ -92,16 +92,18 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                 <h4>{startTime} - {endTime}</h4>
             </div>
             <div>
+
                 {date.map((event, index) => (
                     <div key={index} className={styles.divbuttons}>
-                        {isAuthenticated && eventQuota[index].includes(userId) ? (
+                        {isAuthenticated ? (
                             <div>
-                                <h4>Suscrito</h4>
+                                {eventQuota[index].includes(userId) && <p>Suscrito</p>}
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
                                     className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}
-                                    // disabled={quota - eventQuota[index].length <= 0}
-                                >{event}</button>
+                                >
+                                    {event}
+                                </button>
                                 <h4>{quota - eventQuota[index].length} lugares disponibles</h4>
                             </div>
                         ) : (
@@ -109,12 +111,14 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
                                     className={styles.eventButton}
-                                    // disabled={quota - eventQuota[index].length <= 0}
-                                >{event}</button>
+                                >
+                                    {event}
+                                </button>
                             </div>
                         )}
                     </div>
                 ))}
+
             </div>
             <Modal
                 isOpen={showModal}

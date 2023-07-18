@@ -12,8 +12,8 @@ const initialState = {
   goals: [],
   coaches: [],
   classes: [],
-  putEvents: [],
-  allEvents:[],
+  events: [],
+  // allEvents:[],
   users:[]
 
 }
@@ -132,13 +132,13 @@ const rootReducer = (state = initialState, action) => {
     case PUT_EVENTS:
       return {
         ...state,
-        putEvents: action.payload,
+        events: action.payload,
       };
 
     case GET_EVENTS:
       return {
         ...state,
-        allEvents: action.payload,
+        events: action.payload,
       };
     
     case GET_USERS:

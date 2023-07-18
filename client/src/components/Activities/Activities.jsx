@@ -102,7 +102,11 @@ const Activities = () => {
           <div style={sliderContainerStyle}>
             <Slider {...settings}             
             >
-              {activities?.map((a, index) => (
+              {activities?.map((a, index) => {
+                if (a.isActive === false) {
+                  return null; // No muestra la activividad si se desactiva desde el dashboardadmin
+              }
+              return (
                 <CardActivities
                   key={index}
                   id={a.id}
@@ -111,7 +115,8 @@ const Activities = () => {
                   goals={a.Goals}
                   description={a.description}
                 />
-              ))}
+              );
+              })}
             </Slider>
           </div>
         </div>

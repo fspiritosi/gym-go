@@ -8,17 +8,20 @@ const getAllClasses = async () => {
     include: [
       {
         model: Events,
-        attributes: ['id', 'date', 'startTime', 'endTime', 'eventQuota']
+        attributes: ["id", "date", "startTime", "endTime", "eventQuota"],
       },
       {
         model: Activities,
-        attributes: ['id', 'title', 'image']
+        attributes: ["id", "title", 'image'],
+       
       },
-      { model: Coaches,         
-        attributes: ["id", "firstName", "lastName", "profilePicture"],                
+      {
+        model: Coaches,
+        attributes: ["id", "firstName", "lastName", 'profilePicture'],
+        
       },
-    ]}
-  );
+    ],
+  });
   return allClasses;
 };
 

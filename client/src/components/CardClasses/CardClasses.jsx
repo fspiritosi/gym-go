@@ -13,20 +13,19 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
-    const userId = 'db0736df-b1cb-42d8-ad9c-bee762cf8f21'; //ejemplo para userid
+    const userId = 'b59cbfc1-f5f3-4c87-97b7-b3cfa3609287'; //ejemplo para userid
 
     const user = useSelector((state) => state.users);
     const userm = user.flatMap((u) => u);
 
     const handleReserva = (eventId, index) => {
         if (isAuthenticated) {
-            dispatch(getClassess(eventId[index]))
-            dispatch(getEvents())
+            dispatch(getClassess())
+            dispatch(getEvents())   
             dispatch(getUsers())
             setShowModal(false);
             const event = eventQuota[index];
             const d = date[index];
-            // const isNotCredits = userm.some(s => s.credits === 0);
             const isNotCredits = userm.find(s => s.id === userId && s.credits === 0) !== undefined;
             const suscribed = eventQuota[index].includes(userId);
 
@@ -41,17 +40,15 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                 if (isNotCredits) {
                     toast.error('No tienes suficientes créditos');
                 } else {
-                    dispatch(putEvents(eventId[index], userId))
+                    dispatch(putEvents())
                         .then(() => {
-                            dispatch(getClassess(eventId[index])); // Obtener las clases actualizadas
+                            dispatch(getClassess()); // Obtener las clases actualizadas
                             dispatch(getUsers())
                             dispatch(getEvents())
                             toast.success(`Registro a evento ${d} exitoso✅`);
                         })
                         .catch(error => {
                             toast.error('Ocurrio un error vuelve a intentar');
-                            // dispatch(getEvents())
-                            // dispatch(getUsers())
                         });
                 }
             } else if (suscribed) {
@@ -105,7 +102,7 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                                     className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}
                                     // disabled={quota - eventQuota[index].length <= 0}
                                 >{event}</button>
-                                {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
+                                <h4>{quota - eventQuota[index].length} lugares disponibles</h4>
                             </div>
                         ) : (
                             <div>

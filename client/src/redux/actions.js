@@ -129,7 +129,6 @@ export const putEvents = (id, userId) => {
       type: PUT_EVENTS,
       payload: events,
     });
-    return backEvents;
   };
 };
 

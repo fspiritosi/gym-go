@@ -12,28 +12,21 @@ import EditIcon from "@mui/icons-material/Edit";
 import Header from "../../adminComponentes/Header";
 
 const Activities = () => {
-    const [activities, setActivities] = useState([])
+  const [activities, setActivities] = useState([])
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
     const changeIsActive = async (id, isActive) => {
-        console.log('desde la función', `is active es ${isActive}`)
       await axios.put(`/activities/${id}`, {isActive});
       getActivities()
     };
   const colums = [
-    // { field: "id", headerName: "ID" },
     {
       field: "title",
       headerName: "Titulo",
       flex: 1,
       cellClassName: "name-column--cell",
     },
-    // {
-    //   field: "description",
-    //   headerName: "Descripción",
-    //   flex: 1,
-    // },
     {
       field: "image",
       headerName: "Imagen",
@@ -49,7 +42,27 @@ const Activities = () => {
       },
     },
     { field: "Goals", headerName: "Objetivos", flex: 1 },
-    { field: "Coaches", headerName: "Profesores", flex: 1 },
+    // { field: "Coaches", headerName: "Profesores", flex: 1 },
+    {
+      field: "Coaches",
+      headerName: "Profesores",
+      headerAlign: "center",
+      align: "center",
+      flex: 1,
+      renderCell: ({ row: { Coaches } }) => {
+        return (
+          <Box>
+            <ul>
+              {Coaches?.map((coach) => (
+                <li key={coach.id}>
+                  {coach.firstName} {coach.lastName}
+                </li>
+              ))}
+            </ul>
+          </Box>
+        );
+      },
+    },
     {
       field: "isActive",
       headerName: "Estado",
@@ -81,10 +94,6 @@ const Activities = () => {
                 }}
                 onClick={() => {
                   changeIsActive(id, !isActive);
-                  console.log(`isActive esta en ${isActive} y el id es ${id}`);
-                  console.log(
-                    `isActive esta en ${isActive} y se envió a la f() ${!isActive}`
-                  );
                 }}
               >
                 <ThumbUpOffAltIcon />
@@ -100,10 +109,6 @@ const Activities = () => {
                 }}
                 onClick={() => {
                   changeIsActive(id, !isActive);
-                  console.log(`isActive esta en ${isActive} y el id es ${id}`);
-                  console.log(
-                    `isActive esta en ${isActive} y se envió a la f() ${!isActive}`
-                  );
                 }}
               >
                 <RemoveCircleOutlineIcon />
@@ -135,7 +140,7 @@ const Activities = () => {
     getActivities()
   },[])
 
-  console.log(activities)
+
   return (
     <Box m="20px">
       <Header title="ACTIVIDADES" subtitle="Gestion de Actividades" />

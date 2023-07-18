@@ -4,7 +4,7 @@ const {
   createGoal,
   updateGoalById,
   deleteGoalById
-} = require("../controllers/goalsControllers");
+} = require("../controllers/goalsController");
 
 const getAllGoalsHandler = async (req, res) => {
   try {

@@ -1,30 +1,22 @@
 import React from 'react';
-import { useState } from 'react';
-import style from './CardProfesores.module.css'
+import 'tailwindcss/tailwind.css';
+
 
 
 const Card = ({ id, firstName, profilePicture, description, lastName }) => {
 
-    const [isFlipped, setIsFlipped] = useState(false);
-
-    const handleFlip = () => {
-        setIsFlipped(!isFlipped);
-    };
+    
 
     return (
-        <div className={style.cardContainer}>
-            <div className={`${style.card} ${isFlipped ? style.flipped : ''}`} onClick={handleFlip}>
-                <div className={style.front}>
-                    <img src={profilePicture} alt='' className={style.profile} />
-                    <h3>{firstName} {lastName}</h3>
-                </div>
-                <div className={style.back}>
-                {/* <h3>{firstName}{lastName}</h3> */}
-                <br/>
-                    <h5 className={style.text}>{description}</h5>
-                </div>
-            </div>
+        <div class="my-4 px-1 w-1/5  md:w-1/5 lg:w-1/6 overflow-hiddden">
+        <div>
+            <img class="border-4 border-green-neon rounded-full transition duration-500 hover:border-yellow mx-auto md:mx-0 w-18 md:w-auto"
+                src={profilePicture}
+                alt="user-avatar"/>
+            <p class="text-lg text-yellow mt-4 md:mt-8"><b>{firstName} {lastName}</b></p>            
+            <p class="text-yellow-500">{description}</p>
         </div>
+    </div>
     );
 };
 

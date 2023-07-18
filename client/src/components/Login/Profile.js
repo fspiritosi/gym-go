@@ -11,10 +11,8 @@ const Profile = () => {
   const userInDBRef = useRef(false);
 
   useEffect(() => {
-    console.log("useEffect");
     if (userInDBRef) return;
     const createUserInDB = async (username, email) => {
-      console.log("entro en createUser");
       await axios
         .post("/users/register", {
           username: username,

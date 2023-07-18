@@ -16,7 +16,6 @@ const MercadoPago = ({ orderData }) => {
       await axios
         .post("/mercadopago/create-preference", orderData)
         .then( async (response) => {
-          console.log(response.data.id);
           setPreferenceId(response.data.id);
           await axios.post("/orders", {
             preferenceId: response.data.id,

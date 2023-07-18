@@ -7,29 +7,42 @@ import { toast } from 'react-toastify'; //toastify
 import 'react-toastify/dist/ReactToastify.css'; //toastify
 import LoginButton from '../../components/Login/LoginButton';
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
-const CardPaquete = ({ title, clases, price, description, comprar }) => {
-    const [orderData, setOrderData] = useState({ description: title, price: Number(price), quantity: 1 });
-    const [showMercadoPago, setShowMercadoPago] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-    const { isAuthenticated, loginWithRedirect, signupWithRedirect } = useAuth0();
+const CardPaquete = ({ title, clases, price, comprar }) => {
+  const [orderData, setOrderData] = useState({
+    description: title,
+    price: Number(price),
+    quantity: 1,
+  });
+  const [showMercadoPago, setShowMercadoPago] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const { isAuthenticated, loginWithRedirect, signupWithRedirect } = useAuth0();
 
-    const handleBuy = () => {
-        if (isAuthenticated) {
-            setShowMercadoPago(true);
-        } else {
-            setShowModal(true);
-        }
-    };
+  //Con toastify
+  // const handleBuy = () => {
+  //     if (isAuthenticated) {
+  //     setShowMercadoPago(true);
+  // } else {
+  //     toast.error('Debes iniciar sesión para realizar la compra');
+  // }
+  // };
 
-    const closeModal = () => {
-        setShowModal(false);
-    };
+  const handleBuy = () => {
+    if (isAuthenticated) {
+      setShowMercadoPago(true);
+    } else {
+      setShowModal(true);
+    }
+  };
 
-    const handleModalLogin = () => {
-        loginWithRedirect(); // Redirige al usuario a la página de auth0
-    };
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleModalLogin = () => {
+    loginWithRedirect(); // Redirige al usuario a la página de auth0
+  };
 
     return (    
        
@@ -58,27 +71,3 @@ const CardPaquete = ({ title, clases, price, description, comprar }) => {
 };
 
 export default CardPaquete;
-
-
-// <div className={style.cardContainer}>
-//             <br />
-//             <h2>{title}</h2>
-//             <h2>${price}</h2>
-//             <br />
-//             <button
-//                 className={style.comprar}
-//                 onClick={handleBuy}
-//             >Comprar</button>
-//             {showMercadoPago && <MercadoPago orderData={orderData} />}
-//             <Modal 
-//             isOpen={showModal} 
-//             onRequestClose={closeModal}
-//             className={`${style.modalContent} ${style.modalOverlay}`}
-//             >
-//                 <h2>Debes iniciar sesión o Registrarte para realizar la compra</h2>
-//                 <button onClick={handleModalLogin} className={style.modalButton}>Iniciar sesión</button>
-//                 <button onClick={handleModalLogin} className={style.modalButton}>Registrarse</button>
-//                 <button onClick={closeModal} className={style.modalButton}>Cerrar</button>
-//             </Modal>
-//             <br />
-//         </div>

@@ -13,7 +13,7 @@ module.exports = {
     './src/components/Activities/Activities.jsx',
     './src/components/FilterandSort/FilterandSort.jsx',
     './src/components/SearchBar/SearchBar.jsx',
-    './src/**/*.{js,jsx,ts,tsx}'
+    './src/**/*.{js,jsx,ts,tsx}',
     './src/components/CardActivities/CardActivities.jsx',
     './src/components/FilterandSort/GoalFilterDropdown.jsx',
     './src/components/FilterandSort/Siderbar.jsx',

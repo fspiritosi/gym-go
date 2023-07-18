@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getClassess, getEvents, getUsers } from '../../redux/actions';
 import CardClasses from "../../components/CardClasses/CardClasses";
 import { ToastContainer } from 'react-toastify';
+import Sidebar from "../../components/sidebarcoaches/sidebar2";
+
 
 const Classes = () => {
     const dispatch = useDispatch();
@@ -35,19 +37,11 @@ const Classes = () => {
 
     return (
         <div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <h1>Nuestras Clases</h1>
-            <br />
+          <div className=" p-7 text-2xl font-semibold flex-3 h-screen">
+                <h1>Nuestras Clases</h1>
+                <Sidebar/>  
             {sortedClasses?.map((clase, index) => {
-                if (clase.isActive === false) {
+              if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false REVISAR 
                 }
 
@@ -68,8 +62,10 @@ const Classes = () => {
                         handleUpdateClasses={handleUpdateClasses}
                     />
                 );
-            })}
-            <ToastContainer autoClose={2000} theme="dark" />
+                })}
+                <ToastContainer autoClose={2000} theme="dark" />
+            </div>
+            
         </div>
     )
 };

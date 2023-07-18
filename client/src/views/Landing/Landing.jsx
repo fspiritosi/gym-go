@@ -1,4 +1,5 @@
 import React from "react";
+import landing from '../../Assets/backgraund/fitnes.png'
 import backgroundImage from '../../Assets/backgraund/Fondo2.jpg';
 import home from '../../Assets/backgraund/home.png'
 import coaches  from '../../Assets/Cards/profesores.jpg'

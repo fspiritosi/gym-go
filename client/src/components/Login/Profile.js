@@ -18,15 +18,8 @@ const Profile = (props) => {
     <div className="relative">
       {isAuthenticated ? (
         <>
-          <button
-            onClick={toggleDropdown}
-            className="flex items-center space-x-2"
-          >
-            <img
-              className="w-8 h-8 rounded-full"
-              src={user.picture}
-              alt="user photo"
-            />
+          <button onClick={toggleDropdown} className="flex items-center space-x-2">
+            <img className="w-8 h-8 rounded-full" src={user.picture} alt='usuario' />         
           </button>
           {isOpen && (
             <div
@@ -74,5 +67,5 @@ const Profile = (props) => {
       )}
     </div>
   );
-};
+ };
 export default Profile;

@@ -21,9 +21,12 @@ const GoalFilterDropdown = () => {
     }
   };
 
+  
+  
+
   return (
-    <div className="bg-green.claro mb-2 w-auto mt-8 mx-auto md:w-2/3 py-3 px-2 rounded-lg">
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
+    <div>
+      <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-2 gap-4">
         <Select
           multi
           options={goals.map((goal) => ({ value: goal.name, label: goal.name }))}
@@ -34,7 +37,7 @@ const GoalFilterDropdown = () => {
           values={selectedGoals}
         />
         <button
-          className="bg-gray hover:bg-gray-light hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2"
           onClick={handleFilter}
         >
           Buscar

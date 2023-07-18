@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivities, getGoals, searchActivitieName } from '../../redux/actions';
 import CardActivities from '../CardActivities/CardActivities'
-import FilterandSort from '../FilterandSort/FilterandSort';
 import 'tailwindcss/tailwind.css';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import GoalFilterDropdown from '../FilterandSort/GoalFilterDropdown';
+import Sidebar from '../../components/FilterandSort/Siderbar';
+
 
 
 
@@ -38,6 +38,11 @@ const Activities = () => {
       />
     );
   }
+
+  const sliderContainerStyle = {
+    position: 'relative', // Agregar posición relativa al contenedor del Slider
+    zIndex: 0, // Asegurar que el Slider no tenga un valor de z-index mayor que otros elementos
+  };
   
   const settings = {
     dots: true,
@@ -88,17 +93,20 @@ const Activities = () => {
   return (
 
     <div className=" bg-gray-light w-full min-h-screen px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-       <FilterandSort/>
-       <GoalFilterDropdown/>
+       <Sidebar/>
         <div className=" pt-9 mx-8 lg:items-center">
           <div className=" pb-10">
             <h2 className=" font-semibold text-3xl sm:text-4xl">Encuentra tu pasión por el fitness en nuestras diversas actividades</h2>
           </div>
           
-          <div>
-            <Slider {...settings}              
+          <div style={sliderContainerStyle}>
+            <Slider {...settings}             
             >
-              {activities?.map((a, index) => (
+              {activities?.map((a, index) => {
+                if (a.isActive === false) {
+                  return null; // No muestra la activividad si se desactiva desde el dashboardadmin
+              }
+              return (
                 <CardActivities
                   key={index}
                   id={a.id}
@@ -107,7 +115,8 @@ const Activities = () => {
                   goals={a.Goals}
                   description={a.description}
                 />
-              ))}
+              );
+              })}
             </Slider>
           </div>
         </div>

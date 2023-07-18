@@ -19,6 +19,7 @@ export const FILTER_BY_DATE = "FILTER_BY_DATE";
 export const FILTER_BY_COACH_NAME = "FILTER_BY_COACH_NAME";
 export const GET_EVENTS = "GET_EVENTS";
 export const GET_USERS = "GET_USERS";
+export const GET_CLASS_NAME = "GET_CLASS_NAME";
 
 
 
@@ -196,3 +197,28 @@ export function filterByCoachName(payload) {
     payload,
   };
 }
+
+//Busqueda por nombre para Classes
+export function searchClassesByName(title) {
+  return async function (dispatch) {
+    try {
+      title = title.toLowerCase();
+      const infoClass = await axios.get(`/classes`);
+      const classes = infoClass.data.filter((classObj) => {
+        const activityTitle = classObj.Activity.title.toLowerCase();
+        return activityTitle.includes(title);
+      });
+      if (classes.length === 0) {
+        toast.error("Actividad no encontrada");
+      } else {
+        dispatch({
+          type: GET_CLASS_NAME,
+          payload: classes,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+

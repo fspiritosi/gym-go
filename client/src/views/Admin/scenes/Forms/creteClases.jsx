@@ -146,7 +146,7 @@ const ClassesForm = () => {
 
    
      return (
-       <Box marginTop="30px">
+       <Box marginTop="10px">
          <Header title="CREAR CLASE" subtitle="Crea una nueva Clase" />
          <Formik
            onSubmit={handleFormSubmit}
@@ -186,202 +186,205 @@ const ClassesForm = () => {
                  </Alert>
                )}
                <Box
-                 display="grid"
-                 gap="30px"
-                 gridTemplateColumns="repeat(3, minmax(0, 1fr))"
-                 sx={{
-                   "& > div": {
-                     gridColumn: isNonMobile ? undefined : "span 1",
-                   },
-                   margin: "50px",
-                 }}
+                 display="flex"
+                 flexDirection="column"
+                 alignItems="center"
                >
-                 <TextField
-                   label="Selecciona una Actividad"
-                   select
-                   value={values.ActivityId}
-                   onChange={handleChange}
-                   onBlur={selectActivitie}
-                   name="ActivityId"
-                   error={!!touched.ActivityId && !!errors.ActivityId}
-                   helperText={touched.ActivityId && errors.ActivityId}
-                   sx={{ gridColumn: "span 1" }}
-                   InputLabelProps={{
-                     shrink: true,
-                   }}
-                 >
-                   {activities?.map((act) => (
-                     <MenuItem key={act.id} value={act.id}>
-                       {act.title}
-                     </MenuItem>
-                   ))}
-                 </TextField>
-                 <TextField
-                   label="Selecciona una Profesor"
-                   select
-                   value={values.CoachId}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   name="CoachId"
-                   error={!!touched.CoachId && !!errors.CoachId}
-                   helperText={touched.CoachId && errors.CoachId}
-                   sx={{ gridColumn: "span 1" }}
-                   InputLabelProps={{
-                     shrink: true,
-                   }}
-                 >
-                   {selectActivity?.Coaches?.length ? (
-                     selectActivity.Coaches.map((coach) => (
-                       <MenuItem key={coach.id} value={coach.id}>
-                         {`${coach.firstName} ${coach.lastName}`}
-                       </MenuItem>
-                     ))
-                   ) : (
-                     <MenuItem disabled>No hay profesores</MenuItem>
-                   )}
-                 </TextField>
-                 <TextField
-                   label="Selecciona un frecuencia para la Clase"
-                   select
-                   value={values.recurringPattern}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   name="recurringPattern"
-                   error={
-                     !!touched.recurringPattern && !!errors.recurringPattern
-                   }
-                   helperText={
-                     touched.recurringPattern && errors.recurringPattern
-                   }
-                   sx={{ gridColumn: "span 1" }}
-                   InputLabelProps={{
-                     shrink: true,
-                   }}
-                 >
-                   <MenuItem value="">
-                     <em>None</em>
-                   </MenuItem>
-                   <MenuItem value={"does not repeat"}>Único</MenuItem>
-                   <MenuItem value={"weekly"}>Semanal</MenuItem>
-                 </TextField>
-                 <TextField
-                   label="Selecciona un dificultad para la Clase"
-                   select
-                   value={values.difficulty}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   name="difficulty"
-                   error={!!touched.difficulty && !!errors.difficulty}
-                   helperText={touched.difficulty && errors.difficulty}
-                   sx={{ gridColumn: "span 1" }}
-                   InputLabelProps={{
-                     shrink: true,
-                   }}
-                 >
-                   <MenuItem value="">
-                     <em>None</em>
-                   </MenuItem>
-                   <MenuItem value={"easy"}>Facil</MenuItem>
-                   <MenuItem value={"medium"}>Intermedia</MenuItem>
-                   <MenuItem value={"hard"}>Dificil</MenuItem>
-                 </TextField>
-                 <TextField
-                   label="Selecciona el cupo máximo de la clase"
-                   type="number"
-                   value={values.quota}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   name="quota"
-                   error={!!touched.quota && !!errors.quota}
-                   helperText={touched.quota && errors.quota}
-                   sx={{ gridColumn: "span 1" }}
-                   InputLabelProps={{
-                     shrink: true,
-                   }}
-                 />
-                 <TextField
-                   label="Fecha de inicio"
-                   type="date"
-                   value={values.startDate}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   name="startDate"
-                   error={!!touched.startDate && !!errors.startDate}
-                   helperText={touched.startDate && errors.startDate}
-                   sx={{ gridColumn: "span 1" }}
-                   InputLabelProps={{
-                     shrink: true,
-                   }}
-                 />
-                 {values.recurringPattern === "weekly" ? (
-                   <TextField
-                     label="Fecha de fin"
-                     type="date"
-                     value={values.endDate}
-                     onChange={handleChange}
-                     onBlur={handleBlur}
-                     name="endDate"
-                     error={!!touched.endDate && !!errors.endDate}
-                     helperText={touched.endDate && errors.endDate}
-                     sx={{ gridColumn: "span 1" }}
-                     InputLabelProps={{
-                       shrink: true,
-                     }}
-                   />
-                 ) : (
-                   <TextField
-                     disabled
-                     label="Fecha de fin"
-                     type="date"
-                     value={values.endDate}
-                     onChange={handleChange}
-                     onBlur={handleBlur}
-                     name="endDate"
-                     error={!!touched.endDate && !!errors.endDate}
-                     helperText={touched.endDate && errors.endDate}
-                     sx={{ gridColumn: "span 1" }}
-                     InputLabelProps={{
-                       shrink: true,
-                     }}
-                   />
-                 )}
-                 <TextField
-                   label="Selecciona Hora de Inicio"
-                   type="time"
-                   value={values.startTime}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   name="startTime"
-                   error={!!touched.startTime && !!errors.startTime}
-                   helperText={touched.startTime && errors.startTime}
-                   sx={{ gridColumn: "span 1" }}
-                   InputLabelProps={{
-                     shrink: true,
-                   }}
-                 ></TextField>
-                 <TextField
-                   label="Selecciona Hora de Fin"
-                   type="time"
-                   value={values.endTime}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   name="endTime"
-                   error={!!touched.endTime && !!errors.endTime}
-                   helperText={touched.endTime && errors.endTime}
-                   sx={{ gridColumn: "span 1" }}
-                   InputLabelProps={{
-                     shrink: true,
-                   }}
-                 ></TextField>
                  <Box
-                   display="flex"
-                   justifyContent="center"
-                   mt="20px"
-                   sx={{ gridColumn: "span 3" }}
+                   display="grid"
+                   gap="30px"
+                   gridTemplateColumns="repeat(2, minmax(0, 1fr))"
+                   sx={{
+                     "& > div": {
+                       gridColumn: isNonMobile ? undefined : "span 6",
+                     },
+                     margin: "50px",
+                   }}
                  >
-                   <Button type="submit" color="secondary" variant="contained">
-                     Crear Clase
-                   </Button>
+                   <TextField
+                     fullWidth
+                     label="Selecciona una Actividad"
+                     select
+                     value={values.ActivityId}
+                     onChange={handleChange}
+                     onBlur={selectActivitie}
+                     name="ActivityId"
+                     error={!!touched.ActivityId && !!errors.ActivityId}
+                     helperText={touched.ActivityId && errors.ActivityId}
+                     sx={{ gridColumn: "span 6", width: "600px" }}
+                   >
+                     {activities?.map((act) => (
+                       <MenuItem key={act.id} value={act.id}>
+                         {act.title}
+                       </MenuItem>
+                     ))}
+                   </TextField>
+                   <TextField
+                   fullWidth
+                     label="Selecciona una Profesor"
+                     select
+                     value={values.CoachId}
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     name="CoachId"
+                     error={!!touched.CoachId && !!errors.CoachId}
+                     helperText={touched.CoachId && errors.CoachId}
+                     sx={{ gridColumn: "span 6", width: "600px" }}
+
+                   >
+                     {selectActivity?.Coaches?.length ? (
+                       selectActivity.Coaches.map((coach) => (
+                         <MenuItem key={coach.id} value={coach.id}>
+                           {`${coach.firstName} ${coach.lastName}`}
+                         </MenuItem>
+                       ))
+                     ) : (
+                       <MenuItem disabled>No hay profesores</MenuItem>
+                     )}
+                   </TextField>
+                   <TextField
+                   fullWidth
+                     label="Selecciona un frecuencia para la Clase"
+                     select
+                     value={values.recurringPattern}
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     name="recurringPattern"
+                     error={
+                       !!touched.recurringPattern && !!errors.recurringPattern
+                     }
+                     helperText={
+                       touched.recurringPattern && errors.recurringPattern
+                     }
+                     sx={{ gridColumn: "span 6", width: "600px" }}
+
+                   >
+                     <MenuItem value="">
+                       <em>None</em>
+                     </MenuItem>
+                     <MenuItem value={"does not repeat"}>Único</MenuItem>
+                     <MenuItem value={"weekly"}>Semanal</MenuItem>
+                   </TextField>
+                   <TextField
+                   fullWidth
+                     label="Selecciona un dificultad para la Clase"
+                     select
+                     value={values.difficulty}
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     name="difficulty"
+                     error={!!touched.difficulty && !!errors.difficulty}
+                     helperText={touched.difficulty && errors.difficulty}
+                     sx={{ gridColumn: "span 6", width: "600px" }}
+
+                   >
+                     <MenuItem value="">
+                       <em>None</em>
+                     </MenuItem>
+                     <MenuItem value={"easy"}>Facil</MenuItem>
+                     <MenuItem value={"medium"}>Intermedia</MenuItem>
+                     <MenuItem value={"hard"}>Dificil</MenuItem>
+                   </TextField>
+                   <TextField
+                     label="Selecciona el cupo máximo de la clase"
+                     type="number"
+                     value={values.quota}
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     name="quota"
+                     error={!!touched.quota && !!errors.quota}
+                     helperText={touched.quota && errors.quota}
+                     sx={{ gridColumn: "span 6", width: "600px" }}
+                     
+                   />
+                   <TextField
+                     label="Fecha de inicio"
+                     type="date"
+                     value={values.startDate}
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     name="startDate"
+                     error={!!touched.startDate && !!errors.startDate}
+                     helperText={touched.startDate && errors.startDate}
+                     sx={{ gridColumn: "span 3", width: "250px" }}
+                     InputLabelProps={{
+                       shrink: true,
+                     }}
+                   />
+                   {values.recurringPattern === "weekly" ? (
+                     <TextField
+                       label="Fecha de fin"
+                       type="date"
+                       value={values.endDate}
+                       onChange={handleChange}
+                       onBlur={handleBlur}
+                       name="endDate"
+                       error={!!touched.endDate && !!errors.endDate}
+                       helperText={touched.endDate && errors.endDate}
+                       sx={{ gridColumn: "span 3", width: "250px" }}
+                       InputLabelProps={{
+                         shrink: true,
+                       }}
+                     />
+                   ) : (
+                     <TextField
+                       disabled
+                       label="Fecha de fin"
+                       type="date"
+                       value={values.endDate}
+                       onChange={handleChange}
+                       onBlur={handleBlur}
+                       name="endDate"
+                       error={!!touched.endDate && !!errors.endDate}
+                       helperText={touched.endDate && errors.endDate}
+                       sx={{ gridColumn: "span 3", width: "250px" }}
+                       InputLabelProps={{
+                         shrink: true,
+                       }}
+                     />
+                   )}
+                   <TextField
+                     label="Selecciona Hora de Inicio"
+                     type="time"
+                     value={values.startTime}
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     name="startTime"
+                     error={!!touched.startTime && !!errors.startTime}
+                     helperText={touched.startTime && errors.startTime}
+                     sx={{ gridColumn: "span 3", width: "250px" }}
+                     InputLabelProps={{
+                       shrink: true,
+                     }}
+                   ></TextField>
+                   <TextField
+                     label="Selecciona Hora de Fin"
+                     type="time"
+                     value={values.endTime}
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     name="endTime"
+                     error={!!touched.endTime && !!errors.endTime}
+                     helperText={touched.endTime && errors.endTime}
+                     sx={{ gridColumn: "span 3",width: "250px" }}
+                     InputLabelProps={{
+                       shrink: true,
+                     }}
+                   ></TextField>
+                   <Box
+                     display="flex"
+                     justifyContent="center"
+                     mt="20px"
+                     sx={{ gridColumn: "span 6" }}
+                   >
+                     <Button
+                       type="submit"
+                       color="secondary"
+                       variant="contained"
+                     >
+                       Crear Clase
+                     </Button>
+                   </Box>
                  </Box>
                </Box>
              </form>

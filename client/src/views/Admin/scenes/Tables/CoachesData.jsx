@@ -1,8 +1,7 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../../theme";
-
-
+import CoacheModal from "../Modals/coachModal";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -13,15 +12,43 @@ import EditIcon from "@mui/icons-material/Edit";
 import Header from "../../adminComponentes/Header";
 
 const Coaches = () => {
-    const [coaches, setCoaches] = useState([])
+  const [coaches, setCoaches] = useState([])
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState({});
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const changeIsActive = async (id, isActive) => {
-    console.log("desde la función", `is active es ${isActive}`);
-    await axios.put(`/coaches/${id}`, {isActive});
-   getCoaches()
+  
+
+  const handleOpenModal = (
+    id,
+    firstName,
+    lastName,
+    profilePicture,
+    titleActivities,
+    isActive,
+    description,
+    education,
+    workExperience, 
+  ) => {
+    setData({
+      id,
+      firstName,
+      lastName,
+      profilePicture,
+      titleActivities,
+      isActive,
+      description,
+      education,
+      workExperience,
+    
+    });
+    setOpen(true);
   };
 
+  const changeIsActive = async (id, isActive) => {
+    await axios.put(`/coaches/${id}`, { isActive });
+    getCoaches();
+  };
   const colums = [
     {
       field: "profilePicture",
@@ -132,15 +159,43 @@ const Coaches = () => {
       },
     },
     {
-      field: "edit",
       headerName: "Acciones",
-      headerAlign: "center",
-      align: "center",
-      renderCell: ({ row: { id } }) => {
+      renderCell: ({
+        row: {
+          id,
+          firstName,
+          lastName,
+          profilePicture,
+          Activities,
+          isActive,
+          description,
+          education,
+          workExperience,
+        },
+      }) => {
+        const titleActivities = Activities.map(act => act.title)
         return (
           <Box sx={{ cursor: "pointer" }}>
-            <EditIcon />
-            <Typography variant="h6">Editar</Typography>
+            <Button
+              variant="outline"
+              onClick={() =>
+                handleOpenModal(
+                  id,
+                  firstName,
+                  lastName,
+                  profilePicture,
+                  titleActivities,
+                  isActive,
+                  description,
+                  education,
+                  workExperience
+                )
+              }
+            >
+              <EditIcon />
+              <Typography variant="h6">Editar</Typography>
+              <CoacheModal open={open} setOpen={setOpen} data={data} />
+            </Button>
           </Box>
         );
       },

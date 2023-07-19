@@ -27,8 +27,8 @@ const userSchema = yup.object().shape({
   lastName: yup.string().required("El Apellido del profesor no puede estar Vacío"),
   profilePicture: yup.string().required("Debe seleccionar un imagen para el profesor"),
   description: yup.string().required("La descripción no puede ser un campo vacío"),
-  education: yup.string().required("La educación no puede ser un campo vacío"),
-  workExperience: yup.string().required("La experiencia no puede ser un campo vacío"),
+  // education: yup.string().required("La educación no puede ser un campo vacío"),
+  // workExperience: yup.string().required("La experiencia no puede ser un campo vacío"),
   activities: yup
     .array()
     .required("Requerido")
@@ -56,7 +56,7 @@ const CreateCoach= () => {
   };
 
   const handleFormSubmit = async (values, { resetForm }) => {
-   
+    console.log(values)
     await axios
       .post("/coaches", values)
       .then((response) => {

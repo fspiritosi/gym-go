@@ -40,8 +40,27 @@ const createClassHandler = async (req, res) => {
 const updateClassByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const { difficulty, startDate, startTime, duration, recurringPattern, quota } = req.body;
-    const updatedClass = await updateClassById(id, difficulty, startDate, startTime, duration, quota, recurringPattern);
+    const {
+      difficulty,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      quota,
+      recurringPattern,
+      isActive,
+    } = req.body;
+    const updatedClass = await updateClassById(
+      id,
+      difficulty,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      quota,
+      recurringPattern,
+      isActive
+    );
     res.status(200).json(updatedClass);
   } catch (error) {
     res.status(400).json({ error: error.message });

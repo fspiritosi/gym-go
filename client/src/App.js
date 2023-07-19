@@ -17,26 +17,26 @@ import ClassesForm from "./views/Admin/scenes/Forms/creteClases";
 import Classes from "./views/Classes/Classes";
 import ClassesAdm from "./views/Admin/scenes/Tables/ClassesData";
 import { AuthenticationGuard } from "./components/authentication-guard";
-
 import axios from "axios";
 import CreateGoals from "./views/Admin/scenes/Forms/createGoals";
 import GoalsData from "./views/Admin/scenes/Tables/GoalsData";
 import CreateCoach from "./views/Admin/scenes/Forms/createCoach";
 import CreateActivitie from "./views/Admin/scenes/Forms/createActivities";
-axios.defaults.baseURL = "http://localhost:3001";
-//axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
+import UserProfile from "./views/UserProfile/UserProfile";
+
+// axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 
 function App() {
   let location = useLocation();
 
   return (
     <div className="App">
-      {location.pathname === "/" ||
-      location.pathname.includes("/admin") ? undefined : (
+      {location.pathname.includes("/admin") ? undefined : (
         <Nav />
       )}
       <Routes>
-        <Route exact path="/" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/activities" element={<ActivitiesV />} />
         {/* este es un ejemplo de como proteger las rutas con el componente AutenticationGuard */}
         {/* <Route
@@ -47,6 +47,7 @@ function App() {
         <Route path="/coaches" element={<Profesores />} />
         <Route path="/prices" element={<PaquetesClases />} />
         <Route path="/classes" element={<Classes />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route
           path="/admin"
           element={<AuthenticationGuard component={Admin} />}
@@ -61,11 +62,10 @@ function App() {
           <Route path="coachesCreate" element={<CreateCoach />} />
           <Route path="classesCreate" element={<ClassesForm />} />
           <Route path="goalsCreate" element={<CreateGoals />} />
-          <Route path="activitiesCreate" element={<CreateActivitie/>} />
+          <Route path="activitiesCreate" element={<CreateActivitie />} />
         </Route>
       </Routes>
-      {location.pathname === "/" ||
-      location.pathname.includes("/admin") ? undefined : (
+      {location.pathname.includes("/admin") ? undefined : (
         <Footer />
       )}
     </div>

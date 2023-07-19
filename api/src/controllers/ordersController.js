@@ -29,6 +29,7 @@ const createOrder = async (preferenceId, checkout, item, operationType, userEmai
   user.purchases = [ ...user.purchases, {
     orderId: newOrder.id,
     item: item,
+    createdAt: newOrder.createdAt,
   }];
   switch (item.description) {
     case "1 clase":

@@ -16,7 +16,6 @@ const Landing = () => {
   return (
     <>
     <header >
-      <Nav />
       <div className="mx-auto sm:grid-cols-2 gap-4 grid-cols-1 text-gray-claro h-auto grid items-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className="sm:ml-20 text-gray-50 mt-24 text-center sm:text-left">
           <h1 className="text-4xl sm:text-5xl font-bold mb-5">
@@ -78,7 +77,6 @@ const Landing = () => {
       <p>No esperes más para formar parte de nuestra vibrante comunidad. El cambio que deseas comienza hoy mismo. ¡Únete a nuestro gimnasio y descubre el poder de una vida activa y saludable!</p>
     </div>
   </main>
-  <Footer/>
   </>
   );
 };

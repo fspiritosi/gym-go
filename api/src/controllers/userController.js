@@ -1,4 +1,4 @@
-const { users, Events } = require("../db");
+const { users, Events, Classes, Activities, Coaches } = require("../db");
 const { token } = require("../utils/jwt");
 const { registerEmail } = require("../utils/nodemailer");
 
@@ -38,7 +38,28 @@ const getAllUsers = async () => {
 };
 
 const getUserByEmail = async (email) => {
-  const user = await users.findOne({ where: { email: email } });
+  const user = await users.findOne({
+    where: { email: email },
+    include: {
+      model: Events,
+      attributes: ["id", "date", "startTime", "endTime"],
+      through: { attributes: [] },
+      include: {
+        model: Classes,
+        attributes: ["id", "difficulty"],
+        include: [
+          {
+            model: Activities,
+            attributes: ["id", "title"],
+          },
+          {
+            model: Coaches,
+            attributes: ["id", "firstName", "lastName"],
+          },
+        ],
+      },
+    },
+  });
   if (!user) throw new Error(`User with email ${email} not found`);
   return user;
 };
@@ -47,8 +68,22 @@ const getUserById = async (id) => {
   const user = await users.findByPk(id, {
     include: {
       model: Events,
-      attributes: ["id", "date", "startTime", "endTime", "ClassId"],
+      attributes: ["id", "date", "startTime", "endTime"],
       through: { attributes: [] },
+      include: {
+        model: Classes,
+        attributes: ["id", "difficulty"],
+        include: [
+          {
+            model: Activities,
+            attributes: ["id", "title"],
+          },
+          {
+            model: Coaches,
+            attributes: ["id", "firstName", "lastName"],
+          },
+        ],
+      },
     },
   });
   if (!user) throw new Error(`User with id ${id} not found`);

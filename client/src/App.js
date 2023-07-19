@@ -24,8 +24,8 @@ import CreateCoach from "./views/Admin/scenes/Forms/createCoach";
 import CreateActivitie from "./views/Admin/scenes/Forms/createActivities";
 import UserProfile from "./views/UserProfile/UserProfile";
 
-axios.defaults.baseURL = "http://localhost:3001";
-// axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
+// axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 
 function App() {
   let location = useLocation();

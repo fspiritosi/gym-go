@@ -13,14 +13,10 @@ import SearchBarClasses from "./searchbarclasses";
 
 import { filterByDifficulty, filterByTitle, filterByStartTime, filterByDate, filterByCoachName, clearFilters } from "../../redux/actions"
 
-
-
 const Sidebar = () => {
   const dispatch = useDispatch();
   const classe = useSelector((state) => state.classes)
   const allClasse = useSelector((state) => state.allClasses)
-
- 
 
   const [open, setOpen] = useState(true);
   const [selectedClasse, setSelectedClasse] = useState([]);
@@ -28,7 +24,6 @@ const Sidebar = () => {
   const [selectedStartTime, setSelectedStartTime] = useState([]);
   const [selectedStartDate, setSelectedStartDate] = useState([]);
   const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
-
 
   const handleFilterTitle = () => {
     const selectedClassesNames = selectedClasse.map((c) => c.value);
@@ -55,14 +50,13 @@ const Sidebar = () => {
     }
   };
 
-
   const handleStartTimeFilter = () => {
-    const selectedClasseStartTime = selectedStartTime.map((c)=> c.value);
+    const selectedClasseStartTime = selectedStartTime.map((c) => c.value);
     console.log('Horarios de inicio seleccionados:', selectedClasseStartTime);
 
-    if(selectedClasseStartTime.length > 0){
-    dispatch(filterByStartTime(selectedClasseStartTime))
-    }else{
+    if (selectedClasseStartTime.length > 0) {
+      dispatch(filterByStartTime(selectedClasseStartTime))
+    } else {
       console.log('No se seleccionaron horarios válidos')
     }
   }
@@ -70,23 +64,22 @@ const Sidebar = () => {
     setSelectedDifficulty(e.target.checked ? e.target.value.toString() : null);
     dispatch(filterByDifficulty(e.target.checked ? e.target.value.toString() : null));
   };
-  
+
   const handleClearFilters = () => {
     dispatch(clearFilters());
   };
-  
+
 
   const handleDateFilter = (date) => {
-    const selectedClasseStartDate = selectedStartDate.map((c)=> c.value);
+    const selectedClasseStartDate = selectedStartDate.map((c) => c.value);
     console.log('Fechas de inicio seleccionados:', selectedClasseStartDate);
 
-    if(selectedClasseStartDate.length > 0){
-    dispatch(filterByDate(selectedClasseStartDate))
-    }else{
+    if (selectedClasseStartDate.length > 0) {
+      dispatch(filterByDate(selectedClasseStartDate))
+    } else {
       console.log('No se seleccionaron fechas válidas')
     }
   };
-
 
   return (
     <div className="flex-1">
@@ -99,10 +92,12 @@ const Sidebar = () => {
             className={`cursor-pointer rounded-full duration-500 ${open && "rotate-[360dg]"}`}
             alt='' />
           <h1 className={` text-white origin-left font-medium text-x1 duration-200 ${!open && "scale-0"}`}>Filtros</h1>
+          {/* Limpiar filtros */}
         </div>
-
-        
-
+          <div className={`${!open && "scale-0"} w-60 h-11 relative`}>
+            <button className="bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2"
+              onClick={handleClearFilters}>Limpiar Filtros</button>
+          </div>
 
         <div className={`${!open && "scale-0"} w-60 h-11 relative`} >
           <SearchBarClasses />
@@ -114,10 +109,10 @@ const Sidebar = () => {
             <img src={Actividad} className={`w-12 rounded-full duration-500 `} alt="" />
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
-                 origin-left duration-200`}
+              origin-left duration-200`}
               multi
               options={allClasse.map((classItem) => ({ value: classItem.Activity.title, label: classItem.Activity.title }))}
-            
+
               onChange={(values) => {
                 console.log('Valores seleccionados:', values);
                 setSelectedClasse(values);
@@ -134,7 +129,7 @@ const Sidebar = () => {
             <img src={Profesor} className={`w-12  rounded-full duration-500 `} alt="" />
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
-                 origin-left duration-200`}
+              origin-left duration-200`}
               multi
               options={allClasse.map((classItem) => ({
                 value: classItem.Coach.firstName + " " + classItem.Coach.lastName,
@@ -156,12 +151,12 @@ const Sidebar = () => {
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
                  origin-left duration-200`}
-                multi options={classe.map((classItem) => ({ value: classItem.startDate, label: classItem.startDate }))}
-                onChange={(values) => {
-                  console.log('Valores seleccionados:', values);
-                  setSelectedStartDate(values);
-                }}
-                values={selectedStartDate}
+              multi options={allClasse.map((classItem) => ({ value: classItem.startDate, label: classItem.startDate }))}
+              onChange={(values) => {
+                console.log('Valores seleccionados:', values);
+                setSelectedStartDate(values);
+              }}
+              values={selectedStartDate}
             />
             <button
               className={`bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2 ${!open && "scale-0"}`}
@@ -173,18 +168,18 @@ const Sidebar = () => {
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"
                 } origin-left duration-200`}
-                multi options={classe.map((classItem) => ({ value: classItem.startTime, label: classItem.startTime }))}
-                onChange={(values) => {
-                  console.log('Valores seleccionados:', values);
-                  setSelectedStartTime(values);
-                }}
-                values={selectedStartTime}
+              multi options={allClasse.map((classItem) => ({ value: classItem.startTime, label: classItem.startTime }))}
+              onChange={(values) => {
+                console.log('Valores seleccionados:', values);
+                setSelectedStartTime(values);
+              }}
+              values={selectedStartTime}
             />
             <button
               className={`bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2 ${!open && "scale-0"}`}
               onClick={handleStartTimeFilter}>Buscar</button>
           </div>
-          
+
           {/* Filtra por Dificultad */}
           <div className={`${!open && "scale-0"} w-70 duration-200 p-10 pt-10 text-black relative`}>
             <label htmlFor="difficulty">Selecciona la Dificultad</label>
@@ -193,8 +188,8 @@ const Sidebar = () => {
               id="difficulty"
               min="1"
               max="3"
-            value={selectedDifficulty}
-            onChange={handleDifficultyChange}
+              value={selectedDifficulty}
+              onChange={handleDifficultyChange}
             />
             <div className="w-24 h-8 absolute text-center text-black text-m font-normal">
               <span>Fácil</span>
@@ -202,14 +197,10 @@ const Sidebar = () => {
               <span>Avanzado</span>
             </div>
           </div>
-      </div >
+        </div >
 
-      {/* Limpiar filtros */}
-      <div className={`${!open && "scale-0"} w-70 duration-200 p-10 pt-10 text-black relative`}>
-      <button className="bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2"
-        onClick={handleClearFilters}>Limpiar Filtros</button>
+
       </div>
-        </div>
     </div>
   )
 }

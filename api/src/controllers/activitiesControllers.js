@@ -113,7 +113,7 @@ const updateActivity = async (
   goals,
   isActive
 ) => {
-  const activity = await Activities.findByPk(id, {
+  let activity = await Activities.findByPk(id, {
     include: [
       {
         model: Goals,
@@ -122,7 +122,32 @@ const updateActivity = async (
       },
     ],
   });
-  await activity.update({ title, description, image, goals, isActive });
+  if (!activity) throw new Error(`Activity with id ${id} not found`);
+  if (goals) {
+    for (const goal of activity.Goals) {
+      const goalToRemove = await Goals.findByPk(goal.id);
+      await activity.removeGoals(goalToRemove);
+    }
+    for (const goalStr of goals) {
+      const goalToAdd = await Goals.findAll({
+        where: {
+          name: goalStr,
+        },
+      });
+      await activity.addGoals(goalToAdd);
+    }
+  }
+  await activity.update({ title, description, image, isActive });
+  // traigo de nuevo la instancia porque no se actualizan las goals en el response de la request
+  activity = await Activities.findByPk(id, {
+    include: [
+      {
+        model: Goals,
+        attributes: ["id", "name", "description"],
+        through: { attributes: [] },
+      },
+    ],
+  });
   return activity;
 };
 

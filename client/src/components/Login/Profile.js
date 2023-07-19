@@ -1,29 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
+import { getUserLogged } from "../../redux/actions";
 import { FaUserCircle } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, isAuthenticated, isLoading, logout, loginWithRedirect } =
-    useAuth0();
-  const userInDBRef = useRef(false);
+  const { user, isAuthenticated, isLoading, logout, loginWithRedirect } = useAuth0();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userInDBRef) return;
-    const createUserInDB = async (username, email) => {
-      await axios
-        .post("/users/register", {
-          username: username,
-          email: email,
-        })
-        .then((res) => { console.log("Usuario creado", res) })
-        .catch((err) => { console.log("Usuario ya existe", err)});
-    };
-    createUserInDB(user.nickname, user.email);
-    userInDBRef.current = true;
-  }, [user]);
+    dispatch(getUserLogged(user.email, user.nickname));
+  }, [dispatch]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

@@ -15,7 +15,7 @@ const Classes = () => {
 
     useEffect(() => {
         dispatch(getClassess());
-        dispatch(getUsers());
+        // dispatch(getUsers()); // Juan Cruz: ¿por qué se hace un dispatch de todos los usuarios acá? Lo comenté porque se cambió esa action en redux para que solo traiga el usuario logeado
         dispatch(getEvents());
     }, [dispatch, updateClasses]);
 

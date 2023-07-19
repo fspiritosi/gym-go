@@ -1,9 +1,23 @@
-
-
-
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES, PUT_EVENTS, FILTER_BY_TITLE, FILTER_BY_START_TIME, FILTER_BY_DATE, FILTER_BY_COACH_NAME, GET_EVENTS, GET_USERS, GET_CLASS_NAME, CLEAR_FILTERS } from "./actions";
-
-
+import {
+  GET_ACTIVITIES,
+  GET_ACTIVITIE_NAME,
+  GET_DETAILS_ID,
+  ORDER_BY_NAME,
+  FILTER_BY_DIFFICULTY,
+  GET_GOALS,
+  FILTER_BY_GOALS,
+  GET_COACHES,
+  GET_CLASSES,
+  PUT_EVENTS,
+  FILTER_BY_TITLE,
+  FILTER_BY_START_TIME,
+  FILTER_BY_DATE,
+  FILTER_BY_COACH_NAME,
+  GET_EVENTS,
+  GET_USERLOGGED,
+  GET_CLASS_NAME,
+  CLEAR_FILTERS,
+} from "./actions";
 
 const initialState = {
   activities: [],
@@ -14,12 +28,11 @@ const initialState = {
   classes: [],
   allClasses: [],
   events: [],
-  users: []
-}
+  userLogged: [],
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case GET_ACTIVITIES:
       return {
         ...state,
@@ -49,20 +62,20 @@ const rootReducer = (state = initialState, action) => {
     // Filtro por dificultad
     case FILTER_BY_DIFFICULTY:
       const { allClasses: allDifficultyClasses } = state;
-      const selectedDiff = action.payload;
-      if (selectedDiff === "") {
-        return {
-          ...state,
-          classes: allDifficultyClasses,
-        };
+      const selectedDifficulty = action.payload;
+      let diffFiltered = [];
+
+      if (selectedDifficulty.length === 0) {
+        diffFiltered = allDifficultyClasses; 
+      } else {
+        diffFiltered = allDifficultyClasses.filter((el) =>
+          selectedDifficulty.includes(el.difficulty)
+        );
       }
-      const difficultyFiltered = allDifficultyClasses.filter((classItem) =>
-      selectedDiff.includes(classItem.difficulty)
-      );
-      console.log('Estado filtrado:', difficultyFiltered);
+
       return {
         ...state,
-        classes: difficultyFiltered,
+        classes: diffFiltered,
       };
 
     case GET_DETAILS_ID:
@@ -91,19 +104,17 @@ const rootReducer = (state = initialState, action) => {
       const goalFiltered = allActivitiesGoals.filter((el) =>
         el.Goals.some((goal) => selectedGoals.includes(goal))
       );
-      console.log('Estado filtrado:', goalFiltered);
+      console.log("Estado filtrado:", goalFiltered);
       return {
         ...state,
         activities: goalFiltered,
       };
-
 
     case GET_COACHES:
       return {
         ...state,
         coaches: action.payload,
       };
-
 
     case GET_CLASSES:
       return {
@@ -124,13 +135,13 @@ const rootReducer = (state = initialState, action) => {
         events: action.payload,
       };
 
-    case GET_USERS:
+    case GET_USERLOGGED:
       return {
         ...state,
-        users: action.payload,
+        userLogged: action.payload,
       };
 
-    // Se adapto a la data que se recibe de classes 
+    // Se adapto a la data que se recibe de classes
     case FILTER_BY_TITLE:
       const { allClasses: allClassesTitle } = state;
       const selectedClassesNames = action.payload;
@@ -144,12 +155,11 @@ const rootReducer = (state = initialState, action) => {
       const classesFiltered = allClassesTitle.filter((classItem) =>
         selectedClassesNames.includes(classItem.Activity.title)
       );
-      console.log('Estado filtrado:', classesFiltered);
+      console.log("Estado filtrado:", classesFiltered);
       return {
         ...state,
         classes: classesFiltered,
       };
-
 
     case FILTER_BY_START_TIME:
       const { allClasses: allClassesStartTime } = state;
@@ -164,7 +174,7 @@ const rootReducer = (state = initialState, action) => {
       const startTimeFiltered = allClassesStartTime.filter((classItem) =>
         startTimeToFilter.includes(classItem.startTime)
       );
-      console.log('Estado filtrado:', startTimeFiltered);
+      console.log("Estado filtrado:", startTimeFiltered);
       return {
         ...state,
         classes: startTimeFiltered,
@@ -183,13 +193,13 @@ const rootReducer = (state = initialState, action) => {
       const startDateFiltered = allClassesStartDate.filter((classItem) =>
         startDateToFilter.includes(classItem.startDate)
       );
-      console.log('Estado filtrado:', startDateFiltered);
+      console.log("Estado filtrado:", startDateFiltered);
       return {
         ...state,
         classes: startDateFiltered,
       };
 
-    // Filtrar por name de profesor 
+    // Filtrar por name de profesor ?
     case FILTER_BY_COACH_NAME:
       const { allClasses: allClassesCoaches } = state;
       const selectedCoachNames = action.payload;
@@ -201,9 +211,11 @@ const rootReducer = (state = initialState, action) => {
         };
       }
       const coachFiltered = allClassesCoaches.filter((classItem) =>
-        selectedCoachNames.includes(`${classItem.Coach.firstName} ${classItem.Coach.lastName}`)
-      )
-      console.log('Estado filtrado:', coachFiltered);
+        selectedCoachNames.includes(
+          `${classItem.Coach.firstName} ${classItem.Coach.lastName}`
+        )
+      );
+      console.log("Estado filtrado:", coachFiltered);
       return {
         ...state,
         classes: coachFiltered,
@@ -220,7 +232,7 @@ const rootReducer = (state = initialState, action) => {
     case CLEAR_FILTERS:
       return {
         ...state,
-        classes: state.allClasses
+        classes: state.allClasses,
       };
 
     default:
@@ -228,7 +240,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-
-
 export default rootReducer;
-

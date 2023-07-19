@@ -15,10 +15,12 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
-    const userId = '455f1467-b3b5-494d-b975-3a6c45bcfc8a'; // Ejemplo de userID
+    // const userId = '455f1467-b3b5-494d-b975-3a6c45bcfc8a'; // Ejemplo de userID
 
-    const user = useSelector((state) => state.users);
-    const userm = user.flatMap((u) => u);
+    const user = useSelector((state) => state.userLogged);
+    const userm = user.flatMap((u) => u.id);
+    const userId = userm.id;
+    console.log(user);
 
     const handleReserva = (eventId, index) => {
         if (isAuthenticated) {

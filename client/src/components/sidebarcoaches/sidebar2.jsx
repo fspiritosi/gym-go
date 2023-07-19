@@ -15,7 +15,6 @@ import { filterByDifficulty, filterByTitle, filterByStartTime, filterByDate, fil
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const classe = useSelector((state) => state.classes)
   const allClasse = useSelector((state) => state.allClasses)
 
   const [open, setOpen] = useState(true);
@@ -23,11 +22,12 @@ const Sidebar = () => {
   const [selectedCoach, setSelectedCoach] = useState([]);
   const [selectedStartTime, setSelectedStartTime] = useState([]);
   const [selectedStartDate, setSelectedStartDate] = useState([]);
-  const [selectedDifficulty, setSelectedDifficulty] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
+  const [selectedDifficulty, setSelectedDifficulty] = useState([]);
+
+  useEffect(() => {
+    dispatch(filterByDifficulty(selectedDifficulty));
+  }, [dispatch, selectedDifficulty]);
+
 
   const handleFilterTitle = () => {
     const selectedClassesNames = selectedClasse.map((c) => c.value);
@@ -67,16 +67,14 @@ const Sidebar = () => {
 
   const handleDifficultyFilterChange = (event) => {
     const { name, checked } = event.target;
-    setSelectedDifficulty((prevFilter) => ({
-      ...prevFilter,
-      [name]: checked,
-    }));
-
-    // Dispatch de la acción aquí
-    dispatch(filterByDifficulty(selectedDifficulty));
-  };
-
-
+    if (checked) {
+      setSelectedDifficulty((prevFilter) => [...prevFilter, name]);
+    } 
+    else {
+      setSelectedDifficulty((prevFilter) => prevFilter.filter((diff) => diff !== name));
+    }
+  }; 
+  
   const handleClearFilters = () => {
     dispatch(clearFilters());
   };

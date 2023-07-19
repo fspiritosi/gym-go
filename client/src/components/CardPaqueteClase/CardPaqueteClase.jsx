@@ -53,7 +53,7 @@ const CardPaquete = ({ title, clases, price, comprar, description }) => {
 
                    <button onClick={handleBuy} class=" text-sm w-40 text-white bg-green-neon hover:bg-green focus:ring-4 focus:ring-green-neon font-medium rounded-lg text-s px-5 py-2.5 text-center" type="button" data-modal-toggle="authentication-modal">
                         Elegir
-                    </button>{showMercadoPago && <MercadoPago orderData={orderData} />}
+                    </button>
                     {showMercadoPago && <MercadoPago orderData={orderData} />}
                     
                     <div class="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center">

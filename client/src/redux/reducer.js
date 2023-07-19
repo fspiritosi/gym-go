@@ -62,17 +62,17 @@ const rootReducer = (state = initialState, action) => {
     // Filtro por dificultad
     case FILTER_BY_DIFFICULTY:
       const { allClasses: allDifficultyClasses } = state;
-      const diffToFilter = action.payload;
+      const selectedDifficulty = action.payload;
       let diffFiltered = [];
 
-      if (diffToFilter !== "difficulty") {
-        diffFiltered = allDifficultyClasses.filter(
-          (el) => el.difficulty === diffToFilter
+      if (selectedDifficulty.length === 0) {
+        diffFiltered = allDifficultyClasses; 
+      } else {
+        diffFiltered = allDifficultyClasses.filter((el) =>
+          selectedDifficulty.includes(el.difficulty)
         );
-        if (diffFiltered.length === 0) {
-          diffFiltered = allDifficultyClasses;
-        }
       }
+
       return {
         ...state,
         classes: diffFiltered,

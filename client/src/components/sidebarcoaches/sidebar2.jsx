@@ -23,7 +23,11 @@ const Sidebar = () => {
   const [selectedCoach, setSelectedCoach] = useState([]);
   const [selectedStartTime, setSelectedStartTime] = useState([]);
   const [selectedStartDate, setSelectedStartDate] = useState([]);
-  const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
+  const [selectedDifficulty, setSelectedDifficulty] = useState({
+    easy: false,
+    medium: false,
+    hard: false,
+  });
 
   const handleFilterTitle = () => {
     const selectedClassesNames = selectedClasse.map((c) => c.value);
@@ -33,7 +37,7 @@ const Sidebar = () => {
     if (selectedClassesNames.length > 0) {
       dispatch(filterByTitle(selectedClassesNames));
     } else {
-      console.log('No se seleccionaron objetivos válidos.');
+      console.log('No se seleccionaron actividades válidas.');
     }
   };
 
@@ -60,15 +64,22 @@ const Sidebar = () => {
       console.log('No se seleccionaron horarios válidos')
     }
   }
-  const handleDifficultyChange = (e) => {
-    setSelectedDifficulty(e.target.checked ? e.target.value.toString() : null);
-    dispatch(filterByDifficulty(e.target.checked ? e.target.value.toString() : null));
+
+  const handleDifficultyFilterChange = (event) => {
+    const { name, checked } = event.target;
+    setSelectedDifficulty((prevFilter) => ({
+      ...prevFilter,
+      [name]: checked,
+    }));
+
+    // Dispatch de la acción aquí
+    dispatch(filterByDifficulty(selectedDifficulty));
   };
+
 
   const handleClearFilters = () => {
     dispatch(clearFilters());
   };
-
 
   const handleDateFilter = (date) => {
     const selectedClasseStartDate = selectedStartDate.map((c) => c.value);
@@ -94,10 +105,10 @@ const Sidebar = () => {
           <h1 className={` text-white origin-left font-medium text-x1 duration-200 ${!open && "scale-0"}`}>Filtros</h1>
           {/* Limpiar filtros */}
         </div>
-          <div className={`${!open && "scale-0"} w-60 h-11 relative`}>
-            <button className="bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2"
-              onClick={handleClearFilters}>Limpiar Filtros</button>
-          </div>
+        <div className={`${!open && "scale-0"} w-60 h-11 relative`}>
+          <button className="bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2"
+            onClick={handleClearFilters}>Limpiar Filtros</button>
+        </div>
 
         <div className={`${!open && "scale-0"} w-60 h-11 relative`} >
           <SearchBarClasses />
@@ -150,7 +161,7 @@ const Sidebar = () => {
             <img src={Calendario} className={`w-12 rounded-full duration-500 `} alt="" />
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
-                 origin-left duration-200`}
+                origin-left duration-200`}
               multi options={allClasse.map((classItem) => ({ value: classItem.startDate, label: classItem.startDate }))}
               onChange={(values) => {
                 console.log('Valores seleccionados:', values);
@@ -181,25 +192,31 @@ const Sidebar = () => {
           </div>
 
           {/* Filtra por Dificultad */}
-          <div className={`${!open && "scale-0"} w-70 duration-200 p-10 pt-10 text-black relative`}>
+          <div className={`${!open && "scale-0"} w-70 duration-200 p-10 pt-5 text-black relative`}>
             <label htmlFor="difficulty">Selecciona la Dificultad</label>
-            <input
-              type="range"
-              id="difficulty"
-              min="1"
-              max="3"
-              value={selectedDifficulty}
-              onChange={handleDifficultyChange}
-            />
-            <div className="w-24 h-8 absolute text-center text-black text-m font-normal">
-              <span>Fácil</span>
-              <span>Intermedio</span>
-              <span>Avanzado</span>
-            </div>
+            <label>Fácil
+              <input
+                type="checkbox"
+                name="easy"
+                checked={selectedDifficulty.easy}
+                onChange={handleDifficultyFilterChange}
+              /></label>
+            <label> Intermedio
+              <input
+                type="checkbox"
+                name="medium"
+                checked={selectedDifficulty.medium}
+                onChange={handleDifficultyFilterChange}
+              /></label>
+            <label> Avanzado
+              <input
+                type="checkbox"
+                name="hard"
+                checked={selectedDifficulty.hard}
+                onChange={handleDifficultyFilterChange}
+              /></label>
           </div>
         </div >
-
-
       </div>
     </div>
   )

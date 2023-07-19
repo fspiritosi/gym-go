@@ -23,8 +23,8 @@ import CreateGoals from "./views/Admin/scenes/Forms/createGoals";
 import GoalsData from "./views/Admin/scenes/Tables/GoalsData";
 import CreateCoach from "./views/Admin/scenes/Forms/createCoach";
 import CreateActivitie from "./views/Admin/scenes/Forms/createActivities";
-axios.defaults.baseURL = "http://localhost:3001";
-// axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
+//axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
 
 function App() {
   let location = useLocation();

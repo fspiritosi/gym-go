@@ -206,7 +206,7 @@ const CreateActivitie = () => {
                   variant="filled"
                   sx={{ gridColumn: "span 12" }}
                 >
-                  <InputLabel>Actividades</InputLabel>
+                  <InputLabel>Objetivos</InputLabel>
                   <Field
                     label="Objetivos"
                     as={Select}

@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { Box, Button, TextField, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -10,55 +18,40 @@ import axios from "axios";
 
 
 
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  profilePicture: "",
-  description: "",
-  education: "",
-  workExperience: "",
-  activities: [],
-};
-
-
-
-const userSchema = yup.object().shape({
-  firstName: yup.string().required("El Nombre del profesor no puede estar Vacío"),
-  lastName: yup.string().required("El Apellido del profesor no puede estar Vacío"),
-  profilePicture: yup.string().required("Debe seleccionar un imagen para el profesor"),
-  description: yup.string().required("La descripción no puede ser un campo vacío"),
-  // education: yup.string().required("La educación no puede ser un campo vacío"),
-  // workExperience: yup.string().required("La experiencia no puede ser un campo vacío"),
-  activities: yup
-    .array()
-    .required("Requerido")
-    .min(1, "Debe seleccionar al menos una actividad"),
-});
-
-const CreateCoach= () => {
+const EditActivitie = (props) => {
   const [response, setResponse] = useState("");
-  const [activitiesBack, setActivitiesBack] = useState([]);
+  const [goalsBack, setGoalsBack] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  
 
-  const handleReset = (values) => {
-    values = {
-      firstName: "",
-      lastName: "",
-      profilePicture: "",
-      description: "",
-      education: "",
-      workExperience: "",
-      activities: [],
-    };
-    return values;
+  const initialValues = {
+    id: props.data.id,
+    title: props.data.title,
+    description: props.data.description,
+    image: props.data.image,
+    goals: props.data.Goals,
+    isActive: props.data.isActive
   };
 
-  const handleFormSubmit = async (values, { resetForm }) => {
-   
+  
+
+  const userSchema = yup.object().shape({
+    title: yup
+      .string()
+      .required("El Titulo de la actividad no puede estar Vacío"),
+    description: yup.string().required("El Descripción no puede estar Vacío"),
+    image: yup
+      .array(),
+    goals: yup
+      .array()
+      .required("Requerido")
+      .min(1, "Debe seleccionar al menos un Objetivo"),
+  });
+
+
+  const handleFormSubmit = async (values) => {
     await axios
-      .post("/coaches", values)
+      .put(`/activities/${values.id}`, {title: values.title, description: values.description, goals: values.goals, image: values.image, isActive: values.isActive})
       .then((response) => {
         setResponse(response.statusText);
       })
@@ -70,70 +63,51 @@ const CreateCoach= () => {
         } else {
           setResponse(error.message);
         }
-      }
-      );
-     
-    resetForm({
-      values: {
-        firstName: "",
-        lastName: "",
-        profilePicture: "",
-        description: "",
-        education: "",
-        workExperience: "",
-        activities: [],
-      },
-    });
+      });
   };
 
   const handleImageUpload = async (e, setFieldValue) => {
     const file = e.target.files[0];
-
+    const imgArr = [];
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "gym-go"); 
+    formData.append("upload_preset", "gym-go");
     try {
       const response = await axios.post(
         "https://api.cloudinary.com/v1_1/gym-go/image/upload",
         formData
       );
       const imageURL = response.data.secure_url;
+      const dataField = imgArr.push(imageURL);
       setSelectedImage(imageURL);
-      setFieldValue("profilePicture", imageURL); // Actualiza el valor de profilePicture en Formik
+      setFieldValue("image", imgArr); // Actualiza el valor de image en Formik
     } catch (error) {
       console.error("Error al cargar la imagen en Cloudinary:", error);
     }
   };
 
-  
-  
-
-
   useEffect(() => {
-    const getActivities = async () => {
+    const getGoals = async () => {
       try {
-        const response = await axios.get("/activities");
-        const activitiesData = response.data;
-        const activeActivities = activitiesData?.filter(
-          (activity) => activity.isActive === true
-        );
-        setActivitiesBack(activeActivities);
+        const response = await axios.get("/goals");
+        const goalsData = response.data;
+        const activeGoals = goalsData?.filter((goal) => goal.isActive === true);
+        setGoalsBack(activeGoals);
       } catch (error) {
         console.error("Error al obtener las actividades:", error);
       }
     };
 
-    getActivities();
+    getGoals();
   }, [selectedImage]);
 
   return (
     <Box m="20px">
-      <Header title="CREAR PROFESOR" subtitle="Crea un nuevo Profesor" />
+      <Header title="EDITAR ACTIVIDAD" />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={userSchema}
-        onReset={handleReset}
       >
         {({
           values,
@@ -146,7 +120,7 @@ const CreateCoach= () => {
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit} onReset={handleReset}>
-            {!response ? undefined : response === "Created" ? (
+            {!response ? undefined : response === "Created" || "OK" ? (
               <Alert
                 variant="filled"
                 icon={<ThumbUpOffAltIcon fontSize="inherit" />}
@@ -154,7 +128,7 @@ const CreateCoach= () => {
                   setResponse("");
                 }}
               >
-                Profesor creado de manera exitosa!
+                Actividad editada de manera exitosa!
               </Alert>
             ) : (
               <Alert
@@ -164,7 +138,7 @@ const CreateCoach= () => {
                   setResponse("");
                 }}
               >
-                Hubo un error al crear el profesor
+                Hubo un error al editar la Actividad
               </Alert>
             )}
 
@@ -186,28 +160,13 @@ const CreateCoach= () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Nombre"
+                  label="Titulo"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.name}
-                  name="firstName"
-                  error={!!touched.firstName && !!errors.firstName}
-                  helperText={touched.firstName && errors.firstName}
-                  sx={{ gridColumn: "span 12" }}
-                />
-                <TextField
-                  id="outlined-multiline-static"
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Apellido"
-                  maxRows={4}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.lastName}
-                  name="lastName"
-                  error={!!touched.lastName && !!errors.lastName}
-                  helperText={touched.lastName && errors.lastName}
+                  value={values.title}
+                  name="title"
+                  error={!!touched.title && !!errors.title}
+                  helperText={touched.title && errors.title}
                   sx={{ gridColumn: "span 12" }}
                 />
                 <TextField
@@ -225,57 +184,27 @@ const CreateCoach= () => {
                   helperText={touched.description && errors.description}
                   sx={{ gridColumn: "span 12" }}
                 />
-                <TextField
-                  id="outlined-multiline-static"
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Eduación"
-                  maxRows={4}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.education}
-                  name="education"
-                  error={!!touched.education && !!errors.education}
-                  helperText={touched.education && errors.education}
-                  sx={{ gridColumn: "span 12" }}
-                />
-                <TextField
-                  id="outlined-multiline-static"
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Experiencia Previa"
-                  maxRows={4}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.workExperience}
-                  name="workExperience"
-                  error={!!touched.workExperience && !!errors.workExperience}
-                  helperText={touched.workExperience && errors.workExperience}
-                  sx={{ gridColumn: "span 12" }}
-                />
                 <FormControl
                   fullWidth
                   variant="filled"
                   sx={{ gridColumn: "span 12" }}
                 >
-                  <InputLabel>Actividades</InputLabel>
+                  <InputLabel>Objetivos</InputLabel>
                   <Field
-                    label="Actividades"
+                    label="Objetivos"
                     as={Select}
                     multiple
-                    name="activities"
-                    labelId="activities-label"
-                    id="activities"
-                    value={values.activities}
+                    name="goals"
+                    labelId="goals-label"
+                    id="goals"
+                    value={values.goals}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={!!touched.activities && !!errors.activities}
+                    error={!!touched.goals && !!errors.goals}
                   >
-                    {activitiesBack.map((activity) => (
-                      <MenuItem key={activity.id} value={activity.title}>
-                        {activity.title}
+                    {goalsBack.map((goal) => (
+                      <MenuItem key={goal.id} value={goal.name}>
+                        {goal.name}
                       </MenuItem>
                     ))}
                   </Field>
@@ -304,7 +233,6 @@ const CreateCoach= () => {
                       style={{
                         maxWidth: "150px",
                         marginTop: "0px",
-                        borderRadius: "50%",
                       }}
                     />
                   )}
@@ -317,12 +245,10 @@ const CreateCoach= () => {
                 sx={{ maxWidth: "50%" }}
               >
                 <Button type="submit" color="secondary" variant="contained">
-                  Crear Profesor
+                  Editar Actividad
                 </Button>
               </Box>
             </Box>
-            {/* Agregamos un console.log para mostrar los valores */}
-            {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
           </form>
         )}
       </Formik>
@@ -330,4 +256,4 @@ const CreateCoach= () => {
   );
 };
 
-export default CreateCoach;
+export default EditActivitie;

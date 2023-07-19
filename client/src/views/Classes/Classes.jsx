@@ -3,7 +3,7 @@
 //NO MOVER NADA DE LA LOGICA DE ESTE COMPONENTE 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getClassess, getEvents, getUsers } from '../../redux/actions';
+import { getClassess, getEvents } from '../../redux/actions';
 import CardClasses from "../../components/CardClasses/CardClasses";
 import { ToastContainer } from 'react-toastify';
 import Sidebar from "../../components/sidebarcoaches/sidebar2";
@@ -15,7 +15,6 @@ const Classes = () => {
 
     useEffect(() => {
         dispatch(getClassess());
-        // dispatch(getUsers()); // Juan Cruz: ¿por qué se hace un dispatch de todos los usuarios acá? Lo comenté porque se cambió esa action en redux para que solo traiga el usuario logeado
         dispatch(getEvents());
     }, [dispatch, updateClasses]);
 
@@ -37,7 +36,6 @@ const Classes = () => {
     return (
         <div>
           {/* <div className=" p-7 text-2xl font-semibold flex-3 h-screen"> */}
-    
         <br/>
         <br/>
         <br/>

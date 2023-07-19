@@ -8,7 +8,6 @@ import CardClasses from "../../components/CardClasses/CardClasses";
 import { ToastContainer } from 'react-toastify';
 import Sidebar from "../../components/sidebarcoaches/sidebar2";
 
-
 const Classes = () => {
     const dispatch = useDispatch();
     const classes = useSelector((state) => state.classes);
@@ -16,7 +15,7 @@ const Classes = () => {
 
     useEffect(() => {
         dispatch(getClassess());
-        dispatch(getUsers());
+        // dispatch(getUsers()); // Juan Cruz: ¿por qué se hace un dispatch de todos los usuarios acá? Lo comenté porque se cambió esa action en redux para que solo traiga el usuario logeado
         dispatch(getEvents());
     }, [dispatch, updateClasses]);
 
@@ -38,9 +37,14 @@ const Classes = () => {
     return (
         <div>
           {/* <div className=" p-7 text-2xl font-semibold flex-3 h-screen"> */}
+    
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <div>
-                <h1>Nuestras Clases</h1>
-                <Sidebar/>  
+            <h1>Nuestras Clases</h1>
+            <Sidebar/>
             {sortedClasses?.map((clase, index) => {
             if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false REVISAR 
@@ -66,7 +70,6 @@ const Classes = () => {
                 })}
                 <ToastContainer autoClose={2000} theme="dark" />
             </div>
-            
         </div>
     )
 };

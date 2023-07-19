@@ -15,8 +15,6 @@ const initialState = {
   allClasses: [],
   events: [],
   users: []
-  // allEvents:[],
-
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -134,21 +132,21 @@ const rootReducer = (state = initialState, action) => {
     // Se adapto a la data que se recibe de classes 
     case FILTER_BY_TITLE:
       const { allClasses: allClassesTitle } = state;
-      const titleToFilter = action.payload;
+      const selectedClassesNames = action.payload;
 
-      if (titleToFilter.includes("all")) {
+      if (selectedClassesNames.includes("")) {
         return {
           ...state,
           classes: allClassesTitle,
         };
       }
-      const titleFiltered = allClassesTitle.filter((classItem) =>
-        titleToFilter.includes(classItem.Activity.title)
+      const classesFiltered = allClassesTitle.filter((classItem) =>
+      selectedClassesNames.includes(classItem.Activity.title)
       );
-      console.log('Estado filtrado:', titleFiltered);
+      console.log('Estado filtrado:', classesFiltered);
       return {
         ...state,
-        classes: titleFiltered,
+        classes: classesFiltered,
       };
 
 
@@ -187,15 +185,21 @@ const rootReducer = (state = initialState, action) => {
     // Filtrar por name de profesor ?
     case FILTER_BY_COACH_NAME:
       const { allClasses: allClassesCoaches } = state;
-      const coachNameToFilter = action.payload;
+      const selectedCoachNames = action.payload;
 
-      const cFiltered = coachNameToFilter !== "all" ? allClassesCoaches.filter((classItem) =>
-        classItem.Coach && `${classItem.Coach.firstName} ${classItem.Coach.lastName}` === coachNameToFilter
-      ) : allClassesCoaches;
-
+      if (selectedCoachNames.includes("")) {
+        return {
+          ...state,
+          classes: allClassesCoaches,
+        };
+      }
+      const coachFiltered = allClassesCoaches.filter((classItem) =>
+      selectedCoachNames.includes(`${classItem.Coach.firstName} ${classItem.Coach.lastName}`)
+      )
+      console.log('Estado filtrado:', coachFiltered);
       return {
         ...state,
-        classes: cFiltered,
+        classes: coachFiltered,
       };
 
 

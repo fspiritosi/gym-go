@@ -10,13 +10,14 @@ import Calendario from "../../Assets/sidebar/fecha.png"
 import Reloj from "../../Assets/sidebar/hora.png"
 import Select from 'react-dropdown-select';
 import SearchBarClasses from "./searchbarclasses";
-import { filterByDifficulty, filterByCoach, filterByTitle, filterByStartTime, filterByDate, filterByCoachName } from "../../redux/actions"
+import { filterByDifficulty, filterByTitle, filterByStartTime, filterByDate, filterByCoachName } from "../../redux/actions"
 
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const classe = useSelector((state) => state.classes)
-  const allc = useSelector((state) => state.allClasses)
+  // const classe = useSelector((state) => state.classes)
+  const allClasse = useSelector((state) => state.allClasses)
+  console.log(allClasse)
 
   const [open, setOpen] = useState(true);
   // const [selectedDifficulty, setSelectedDifficulty] = useState("easy");
@@ -26,8 +27,7 @@ const Sidebar = () => {
   const handleFilterTitle = () => {
     const selectedClassesNames = selectedClasse.map((c) => c.value);
     console.log(selectedClassesNames);
-    console.log(allc);
-    console.log(classe);
+    console.log(selectedClasse);
 
     if (selectedClassesNames.length > 0) {
       dispatch(filterByTitle(selectedClassesNames));
@@ -39,6 +39,8 @@ const Sidebar = () => {
   const handleCoachNameFilter = () => {
     const selectedCoachNames = selectedCoach.map((c) => c.value);
     console.log('Nombres de entrenadores seleccionados:', selectedCoachNames);
+    console.log(selectedCoachNames);
+    console.log(selectedCoach);
 
     if (selectedCoachNames.length > 0) {
       dispatch(filterByCoachName(selectedCoachNames));
@@ -47,18 +49,10 @@ const Sidebar = () => {
     }
   };
 
-
-
   // const handleDifficultyChange = (e) => {
   //   setSelectedDifficulty(e.target.value);
   //   dispatch(filterByDifficulty(e.target.value));
   // };
-
-  //const handleCoachFilter = (e) => {
-  //    const selectedCoach = e.target.value;
-  //    dispatch(filterByCoach(selectedCoach));
-  //};
-
 
   const handleStartTimeFilter = (startTime) => {
     dispatch(filterByStartTime(startTime));
@@ -67,7 +61,6 @@ const Sidebar = () => {
   const handleDateFilter = (date) => {
     dispatch(filterByDate(date));
   };
-
 
 
   return (
@@ -95,20 +88,12 @@ const Sidebar = () => {
           {/* Filtra la actividad */}
           <div className="flex inline-flex">
             <img src={Actividad} className={`w-12 rounded-full duration-500 `} alt="" />
-            {/* <select
-              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${
-                !open && "hidden"
-              } origin-left duration-200`}
-              onChange={(e) => handleTitleFilter(e.target.value)}
-            >
-              <option value="">Nombre de la Actividad</option>
-              Opciones adicionales para la selección
-            </select> */}
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "hidden"
                 } origin-left duration-200`}
               multi
-              options={classe.map((classItem) => ({ value: classItem.Activity.title, label: classItem.Activity.title }))}
+              options={allClasse.map((classItem) => ({ value: classItem.Activity.title, label: classItem.Activity.title }))}
+              //Puede la selector de la copia de estado osea allClasses
               onChange={(values) => {
                 console.log('Valores seleccionados:', values);
                 setSelectedClasse(values);
@@ -123,19 +108,11 @@ const Sidebar = () => {
           {/* Filtra por nombre de profesor */}
           <div className="flex inline-flex">
             <img src={Profesor} className={`w-12  rounded-full duration-500 `} alt="" />
-            {/* <select
-              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "hidden"
-                } origin-left duration-200`}
-              onChange={(e) => handleCoachNameFilter(e.target.value)}
-            >
-              <option value="">Nombre del Profesor</option>
-              Opciones adicionales para la selección
-            </select> */}
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "hidden"
                 } origin-left duration-200`}
               multi
-              options={classe.map((classItem) => ({
+              options={allClasse.map((classItem) => ({
                 value: classItem.Coach.firstName + " " + classItem.Coach.lastName,
                 label: classItem.Coach.firstName + " " + classItem.Coach.lastName,
               }))}

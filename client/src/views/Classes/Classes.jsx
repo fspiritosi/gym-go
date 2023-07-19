@@ -37,11 +37,12 @@ const Classes = () => {
 
     return (
         <div>
-          <div className=" p-7 text-2xl font-semibold flex-3 h-screen">
+          {/* <div className=" p-7 text-2xl font-semibold flex-3 h-screen"> */}
+        <div>
                 <h1>Nuestras Clases</h1>
                 <Sidebar/>  
             {sortedClasses?.map((clase, index) => {
-              if (clase.isActive === false) {
+            if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false REVISAR 
                 }
 
@@ -53,7 +54,7 @@ const Classes = () => {
                         startTime={clase.Events[0].startTime}
                         endTime={clase.Events[0].endTime}
                         quota={clase.quota}
-                        coachName={clase.Coach.firstName}
+                        coachName={`${clase.Coach.firstName} ${clase.Coach.lastName}`}
                         imageA={clase.Activity.image[0]}
                         imageC={clase.Coach.profilePicture}
                         eventQuota={clase.Events.map((q) => q.eventQuota)}

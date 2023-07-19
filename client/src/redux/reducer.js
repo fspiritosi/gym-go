@@ -1,7 +1,7 @@
 
 
 
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES, FILTER_BY_COACH, PUT_EVENTS, FILTER_BY_TITLE, FILTER_BY_START_TIME, FILTER_BY_DATE, FILTER_BY_COACH_NAME, GET_EVENTS, GET_USERS } from "./actions";
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES,  PUT_EVENTS, FILTER_BY_TITLE, FILTER_BY_START_TIME, FILTER_BY_DATE, FILTER_BY_COACH_NAME, GET_EVENTS, GET_USERS, GET_CLASS_NAME, CLEAR_FILTERS } from "./actions";
 
 
 
@@ -12,10 +12,9 @@ const initialState = {
   goals: [],
   coaches: [],
   classes: [],
+  allClasses: [],
   events: [],
-  // allEvents:[],
-  users:[]
-
+  users: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -46,23 +45,24 @@ const rootReducer = (state = initialState, action) => {
         activities:
           action.payload === "all" ? state.allActivities : sortedActivities,
       };
-
+    
+    // Filtro por dificultad
     case FILTER_BY_DIFFICULTY:
-      const { allActivities } = state; // Cambiado a desestructuración
+      const { allClasses: allDifficultyClasses  } = state;
       const diffToFilter = action.payload;
-      let diffFiltered = allActivities;
-      if (diffToFilter !== "diff") {
-        diffFiltered = allActivities.filter(
+      let diffFiltered = [];
+
+      if (diffToFilter !== "difficulty") {
+        diffFiltered = allDifficultyClasses.filter(
           (el) => el.difficulty === diffToFilter
         );
         if (diffFiltered.length === 0) {
-          diffFiltered = allActivities;
+          diffFiltered = allDifficultyClasses;
         }
       }
       return {
         ...state,
-        activities:
-          action.payload === "diff" ? state.allActivities : diffFiltered,
+        classes: diffFiltered
       };
 
     case GET_DETAILS_ID:
@@ -77,7 +77,7 @@ const rootReducer = (state = initialState, action) => {
         goals: action.payload,
       };
 
-      case FILTER_BY_GOALS:
+    case FILTER_BY_GOALS:
       const { allActivities: allActivitiesGoals } = state;
       const selectedGoals = action.payload;
 
@@ -88,45 +88,28 @@ const rootReducer = (state = initialState, action) => {
         };
       }
 
-     const goalFiltered = allActivitiesGoals.filter((el) =>
-    el.Goals.some((goal) => selectedGoals.includes(goal))
+      const goalFiltered = allActivitiesGoals.filter((el) =>
+        el.Goals.some((goal) => selectedGoals.includes(goal))
       );
+      console.log('Estado filtrado:', goalFiltered);
+      return {
+        ...state,
+        activities: goalFiltered,
+      };
 
-     return {
-    ...state,
-    activities: goalFiltered,
-     };  
 
-   
-    case GET_COACHES: //En espera de la Ruta 
+    case GET_COACHES:
       return {
         ...state,
         coaches: action.payload,
       };
 
-      case FILTER_BY_COACH:
-        const { allActivities: allActivitiesCoaches } = state;
-        const coachToFilter = action.payload;
-        let coachFiltered = allActivitiesCoaches;
-  
-        if (coachToFilter !== "all") {
-          coachFiltered = coachFiltered.filter((el) =>
-            el.Coach === coachToFilter
-          );
-          if (coachFiltered.length === 0) {
-            coachFiltered = allActivitiesCoaches;
-          }
-        }
-        return {
-          ...state,
-          activities:
-            action.payload === "all" ? state.allActivities : coachFiltered,
-        };
-
+    
     case GET_CLASSES:
       return {
         ...state,
         classes: action.payload,
+        allClasses: action.payload,
       };
 
     case PUT_EVENTS:
@@ -140,78 +123,101 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         events: action.payload,
       };
-    
+
     case GET_USERS:
       return {
         ...state,
         users: action.payload,
       };
 
-   
+    // Se adapto a la data que se recibe de classes 
+    case FILTER_BY_TITLE:
+      const { allClasses: allClassesTitle } = state;
+      const selectedClassesNames = action.payload;
 
-      case FILTER_BY_TITLE:
-        const { allActivities: allActivitiesTitle } = state;
-        const titleToFilter = action.payload;
-        let titleFiltered = allActivitiesTitle;
-  
-        if (titleToFilter !== "") {
-          titleFiltered = titleFiltered.filter(
-            (el) => el.title.toLowerCase().includes(titleToFilter.toLowerCase())
-          );
-        }
+      if (selectedClassesNames.includes("")) {
         return {
           ...state,
-          activities: titleFiltered,
+          classes: allClassesTitle,
         };
-  
-      case FILTER_BY_START_TIME:
-        const { allActivities: allActivitiesStartTime } = state;
-        const startTimeToFilter = action.payload;
-        let startTimeFiltered = allActivitiesStartTime;
-  
-        if (startTimeToFilter !== "") {
-          startTimeFiltered = startTimeFiltered.filter(
-            (el) => el.startTime.toLowerCase().includes(startTimeToFilter.toLowerCase())
-          );
-        }
+      }
+      const classesFiltered = allClassesTitle.filter((classItem) =>
+      selectedClassesNames.includes(classItem.Activity.title)
+      );
+      console.log('Estado filtrado:', classesFiltered);
+      return {
+        ...state,
+        classes: classesFiltered,
+      };
+
+
+    case FILTER_BY_START_TIME:
+      const { allActivities: allActivitiesStartTime } = state;
+      const startTimeToFilter = action.payload;
+      let startTimeFiltered = allActivitiesStartTime;
+
+      if (startTimeToFilter !== "") {
+        startTimeFiltered = startTimeFiltered.filter(
+          (el) => el.startTime.toLowerCase().includes(startTimeToFilter.toLowerCase())
+        );
+      }
+      return {
+        ...state,
+        activities: startTimeFiltered,
+      };
+
+    case FILTER_BY_DATE:
+      const { allActivities: allActivitiesDate } = state;
+      const dateToFilter = action.payload;
+      let dateFiltered = allActivitiesDate;
+
+      if (dateToFilter !== "") {
+        dateFiltered = dateFiltered.filter((el) => {
+          const eventDates = el.date.map((d) => new Date(d));
+          const filterDate = new Date(dateToFilter);
+          return eventDates.some((eventDate) => eventDate.getTime() === filterDate.getTime());
+        });
+      }
+      return {
+        ...state,
+        activities: dateFiltered,
+      };
+
+    // Filtrar por name de profesor ?
+    case FILTER_BY_COACH_NAME:
+      const { allClasses: allClassesCoaches } = state;
+      const selectedCoachNames = action.payload;
+
+      if (selectedCoachNames.includes("")) {
         return {
           ...state,
-          activities: startTimeFiltered,
+          classes: allClassesCoaches,
         };
-  
-      case FILTER_BY_DATE:
-        const { allActivities: allActivitiesDate } = state;
-        const dateToFilter = action.payload;
-        let dateFiltered = allActivitiesDate;
-  
-        if (dateToFilter !== "") {
-          dateFiltered = dateFiltered.filter((el) => {
-            const eventDates = el.date.map((d) => new Date(d));
-            const filterDate = new Date(dateToFilter);
-            return eventDates.some((eventDate) => eventDate.getTime() === filterDate.getTime());
-          });
-        }
-        return {
-          ...state,
-          activities: dateFiltered,
-        };
-  
-      case FILTER_BY_COACH_NAME:
-        const { allActivities: allActivitiesCoachName } = state;
-        const coachNameToFilter = action.payload;
-        let coachNameFiltered = allActivitiesCoachName;
-  
-        if (coachNameToFilter !== "") {
-          coachNameFiltered = coachNameFiltered.filter(
-            (el) => el.coachName.toLowerCase().includes(coachNameToFilter.toLowerCase())
-          );
-        }
-        return {
-          ...state,
-          activities: coachNameFiltered,
-        };
-      
-       default:
+      }
+      const coachFiltered = allClassesCoaches.filter((classItem) =>
+      selectedCoachNames.includes(`${classItem.Coach.firstName} ${classItem.Coach.lastName}`)
+      )
+      console.log('Estado filtrado:', coachFiltered);
+      return {
+        ...state,
+        classes: coachFiltered,
+      };
+
+    // Classes por name title activity
+    case GET_CLASS_NAME:
+      return {
+        ...state,
+        classes: action.payload,
+      };
+    
+    //Limpiar filtros en Classes
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        classes: state.allClasses
+      };
+
+    default:
       return { ...state };
   }
 };

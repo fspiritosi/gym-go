@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
 import { getUserLogged } from "../../redux/actions";
@@ -7,7 +8,8 @@ import "tailwindcss/tailwind.css";
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, isAuthenticated, isLoading, logout, loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, isLoading, logout, loginWithRedirect } =
+    useAuth0();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -52,15 +54,15 @@ const Profile = () => {
                 aria-labelledby="dropdownUserAvatarButton"
               >
                 <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray">
-                    Clases disponibles
-                  </a>
+                  <Link to="/profile" className="block px-4 py-2 hover:bg-gray">
+                    Mi perfil
+                  </Link>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#" className="block px-4 py-2 hover:bg-gray">
                     Próximos eventos
                   </a>
-                </li>
+                </li> */}
               </ul>
               <div className="py-1">
                 <button

@@ -20,10 +20,12 @@ module.exports = (sequelize) => {
     purchases: {
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: true,
+      defaultValue: [],
     },
     credits: {
       type: DataTypes.INTEGER,
       allowNull: true,
+      defaultValue: 0,
     },
     role: {
       type: DataTypes.ENUM,

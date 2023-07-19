@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
-import landing from '../../assets/backgraund/fitnes.png'
-import backgroundImage from '../../assets/backgraund/Fondo2.jpg';
-import home from '../../assets/backgraund/home.png'
-import coaches  from '../../assets/Cards/profesores.jpg'
-import activities from '../../assets/Cards/actividades.jpg'
+import landing from '../../Assets/backgraund/fitnes.png'
+import backgroundImage from '../../Assets/backgraund/Fondo2.jpg';
+import home from '../../Assets/backgraund/home.png'
+import coaches  from '../../Assets/Cards/profesores.jpg'
+import activities from '../../Assets/Cards/actividades.jpg'
 import 'tailwindcss/tailwind.css';
 import { Link } from 'react-router-dom';
 import Nav from "../../components/Nav/Nav";

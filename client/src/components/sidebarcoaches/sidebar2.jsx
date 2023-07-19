@@ -2,12 +2,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import vector from "../../assets/sidebar/Vector.png"
-import filtro from "../../assets/sidebar/filtro.png"
-import Actividad from "../../assets/sidebar/actividad.png"
-import Profesor from "../../assets/sidebar/teacher.png"
-import Calendario from "../../assets/sidebar/fecha.png"
-import Reloj from "../../assets/sidebar/hora.png"
+import vector from "../../Assets/sidebar/Vector.png"
+import filtro from "../../Assets/sidebar/filtro.png"
+import Actividad from "../../Assets/sidebar/actividad.png"
+import Profesor from "../../Assets/sidebar/teacher.png"
+import Calendario from "../../Assets/sidebar/fecha.png"
+import Reloj from "../../Assets/sidebar/hora.png"
 import Select from 'react-dropdown-select';
 import SearchBarClasses from "./searchbarclasses";
 
@@ -17,7 +17,6 @@ import { filterByDifficulty, filterByTitle, filterByStartTime, filterByDate, fil
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-
   const classe = useSelector((state) => state.classes)
   const allClasse = useSelector((state) => state.allClasses)
 
@@ -66,7 +65,7 @@ const Sidebar = () => {
     }else{
       console.log('No se seleccionaron horarios válidos')
     }
-
+  }
   const handleDifficultyChange = (e) => {
     setSelectedDifficulty(e.target.checked ? e.target.value.toString() : null);
     dispatch(filterByDifficulty(e.target.checked ? e.target.value.toString() : null));
@@ -211,10 +210,8 @@ const Sidebar = () => {
         onClick={handleClearFilters}>Limpiar Filtros</button>
       </div>
         </div>
-
-
     </div>
   )
 }
 
-export default Sidebar
+export default Sidebar;

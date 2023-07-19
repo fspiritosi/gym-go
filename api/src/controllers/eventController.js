@@ -3,11 +3,27 @@ const { Events, Classes, users, Activities, Coaches } = require("../db");
 
 const getAllEvents = async () => {
   const allEvents = await Events.findAll({
-    include: {
-      model: users,
-      attributes: ['id', 'username', 'email'],
-      through: { attributes: [] }
-    },
+    include: [
+      {
+        model: Classes,
+        attributes: ["id", "difficulty"],
+        include: [
+          {
+            model: Activities,
+            attributes: ["id", "title"],
+          },
+          {
+            model: Coaches,
+            attributes: ["id", "firstName", "lastName"],
+          },
+        ],
+      },
+      {
+        model: users,
+        attributes: ["id", "username", "email"],
+        through: { attributes: [] },
+      },
+    ],
   });
   return allEvents;
 };
@@ -17,8 +33,8 @@ const getEventById = async (id) => {
     include: [
       {
         model: users,
-        attributes: ['id', 'username', 'email'],
-        through: { attributes: [] }
+        attributes: ["id", "username", "email"],
+        through: { attributes: [] },
       },
       {
         model: Classes,
@@ -120,7 +136,7 @@ const updateEventById = async (
   const event = await Events.findByPk(id, {
     include: {
       model: users,
-      attributes: ['id', 'username', 'email']
+      attributes: ["id", "username", "email"],
     },
   });
   const eventClass = await Classes.findByPk(event.ClassId);

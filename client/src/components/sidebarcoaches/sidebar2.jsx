@@ -10,7 +10,7 @@ import Calendario from "../../Assets/sidebar/fecha.png"
 import Reloj from "../../Assets/sidebar/hora.png"
 import Select from 'react-dropdown-select';
 import SearchBarClasses from "./searchbarclasses";
-import { filterByDifficulty, filterByTitle, filterByStartTime, filterByDate, filterByCoachName } from "../../redux/actions"
+import { filterByDifficulty, filterByTitle, filterByStartTime, filterByDate, filterByCoachName, clearFilters } from "../../redux/actions"
 
 
 const Sidebar = () => {
@@ -20,9 +20,9 @@ const Sidebar = () => {
   console.log(allClasse)
 
   const [open, setOpen] = useState(true);
-  // const [selectedDifficulty, setSelectedDifficulty] = useState("easy");
   const [selectedClasse, setSelectedClasse] = useState([]);
   const [selectedCoach, setSelectedCoach] = useState([]);
+  const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
 
   const handleFilterTitle = () => {
     const selectedClassesNames = selectedClasse.map((c) => c.value);
@@ -49,10 +49,15 @@ const Sidebar = () => {
     }
   };
 
-  // const handleDifficultyChange = (e) => {
-  //   setSelectedDifficulty(e.target.value);
-  //   dispatch(filterByDifficulty(e.target.value));
-  // };
+  const handleDifficultyChange = (e) => {
+    setSelectedDifficulty(e.target.checked ? e.target.value.toString() : null);
+    dispatch(filterByDifficulty(e.target.checked ? e.target.value.toString() : null));
+  };
+  
+  const handleClearFilters = () => {
+    dispatch(clearFilters());
+  };
+  
 
   const handleStartTimeFilter = (startTime) => {
     dispatch(filterByStartTime(startTime));
@@ -77,6 +82,8 @@ const Sidebar = () => {
           <h1 className={` text-white origin-left font-medium text-x1 duration-200 ${!open && "scale-0"}`}>Filtros</h1>
         </div>
 
+        
+
         {/* Aqui esta el searchbarclasses     */}
         <div className={`${!open && "scale-0"} w-60 h-11 relative`} >
           {/* <SearchBar/>	   */}
@@ -84,7 +91,7 @@ const Sidebar = () => {
           <SearchBarClasses />
         </div>
 
-        <div className={`${open ? "w-30" : "w-20 items-center"} flex-col  items-start gap-10 inline-flex`}>
+        <div className={`${!open && "scale-0"} w-70 h-15 relative`}>
           {/* Filtra la actividad */}
           <div className="flex inline-flex">
             <img src={Actividad} className={`w-12 rounded-full duration-500 `} alt="" />
@@ -150,28 +157,33 @@ const Sidebar = () => {
               {/* Opciones adicionales para la selección */}
             </select>
           </div>
-
+          
+          {/* Filtra por Dificultad */}
           <div className={`${!open && "scale-0"} w-70 duration-200 p-10 pt-10 text-black relative`}>
-            <label htmlFor="difficulty">Seleccione su Dificultad</label>
+            <label htmlFor="difficulty">Selecciona la Dificultad</label>
             <input
               type="range"
               id="difficulty"
-              min="easy"
-              max="hard"
-            // value={selectedDifficulty}
-            // onChange={handleDifficultyChange}
+              min="1"
+              max="3"
+            value={selectedDifficulty}
+            onChange={handleDifficultyChange}
             />
-            <div className="w-24 h-9 absolute text-center text-black text-xl font-normal">
-              <span>Easy</span>
-              <span>Medium</span>
-              <span>Hard</span>
+            <div className="w-24 h-8 absolute text-center text-black text-m font-normal">
+              <span>Fácil</span>
+              <span>Intermedio</span>
+              <span>Avanzado</span>
             </div>
           </div>
+      </div >
+
+      {/* Limpiar filtros */}
+      <div className={`${!open && "scale-0"} w-70 duration-200 p-10 pt-10 text-black relative`}>
+      <button className="bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2"
+        onClick={handleClearFilters}>Limpiar Filtros</button>
+      </div>
         </div>
 
-
-
-      </div >
 
     </div>
   )

@@ -20,6 +20,7 @@ export const FILTER_BY_COACH_NAME = "FILTER_BY_COACH_NAME";
 export const GET_EVENTS = "GET_EVENTS";
 export const GET_USERS = "GET_USERS";
 export const GET_CLASS_NAME = "GET_CLASS_NAME";
+export const CLEAR_FILTERS = "CLEAR_FILTERS";
 
 
 
@@ -222,3 +223,9 @@ export function searchClassesByName(title) {
   };
 }
 
+//Limpiar filtros en Classes
+export const clearFilters = () => {
+  return {
+    type: CLEAR_FILTERS
+  };
+};

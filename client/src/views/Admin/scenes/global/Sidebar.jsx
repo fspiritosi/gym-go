@@ -135,7 +135,7 @@ function SidebarMenu() {
               setSelected={setSelected}
             />
             <Item
-              title="Actividates"
+              title="Actividades"
               to="activities"
               icon={<StorageIcon />}
               selected={selected}

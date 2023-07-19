@@ -23,10 +23,10 @@ const Activities = () => {
     setData({id, title, description, Goals, image, isActive });
     setOpen(true);
   };
-    const changeIsActive = async (id, isActive) => {
-      await axios.put(`/activities/${id}`, {isActive});
-      getActivities()
-    };
+  const changeIsActive = async (id, isActive) => {
+    await axios.put(`/activities/${id}`, {isActive});
+    getActivities()
+  };
   const colums = [
     {
       field: "title",

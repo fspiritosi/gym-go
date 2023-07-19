@@ -1,4 +1,3 @@
-
 import {
   Button,
   Dialog,
@@ -6,10 +5,10 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
-import EditActivitie from '../Forms/editActivitie'
+import EditCoach from "../Forms/editCoache";
 
-const ActivitieModal = ({ open, setOpen, data }) => {
-
+const CoacheModal = ({ open, setOpen, data }) => {
+  
   const handleClose = () => {
     setOpen(false);
   };
@@ -17,16 +16,18 @@ const ActivitieModal = ({ open, setOpen, data }) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Editar Actividad</DialogTitle>
+        <DialogTitle>Editar Profesor</DialogTitle>
         <DialogContent>
-          <EditActivitie data={data}/>
+          <EditCoach data={data} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} sx={{color:'white'}}>Cerrar</Button>
+          <Button onClick={handleClose} sx={{ color: "white" }}>
+            Cerrar
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 };
 
-export default ActivitieModal;
+export default CoacheModal;

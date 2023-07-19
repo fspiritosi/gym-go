@@ -18,39 +18,60 @@ import axios from "axios";
 
 
 
-const EditActivitie = (props) => {
+const EditCoach = (props) => {
   const [response, setResponse] = useState("");
-  const [goalsBack, setGoalsBack] = useState([]);
+  const [activitiesBack, setActivitiesBack] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const initialValues = {
     id: props.data.id,
-    title: props.data.title,
+    firstName: props.data.firstName,
+    lastName: props.data.lastName,
+    profilePicture: props.data.profilePicture,
     description: props.data.description,
-    image: props.data.image,
-    goals: props.data.Goals,
-    isActive: props.data.isActive,
+    education: props.data.education,
+    workExperience: props.data.workExperience,
+    activities: props.data.titleActivities,
+    isActive: props.data.isActive
   };
 
 
   const userSchema = yup.object().shape({
-    title: yup
+    firstName: yup
       .string()
-      .required("El Titulo de la actividad no puede estar Vacío"),
-    description: yup.string().required("El Descripción no puede estar Vacío"),
-    image: yup
-      .array(),
-    goals: yup
+      .required("El Nombre del profesor no puede estar Vacío"),
+    lastName: yup
+      .string()
+      .required("El Apellido del profesor no puede estar Vacío"),
+    profilePicture: yup
+      .string(),
+      // .required("Debe seleccionar un imagen para el profesor"),
+    description: yup
+      .string()
+      .required("La descripción no puede ser un campo vacío"),
+    // education: yup.string().required("La educación no puede ser un campo vacío"),
+    // workExperience: yup.string().required("La experiencia no puede ser un campo vacío"),
+    activities: yup
       .array()
-      .required("Requerido")
-      .min(1, "Debe seleccionar al menos un Objetivo"),
+      // .required("Requerido")
+      // .min(1, "Debe seleccionar al menos una actividad"),
   });
 
 
   const handleFormSubmit = async (values) => {
+    console.log(values)
     await axios
-      .put(`/activities/${values.id}`, {title: values.title, description: values.description, goals: values.goals, image: values.image, isActive: values.isActive})
+      .put(`/coaches/${values.id}`, {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        profilePicture: values.profilePicture,
+        description: values.description,
+        education: values.education,
+        workExperience: values.workExperience,
+        activities: values.activities,
+        isActive: values.isActive,
+      })
       .then((response) => {
         setResponse(response.statusText);
       })
@@ -67,7 +88,7 @@ const EditActivitie = (props) => {
 
   const handleImageUpload = async (e, setFieldValue) => {
     const file = e.target.files[0];
-    const imgArr = [];
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "gym-go");
@@ -77,36 +98,39 @@ const EditActivitie = (props) => {
         formData
       );
       const imageURL = response.data.secure_url;
-      const dataField = imgArr.push(imageURL);
       setSelectedImage(imageURL);
-      setFieldValue("image", imgArr); // Actualiza el valor de image en Formik
+      setFieldValue("profilePicture", imageURL); // Actualiza el valor de profilePicture en Formik
     } catch (error) {
       console.error("Error al cargar la imagen en Cloudinary:", error);
     }
   };
 
   useEffect(() => {
-    const getGoals = async () => {
+    const getActivities = async () => {
       try {
-        const response = await axios.get("/goals");
-        const goalsData = response.data;
-        const activeGoals = goalsData?.filter((goal) => goal.isActive === true);
-        setGoalsBack(activeGoals);
+        const response = await axios.get("/activities");
+        const activitiesData = response.data;
+        const activeActivities = activitiesData?.filter(
+          (activity) => activity.isActive === true
+        );
+        setActivitiesBack(activeActivities);
       } catch (error) {
         console.error("Error al obtener las actividades:", error);
       }
     };
 
-    getGoals();
+    getActivities();
+    // handleActivitiesProps()
   }, [selectedImage]);
 
   return (
     <Box m="20px">
-      <Header title="EDITAR ACTIVIDAD" />
+      <Header title="EDITAR PROFESOR"/>
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={userSchema}
+       
       >
         {({
           values,
@@ -119,7 +143,7 @@ const EditActivitie = (props) => {
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit} onReset={handleReset}>
-            {!response ? undefined : response === "Created" || "OK" ? (
+            {!response ? undefined : response === "Created" || 'OK'? (
               <Alert
                 variant="filled"
                 icon={<ThumbUpOffAltIcon fontSize="inherit" />}
@@ -127,7 +151,7 @@ const EditActivitie = (props) => {
                   setResponse("");
                 }}
               >
-                Actividad editada de manera exitosa!
+                Profesor editado de manera exitosa!
               </Alert>
             ) : (
               <Alert
@@ -137,7 +161,7 @@ const EditActivitie = (props) => {
                   setResponse("");
                 }}
               >
-                Hubo un error al editar la Actividad
+                Hubo un error al editar el profesor
               </Alert>
             )}
 
@@ -159,13 +183,28 @@ const EditActivitie = (props) => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Titulo"
+                  label="Nombre"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.title}
-                  name="title"
-                  error={!!touched.title && !!errors.title}
-                  helperText={touched.title && errors.title}
+                  value={values.firstName}
+                  name="firstName"
+                  error={!!touched.firstName && !!errors.firstName}
+                  helperText={touched.firstName && errors.firstName}
+                  sx={{ gridColumn: "span 12" }}
+                />
+                <TextField
+                  id="outlined-multiline-static"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Apellido"
+                  maxRows={4}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.lastName}
+                  name="lastName"
+                  error={!!touched.lastName && !!errors.lastName}
+                  helperText={touched.lastName && errors.lastName}
                   sx={{ gridColumn: "span 12" }}
                 />
                 <TextField
@@ -183,27 +222,57 @@ const EditActivitie = (props) => {
                   helperText={touched.description && errors.description}
                   sx={{ gridColumn: "span 12" }}
                 />
+                <TextField
+                  id="outlined-multiline-static"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Eduación"
+                  maxRows={4}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.education}
+                  name="education"
+                  error={!!touched.education && !!errors.education}
+                  helperText={touched.education && errors.education}
+                  sx={{ gridColumn: "span 12" }}
+                />
+                <TextField
+                  id="outlined-multiline-static"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Experiencia Previa"
+                  maxRows={4}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.workExperience}
+                  name="workExperience"
+                  error={!!touched.workExperience && !!errors.workExperience}
+                  helperText={touched.workExperience && errors.workExperience}
+                  sx={{ gridColumn: "span 12" }}
+                />
                 <FormControl
                   fullWidth
                   variant="filled"
                   sx={{ gridColumn: "span 12" }}
                 >
-                  <InputLabel>Objetivos</InputLabel>
+                  <InputLabel>Actividades</InputLabel>
                   <Field
-                    label="Objetivos"
+                    label="Actividades"
                     as={Select}
                     multiple
-                    name="goals"
-                    labelId="goals-label"
-                    id="goals"
-                    value={values.goals}
+                    name="activities"
+                    labelId="activities-label"
+                    id="activities"
+                    value={values.activities}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={!!touched.goals && !!errors.goals}
+                    error={!!touched.activities && !!errors.activities}
                   >
-                    {goalsBack.map((goal) => (
-                      <MenuItem key={goal.id} value={goal.name}>
-                        {goal.name}
+                    {activitiesBack.map((activity) => (
+                      <MenuItem key={activity.id} value={activity.title}>
+                        {activity.title}
                       </MenuItem>
                     ))}
                   </Field>
@@ -232,6 +301,7 @@ const EditActivitie = (props) => {
                       style={{
                         maxWidth: "150px",
                         marginTop: "0px",
+                        borderRadius: "50%",
                       }}
                     />
                   )}
@@ -244,7 +314,7 @@ const EditActivitie = (props) => {
                 sx={{ maxWidth: "50%" }}
               >
                 <Button type="submit" color="secondary" variant="contained">
-                  Editar Actividad
+                  Editar Profesor
                 </Button>
               </Box>
             </Box>
@@ -255,4 +325,4 @@ const EditActivitie = (props) => {
   );
 };
 
-export default EditActivitie;
+export default EditCoach;

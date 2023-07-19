@@ -56,7 +56,7 @@ const CreateCoach= () => {
   };
 
   const handleFormSubmit = async (values, { resetForm }) => {
-   
+    console.log(values)
     await axios
       .post("/coaches", values)
       .then((response) => {

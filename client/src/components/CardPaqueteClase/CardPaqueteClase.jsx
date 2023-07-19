@@ -9,15 +9,11 @@ import LoginButton from '../../components/Login/LoginButton';
 
 Modal.setAppElement("#root");
 
-const CardPaquete = ({ title, clases, price, comprar }) => {
-  const [orderData, setOrderData] = useState({
-    description: title,
-    price: Number(price),
-    quantity: 1,
-  });
-  const [showMercadoPago, setShowMercadoPago] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const { isAuthenticated, loginWithRedirect, signupWithRedirect } = useAuth0();
+const CardPaquete = ({ title, clases, price, comprar, description }) => {
+    const [orderData, setOrderData] = useState({ description: title, price: Number(price), quantity: 1 });
+    const [showMercadoPago, setShowMercadoPago] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const { isAuthenticated, loginWithRedirect, signupWithRedirect } = useAuth0();
 
   //Con toastify
   // const handleBuy = () => {

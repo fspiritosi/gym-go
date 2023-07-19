@@ -57,24 +57,46 @@ const createClass = async (difficulty, recurringPattern, startDate, endDate, sta
   return newClasses;
 };
 
-const updateClassById = async (id, difficulty, startDate, endDate, startTime, endTime, quota) => {
-  const getClass = await Classes.findByPk(id);
-  console.log(getClass.toJSON());
-  if(!getClass) return null;
-  if(difficulty) getClass.difficulty = difficulty;
-  if(startDate) {
-    getClass.startDate = startDate;
-    // Hay que modificar el date de los eventos asociados a la clase
-  };
-  if(endDate) {
-    getClass.endDate = endDate;
-    // Idem arriba
-  };
-  if(startTime) {
-    getClass.startTime = startTime;
+const updateClassById = async (
+  id,
+  difficulty,
+  startDate,
+  endDate,
+  startTime,
+  endTime,
+  quota,
+  recurringPattern,
+  isActive
+) => {
+  const clase = await Classes.findByPk(id, {
+    include: [
+      {
+        model: Events,
+        attributes: ["id", "date", "startTime", "endTime", "eventQuota"],
+      },
+      {
+        model: Activities,
+        attributes: ["id", "title", "image"],
+      },
+      {
+        model: Coaches,
+        attributes: ["id", "firstName", "lastName", "profilePicture"],
+      },
+    ],
+  });
+  console.log(clase.toJSON());
 
-  }
-  return updateClasses;
+  await clase.update({
+    difficulty,
+    startDate,
+    endDate,
+    startTime,
+    endTime,
+    quota,
+    recurringPattern,
+    isActive,
+  });
+  return clase;
 };
 
 const deleteClassById = async (id) => {

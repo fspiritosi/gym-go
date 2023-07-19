@@ -32,10 +32,7 @@ const createGoal = async (name, description) => {
 
 const updateGoalById = async (id, name, description, isActive) => {
   const goal = await Goals.findByPk(id);
-  if (name) goal.name = name;
-  if (description) goal.description = description;
-  if (isActive) goal.isActive = isActive;
-  await goal.save();
+  await goal.update({ name, description, isActive });
   return goal;
 };
 

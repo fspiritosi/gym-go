@@ -74,18 +74,22 @@ const updateCoachById = async (id, firstName, lastName, profilePicture, descript
       }
     ]
   });
-  if(!coach) return null;
-  if(firstName) coach.firstName = firstName;
-  if(lastName) coach.lastName = lastName;
-  if(profilePicture) coach.profilePicture = profilePicture;
-  if(description) coach.description = description;
-  if(education) coach.education = education;
-  if(workExperience) coach.workExperience = workExperience;
-  if(isActive || !isActive) coach.isActive = isActive;
+  // if(!coach) return null;
+  // if(firstName) coach.firstName = firstName;
+  // if(lastName) coach.lastName = lastName;
+  // if(profilePicture) coach.profilePicture = profilePicture;
+  // if(description) coach.description = description;
+  // if(education) coach.education = education;
+  // if(workExperience) coach.workExperience = workExperience;
+  // if(isActive || !isActive) coach.isActive = isActive;
   if(activities) {
-    for (const activityId of activities) {
-    const activity = await Activities.findByPk(activityId);
-    await coach.addActivities(activity);
+    for (const activityStr of activities) {
+    const activityToAdd = await Activities.findAll(
+     { where: {
+        title: activityStr,
+      }}
+    );
+    await coach.addActivities(activityToAdd);
   }}
   await coach.update({firstName, lastName, profilePicture, description, education, workExperience, isActive})
   return coach;

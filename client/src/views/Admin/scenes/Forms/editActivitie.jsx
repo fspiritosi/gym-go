@@ -16,47 +16,41 @@ import Alert from "@mui/material/Alert";
 import Header from "../../adminComponentes/Header";
 import axios from "axios";
 
-const initialValues = {
-  title: "",
-  description: "",
-  image: [],
-  goals:[]
-};
 
-const userSchema = yup.object().shape({
-  title: yup.string().required("El Titulo de la actividad no puede estar Vacío"),
-  description: yup
-    .string()
-    .required("El Descripción no puede estar Vacío"),
-  image: yup
-    .array()
-    .required("Requerido")
-    .min(1, "Debe seleccionar una Imagen"),
-  goals: yup
-    .array()
-    .required("Requerido")
-    .min(1, "Debe seleccionar al menos un Objetivo"),
-});
 
-const CreateActivitie = () => {
+const EditActivitie = (props) => {
   const [response, setResponse] = useState("");
   const [goalsBack, setGoalsBack] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleReset = (values) => {
-    values = {
-      title: "",
-      description: "",
-      image: [],
-      goals: [],
-    };
-    return values;
+  const initialValues = {
+    id: props.data.id,
+    title: props.data.title,
+    description: props.data.description,
+    image: props.data.image,
+    goals: props.data.Goals,
+    isActive: props.data.isActive,
   };
 
-  const handleFormSubmit = async (values, { resetForm }) => {
+
+  const userSchema = yup.object().shape({
+    title: yup
+      .string()
+      .required("El Titulo de la actividad no puede estar Vacío"),
+    description: yup.string().required("El Descripción no puede estar Vacío"),
+    image: yup
+      .array(),
+    goals: yup
+      .array()
+      .required("Requerido")
+      .min(1, "Debe seleccionar al menos un Objetivo"),
+  });
+
+
+  const handleFormSubmit = async (values) => {
     await axios
-      .post("/activities", values)
+      .put(`/activities/${values.id}`, {title: values.title, description: values.description, goals: values.goals, image: values.image, isActive: values.isActive})
       .then((response) => {
         setResponse(response.statusText);
       })
@@ -69,15 +63,6 @@ const CreateActivitie = () => {
           setResponse(error.message);
         }
       });
-
-    resetForm({
-      values: {
-        title: "",
-        description: "",
-        image: [],
-        goals: [],
-      },
-    });
   };
 
   const handleImageUpload = async (e, setFieldValue) => {
@@ -92,7 +77,7 @@ const CreateActivitie = () => {
         formData
       );
       const imageURL = response.data.secure_url;
-      const dataField = imgArr.push(imageURL)
+      const dataField = imgArr.push(imageURL);
       setSelectedImage(imageURL);
       setFieldValue("image", imgArr); // Actualiza el valor de image en Formik
     } catch (error) {
@@ -105,9 +90,7 @@ const CreateActivitie = () => {
       try {
         const response = await axios.get("/goals");
         const goalsData = response.data;
-        const activeGoals = goalsData?.filter(
-          (goal) => goal.isActive === true
-        );
+        const activeGoals = goalsData?.filter((goal) => goal.isActive === true);
         setGoalsBack(activeGoals);
       } catch (error) {
         console.error("Error al obtener las actividades:", error);
@@ -119,12 +102,11 @@ const CreateActivitie = () => {
 
   return (
     <Box m="20px">
-      <Header title="CREAR ACTIVIDAD" subtitle="Crea una nueva Actividad" />
+      <Header title="EDITAR ACTIVIDAD" />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={userSchema}
-        onReset={handleReset}
       >
         {({
           values,
@@ -137,7 +119,7 @@ const CreateActivitie = () => {
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit} onReset={handleReset}>
-            {!response ? undefined : response === "Created" ? (
+            {!response ? undefined : response === "Created" || "OK" ? (
               <Alert
                 variant="filled"
                 icon={<ThumbUpOffAltIcon fontSize="inherit" />}
@@ -145,7 +127,7 @@ const CreateActivitie = () => {
                   setResponse("");
                 }}
               >
-                Actividad creada de manera exitosa!
+                Actividad editada de manera exitosa!
               </Alert>
             ) : (
               <Alert
@@ -155,7 +137,7 @@ const CreateActivitie = () => {
                   setResponse("");
                 }}
               >
-                Hubo un error al crear la Actividad
+                Hubo un error al editar la Actividad
               </Alert>
             )}
 
@@ -180,7 +162,7 @@ const CreateActivitie = () => {
                   label="Titulo"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.name}
+                  value={values.title}
                   name="title"
                   error={!!touched.title && !!errors.title}
                   helperText={touched.title && errors.title}
@@ -262,7 +244,7 @@ const CreateActivitie = () => {
                 sx={{ maxWidth: "50%" }}
               >
                 <Button type="submit" color="secondary" variant="contained">
-                  Crear Actividad
+                  Editar Actividad
                 </Button>
               </Box>
             </Box>
@@ -273,4 +255,4 @@ const CreateActivitie = () => {
   );
 };
 
-export default CreateActivitie;
+export default EditActivitie;

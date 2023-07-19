@@ -152,36 +152,42 @@ const rootReducer = (state = initialState, action) => {
 
 
     case FILTER_BY_START_TIME:
-      const { allActivities: allActivitiesStartTime } = state;
+      const { allClasses: allClassesStartTime } = state;
       const startTimeToFilter = action.payload;
-      let startTimeFiltered = allActivitiesStartTime;
 
-      if (startTimeToFilter !== "") {
-        startTimeFiltered = startTimeFiltered.filter(
-          (el) => el.startTime.toLowerCase().includes(startTimeToFilter.toLowerCase())
-        );
-      }
+      if (startTimeToFilter.includes("all")) {
       return {
         ...state,
         activities: startTimeFiltered,
       };
+      }
+      const startTimeFiltered = allClassesStartTime.filter((classItem) =>
+        startTimeToFilter.includes(classItem.startTime)
+        );
+        console.log('Estado filtrado:', startTimeFiltered);
+        return {
+          ...state,
+          classes: startTimeFiltered,
+        };
 
     case FILTER_BY_DATE:
-      const { allActivities: allActivitiesDate } = state;
-      const dateToFilter = action.payload;
-      let dateFiltered = allActivitiesDate;
+      const { allClasses: allClassesStartDate } = state;
+      const startDateToFilter = action.payload;
 
-      if (dateToFilter !== "") {
-        dateFiltered = dateFiltered.filter((el) => {
-          const eventDates = el.date.map((d) => new Date(d));
-          const filterDate = new Date(dateToFilter);
-          return eventDates.some((eventDate) => eventDate.getTime() === filterDate.getTime());
-        });
-      }
+      if (startDateToFilter.includes("all")) {
       return {
         ...state,
-        activities: dateFiltered,
+        activities: startDateFiltered,
       };
+      }
+      const startDateFiltered = allClassesStartDate.filter((classItem) =>
+      startDateToFilter.includes(classItem.startDate)
+        );
+        console.log('Estado filtrado:', startDateFiltered);
+        return {
+          ...state,
+          classes: startDateFiltered,
+        };
 
     // Filtrar por name de profesor ?
     case FILTER_BY_COACH_NAME:

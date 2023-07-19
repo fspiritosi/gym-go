@@ -3,12 +3,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Landing from "./views/Landing/Landing";
 import Detail from "./views/Detail/Detail";
 import Nav from "./components/Nav/Nav";
-import FormCreateActivities from "./views/FormCreateActivities/FormCreateActivities";
 import Profesores from "./views/Profesores/Profesores"; //Se volvio a agregar la ruta profesores por que no estaba
 import PaquetesClases from "./views/PaquetesClases/PaquetesClases";
-import FormGoals from "./views/FormGoals/FormGoals";
 import Footer from "./components/Footer/Footer";
-import FormClasses from "./views/FormClasses/FormClasses";
 import ActivitiesV from "./views/ActivitiesV/ActivitiesV";
 import Admin from "./views/Admin/Admin";
 import Dashboard from "./views/Admin/scenes/Dashboard/Dashboard";
@@ -26,8 +23,8 @@ import CreateGoals from "./views/Admin/scenes/Forms/createGoals";
 import GoalsData from "./views/Admin/scenes/Tables/GoalsData";
 import CreateCoach from "./views/Admin/scenes/Forms/createCoach";
 import CreateActivitie from "./views/Admin/scenes/Forms/createActivities";
-axios.defaults.baseURL = "http://localhost:3001";
-// axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
+//axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://gym-go-production.up.railway.app"
 
 function App() {
   let location = useLocation();
@@ -47,11 +44,7 @@ function App() {
           element={<AuthenticationGuard component={<ActivitiesV />} />}
         /> */}
         <Route path="/activity-detail/:id" element={<Detail />} />
-        {/* <Route path="/create-activity" element={<FormCreateActivities />} /> */}
-        {/* <Route path="/create-goals" element={<FormGoals />} /> */}
         <Route path="/coaches" element={<Profesores />} />
-        {/* <Route path="/create-goals" element={<FormGoals />} /> */}
-        {/* <Route path="/create-classes" element={<FormClasses />} /> */}
         <Route path="/prices" element={<PaquetesClases />} />
         <Route path="/classes" element={<Classes />} />
         <Route

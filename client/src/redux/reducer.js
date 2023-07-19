@@ -1,7 +1,7 @@
 
 
 
-import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES,  PUT_EVENTS, FILTER_BY_TITLE, FILTER_BY_START_TIME, FILTER_BY_DATE, FILTER_BY_COACH_NAME, GET_EVENTS, GET_USERS, GET_CLASS_NAME } from "./actions";
+import { GET_ACTIVITIES, GET_ACTIVITIE_NAME, GET_DETAILS_ID, ORDER_BY_NAME, FILTER_BY_DIFFICULTY, GET_GOALS, FILTER_BY_GOALS, GET_COACHES, GET_CLASSES,  PUT_EVENTS, FILTER_BY_TITLE, FILTER_BY_START_TIME, FILTER_BY_DATE, FILTER_BY_COACH_NAME, GET_EVENTS, GET_USERS, GET_CLASS_NAME, CLEAR_FILTERS } from "./actions";
 
 
 
@@ -15,8 +15,6 @@ const initialState = {
   allClasses: [],
   events: [],
   users: []
-  // allEvents:[],
-
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -47,23 +45,24 @@ const rootReducer = (state = initialState, action) => {
         activities:
           action.payload === "all" ? state.allActivities : sortedActivities,
       };
-
+    
+    // Filtro por dificultad
     case FILTER_BY_DIFFICULTY:
-      const { allActivities } = state; // Cambiado a desestructuración
+      const { allClasses: allDifficultyClasses  } = state;
       const diffToFilter = action.payload;
-      let diffFiltered = allActivities;
-      if (diffToFilter !== "diff") {
-        diffFiltered = allActivities.filter(
+      let diffFiltered = [];
+
+      if (diffToFilter !== "difficulty") {
+        diffFiltered = allDifficultyClasses.filter(
           (el) => el.difficulty === diffToFilter
         );
         if (diffFiltered.length === 0) {
-          diffFiltered = allActivities;
+          diffFiltered = allDifficultyClasses;
         }
       }
       return {
         ...state,
-        activities:
-          action.payload === "diff" ? state.allActivities : diffFiltered,
+        classes: diffFiltered
       };
 
     case GET_DETAILS_ID:
@@ -210,12 +209,18 @@ const rootReducer = (state = initialState, action) => {
         classes: coachFiltered,
       };
 
-
     // Classes por name title activity
     case GET_CLASS_NAME:
       return {
         ...state,
         classes: action.payload,
+      };
+    
+    //Limpiar filtros en Classes
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        classes: state.allClasses
       };
 
     default:

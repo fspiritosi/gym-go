@@ -18,7 +18,7 @@ const Profesores = () => {
     
        
    <section>
-	<div class="py-4 bg-black text-white">
+	<div class=" min-h-screen py-4 bg-black text-white">
 
 		<div class="mx-auto mt-10 flex flex-col md:flex-row">
 			<div class="flex flex-col w-full lg:w-3/5 p-8">

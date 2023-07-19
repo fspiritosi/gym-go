@@ -158,7 +158,7 @@ const rootReducer = (state = initialState, action) => {
       if (startTimeToFilter.includes("all")) {
       return {
         ...state,
-        activities: startTimeFiltered,
+        activities: startTimeToFilter,
       };
       }
       const startTimeFiltered = allClassesStartTime.filter((classItem) =>
@@ -177,7 +177,7 @@ const rootReducer = (state = initialState, action) => {
       if (startDateToFilter.includes("all")) {
       return {
         ...state,
-        activities: startDateFiltered,
+        activities: startDateToFilter,
       };
       }
       const startDateFiltered = allClassesStartDate.filter((classItem) =>

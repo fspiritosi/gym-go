@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../Login/LoginButton";
 import LogoutButton from "../Login/LogoutButton";
-import Logo from "../../assets/Logos/Logo.svg";
+import Logo from "../../Assets/Logos/Logo.svg";
 import Profile from "../Login/Profile";
 import { MdMenu, MdClose } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";

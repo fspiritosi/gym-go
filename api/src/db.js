@@ -2,7 +2,7 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT} = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
@@ -39,7 +39,8 @@ modelDefiners.forEach((model) => model(sequelize));
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Activities, Goals, Classes, Coaches, Events, users } = sequelize.models;
+const { Activities, Goals, Classes, Coaches, Events, users, Orders } =
+  sequelize.models;
 
 // Aca vendrian las relaciones
 Activities.belongsToMany(Goals, { through: "Activities_Goals" });
@@ -51,14 +52,17 @@ Classes.belongsTo(Activities);
 Coaches.hasMany(Classes);
 Classes.belongsTo(Coaches);
 
-Activities.belongsToMany(Coaches, { through: 'Activities_Coaches' });
-Coaches.belongsToMany(Activities, { through: 'Activities_Coaches' });
+Activities.belongsToMany(Coaches, { through: "Activities_Coaches" });
+Coaches.belongsToMany(Activities, { through: "Activities_Coaches" });
 
 Classes.hasMany(Events);
 Events.belongsTo(Classes);
 
 Events.belongsToMany(users, { through: "Events_Users" });
-users.belongsToMany(Events, { through: "Events_Users" })
+users.belongsToMany(Events, { through: "Events_Users" });
+
+users.hasMany(Orders);
+Orders.belongsTo(users);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

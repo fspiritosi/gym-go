@@ -1,6 +1,6 @@
 import React from 'react';
 import 'tailwindcss/tailwind.css';
-import Logo from '../../Assets/Logos/Logo.svg';
+import Logo from '../../assets/Logos/Logo.svg';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {

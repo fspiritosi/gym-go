@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import MercadoPago from '../MercadoPago/MercadoPago';
 import Modal from 'react-modal';
 import { useAuth0 } from '@auth0/auth0-react';
-import { toast } from 'react-toastify'; //toastify
 import 'react-toastify/dist/ReactToastify.css'; //toastify
-import LoginButton from '../../components/Login/LoginButton';
+import backgroundImage from '../../Assets/backgraund/Fondo2.jpg'
+import card from '../../Assets/backgraund/card.jpg'
+import Logo from "../../Assets/Logos/Logo.svg";
+import {FaWindowClose} from 'react-icons/fa'
+
 
 Modal.setAppElement("#root");
 
@@ -39,31 +42,52 @@ const CardPaquete = ({ title, clases, price, comprar, description }) => {
   const handleModalLogin = () => {
     loginWithRedirect(); // Redirige al usuario a la página de auth0
   };
+  
 
-    return (    
+    return (
        
-        <div class=" bg-gray-claro border-2 border-gray px-6 py-4  rounded-lg hover:bg-gray hover:border-black hover:border-2 shadow-xl dark:hover:bg-gray-700">
-                    <p class="text-lg font-medium text-gray-800 dark:text-gray-100">{title}</p>
-                    <h4 class="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100">${price} <span class="text-base font-normal text-gray-600 dark:text-gray-400">/ Año </span></h4>
-                    <p class="mt-4 text-gray-500 dark:text-gray-300">{description}</p>
+        <div class="px-6 py-4 bg-gray hover:shadow-gray-claro rounded-lg shadow-md">
+                    <p class="text-xl font-semibold">{title}</p>
+                    <h4 class="mt-2 text-4xl font-semibol"> <span className=' font-bold text-5xl text-green'>$</span>{price} <span class="text-base font-normal text-gray-600 dark:text-gray-400">/ Año </span></h4>
+                    <p class="mt-4 text-lg">{description}</p>
 
-                   <button onClick={handleBuy} class=" w-full px-4 py-2 mt-10 font-semibold text-white capitalize bg-green-neon rounded-md hover:bg-green.claro focus:outline-none focus:bg-blue-600">
+                   <button onClick={handleBuy} class=" text-sm w-40 text-white bg-green-neon hover:bg-green focus:ring-4 focus:ring-green-neon font-medium rounded-lg text-s px-5 py-2.5 text-center" type="button" data-modal-toggle="authentication-modal">
                         Elegir
                     </button>{showMercadoPago && <MercadoPago orderData={orderData} />}
                     {showMercadoPago && <MercadoPago orderData={orderData} />}
-                    <Modal 
-                       isOpen={showModal} 
-                       onRequestClose={closeModal}
-                       
-                       >
-                <h2>Debes iniciar sesión o Registrarte para realizar la compra</h2>
-                <button onClick={handleModalLogin} >Iniciar sesión</button>
-                <button onClick={handleModalLogin}>Registrarse</button>
-                <button onClick={closeModal} >Cerrar</button>
-            </Modal>                    
+                    
+                    <div class="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center">
+                        
+                    <Modal
+                                        
+                     isOpen={showModal} 
+                     onRequestClose={closeModal}                                           
+                        >                          
+                   <div class=" w bg-cover items-center justify-center rounded-t-md border-b-2 border-gray border-opacity-100 p-4 mt-16 h-96 grid " style={{ backgroundImage: `url(${backgroundImage})` }}>                  
+                                     
+                   <img
+                         className=" ml-1 flex justify-between w-40"
+                         src={Logo}
+                         alt="logo"
+                             />
+                   
+                   <h1 className='text-4xl font-semibold leading-normal text-white'>Debes iniciar sesión o Registrarte para realizar la compra</h1>
+                   <button  class="rounded-xl w-96 inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray"
+                   onClick={handleModalLogin} >Iniciar sesión</button>
+                   <button class="rounded-xl w-96 inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" onClick={handleModalLogin}>Registrarse</button>
+                   <button onClick={closeModal} className= ' ml-44 box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'>
+                    <FaWindowClose color='white' className='w-8 h-8'/>
+                   </button>
+                  </div>
+             </Modal>         
+              </div>                                          
         </div>  
         
   );
 };
 
 export default CardPaquete;
+
+
+
+

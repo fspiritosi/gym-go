@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch } from 'react-redux';
-import { getUserLogged } from '../../redux/actions';
+import { useDispatch } from "react-redux";
+import { getUserLogged } from "../../redux/actions";
 import { FaUserCircle } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 

@@ -2,7 +2,6 @@ import { Box, Button, Typography,  useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../../theme";
 import ActivitieModal from "../Modals/actionModal";
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 

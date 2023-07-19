@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import style from "./CardPaquete.module.css";
-import MercadoPago from "../MercadoPago/MercadoPago";
-import Modal from "react-modal";
-import { useAuth0 } from "@auth0/auth0-react";
-import { toast } from "react-toastify"; //toastify
-import "react-toastify/dist/ReactToastify.css"; //toastify
-import LoginButton from "../../components/Login/LoginButton";
+import React, { useState } from 'react';
+import MercadoPago from '../MercadoPago/MercadoPago';
+import Modal from 'react-modal';
+import { useAuth0 } from '@auth0/auth0-react';
+import { toast } from 'react-toastify'; //toastify
+import 'react-toastify/dist/ReactToastify.css'; //toastify
+import LoginButton from '../../components/Login/LoginButton';
 
 Modal.setAppElement("#root");
 
@@ -45,34 +44,29 @@ const CardPaquete = ({ title, clases, price, comprar }) => {
     loginWithRedirect(); // Redirige al usuario a la página de auth0
   };
 
-  return (
-    <div className={style.cardContainer}>
-      <br />
-      <h2>{title}</h2>
-      <h2>${price}</h2>
-      <br />
-      <button className={style.comprar} onClick={handleBuy}>
-        Comprar
-      </button>
-      {showMercadoPago && <MercadoPago orderData={orderData} />}
-      <Modal
-        isOpen={showModal}
-        onRequestClose={closeModal}
-        className={`${style.modalContent} ${style.modalOverlay}`}
-      >
-        <h2>Debes iniciar sesión o Registrarte para realizar la compra</h2>
-        <button onClick={handleModalLogin} className={style.modalButton}>
-          Iniciar sesión
-        </button>
-        <button onClick={handleModalLogin} className={style.modalButton}>
-          Registrarse
-        </button>
-        <button onClick={closeModal} className={style.modalButton}>
-          Cerrar
-        </button>
-      </Modal>
-      <br />
-    </div>
+    return (    
+       
+        <div class=" bg-gray-claro border-2 border-gray px-6 py-4  rounded-lg hover:bg-gray hover:border-black hover:border-2 shadow-xl dark:hover:bg-gray-700">
+                    <p class="text-lg font-medium text-gray-800 dark:text-gray-100">{title}</p>
+                    <h4 class="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100">${price} <span class="text-base font-normal text-gray-600 dark:text-gray-400">/ Año </span></h4>
+                    <p class="mt-4 text-gray-500 dark:text-gray-300">{description}</p>
+
+                   <button onClick={handleBuy} class=" w-full px-4 py-2 mt-10 font-semibold text-white capitalize bg-green-neon rounded-md hover:bg-green.claro focus:outline-none focus:bg-blue-600">
+                        Elegir
+                    </button>{showMercadoPago && <MercadoPago orderData={orderData} />}
+                    {showMercadoPago && <MercadoPago orderData={orderData} />}
+                    <Modal 
+                       isOpen={showModal} 
+                       onRequestClose={closeModal}
+                       
+                       >
+                <h2>Debes iniciar sesión o Registrarte para realizar la compra</h2>
+                <button onClick={handleModalLogin} >Iniciar sesión</button>
+                <button onClick={handleModalLogin}>Registrarse</button>
+                <button onClick={closeModal} >Cerrar</button>
+            </Modal>                    
+        </div>  
+        
   );
 };
 

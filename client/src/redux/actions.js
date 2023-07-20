@@ -9,7 +9,7 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const FILTER_BY_DIFFICULTY = "FILTER_BY_DIFFICULTY";
 export const GET_GOALS = "GET_GOALS";
 export const FILTER_BY_GOALS = "FILTER_BY_GOALS";
-export const GET_COACHES = 'GET_COACHES'
+export const GET_COACHES = "GET_COACHES";
 export const GET_CLASSES = "GET_CLASSES";
 export const PUT_EVENTS = "PUT_EVENTS";
 export const FILTER_BY_COACH = "FILTER_BY_COACH";
@@ -18,11 +18,9 @@ export const FILTER_BY_START_TIME = "FILTER_BY_START_TIME";
 export const FILTER_BY_DATE = "FILTER_BY_DATE";
 export const FILTER_BY_COACH_NAME = "FILTER_BY_COACH_NAME";
 export const GET_EVENTS = "GET_EVENTS";
-export const GET_USERS = "GET_USERS";
+export const GET_USERLOGGED = "GET_USERLOGGED";
 export const GET_CLASS_NAME = "GET_CLASS_NAME";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
-
-
 
 //All Activities
 export const getActivities = () => {
@@ -86,16 +84,15 @@ export function filterByDifficulty(payload) {
 
 //All Goals
 export const getGoals = () => {
-    return async function (dispatch) {
-        const backGoals = await axios.get("/goals");
-        const goals = backGoals.data;
-        dispatch({
-            type: GET_GOALS,
-            payload: goals,
-        });
-    };
+  return async function (dispatch) {
+    const backGoals = await axios.get("/goals");
+    const goals = backGoals.data;
+    dispatch({
+      type: GET_GOALS,
+      payload: goals,
+    });
+  };
 };
-
 
 export function filterByGoals(payload) {
   return {
@@ -104,16 +101,16 @@ export function filterByGoals(payload) {
   };
 }
 
-//All Coaches 
+//All Coaches
 export const getCoaches = () => {
-    return async function (dispatch) {
-        const backCoaches = await axios.get("/coaches");
-        const coaches = backCoaches.data;
-        dispatch({
-            type: GET_COACHES,
-            payload: coaches,
-        });
-    };
+  return async function (dispatch) {
+    const backCoaches = await axios.get("/coaches");
+    const coaches = backCoaches.data;
+    dispatch({
+      type: GET_COACHES,
+      payload: coaches,
+    });
+  };
 };
 
 //All Classes
@@ -129,14 +126,22 @@ export const getClassess = () => {
 };
 
 //Put Events update
-export const putEvents = (id, userId) => {
+export const putEvents = (id, userId, email) => {
   return async function (dispatch) {
-    const backEvents = await axios.put(`/events/${id}`, { userId });
-    const events = backEvents.data;
-    dispatch({
-      type: PUT_EVENTS,
-      payload: events,
-    });
+    try {
+      // Realizar la solicitud PUT para guardar la compra
+      await axios.put(`/events/${id}`, { userId, email });
+      // Realizar la solicitud GET para obtener la información actualizada del usuario
+      const response = await axios.get(`/users/${userId}`);
+      const user = response.data;
+      // Actualizar el estado del usuario con los nuevos datos
+      dispatch({
+        type: GET_USERLOGGED,
+        payload: user,
+      });
+    } catch (error) {
+      // Manejar errores si es necesario
+    }
   };
 };
 
@@ -152,15 +157,29 @@ export const getEvents = (id) => {
   };
 };
 
-//get Users
-export const getUsers = () => {
+// Get User Logged In GymGo
+export const getUserLogged = (email, username) => {
   return async function (dispatch) {
-    const backUsers = await axios.get("/users");
-    const users = backUsers.data;
-    dispatch({
-      type: GET_USERS,
-      payload: users,
-    });
+    await axios
+      .get(`/users?email=${email}`)
+      .then((response) => {
+        const userLogged = response.data;
+        dispatch({
+          type: GET_USERLOGGED,
+          payload: userLogged,
+        });
+      })
+      .catch(async (error) => {
+        const response = await axios.post("/users/register", {
+          username: username,
+          email: email,
+        });
+        const userLogged = response.data;
+        dispatch({
+          type: GET_USERLOGGED,
+          payload: userLogged,
+        });
+      });
   };
 };
 
@@ -226,6 +245,6 @@ export function searchClassesByName(title) {
 //Limpiar filtros en Classes
 export const clearFilters = () => {
   return {
-    type: CLEAR_FILTERS
+    type: CLEAR_FILTERS,
   };
 };

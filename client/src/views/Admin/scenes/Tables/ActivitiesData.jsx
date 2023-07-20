@@ -1,7 +1,7 @@
 import { Box, Button, Typography,  useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../../theme";
-
+import ActivitieModal from "../Modals/actionModal";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -13,13 +13,19 @@ import Header from "../../adminComponentes/Header";
 
 const Activities = () => {
   const [activities, setActivities] = useState([])
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState({})
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-    const changeIsActive = async (id, isActive) => {
-      await axios.put(`/activities/${id}`, {isActive});
-      getActivities()
-    };
+  const handleOpenModal = (id, title, description, image, Goals, isActive) => {
+    setData({id, title, description, Goals, image, isActive });
+    setOpen(true);
+  };
+  const changeIsActive = async (id, isActive) => {
+    await axios.put(`/activities/${id}`, {isActive});
+    getActivities()
+  };
   const colums = [
     {
       field: "title",
@@ -42,7 +48,6 @@ const Activities = () => {
       },
     },
     { field: "Goals", headerName: "Objetivos", flex: 1 },
-    // { field: "Coaches", headerName: "Profesores", flex: 1 },
     {
       field: "Coaches",
       headerName: "Profesores",
@@ -120,11 +125,19 @@ const Activities = () => {
     },
     {
       headerName: "Acciones",
-      renderCell: ({ row: { id } }) => {
+      renderCell: ({ row: { id, title, description, image, Goals, isActive } }) => {
         return (
           <Box sx={{ cursor: "pointer" }}>
-            <EditIcon />
-            <Typography variant="h6">Editar</Typography>
+            <Button
+              variant="outline"
+              onClick={() =>
+                handleOpenModal(id, title, description, image, Goals, isActive)
+              }
+            >
+              <EditIcon />
+              <Typography variant="h6">Editar</Typography>
+            </Button>
+            <ActivitieModal open={open} setOpen={setOpen} data={data} />
           </Box>
         );
       },

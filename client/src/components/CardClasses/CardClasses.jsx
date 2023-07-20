@@ -15,31 +15,37 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
-    const userId = 'b59cbfc1-f5f3-4c87-97b7-b3cfa3609287'; // Ejemplo de userID
 
-    const user = useSelector((state) => state.users);
-    const userm = user.flatMap((u) => u);
+    const user = useSelector((state) => state.userLogged);
+    console.log(user);
+    const credits = user.credits;
+    console.log(credits); // Imprime el valor de los créditos del usuario
+
 
     const handleReserva = (eventId, index) => {
         if (isAuthenticated) {
             setShowModal(false);
             const event = eventQuota[index];
             const d = date[index];
-            const isNotCredits = userm.find((s) => s.id === userId && s.credits === 0) !== undefined;
-            const suscribed = eventQuota[index].includes(userId);
+            const isNotCredits = user.credits === 0;
+            console.log(isNotCredits); // Devuelve true si los créditos no son cero, o false si los créditos son cero
+
+            const suscribed = eventQuota[index].includes(user.id);
 
             console.log(`fecha ${d}`);
             console.log(`evento id ${eventId[index]}`);
-            console.log(`user id ${userId}`);
+            console.log(`username ${user.username}`);
+            console.log(`username ${user.email}`);
+            console.log(`user id ${user.id}`);
             console.log(`array de usuarios inscritos ${event}`);
-            console.log(isNotCredits);
-            console.log(suscribed);
+            console.log(`Tiene creditos? ${isNotCredits}`);
+            console.log(`Esta suscrito? ${suscribed}`);
 
             if (event.length < quota && !suscribed) {
                 if (isNotCredits) {
                     toast.error('No tienes suficientes créditos');
                 } else {
-                    dispatch(putEvents(eventId[index], userId))
+                    dispatch(putEvents(eventId[index], user.id, user.email ))
                         .then(() => {
                             handleUpdateClasses(); // Llamada a la función de actualización del componente padre
                             toast.success(`Registro a evento ${d} exitoso✅`);
@@ -97,7 +103,7 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                     <div key={index} className={styles.divbuttons}>
                         {isAuthenticated ? (
                             <div>
-                                {eventQuota[index].includes(userId) && <p>Suscrito</p>}
+                                {eventQuota[index].includes(user.id) && <p>Suscrito</p>}
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
                                     className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}

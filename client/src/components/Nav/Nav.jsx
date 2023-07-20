@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "../Login/LoginButton";
-import LogoutButton from "../Login/LogoutButton";
 import Logo from "../../Assets/Logos/Logo.svg";
 import Profile from "../Login/Profile";
 import { MdMenu, MdClose } from "react-icons/md";

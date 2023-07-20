@@ -20,7 +20,6 @@ const ClassesAdm = () => {
     getClasses();
   };
   const colums = [
-    // { field: "id", headerName: "ID" },
     {
       field: "Activity",
       headerName: "Actividad",
@@ -43,20 +42,6 @@ const ClassesAdm = () => {
       headerName: "Dificultad",
       flex: 1,
     },
-    // {
-    //   field: "image",
-    //   headerName: "Imagen",
-    //   flex: 1,
-    //   headerAlign: "center",
-    //   align: "center",
-    //   renderCell: ({ row: { image, title } }) => {
-    //     return (
-    //       <Box width="50px">
-    //         <img src={image} alt={title} />
-    //       </Box>
-    //     );
-    //   },
-    // },
     { field: "startDate", headerName: "Fecha Inicio", flex: 1 },
     { field: "endDate", headerName: "Fecha de Fin", flex: 1 },
     { field: "startTime", headerName: "Hora de Inicio", flex: 1 },

@@ -4,15 +4,16 @@ import EjemploPC from "./ejemplopaquetesclases.json"
 
 
 
+
 const PaqueteClases = () => {
     return (
         
-        <section>
-        <div class="py-4 bg-gray-light ">
+        <section >
+        <div class="py-4 bg-black">
             <div class=" mt-24 items-center sm:items-center sm:justify-between mx-auto flex-col md:flex-row">
                 <div>
-                    <h2 class="text-4xl font-semibold text-black">¿Preparado para dar el primer paso hacia una nueva versión de ti mismo?</h2>
-                    <p class="mt-4 text-xl">Suscríbete hoy y descubre cómo nuestro gimnasio hará que tus objetivos sean realidad.</p>
+                    <h2 class="text-4xl font-semibold text-white">¿Preparado para dar el primer paso hacia una nueva versión de ti mismo?</h2>
+                    <p class="mt-4 text-white text-xl">Suscríbete hoy y descubre cómo nuestro gimnasio hará que tus objetivos sean realidad.</p>
                 </div>               
             </div>
 

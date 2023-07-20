@@ -21,13 +21,16 @@ module.exports = {
     './src/components/SearchBar/SearchBar.jsx',    
     './src/components/CardActivities/CardActivities.jsx',
     './src/components/CardProfesores/CardProfesores.jsx',
-    
+    './src/components/CardProfesores/CardPaqueteClase.jsx',
+    './src/components/CardCompras/CardCompras.jsx',
+    './src/components/CardReservas/CardReservas.jsx',
+    './src/components/UserProfile/UserProfile.jsx',
     './src/**/*.{js,jsx,ts,tsx}',
 
   ],
   theme: {
     colors: {
-      'black': '#030712',
+      'black': '#0a0a0a',
       'white': '#f9fafb',
       'green-neon': '#a3e635',
       'green.claro': '#c4ee72',
@@ -37,7 +40,10 @@ module.exports = {
       'gray-light': '#f3f4f6',
       'lighter-white':'rgba(255,255,255,0.17)',
       'yellow': '#facc15',
-      'lima': '#ecfccb',      
+      'lima': '#ecfccb',
+      'red': '#dc2626',
+      'green':'#65a30d'
+        
     },
     },
   extend: {},  

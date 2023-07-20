@@ -18,7 +18,7 @@ const Profesores = () => {
     
        
    <section>
-	<div class="py-4 bg-black text-white">
+	<div class=" min-h-screen py-4 bg-black text-white">
 
 		<div class="mx-auto mt-10 flex flex-col md:flex-row">
 			<div class="flex flex-col w-full lg:w-3/5 p-8">
@@ -58,20 +58,3 @@ export default Profesores;
 
 
 
-{/* 
-
-// {coaches.map((c, index) => {
-//     if (c.isActive === false) {
-//         return null; //no muestra los profesores si esta en false
-//     }
-//     return (
-//         <CardProfesores
-//             key={index}
-//             id={c.id}
-//             profilePicture={c.profilePicture}
-//             firstName={c.firstName}
-//             lastName={c.lastName}
-//             description={c.description}
-//         />
-//     )
-// })} */}

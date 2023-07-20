@@ -126,14 +126,22 @@ export const getClassess = () => {
 };
 
 //Put Events update
-export const putEvents = (id, userId) => {
+export const putEvents = (id, userId, email) => {
   return async function (dispatch) {
-    const backEvents = await axios.put(`/events/${id}`, { userId });
-    const events = backEvents.data;
-    dispatch({
-      type: PUT_EVENTS,
-      payload: events,
-    });
+    try {
+      // Realizar la solicitud PUT para guardar la compra
+      await axios.put(`/events/${id}`, { userId, email });
+      // Realizar la solicitud GET para obtener la información actualizada del usuario
+      const response = await axios.get(`/users/${userId}`);
+      const user = response.data;
+      // Actualizar el estado del usuario con los nuevos datos
+      dispatch({
+        type: GET_USERLOGGED,
+        payload: user,
+      });
+    } catch (error) {
+      // Manejar errores si es necesario
+    }
   };
 };
 

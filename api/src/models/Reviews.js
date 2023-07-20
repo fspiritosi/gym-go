@@ -2,24 +2,23 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define("Reviews", {
-    userId: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-    },
-    classeId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
+      autoIncrement: true,
     },
     rate: {
-      type: DataTypes.SMALLINT,
+      type: DataTypes.INTEGER, // beeing 1 the worst and 5 the best
       allowNull: false,
+      validate: {
+        min: 1,
+        max: 5,
+      },
     },
-    comment: {
-      type: DataTypes.TEXT,
-    },
-    image: {
-      type: DataTypes.STRING,
-    },
+    // comment: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false
+    // },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,

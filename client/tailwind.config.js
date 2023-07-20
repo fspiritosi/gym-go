@@ -22,6 +22,9 @@ module.exports = {
     './src/components/CardActivities/CardActivities.jsx',
     './src/components/CardProfesores/CardProfesores.jsx',
     './src/components/CardProfesores/CardPaqueteClase.jsx',
+    './src/components/CardCompras/CardCompras.jsx',
+    './src/components/CardReservas/CardReservas.jsx',
+    './src/components/UserProfile/UserProfile.jsx',
     './src/**/*.{js,jsx,ts,tsx}',
 
   ],

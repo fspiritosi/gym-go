@@ -17,6 +17,7 @@ import {
   GET_USERLOGGED,
   GET_CLASS_NAME,
   CLEAR_FILTERS,
+  GET_REVIEWS,
 } from "./actions";
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
   allClasses: [],
   events: [],
   userLogged: [],
+  reviews: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -66,7 +68,7 @@ const rootReducer = (state = initialState, action) => {
       let diffFiltered = [];
 
       if (selectedDifficulty.length === 0) {
-        diffFiltered = allDifficultyClasses; 
+        diffFiltered = allDifficultyClasses;
       } else {
         diffFiltered = allDifficultyClasses.filter((el) =>
           selectedDifficulty.includes(el.difficulty)
@@ -132,107 +134,13 @@ const rootReducer = (state = initialState, action) => {
     case GET_EVENTS:
       return {
         ...state,
-        events: action.payload,
+        allEvents: action.payload,
       };
 
-    case GET_USERLOGGED:
+    case GET_USERS:
       return {
         ...state,
-        userLogged: action.payload,
-      };
-
-    // Se adapto a la data que se recibe de classes
-    case FILTER_BY_TITLE:
-      const { allClasses: allClassesTitle } = state;
-      const selectedClassesNames = action.payload;
-
-      if (selectedClassesNames.includes("")) {
-        return {
-          ...state,
-          classes: allClassesTitle,
-        };
-      }
-      const classesFiltered = allClassesTitle.filter((classItem) =>
-        selectedClassesNames.includes(classItem.Activity.title)
-      );
-      console.log("Estado filtrado:", classesFiltered);
-      return {
-        ...state,
-        classes: classesFiltered,
-      };
-
-    case FILTER_BY_START_TIME:
-      const { allClasses: allClassesStartTime } = state;
-      const startTimeToFilter = action.payload;
-
-      if (startTimeToFilter.includes("all")) {
-        return {
-          ...state,
-          activities: startTimeToFilter,
-        };
-      }
-      const startTimeFiltered = allClassesStartTime.filter((classItem) =>
-        startTimeToFilter.includes(classItem.startTime)
-      );
-      console.log("Estado filtrado:", startTimeFiltered);
-      return {
-        ...state,
-        classes: startTimeFiltered,
-      };
-
-    case FILTER_BY_DATE:
-      const { allClasses: allClassesStartDate } = state;
-      const startDateToFilter = action.payload;
-
-      if (startDateToFilter.includes("all")) {
-        return {
-          ...state,
-          activities: startDateToFilter,
-        };
-      }
-      const startDateFiltered = allClassesStartDate.filter((classItem) =>
-        startDateToFilter.includes(classItem.startDate)
-      );
-      console.log("Estado filtrado:", startDateFiltered);
-      return {
-        ...state,
-        classes: startDateFiltered,
-      };
-
-    // Filtrar por name de profesor ?
-    case FILTER_BY_COACH_NAME:
-      const { allClasses: allClassesCoaches } = state;
-      const selectedCoachNames = action.payload;
-
-      if (selectedCoachNames.includes("")) {
-        return {
-          ...state,
-          classes: allClassesCoaches,
-        };
-      }
-      const coachFiltered = allClassesCoaches.filter((classItem) =>
-        selectedCoachNames.includes(
-          `${classItem.Coach.firstName} ${classItem.Coach.lastName}`
-        )
-      );
-      console.log("Estado filtrado:", coachFiltered);
-      return {
-        ...state,
-        classes: coachFiltered,
-      };
-
-    // Classes por name title activity
-    case GET_CLASS_NAME:
-      return {
-        ...state,
-        classes: action.payload,
-      };
-
-    //Limpiar filtros en Classes
-    case CLEAR_FILTERS:
-      return {
-        ...state,
-        classes: state.allClasses,
+        reviews: action.payload,
       };
 
     default:

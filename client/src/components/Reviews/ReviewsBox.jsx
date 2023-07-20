@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getReviews, postReview } from "../../Redux/actions/reviews";
-import uploadImageToCloudinary from "../../utils/Cloudinary/uploadImage";
+import { getReviews, postReview } from "../../redux/actions";
+//import uploadImageToCloudinary from "../../utils/Cloudinary/uploadImage";
 import Reviews from "./Reviews";
-import { LoginButton } from "../Login/LoginButton";
+import LoginButton from "../Login/LoginButton";
 import {
   Box,
   Image,
@@ -33,19 +33,20 @@ const ReviewsBox = () => {
   let { id } = useParams();
   let dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews.reviews);
+  const user = useSelector((state) => state.userLogged);
+
   useEffect(() => {
     dispatch(getReviews());
   }, []);
 
   let userReview =
-    user &&
+    userA &&
     reviews
       .filter((r) => r.userId === user.id)
-      .filter((r) => r.recipeId === parseInt(id));
+      .filter((r) => r.eventId === parseInt(id));
 
   const [input, setInput] = useState({
     rate: "",
-    image: null,
     comment: "",
   });
 
@@ -71,26 +72,22 @@ const ReviewsBox = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { rate, image, comment } = input;
+    const { rate, comment } = input;
 
     let imageUrl;
-    if (image) {
-      imageUrl = await uploadImageToCloudinary("reviews", image);
-    }
 
     await dispatch(
       postReview({
         userId: user ? parseInt(user.id) : 1,
-        recipeId: parseInt(id),
+        eventId: parseInt(id),
         rate: rate ? rate : 3,
         comment,
-        image: imageUrl ? imageUrl : null,
+        // image: imageUrl ? imageUrl : null,
       })
     );
 
     setInput({
       rate: "",
-      image: null,
       comment: "",
     });
     dispatch(getReviews());
@@ -99,7 +96,7 @@ const ReviewsBox = () => {
   return (
     <Box p={4}>
       {!user ? (
-        <Box className={s.reviewCreated}>
+        <Box className="">
           <p>Login to write a review</p>
           <Button colorScheme="teal" variant="solid" size="lg">
             <LoginButton />
@@ -138,7 +135,8 @@ const ReviewsBox = () => {
             />
             <span>⭐⭐⭐⭐⭐</span>
 
-            <input type="file" name="image" onChange={handleOnChange} />
+            {/* <input type="file" name="image" onChange={handleOnChange} /> */}
+            <CludinatyUploadComponent />
           </Box>
 
           <Center>
@@ -167,26 +165,24 @@ const ReviewsBox = () => {
         <Box display="flex" flexDirection="row" gap="2" flexWrap="wrap">
           {reviews.length > 0 ? (
             reviews
-              .filter((r) => r.recipeId === parseInt(id))
-              .map(
-                ({ comment, image, rate, userId, createdAt, recipeId }, i) => {
-                  return (
-                    <Center>
-                      <Reviews
-                        key={i}
-                        comment={comment}
-                        image={image}
-                        rate={rate}
-                        userId={userId}
-                        createdAt={createdAt}
-                        recipeId={recipeId}
-                      />
-                    </Center>
-                  );
-                }
-              )
+              .filter((r) => r.eventId === parseInt(id))
+              .map(({ comment, rate, userId, createdAt, eventId }, i) => {
+                return (
+                  <Center>
+                    <Reviews
+                      key={i}
+                      comment={comment}
+                      //image={image}
+                      rate={rate}
+                      userId={userId}
+                      createdAt={createdAt}
+                      eventId={eventId}
+                    />
+                  </Center>
+                );
+              })
           ) : (
-            <Box className={s.noRecipesDiv}>
+            <Box className="">
               <Text>No reviews yet. Write yours!</Text>
             </Box>
           )}

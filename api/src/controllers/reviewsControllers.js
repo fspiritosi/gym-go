@@ -1,15 +1,15 @@
-const { Reviews, users, Events} = require("../db");
+const { Reviews, users, Events } = require("../db");
 
 const getAllReviews = async () => {
   const allReviews = await Reviews.findAll();
   return allReviews;
-}
+};
 
 const getReviewById = async (id) => {
   const review = await Reviews.findByPk(id);
   if (!review) throw new Error(`Review with id ${id} not found`);
   return review;
-}
+};
 
 const createReview = async (rate, userId, eventId) => {
   if (!rate || !userId || !eventId) throw new Error(`Missing values in body`);
@@ -40,9 +40,15 @@ const deleteReviewById = async (id) => {
   const reviewToDestroy = await Reviews.findByPk(id);
   if (!reviewToDestroy) throw new Error(`Review with id ${id} not found`);
   const user = await users.findByPk(reviewToDestroy.userId);
-  if (!user) throw new Error(`The user ${reviewToDestroy.userId}, owner of the review ${id} doesn't exist`);
+  if (!user)
+    throw new Error(
+      `The user ${reviewToDestroy.userId}, owner of the review ${id} doesn't exist`
+    );
   const event = await Events.findByPk(reviewToDestroy.EventId);
-  if (!event) throw new Error(`The event ${reviewToDestroy.EventId}, that has the review ${id} doesn't exist`);
+  if (!event)
+    throw new Error(
+      `The event ${reviewToDestroy.EventId}, that has the review ${id} doesn't exist`
+    );
   await user.removeReview(reviewToDestroy);
   await event.removeReview(reviewToDestroy);
   await reviewToDestroy.destroy();
@@ -55,5 +61,57 @@ module.exports = {
   getReviewById,
   createReview,
   updateReviewById,
-  deleteReviewById
+  deleteReviewById,
 };
+// const { Reviews, users } = require("../db");
+
+// const createReview = async (
+//   userId,
+//   classesId,
+//   comment = null,
+//   rate = null,
+//   image
+// ) => {
+//   const review = await Reviews.create({
+//     userId,
+//     classesId,
+//     rate,
+//     comment,
+//     image,
+//   });
+
+//   return review;
+// };
+
+// const deleteReviews = async (Id) => {
+//   const review = await Reviews.destroy({ where: { Id } });
+
+//   return review;
+// };
+
+// module.exports = { createReview, deleteReviews };
+//////////////////////////////////////////////////////////////
+// const { Reviews, users } = require("../db");
+
+// const postReview = async (req, res) => {
+//   try {
+//     if (!(await users.findByPk(req.body.userId)).isActive)
+//       throw "User bloqueado";
+
+//     const { userId, classesId, rate, comment = null, image = null } = req.body;
+//     let postReview = await Reviews.create({
+//       userId,
+//       classesId,
+//       rate,
+//       comment,
+//       image,
+//     });
+
+//     res.status(200).send(postReview);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).send(error);
+//   }
+// };
+
+// module.exports = postReview;

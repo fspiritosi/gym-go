@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.1.1",
+    "@chakra-ui/react": "^2.8.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mercadopago/sdk-react": "^0.0.12",
@@ -17,6 +18,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "formik": "^2.4.2",
+    "framer-motion": "^10.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropdown-select": "^4.9.4",

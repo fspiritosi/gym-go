@@ -10,6 +10,7 @@ export const FILTER_BY_DIFFICULTY = "FILTER_BY_DIFFICULTY";
 export const GET_GOALS = "GET_GOALS";
 export const FILTER_BY_GOALS = "FILTER_BY_GOALS";
 export const GET_COACHES = "GET_COACHES";
+export const GET_COACHES = "GET_COACHES";
 export const GET_CLASSES = "GET_CLASSES";
 export const PUT_EVENTS = "PUT_EVENTS";
 export const FILTER_BY_COACH = "FILTER_BY_COACH";
@@ -21,6 +22,7 @@ export const GET_EVENTS = "GET_EVENTS";
 export const GET_USERLOGGED = "GET_USERLOGGED";
 export const GET_CLASS_NAME = "GET_CLASS_NAME";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
+export const GET_REVIEWS = "GET_REVIEWS";
 
 //All Activities
 export const getActivities = () => {
@@ -156,7 +158,32 @@ export const getEvents = (id) => {
     });
   };
 };
-
+//get Reviews
+export const getReviews = (currentUser) => {
+  let user;
+  if (currentUser) {
+    user = {
+      id: currentUser.id,
+      email: currentUser.email,
+    };
+  }
+  return async (dispatch) => {
+    await axios
+      .get(`/reviews`, user ? { params: user } : null)
+      .then((response) => response.data)
+      .then((data) => {
+        dispatch({ type: GET_REVIEWS, payload: data });
+      });
+  };
+};
+//post Reviews
+export const postReview = (payload) => async (dispatch) => {
+  return await axios.post(`/reviews`, payload);
+};
+//delete Reviews
+export const deleteReview = (payload) => async (dispatch) => {
+  return await axios.delete(`/reviews`, { data: payload });
+};
 // Get User Logged In GymGo
 export const getUserLogged = (email, username) => {
   return async function (dispatch) {

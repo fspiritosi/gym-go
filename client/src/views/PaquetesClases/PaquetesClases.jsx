@@ -1,7 +1,7 @@
 import React from "react";
 import CardPaquete from "../../components/CardPaqueteClase/CardPaqueteClase";
 import EjemploPC from "./ejemplopaquetesclases.json"
-import backgroundImage from '../../Assets/backgraund/Fondo1.jpg'
+
 
 
 

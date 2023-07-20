@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaTimesCircle } from "react-icons/fa";
 import { getReviews, deleteReview } from "../../redux/actions";
-import { getReviews, deleteReview } from "../../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Box, Image, Text, Button, Center } from "@chakra-ui/react";
 
@@ -48,7 +47,7 @@ const Reviews = (props) => {
   const handleDeleteReview = async () => {
     let info = { userId, eventId };
     await dispatch(deleteReview(info));
-    dispatch(getReviews());
+    dispatch(getReviews);
   };
 
   return (

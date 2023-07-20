@@ -10,7 +10,6 @@ export const FILTER_BY_DIFFICULTY = "FILTER_BY_DIFFICULTY";
 export const GET_GOALS = "GET_GOALS";
 export const FILTER_BY_GOALS = "FILTER_BY_GOALS";
 export const GET_COACHES = "GET_COACHES";
-export const GET_COACHES = "GET_COACHES";
 export const GET_CLASSES = "GET_CLASSES";
 export const PUT_EVENTS = "PUT_EVENTS";
 export const FILTER_BY_COACH = "FILTER_BY_COACH";

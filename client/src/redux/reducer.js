@@ -14,6 +14,7 @@ import {
   FILTER_BY_DATE,
   FILTER_BY_COACH_NAME,
   GET_EVENTS,
+  // GET_USERS,
   GET_USERLOGGED,
   GET_CLASS_NAME,
   CLEAR_FILTERS,
@@ -137,11 +138,11 @@ const rootReducer = (state = initialState, action) => {
         allEvents: action.payload,
       };
 
-    case GET_USERS:
-      return {
-        ...state,
-        reviews: action.payload,
-      };
+    // case GET_USERS:
+    //   return {
+    //     ...state,
+    //     reviews: action.payload,
+    //   };
 
     default:
       return { ...state };

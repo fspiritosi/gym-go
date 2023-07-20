@@ -4,29 +4,18 @@ import { useParams } from "react-router-dom";
 import { getReviews, postReview } from "../../redux/actions";
 //import uploadImageToCloudinary from "../../utils/Cloudinary/uploadImage";
 import Reviews from "./Reviews";
-import LoginButton from "../Login/LoginButton";
+import { LoginButton } from "../Login/LoginButton";
 import {
   Box,
   Image,
   Text,
   IconButton,
   Button,
-  Card,
   Center,
-  Container,
   Input,
-  Tabs,
-  TabList,
-  TabPanels,
   Textarea,
-  SimpleGrid,
-  Spinner,
-  Tab,
-  TabPanel,
   Spacer,
-  Stack,
   HStack,
-  VStack,
 } from "@chakra-ui/react";
 
 const ReviewsBox = () => {
@@ -40,7 +29,7 @@ const ReviewsBox = () => {
   }, []);
 
   let userReview =
-    userA &&
+    user &&
     reviews
       .filter((r) => r.userId === user.id)
       .filter((r) => r.eventId === parseInt(id));
@@ -136,7 +125,7 @@ const ReviewsBox = () => {
             <span>⭐⭐⭐⭐⭐</span>
 
             {/* <input type="file" name="image" onChange={handleOnChange} /> */}
-            <CludinatyUploadComponent />
+            {/* <CludinatyUploadComponent /> */}
           </Box>
 
           <Center>

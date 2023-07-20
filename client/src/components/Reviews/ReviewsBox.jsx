@@ -31,7 +31,6 @@ import {
 
 const ReviewsBox = () => {
   let { id } = useParams();
-  let user = JSON.parse(localStorage.getItem("MANGIARE_user"));
   let dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews.reviews);
   useEffect(() => {

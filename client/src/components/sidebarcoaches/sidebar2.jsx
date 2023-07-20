@@ -10,6 +10,7 @@ import Calendario from "../../Assets/sidebar/fecha.png"
 import Reloj from "../../Assets/sidebar/hora.png"
 import Select from 'react-dropdown-select';
 import SearchBarClasses from "./searchbarclasses";
+// import tailwindConfig from "../../../tailwind.config";
 
 import { filterByDifficulty, filterByTitle, filterByStartTime, filterByDate, filterByCoachName, clearFilters } from "../../redux/actions"
 
@@ -91,11 +92,11 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex-1">
-      <div className={`${open ? "w-72" : "w-20"} duration-300 h-90 p-10 pt-10 bg-gray-claro relative gap-10`}>
-        <img src={vector}
-          className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 border-gray-claro ${!open && 'rotate-180'} `}
-          onClick={() => setOpen(!open)} alt='' />
+    <div className="fflex flex-col md:flex-row">
+      <div className={`${open ? "w-72" : "w-20"} duration-300 h-90 p-10 pt-10 bg-gray-claro gap-10`}>
+        {/* <img src={vector}
+          className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7   ${!open && 'rotate-180'} `}
+          onClick={() => setOpen(!open)} alt='' /> */}
         <div className=" flex gap-x-8 items-center ">
           <img src={filtro}
             className={`cursor-pointer rounded-full duration-500 ${open && "rotate-[360dg]"}`}
@@ -103,22 +104,22 @@ const Sidebar = () => {
           <h1 className={` text-white origin-left font-medium text-x1 duration-200 ${!open && "scale-0"}`}>Filtros</h1>
           {/* Limpiar filtros */}
         </div>
-        <div className={`${!open && "scale-0"} w-60 h-11 relative`}>
+        <div className={`${!open && "scale-0"} w-60 h-11 `}>
           <button className="bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-poppins py-1 px-2"
             onClick={handleClearFilters}>Limpiar Filtros</button>
         </div>
 
-        <div className={`${!open && "scale-0"} w-60 h-11 relative`} >
+        <div className={`${!open && "scale-0"} w-60 h-11`} >
           <SearchBarClasses />
         </div>
 
-        <div className={`${!open && "scale-0"} w-70 h-15 relative`}>
+        <div className={`${!open && "scale-0"} w-70 h-15 `}>
           {/* Filtra la actividad */}
           <div className="flex inline-flex">
-            <img src={Actividad} className={`w-12 rounded-full duration-500 `} alt="" />
+            <img src={Actividad} className={`w-12 h-12 rounded-full duration-500`} alt="" />
             <Select
-              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
-              origin-left duration-200`}
+              className={`text-black w-70 text-sm  items-center gap-x-4 cursor-pointer p-2 hover:bg-green.claro rounded-md ${!open && "scale-0"}
+              origin-left duration-200 `}
               multi
               options={allClasse.map((classItem) => ({ value: classItem.Activity.title, label: classItem.Activity.title }))}
 
@@ -135,7 +136,7 @@ const Sidebar = () => {
 
           {/* Filtra por nombre de profesor */}
           <div className="flex inline-flex">
-            <img src={Profesor} className={`w-12  rounded-full duration-500 `} alt="" />
+            <img src={Profesor} className={`w-12 h-12 rounded-full duration-500`} alt="" />
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
               origin-left duration-200`}
@@ -156,7 +157,7 @@ const Sidebar = () => {
           </div>
 
           <div className="flex inline-flex">
-            <img src={Calendario} className={`w-12 rounded-full duration-500 `} alt="" />
+            <img src={Calendario} className={`w-12 h-12 rounded-full duration-500 `} alt="" />
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
                 origin-left duration-200`}
@@ -173,7 +174,7 @@ const Sidebar = () => {
           </div>
 
           <div className="flex inline-flex">
-            <img src={Reloj} className={`w-12 rounded-full duration-500 `} alt="" />
+            <img src={Reloj} className={`w-12 h-12 rounded-full duration-500`} alt="" />
             <Select
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"
                 } origin-left duration-200`}
@@ -190,7 +191,7 @@ const Sidebar = () => {
           </div>
 
           {/* Filtra por Dificultad */}
-          <div className={`${!open && "scale-0"} w-70 duration-200 p-10 pt-5 text-black relative`}>
+          <div className={`${!open && "scale-0"} w-70 duration-200 p-10 pt-5 text-black `}>
             <label htmlFor="difficulty">Selecciona la Dificultad</label>
             <label>Fácil
               <input

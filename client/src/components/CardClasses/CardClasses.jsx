@@ -17,10 +17,6 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     const { isAuthenticated, loginWithRedirect } = useAuth0();
 
     const user = useSelector((state) => state.userLogged);
-    console.log(user);
-    const credits = user.credits;
-    console.log(credits); // Imprime el valor de los créditos del usuario
-
 
     const handleReserva = (eventId, index) => {
         if (isAuthenticated) {
@@ -28,24 +24,13 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
             const event = eventQuota[index];
             const d = date[index];
             const isNotCredits = user.credits === 0;
-            console.log(isNotCredits); // Devuelve true si los créditos no son cero, o false si los créditos son cero
-
             const suscribed = eventQuota[index].includes(user.id);
-
-            console.log(`fecha ${d}`);
-            console.log(`evento id ${eventId[index]}`);
-            console.log(`username ${user.username}`);
-            console.log(`username ${user.email}`);
-            console.log(`user id ${user.id}`);
-            console.log(`array de usuarios inscritos ${event}`);
-            console.log(`Tiene creditos? ${isNotCredits}`);
-            console.log(`Esta suscrito? ${suscribed}`);
 
             if (event.length < quota && !suscribed) {
                 if (isNotCredits) {
                     toast.error('No tienes suficientes créditos');
                 } else {
-                    dispatch(putEvents(eventId[index], user.id, user.email ))
+                    dispatch(putEvents(eventId[index], user.id, user.email))
                         .then(() => {
                             handleUpdateClasses(); // Llamada a la función de actualización del componente padre
                             toast.success(`Registro a evento ${d} exitoso✅`);
@@ -82,41 +67,41 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     }
 
     return (
-        <div className={styles.cardContainer}>
-            <div className={styles.divs}>
-                <h4>{title}</h4>
-                <img src={imageA} alt='' className={styles.image} />
+        <div className="grid grid-cols-6 ">
+            <div className="flex flex-row items-center space-x-3 w-30">
+                <img src={imageA} alt='' className="w-12 h-12 rounded-full" />
+                <h4 className="text-m font-bold py-5">{title}</h4>
             </div>
-            <div className={styles.divs}>
-                <h4>{coachName}</h4>
-                <img src={imageC} alt='' className={styles.image} />
+            <div className="flex flex-row items-center space-x-3 w-30">
+                <img src={imageC} alt='' className="w-12 h-12 rounded-full" />
+                <h4 className="text-m font-bold py-4 ">{coachName}</h4>
             </div>
-            <div className={styles.divs}>
-                <h4>{difficultyText}</h4>
+            <div className="flex flex-row items-center space-x-3 w-30">
+                <h4 className="text-m font-bold mx-auto">{difficultyText}</h4>
             </div>
-            <div className={styles.divs}>
-                <h4>{startTime} - {endTime}</h4>
+            <div className="flex flex-row items-center space-x-3 w-30">
+                <h4 className="text-m font-bold ">{startTime} a {endTime} hrs</h4>
             </div>
-            <div>
-
+            <div className="grid grid-cols-3 gap-3">
                 {date.map((event, index) => (
-                    <div key={index} className={styles.divbuttons}>
+                    <div key={index} className="flex flex-row items-center space-x-5 w-55">
                         {isAuthenticated ? (
-                            <div>
-                                {eventQuota[index].includes(user.id) && <p>Suscrito</p>}
+                            <div className="flex flex-row items-center space-x-3 w-50">
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
-                                    className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}
+                                    className={`px-6 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon${
+                                        quota - eventQuota[index].length <= 0 ? 'bg-gray-claro' : ''
+                                    } whitespace-nowrap truncate`}
                                 >
-                                    {event}
+                                {event}{eventQuota[index].includes(user.id) && <h5 className="text-xs">Suscrito</h5>}
                                 </button>
-                                <h4>{quota - eventQuota[index].length} lugares disponibles</h4>
+                                {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
                             </div>
                         ) : (
-                            <div>
+                            <div className="flex flex-row items-center space-x-3 w-50"> 
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
-                                    className={styles.eventButton}
+                                    className="px-6 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon whitespace-nowrap truncate"
                                 >
                                     {event}
                                 </button>
@@ -124,7 +109,6 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                         )}
                     </div>
                 ))}
-
             </div>
             <Modal
                 isOpen={showModal}

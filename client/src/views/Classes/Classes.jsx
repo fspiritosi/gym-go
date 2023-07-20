@@ -7,6 +7,7 @@ import { getClassess, getEvents } from '../../redux/actions';
 import CardClasses from "../../components/CardClasses/CardClasses";
 import { ToastContainer } from 'react-toastify';
 import Sidebar from "../../components/sidebarcoaches/sidebar2";
+import 'tailwindcss/tailwind.css';
 
 const Classes = () => {
     const dispatch = useDispatch();
@@ -34,20 +35,16 @@ const Classes = () => {
 
 
     return (
-        <div>
-          {/* <div className=" p-7 text-2xl font-semibold flex-3 h-screen"> */}
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div>
-            <h1>Nuestras Clases</h1>
+        <div class="flex flex-col md:flex-row">
+            <div class="md:w-1/4 px-0 py-12">
             <Sidebar/>
+            </div>
+            <div class="md:w-3/4 px-4 py-4">
+            <h1 class="md:w-3/8 px-5 py-10 text-2xl font-bold mb-5">Nuestras Clases</h1>
             {sortedClasses?.map((clase, index) => {
             if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false REVISAR 
                 }
-
                 return (
                     <CardClasses
                         key={index}
@@ -67,7 +64,7 @@ const Classes = () => {
                 );
                 })}
                 <ToastContainer autoClose={2000} theme="dark" />
-            </div>
+                </div>
         </div>
     )
 };

@@ -7,7 +7,8 @@ import 'tailwindcss/tailwind.css';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import Sidebar from '../../components/FilterandSort/Siderbar';
+import GoalFilterDropdown from '../FilterandSort/GoalFilterDropdown';
+import FilterandSort from '../FilterandSort/FilterandSort'
 import 'tailwindcss/tailwind.css';
 
 
@@ -23,7 +24,7 @@ const Activities = () => {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", background: "green" }}
+        style={{ ...style, display: "block", width:"32px", height: "32px" }}
         onClick={onClick}
       />
     );
@@ -34,7 +35,7 @@ const Activities = () => {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", background: "green" }}
+        style={{ ...style, display: "block", }}
         onClick={onClick}
       />
     );
@@ -93,12 +94,25 @@ const Activities = () => {
 
   return (
 
-    <div className=" bg-gray-light w-full min-h-screen px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-       <Sidebar/>
-        <div className=" pt-9 mx-8 lg:items-center">
-          <div className=" pb-10">
-            <h2 className=" font-semibold text-3xl sm:text-4xl">Encuentra tu pasión por el fitness en nuestras diversas actividades</h2>
+    <div className=" bg-black w-full min-h-screen px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+       <div className=" mt-10 pb-10">
+            <h2 className=" font-semibold text-white text-3xl sm:text-4xl">Encuentra tu pasión por el fitness en nuestras diversas actividades</h2>
           </div>
+       
+       <div>
+       <h1 className=' text-white'>filtra y ordena tus actividades y objetivos</h1>      
+        <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
+        <div class=" h-14 rounded-lg bg-gray-dark">
+          
+          <FilterandSort/>        
+        </div> 
+        <div class=" h-14 rounded-lg bg-gray-dark">
+          <GoalFilterDropdown/>
+        </div>
+        </div>    
+    </div>
+        <div className=" pt-9 mx-8 lg:items-center">
+          
           
           <div style={sliderContainerStyle}>
             <Slider {...settings}             

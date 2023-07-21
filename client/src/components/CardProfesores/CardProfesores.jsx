@@ -13,8 +13,8 @@ const Card = ({ id, firstName, profilePicture, description, lastName }) => {
             <img class="border-4 border-green-neon rounded-full transition duration-500 hover:border-yellow mx-auto md:mx-0 w-18 md:w-auto"
                 src={profilePicture}
                 alt="user-avatar"/>
-            <p class="text-lg text-yellow mt-4 md:mt-8"><b>{firstName} {lastName}</b></p>            
-            <p class="text-yellow-500">{description}</p>
+            <p class="text-lg text-center text-yellow mt-4 md:mt-8"><b>{firstName} {lastName}</b></p>            
+            <p class="text-white text-center">{description}</p>
         </div>
     </div>
     );

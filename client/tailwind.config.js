@@ -35,7 +35,7 @@ module.exports = {
       'green-neon': '#a3e635',
       'green.claro': '#c4ee72',
       'gray-claro': '#d1d5db',
-      'gray-dark': '#1f2937',
+      'gray-dark': '#292524',
       'gray': '#595959',
       'gray-light': '#f3f4f6',
       'lighter-white':'rgba(255,255,255,0.17)',

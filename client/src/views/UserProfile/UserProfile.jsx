@@ -19,50 +19,41 @@ const UserProfile = () => {
     }
   }, [user]);
 
-  return (    
-    
-    <div class=" min-h-screen flex flex-col bg-black">
-      {user ? (
+  return (
+   <section>
+    {user ? (
        <>
-            
-    <div class="bg-green mt-24 shadow-lg pb-3 rounded-b-3xl">
-    <div class="rounded-b-3xl bg-black text-white font-semibold space-y-5 items-center py-7">
-      <FaUserCircle className=" mx-auto w-24 h-24"/>
-      
-        <span class="text-xl font-semibold">{user.username}</span>
-      
-      <div class="ml-3 mr-8 flex justify-end  items-center">      
-         <Link to='/prices'>
-         <span class="text-l font-semibold mr-3 text-white">Comprar más</span>
-          <button class="tr-300">
-            <SiShopee color="white" className="h-8 w-8 "/>    
-          </button>
-          </Link>              
-      </div>       
-    </div>
-    
-    <div class="grid px-7 py-2 items-center justify-around grid-cols-2 gap-4 divide-x divide-solid">
-      <div class="col-span-1 flex flex-col items-center">
-      <button>
-          <BsFillBookmarkStarFill className="h-10 w-10 text-black"/>           
-        </button>
-        <span class="text-2xl font-bold ">Mis Reservas</span>        
-      </div>
-      <div class="col-span-1 px-3 flex flex-col items-center">
-       <button
-          class="tr-300">
-          <MdCreditScore className="h-10 w-10 text-black"/>                
-       </button>
-        <span class="text-2xl font-bold">Mis Creditos</span>        
-      </div>      
-    </div>
-  </div>
 
-  <div class="grid mb-10 pb-4 rounded-2xl divide-x divide-dashed hover:divide-solid justify-evenly bg-gray gap-4 m-3 mt-10 grid-cols-2">
-    <div class="col-span-1 bg-gray h-80 p-3">
-      <div class="flex flex-col items-center mt-1">        
-                    
-          {user.Events.map((event) => (
+    <div class=" min-h-screen py-4 bg-black text-white">
+    <div className=" pt-24 mx-8 lg:items-center">
+          <div className=" pb-10">
+          <div class="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-8">
+          <div class=" min-h-screen rounded-lg bg-gray-dark">          
+           <FaUserCircle className=" mx-auto mb-10 mt-24 w-24 h-24"/>      
+          <span class=" mt-2 text-2xl font-semibold">{user.username}</span>
+
+          <div class=" my-14 py-10 px-10">      
+         <div className=" rounded-xl h-10 items-center pt-2 pb-10 hover:bg-green.claro bg-green-neon">
+         <Link to='/prices'>
+         <span class="text-lg font-semibold mr-3 text-black">Comprar más</span>
+          <button>
+            <SiShopee color="black" className="h-6 w-6 "/>    
+          </button>
+          </Link>
+          </div>                       
+         </div>
+         </div>
+
+         <div class=" min-h-screen rounded-lg bg-gray-dark lg:col-span-2">
+         <div class=" mt-4 mb-4 items-center">
+         <span class="text-xl font-semibold mr-2 ">Mis Reservas</span> 
+        <button>
+          <BsFillBookmarkStarFill color="white" className="h-6 w-6"/>           
+        </button>               
+      </div>
+      <div className=" bg-black rounded-lg min-h-screen mx-4 my-4 px-2 py-3">
+      <div class="flex flex-wrap text-center md:text-left px-8 md:px-4 lg:px-8">
+      {user.Events.map((event) => (
                   <CardReservas
                     key={event.id}
                     date={event.date}
@@ -73,32 +64,42 @@ const UserProfile = () => {
                     coachFirstName={event.Class.Coach.firstName}
                     coachLastName={event.Class.Coach.lastName}
                   />
-                ))}    
+                ))}     
+        </div>
       </div>
-    </div>
-      <div class="col-span-1 bg-gray h-80  p-3">
-         <div class="flex flex-col items-center ">
-          <CardCompras/>
-            
-            {user.purchases.map((purchase) => (
+      </div>
+         <div class=" min-h-screen rounded-lg bg-gray-dark lg:col-span-2">
+         <div class=" mt-4 mb-4 items-center">
+         <span class="text-xl font-semibold mr-2 ">Mis Creditos</span> 
+        <button>
+          <MdCreditScore color="white" className="h-6 w-6"/>           
+        </button>               
+      </div>
+      <div className=" bg-black rounded-lg min-h-screen mx-4 my-4 px-2 py-3">
+      <div class="flex flex-wrap text-center md:text-left px-8 md:px-4 lg:px-8">
+      {user.purchases.map((purchase) => (
                    <CardCompras
                     key={purchase.orderId}
                      description={purchase.item.description}
                      createdAt={purchase.item.createdAt}
                    />
                  ))
-              }
+              }            
           </div>
-        </div>       
+         </div>
+             </div>        
+           </div>         
+          </div>
         </div>
-        </>
-         ) : (
-         <p>Loading...</p>
-         )}
-        
-
-          </div>      
+       </div>
+           </>
+        ) : (
+           <p>Loading...</p>
+      )}   
+      </section>         
  )                 
 };
 
 export default UserProfile;
+
+

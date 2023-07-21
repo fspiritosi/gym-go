@@ -43,7 +43,7 @@ const SearchBar = () => {
           value={searchTerm}
           onChange={handlerInputChange}
         />
-          <button class=' ml-3' type="submit" onClick={handlerSubmit}><FaSearch /></button>
+          <button class=' ml-3' type="submit" onClick={handlerSubmit}><FaSearch color="white" /></button>
             <ToastContainer
             position="top-center"   
             autoClose={2000}

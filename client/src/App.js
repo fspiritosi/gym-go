@@ -25,8 +25,8 @@ import CreateActivitie from "./views/Admin/scenes/Forms/createActivities";
 import UserProfile from "./views/UserProfile/UserProfile";
 import Sales from "./views/Admin/scenes/Tables/SalesData";
 
-axios.defaults.baseURL = "http://localhost:3001";
-//axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
+//axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 
 function App() {
   let location = useLocation();

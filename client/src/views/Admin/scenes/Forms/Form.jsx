@@ -10,7 +10,6 @@ const initialValues = {
     email: '',
     contact: '',
     address1: '',
-    address2: '',
 }
 const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
@@ -21,7 +20,6 @@ const userSchema = yup.object().shape({
   email: yup.string().email('Email Invalido').required("Requerido"),
   contact: yup.string().matches(phoneRegExp, 'Numero no valido').required("Requerido"),
   address1: yup.string().required("Requerido"),
-  address2: yup.string().required("Requerido"),
 });
 
 
@@ -52,6 +50,7 @@ const Form = () => {
               <Box
                 display="grid"
                 gap="30px"
+                mt='50px'
                 gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                 sx={{
                   "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
@@ -61,7 +60,7 @@ const Form = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="First Name"
+                  label="Nombre"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.firstName}
@@ -74,7 +73,7 @@ const Form = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Last Name"
+                  label="Apellido"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.lastName}
@@ -100,7 +99,7 @@ const Form = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Contact Number"
+                  label="Telefono"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.contact}
@@ -113,7 +112,7 @@ const Form = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Address 1"
+                  label="Dirección"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.address1}
@@ -122,23 +121,10 @@ const Form = () => {
                   helperText={touched.address1 && errors.address1}
                   sx={{ gridColumn: "span 4" }}
                 />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Address 2"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.address2}
-                  name="address2"
-                  error={!!touched.address2 && !!errors.address2}
-                  helperText={touched.address2 && errors.address2}
-                  sx={{ gridColumn: "span 4" }}
-                />
               </Box>
               <Box display="flex" justifyContent="end" mt="20px">
                 <Button type="submit" color="secondary" variant="contained">
-                  Create New User
+                  Crear Usuario
                 </Button>
               </Box>
             </form>

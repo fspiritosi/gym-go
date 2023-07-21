@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import Logo from "../../Assets/Logos/Logo.svg";
 import Profile from "../Login/Profile";
@@ -8,14 +9,15 @@ import { MdMenu, MdClose } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 
 const Nav = () => {
-  const { isAuthenticated, loginWithRedirect, user } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const userLogged = useSelector((state) => state.userLogged);
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
 
   return (
-    <nav className="flex fixed justify-between bg-gray text-white w-screen">
+    <nav className="flex fixed justify-between z-50 bg-gray text-white w-screen">
       <div className="px-5 xl:px-12 py-3 flex w-full items-center">
         <Link to="/">
           <img
@@ -62,7 +64,7 @@ const Nav = () => {
               Clases
             </Link>
           </li>
-          {isAuthenticated && 
+          {userLogged.role === "admin" && 
           <li className="mx-4 my-6 md:my-0">
             <Link
               className=" text-l hover:text-green-neon duration-500 text-white px-2"

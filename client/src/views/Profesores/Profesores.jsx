@@ -47,6 +47,7 @@ const Profesores = () => {
                 firstName={c.firstName}
                 lastName={c.lastName}
                 description={c.description}
+                reviews={c.Reviews}
               />
             );
           })}

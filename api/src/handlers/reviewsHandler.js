@@ -27,8 +27,8 @@ const getReviewByIdHandler = async (req, res) => {
 
 const createReviewHandler = async (req, res) => {
   try {
-    const { rate, userId, eventId } = req.body;
-    const newReview = await createReview(rate, userId, eventId);
+    const { rate, userId, eventId, coachId } = req.body;
+    const newReview = await createReview(rate, userId, eventId, coachId);
     res.status(201).json(newReview);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -38,8 +38,8 @@ const createReviewHandler = async (req, res) => {
 const updateReviewByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const { rate, userId, eventId } = req.body;
-    const updatedReview = await updateReviewById(id, rate, userId, eventId);
+    const { rate, userId, eventId, coachId } = req.body;
+    const updatedReview = await updateReviewById(id, rate, userId, eventId, coachId);
     res.status(200).json(updatedReview);
   } catch (error) {
     res.status(400).json({ error: error.message });

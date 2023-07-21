@@ -44,12 +44,6 @@ const SearchBarClasses = () => {
                     onChange={handlerInputChange}
                 />
                 <button class=' ml-3' type="submit" onClick={handlerSubmit}><FaSearch /></button>
-                {/* <ToastContainer
-            position="top-center"   
-            autoClose={2000}
-            theme="dark"
-            />	   */}
-            {/* Se comento por que se repite la notificacion */}
             </div>
         </div>
     )

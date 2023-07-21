@@ -23,10 +23,17 @@ import GoalsData from "./views/Admin/scenes/Tables/GoalsData";
 import CreateCoach from "./views/Admin/scenes/Forms/createCoach";
 import CreateActivitie from "./views/Admin/scenes/Forms/createActivities";
 import UserProfile from "./views/UserProfile/UserProfile";
+<<<<<<< HEAD
 import RequireAuth from "./components/RequireAuth";
 
 axios.defaults.baseURL = "http://localhost:3001";
 // axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
+=======
+import Sales from "./views/Admin/scenes/Tables/SalesData";
+
+//axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
+>>>>>>> 01d377b6bd668dcf50678252271d259fff752065
 
 function App() {
   let location = useLocation();
@@ -43,6 +50,7 @@ function App() {
         <Route path="/prices" element={<PaquetesClases />} />
         <Route path="/classes" element={<Classes />} />
         <Route path="/profile" element={<UserProfile />} />
+<<<<<<< HEAD
 
         {/* admin routes */}
         <Route element={<RequireAuth allowedRole={"admin"} />}>
@@ -59,6 +67,25 @@ function App() {
             <Route path="goalsCreate" element={<CreateGoals />} />
             <Route path="activitiesCreate" element={<CreateActivitie />} />
           </Route>
+=======
+        <Route
+          path="/admin"
+          element={<AuthenticationGuard component={Admin} />}
+        >
+          <Route path="" element={<Dashboard />} />
+          <Route path="users" element={<Users />} />
+          <Route path="activities" element={<Activities />} />
+          <Route path="classes" element={<ClassesAdm />} />
+          <Route path="coaches" element={<Coaches />} />
+          <Route path="goals" element={<GoalsData />} />
+          <Route path="orders" element={<Sales />} />
+          orders
+          <Route path="usersCreate" element={<Form />} />
+          <Route path="coachesCreate" element={<CreateCoach />} />
+          <Route path="classesCreate" element={<ClassesForm />} />
+          <Route path="goalsCreate" element={<CreateGoals />} />
+          <Route path="activitiesCreate" element={<CreateActivitie />} />
+>>>>>>> 01d377b6bd668dcf50678252271d259fff752065
         </Route>
       </Routes>
       {location.pathname.includes("/admin") ? undefined : <Footer />}

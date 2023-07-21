@@ -2,9 +2,9 @@ const { Orders, users } = require("../db");
 
 const getAllOrders = async () => {
   const allOrders = await Orders.findAll({
-    include: {
+    include:{
       model: users,
-      attributes: ["id", "email", "username"],
+      attributes: ['id', 'email', 'username']
     }
   });
   return allOrders;

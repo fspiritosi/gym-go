@@ -7,6 +7,7 @@ import { getClassess, getEvents } from '../../redux/actions';
 import CardClasses from "../../components/CardClasses/CardClasses";
 import { ToastContainer } from 'react-toastify';
 import Sidebar from "../../components/sidebarcoaches/sidebar2";
+import 'tailwindcss/tailwind.css';
 
 const Classes = () => {
     const dispatch = useDispatch();
@@ -34,20 +35,18 @@ const Classes = () => {
 
 
     return (
-        <div>
-          {/* <div className=" p-7 text-2xl font-semibold flex-3 h-screen"> */}
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div>
-            <h1>Nuestras Clases</h1>
+        <section >
+        <div class="flex  min-h-screen flex-col md:flex-row bg-black py-14">
             <Sidebar/>
+            <div class="px-5 py-5 space-y-3">
+                <h2 class="text-4xl font-semibold text-white py-5">¡Superate a ti mismo!</h2>
+                <p class="mt-3 text-white text-lg py-3">Nuestras clases te ofrecen la atención y guía de entrenadores expertos que te ayudarán a alcanzar tus objetivos.</p>          
+            
+            <div className="space-y-3">
             {sortedClasses?.map((clase, index) => {
             if (clase.isActive === false) {
-                    return null; // No mostrar la clase si isActive es false REVISAR 
+                    return null; // No mostrar la clase si isActive es false
                 }
-
                 return (
                     <CardClasses
                         key={index}
@@ -64,11 +63,13 @@ const Classes = () => {
                         eventId={clase.Events.map((i) => i.id)}
                         handleUpdateClasses={handleUpdateClasses}
                     />
-                );
+                    );
                 })}
+                </div>
                 <ToastContainer autoClose={2000} theme="dark" />
-            </div>
+                </div>
         </div>
+        </section>   
     )
 };
 

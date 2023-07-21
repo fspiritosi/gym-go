@@ -5,10 +5,10 @@ import backgroundImage from '../../Assets/backgraund/Fondo2.jpg';
 import home from '../../Assets/backgraund/home.png'
 import coaches  from '../../Assets/Cards/profesores.jpg'
 import activities from '../../Assets/Cards/actividades.jpg'
+import classes from '../../Assets/Cards/6.jpg'
 import 'tailwindcss/tailwind.css';
 import { Link } from 'react-router-dom';
-import Nav from "../../components/Nav/Nav";
-import Footer from "../../components/Footer/Footer";
+
 
 
 const Landing = () => {
@@ -22,59 +22,70 @@ const Landing = () => {
            Tu tiempo, tu poder:<br/> entrena a tu ritmo  <br />
           en el horario que elijas.
           </h1>
-          <p className="text-sm text-white inline-block sm:block">¡Bienvenido al gimnasio que te lleva a lo más alto en salud y bienestar!.</p>
+          <p className="text-lg text-white inline-block sm:block">¡Bienvenido al gimnasio que te lleva a lo más alto en salud y bienestar!</p>
+          <Link to='/prices'>
           <button className=" text-gray-dark bg-green-neon border-2 border-white hover:border-2 hover:border-white hover:bg-green.claro font-poppins rounded-xl text-m px-5 py-2.5 mr-2 mb-10 mt-10">Únete ahora</button>
+          </Link>
         </div>
         <img className='mt-14 right-20' src={home} alt="img"></img>
       </div>
 
       </header>
-    <main class="py-16 bg-gray-light mx-auto px-6 md:px-0">
-    <section>
-      <h1 class="text-3xl font-bold text-gray-dark mb-10">Vive la experiencia GymGo</h1>
-      <div class="grid sm:grid-cols-2 gap-4 grid-cols-1">
+    <main class="py-16 bg-black mx-auto px-6 md:px-0">
+    <section className=" mx-8">
+      <h1 class="text-3xl font-bold text-white mb-10">Vive la experiencia GymGo</h1>
+      <div class="grid sm:grid-cols-3 gap-4 grid-cols-1">
         <div>
           <Link to='/activities'>
-          <div class=" rounded-lg bg-green.claro h-80 w-80 inline-block">
+          <div class=" rounded-lg bg-green.claro h-96  inline-block">
           <img class="h-full w-full border-solid border-l-8 border-t-8 border-green-neon hover:border-2 hover:border-black rounded-lg object-cover" src={activities} alt="" />
           </div>
-          <h3 class="text-lg font-semibold text-gray-dark mt-2">Nuestras <span class=" text-gray">Actividades</span></h3>
+          <h3 class="text-xl font-semibold text-white mt-2">Nuestras <span class=" text-gray-light">Actividades</span></h3>
           </Link>
         </div>
         <div>
           <Link to='/coaches'>
-          <div class=" rounded-lg  bg-green.claro h-80 w-80 inline-block">
+          <div class=" rounded-lg  bg-green.claro h-96 inline-block">
           <img class="h-full w-full border-solid border-l-8 border-t-8 border-green-neon hover:border-2 hover:border-black rounded-lg object-cover" src={coaches} alt="" />
           </div>
-          <h3 class="text-lg font-semibold text-gray-dark mt-2">Nuestros <span class=" text-gray">Profesores</span></h3>
+          <h3 class="text-xl font-semibold text-white mt-2">Nuestros <span class=" text-gray-light">Profesores</span></h3>
           </Link>
-        </div>      
+        </div>
+        <div>
+          <Link to='/classes'>
+          <div class=" rounded-lg  bg-green.claro h-96 inline-block">
+          <img class="h-full w-full border-solid border-l-8 border-t-8 border-green-neon hover:border-2 hover:border-black rounded-lg object-cover" src={classes} alt="" />
+          </div>
+          <h3 class="text-xl font-semibold text-white mt-2">Nuestras <span class=" text-gray-light">Clases</span></h3>
+          </Link>
+        </div>    
       </div>
-      <hr class="w-40 my-14 border-4 rounded-md sm:mx-0 mx-auto" />
+      <hr class="w-40 my-14 border-white border-4 rounded-md mx-auto" />
     </section>
-    <section>
-      <h1 class="inline-block text-black font-bold text-3xl">
+    <section className=" mx-8">
+      <h1 class="inline-block text-white font-bold text-3xl">
       ¡Descubre las razones para unirte a nuestro gimnasio! <br />
-      <span class=" text-sm font-poppins text-gray-dark"> Haz realidad tus metas de salud y bienestar </span>
+      <span class=" text-lg font-semibold text-white"> Haz realidad tus metas de salud y bienestar </span>
       </h1>
 
       <div class="grid grid-cols-3 gap-4 mt-10">
         <div>
-          <h3 class="text-lg font-semibold text-black  mt-2">1. Horario flexible</h3>
-          <p class="text text-gray-400">Entendemos lo ocupada que puede ser tu vida, por eso ofrecemos un horario amplio y flexible para que puedas entrenar en el momento que mejor se adapte a ti.</p>
+          <h3 class="text-xl font-semibold text-white  mt-2">1. Horario flexible</h3>
+          <p class="text-lg text-white">Entendemos lo ocupada que puede ser tu vida, por eso ofrecemos un horario amplio y flexible para que puedas entrenar en el momento que mejor se adapte a ti.</p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold text-black  mt-2">2. Variedad de clases y entrenamientos</h3>
-          <p class="text text-gray-400">Desde sesiones de alta intensidad hasta clases más relajantes como el yoga, tenemos una amplia variedad de opciones para que encuentres el entrenamiento perfecto que se ajuste a tus preferencias y objetivos. ¡Nunca te aburrirás de ejercitarte con nosotros!</p>
+          <h3 class="text-xl font-semibold text-white mt-2">2. Variedad de clases y entrenamientos</h3>
+          <p class="text-lg text-white">Desde sesiones de alta intensidad hasta clases más relajantes como el yoga, tenemos una amplia variedad de opciones para que encuentres el entrenamiento perfecto que se ajuste a tus preferencias y objetivos. ¡Nunca te aburrirás de ejercitarte con nosotros!</p>
         </div>
         <div>
-          <h3 class="text-lg font-semibold text-black  mt-2">3. Instructores altamente calificados:</h3>
-          <p class="text text-gray-400">Nuestro equipo de entrenadores está compuesto por profesionales apasionados y certificados que te brindarán el apoyo y la orientación necesaria en cada paso de tu camino hacia el éxito físico.</p>
+          <h3 class="text-xl font-semibold text-white  mt-2">3. Instructores altamente calificados:</h3>
+          <p class="text-lg text-white">Nuestro equipo de entrenadores está compuesto por profesionales apasionados y certificados que te brindarán el apoyo y la orientación necesaria en cada paso de tu camino hacia el éxito físico.</p>
         </div>
       </div>
     </section>
-    <div class="mt-14">
-      <p>No esperes más para formar parte de nuestra vibrante comunidad. El cambio que deseas comienza hoy mismo. ¡Únete a nuestro gimnasio y descubre el poder de una vida activa y saludable!</p>
+    <div class="mt-14 mx-8">
+      <p className="text-white text-xl">No esperes más para formar parte de nuestra vibrante comunidad.</p>
+      <p className="text-white text-xl"> ¡Únete a nuestro gimnasio y descubre el poder de una vida activa y saludable!</p>
     </div>
   </main>
   </>

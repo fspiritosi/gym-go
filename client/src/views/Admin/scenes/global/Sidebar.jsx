@@ -17,6 +17,7 @@ import StorageIcon from "@mui/icons-material/Storage";
 import SchoolIcon from "@mui/icons-material/School";
 import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 
 const Item =({title, to, icon, selected, setSelected}) =>{
@@ -163,6 +164,13 @@ function SidebarMenu() {
               title="Ventas"
               to="orders"
               icon={<PointOfSaleIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Reviews"
+              to="reviews"
+              icon={<RemoveRedEyeIcon />}
               selected={selected}
               setSelected={setSelected}
             />

@@ -4,7 +4,6 @@ import { getCoaches } from "../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "tailwindcss/tailwind.css";
-import ReviewsBox from "../../components/Reviews/ReviewsBox";
 
 const Profesores = () => {
   const dispatch = useDispatch();
@@ -52,9 +51,6 @@ const Profesores = () => {
             );
           })}
         </div>
-      </div>
-      <div>
-        <ReviewsBox />
       </div>
     </section>
   );

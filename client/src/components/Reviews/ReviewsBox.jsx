@@ -8,26 +8,12 @@ import Reviews from "./Reviews";
 import { LoginButton } from "../Login/LoginButton";
 import {
   Box,
-  Image,
   Text,
-  IconButton,
   Button,
-  Card,
   Center,
-  Container,
-  Input,
-  Tabs,
-  TabList,
-  TabPanels,
   Textarea,
-  SimpleGrid,
-  Spinner,
-  Tab,
-  TabPanel,
   Spacer,
-  Stack,
   HStack,
-  VStack,
 } from "@chakra-ui/react";
 
 const ReviewsBox = () => {
@@ -82,20 +68,12 @@ const ReviewsBox = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const { rate, image, comment } = input;
     const { rate } = input;
-    // let imageUrl;
-    // if (image) {
-    //   imageUrl = await uploadImageToCloudinary("reviews", image);
-    // }
-
-    await dispatch(
+    dispatch(
       postReview({
-        // userId: user.id,
-        // eventId: event.id,
+        userId: user.id,
+        eventId: event.id,
         rate: rate ? rate : 3,
-        // comment,
-        // image: imageUrl ? imageUrl : null,
       })
     );
 

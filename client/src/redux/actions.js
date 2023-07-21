@@ -204,9 +204,17 @@ export const getReviews = (currentUser) => {
 };
 
 //Post Review
-export const postReview = (payload) => async (dispatch) => {
-  return await axios.post(`/reviews`, payload);
+export const postReview = (rate, userId, eventId) => async (dispatch) => {
+  return await axios.post(`/reviews`, { rate, userId, eventId });
 };
+// export const postReview = async (rate, userId, eventId) => {
+//   try {
+//     const response = await axios.post("/reviews", { rate, userId, eventId });
+//     return response.data;
+//   } catch (error) {
+//     throw new Error(`Error al crear la review: ${error.message}`);
+//   }
+// };
 
 //Delete Review
 export const deleteReview = (payload) => async (dispatch) => {

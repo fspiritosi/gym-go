@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-//import { FaTimesCircle } from "react-icons/fa";
 import { useState } from "react";
 const Modal = ({ isOpen, closeModal }) => {
   const [input, setInput] = useState({

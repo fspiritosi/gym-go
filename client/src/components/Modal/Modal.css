@@ -1,4 +1,4 @@
-modal{
+.modal{
     display: flex;
     flex-direction:column;
     width: 600px;
@@ -6,7 +6,7 @@ modal{
 
 }
 
-container{
+.containerModal{
     display: flex;
     padding: 10px;
     height: 200px;

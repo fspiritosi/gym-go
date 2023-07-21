@@ -22,7 +22,12 @@ const Card = ({ id, firstName, profilePicture, description, lastName }) => {
         <p class="text-yellow-500">{description}</p>
       </div>
       <div>
-        <button onClick={() => setIsModalOpen(true)}>Calificar</button>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          style="background-color: blue; width: 200px; height: 50px;"
+        >
+          Calificar
+        </button>
         <Modal
           isOpen={isModalOpen}
           closeModal={() => {

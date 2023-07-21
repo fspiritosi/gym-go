@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CardReservas from "../../components/CardReservas/CardReservas";
 import CardCompras from "../../components/CardCompras/CardCompras";
 import { MdCreditScore } from "react-icons/md";
@@ -9,12 +9,16 @@ import { SiShopee } from "react-icons/si";
 import { FaUserCircle } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getUserLogged } from "../../redux/actions";
 
 const UserProfile = () => {
+  const dispatch = useDispatch();
   const userLogged = useSelector((state) => state.userLogged);
-  const {user} = useAuth0();
+  const { user } = useAuth0();
 
-  
+  useEffect(() => {
+      dispatch(getUserLogged(user.email, user.nickname));
+  }, [dispatch]);
 
   return (
     <section>
@@ -25,7 +29,7 @@ const UserProfile = () => {
               <div className=" pb-10">
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-8">
                   <div class=" min-h-screen rounded-lg bg-gray-dark">
-                    <img src={user.picture} className=" rounded-full mx-auto mb-10 mt-24 w-24 h-24" />
+                    <img src={user?.picture} className=" rounded-full mx-auto mb-10 mt-24 w-24 h-24" />
                     <span class=" mt-2 text-2xl font-semibold">
                       {userLogged.username}
                     </span>
@@ -59,7 +63,7 @@ const UserProfile = () => {
                     </div>
                     <div className=" bg-black rounded-lg min-h-screen mx-4 my-4 px-2 py-3">
                       <div class="flex flex-wrap text-center md:text-left px-8 md:px-4 lg:px-8">
-                        {userLogged.Events.map((event) => (
+                        {userLogged?.Events.map((event) => (
                           <CardReservas
                             key={event.id}
                             eventId={event.id}
@@ -86,7 +90,7 @@ const UserProfile = () => {
                     </div>
                     <div className=" bg-black rounded-lg min-h-screen mx-4 my-4 px-2 py-3">
                       <div class="flex flex-wrap text-center md:text-left px-8 md:px-4 lg:px-8">
-                        {userLogged.purchases.map((purchase) => (
+                        {userLogged?.purchases.map((purchase) => (
                           <CardCompras
                             key={purchase.orderId}
                             description={purchase.item.description}

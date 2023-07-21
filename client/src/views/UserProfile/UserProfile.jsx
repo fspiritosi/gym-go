@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CardReservas from "../../components/CardReservas/CardReservas";
 import CardCompras from "../../components/CardCompras/CardCompras";
-import {MdCreditScore} from 'react-icons/md'
-import {BsFillBookmarkStarFill} from 'react-icons/bs'
-import {SiShopee} from 'react-icons/si'
+import { MdCreditScore } from "react-icons/md";
+import { BsFillBookmarkStarFill } from "react-icons/bs";
+import { SiShopee } from "react-icons/si";
 import { FaUserCircle } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 
 const UserProfile = () => {
   const user = useSelector((state) => state.userLogged);
-  
 
   useEffect(() => {
     if (user) {
@@ -20,6 +19,7 @@ const UserProfile = () => {
   }, [user]);
 
   return (
+
    <section>
     {user ? (
        <>
@@ -54,8 +54,10 @@ const UserProfile = () => {
       <div className=" bg-black rounded-lg min-h-screen mx-4 my-4 px-2 py-3">
       <div class="flex flex-wrap text-center md:text-left px-8 md:px-4 lg:px-8">
       {user.Events.map((event) => (
+
                   <CardReservas
                     key={event.id}
+                    eventId={event.id}
                     date={event.date}
                     startTime={event.startTime}
                     endTime={event.endTime}
@@ -64,6 +66,31 @@ const UserProfile = () => {
                     coachFirstName={event.Class.Coach.firstName}
                     coachLastName={event.Class.Coach.lastName}
                   />
+
+                ))}
+              </div>
+            </div>
+            <div class="col-span-1 bg-gray h-80  p-3">
+              <div class="flex flex-col items-center ">
+                <CardCompras />
+
+                {user.purchases.map((purchase) => (
+                  <CardCompras
+                    key={purchase.orderId}
+                    description={purchase.item.description}
+                    createdAt={purchase.item.createdAt}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+
                 ))}     
         </div>
       </div>
@@ -98,6 +125,7 @@ const UserProfile = () => {
       )}   
       </section>         
  )                 
+
 };
 
 export default UserProfile;

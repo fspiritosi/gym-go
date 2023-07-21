@@ -1,8 +1,18 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
 
-const Card = ({ id, firstName, profilePicture, description, lastName, reviews }) => {
-  const sumRates = reviews.reduce((accumulator, review) => accumulator + review.rate, 0);
+const Card = ({
+  id,
+  firstName,
+  profilePicture,
+  description,
+  lastName,
+  reviews,
+}) => {
+  const sumRates = reviews.reduce(
+    (accumulator, review) => accumulator + review.rate,
+    0
+  );
   const avgRate = (sumRates / reviews.length).toFixed(2);
 
     return (

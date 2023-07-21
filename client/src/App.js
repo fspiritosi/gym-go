@@ -30,6 +30,7 @@ import ReviewsData from "./views/Admin/scenes/Tables/ReviewsData";
 // axios.defaults.baseURL = "http://localhost:3001";
 axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 
+
 function App() {
   let location = useLocation();
 

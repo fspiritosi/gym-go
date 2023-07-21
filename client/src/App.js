@@ -26,7 +26,7 @@ import UserProfile from "./views/UserProfile/UserProfile";
 import Sales from "./views/Admin/scenes/Tables/SalesData";
 import RequireAuth from "./components/RequireAuth";
 
-// axios.defaults.baseURL = "http://localhost:3001";
+//axios.defaults.baseURL = "http://localhost:3001";
 axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 
 function App() {
@@ -46,8 +46,8 @@ function App() {
         <Route path="/profile" element={<UserProfile />} />
 
         {/* admin routes */}
-        <Route element={<RequireAuth allowedRole={"admin"} />}>
-          <Route path="/admin" element={<Admin />}>
+       
+          <Route path="/admin" element={<RequireAuth allowedRole={"admin"} />}>
             <Route path="" element={<Dashboard />} />
             <Route path="users" element={<Users />} />
             <Route path="activities" element={<Activities />} />
@@ -61,7 +61,7 @@ function App() {
             <Route path="goalsCreate" element={<CreateGoals />} />
             <Route path="activitiesCreate" element={<CreateActivitie />} />
           </Route>
-        </Route>
+    
       </Routes>
       {location.pathname.includes("/admin") ? undefined : <Footer />}
     </div>

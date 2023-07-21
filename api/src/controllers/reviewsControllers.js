@@ -1,7 +1,31 @@
-const { Reviews, users, Events, Coaches } = require("../db");
+const { Reviews, users, Events, Coaches, Activities, Classes } = require("../db");
 
 const getAllReviews = async () => {
-  const allReviews = await Reviews.findAll();
+  const allReviews = await Reviews.findAll({
+    attributes: ["id", "rate", "isActive", "createdAt", "updatedAt"],
+    include: [
+      {
+        model: users,
+        attributes: ['id', 'email', 'username'],
+      },
+      {
+        model: Coaches,
+        attributes: ["id", "firstName", "lastName"],
+      },
+      {
+        model: Events,
+        attributes: ["id"],
+        include: {
+          model: Classes,
+          attributes: ["id"],
+          include: {
+            model: Activities,
+            attributes: ["id", "title"],
+          }
+        }
+      }
+    ]
+  });
   return allReviews;
 }
 
@@ -11,8 +35,8 @@ const getReviewById = async (id) => {
   return review;
 }
 
-const createReview = async (rate, userId, eventId, coachId) => {
-  if (!rate || !userId || !eventId || !coachId) throw new Error(`Body must contain rate, userId, eventId, coachId`);
+const createReview = async (rate, comment, userId, eventId, coachId) => {
+  if (!rate || !userId || !eventId || !coachId) throw new Error(`Body must contain rate, comment, userId, eventId and coachId`);
   const user = await users.findByPk(userId);
   if (!user) throw new Error(`User with id ${userId} not found`);
   const event = await Events.findByPk(eventId);
@@ -26,18 +50,21 @@ const createReview = async (rate, userId, eventId, coachId) => {
   return newReview;
 };
 
-const updateReviewById = async (id, rate, userId, eventId, coachId) => {
-  const user = await users.findByPk(userId);
-  if (!user) throw new Error(`User with id ${userId} not found`);
-  const event = await Events.findByPk(eventId);
-  if (!event) throw new Error(`Event with id ${eventId} not found`);
-  const coach = await Coaches.findByPk(coachId);
-  if (!coach) throw new Error(`Coach with id ${coachId} not found`);
+const updateReviewById = async (id, rate, comment, userId, eventId, coachId) => {
   const reviewToUpdate = await Reviews.findByPk(id);
   if (!reviewToUpdate) throw new Error(`Review with id ${id} not found`);
-  await reviewToUpdate.setUser(user);
-  await reviewToUpdate.setEvent(event);
-  await newReview.setCoach(coach);
+  if (userId) {
+    const user = await users.findByPk(userId);
+    await reviewToUpdate.setUser(user);
+  }
+  if (eventId) {
+    const event = await Events.findByPk(eventId);
+    await reviewToUpdate.setEvent(event);
+  }
+  if (coachId) {
+    const coach = await Coaches.findByPk(coachId);
+    await newReview.setCoach(coach);
+  }
   await reviewToUpdate.update({ rate });
   return reviewToUpdate;
 };

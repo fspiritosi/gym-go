@@ -1,0 +1,15 @@
+modal{
+    display: flex;
+    flex-direction:column;
+    width: 600px;
+    height: 300px;
+
+}
+
+container{
+    display: flex;
+    padding: 10px;
+    height: 200px;
+    width: 100px;
+    overflow: hidden;
+}

@@ -92,11 +92,11 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fflex flex-col md:flex-row">
-      <div className={`${open ? "w-72" : "w-20"} duration-300 h-90 p-10 pt-10 bg-gray-claro gap-10`}>
-        {/* <img src={vector}
+    <div className="flex flex-col md:flex-row">
+      <div className={`${open ? "w-72" : "w-20"} duration-300 h-90 p-10 pt-10 bg-gray-claro rounded-xl gap-10`}>
+        <img src={vector}
           className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7   ${!open && 'rotate-180'} `}
-          onClick={() => setOpen(!open)} alt='' /> */}
+          onClick={() => setOpen(!open)} alt='' />
         <div className=" flex gap-x-8 items-center ">
           <img src={filtro}
             className={`cursor-pointer rounded-full duration-500 ${open && "rotate-[360dg]"}`}

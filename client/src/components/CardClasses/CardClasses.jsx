@@ -7,7 +7,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
-import styles from './CardClasses.module.css';
+import {FaWindowClose} from 'react-icons/fa'
+import backgroundImage from '../../Assets/backgraund/Fondo2.jpg'
+import Logo from "../../Assets/Logos/Logo.svg";
 
 Modal.setAppElement('#root');
 
@@ -67,41 +69,42 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     }
 
     return (
-        <div className="grid grid-cols-6 ">
-            <div className="flex flex-row items-center space-x-3 w-30">
+        <div className="px-6 py-0 grid grid-cols-6 bg-gray-claro rounded-xl">
+            <div className="flex items-center space-x-2 ">
                 <img src={imageA} alt='' className="w-12 h-12 rounded-full" />
-                <h4 className="text-m font-bold py-5">{title}</h4>
+                <h4 className="text-sm font-bold py-3 ">{title}</h4>
             </div>
-            <div className="flex flex-row items-center space-x-3 w-30">
+            <div className="flex items-center space-x-2">
                 <img src={imageC} alt='' className="w-12 h-12 rounded-full" />
-                <h4 className="text-m font-bold py-4 ">{coachName}</h4>
+                <h4 className="text-sm font-bold py-4 ">{coachName}</h4>
             </div>
-            <div className="flex flex-row items-center space-x-3 w-30">
-                <h4 className="text-m font-bold mx-auto">{difficultyText}</h4>
+            <div className="flex items-center space-x-2">
+                <h4 className="text-sm font-bold mx-auto">{difficultyText}</h4>
             </div>
-            <div className="flex flex-row items-center space-x-3 w-30">
-                <h4 className="text-m font-bold ">{startTime} a {endTime} hrs</h4>
+            <div className="flex items-center space-x-2">
+                <h4 className="text-sm font-bold ">{startTime} a {endTime} hrs</h4>
             </div>
-            <div className="grid grid-cols-3 gap-3">
+            {/* <h5 className="text-xs bg-gray-claro">Proximas Fechas</h5> */}
+            <div className="px-0.6 py-5 grid gap-2 grid-cols-3 w-72">
                 {date.map((event, index) => (
-                    <div key={index} className="flex flex-row items-center space-x-5 w-55">
+                    <div key={index} className="flex flex-row items-center">
                         {isAuthenticated ? (
-                            <div className="flex flex-row items-center space-x-3 w-50">
+                            <div className="flex flex-row items-center">
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
-                                    className={`px-6 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon${
+                                    className={`px-3 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon hover:bg-green ${
                                         quota - eventQuota[index].length <= 0 ? 'bg-gray-claro' : ''
-                                    } whitespace-nowrap truncate`}
+                                    } whitespace-nowrap truncate `}
                                 >
-                                {event}{eventQuota[index].includes(user.id) && <h5 className="text-xs">Suscrito</h5>}
+                                {event}{eventQuota[index].includes(user.id) && <h5 className="text-xs bg-gray-claro">Suscrito</h5>}
                                 </button>
                                 {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
                             </div>
                         ) : (
-                            <div className="flex flex-row items-center space-x-3 w-50"> 
+                            <div className="flex flex-row items-center space-x-3">
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
-                                    className="px-6 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon whitespace-nowrap truncate"
+                                    className="px-3 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon hover:bg-green whitespace-nowrap truncate"
                                 >
                                     {event}
                                 </button>
@@ -113,12 +116,22 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
             <Modal
                 isOpen={showModal}
                 onRequestClose={closeModal}
-                className={`${styles.modalContent} ${styles.modalOverlay}`}
             >
-                <h2>Debes iniciar sesión o registrarte para suscribirte a este evento</h2>
-                <button onClick={handleModalLogin} className={styles.modalButton}>Iniciar sesión</button>
-                <button onClick={handleModalLogin} className={styles.modalButton}>Registrarse</button>
-                <button onClick={closeModal} className={styles.modalButton}>Cerrar</button>
+            <div class=" w bg-cover items-center justify-center rounded-t-md border-b-2 border-gray border-opacity-100 p-4 mt-16 h-96 grid " style={{ backgroundImage: `url(${backgroundImage})` }}> 
+            <img
+                className=" ml-1 flex justify-between w-40"
+                src={Logo}
+                alt="logo"
+            />
+                <h1 className='text-4xl font-semibold leading-normal text-white'>Debes iniciar sesión o registrarte para suscribirte a este evento</h1>
+                <button class="rounded-xl w-96 inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" 
+                onClick={handleModalLogin}>Iniciar sesión</button>
+                <button  class="rounded-xl w-96 inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" 
+                onClick={handleModalLogin}>Registrarse</button>
+                <button onClick={closeModal} className= ' ml-44 box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'>
+                <FaWindowClose color='white' className='w-8 h-8'/>
+                </button>
+                </div>
             </Modal>
         </div>
     );

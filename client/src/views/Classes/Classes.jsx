@@ -35,12 +35,14 @@ const Classes = () => {
 
 
     return (
-        <div class="flex flex-col md:flex-row">
-            <div class="md:w-1/4 px-0 py-12">
+        <section >
+        <div class="flex flex-col md:flex-row bg-black py-12">
             <Sidebar/>
-            </div>
-            <div class="md:w-3/4 px-4 py-4">
-            <h1 class="md:w-3/8 px-5 py-10 text-2xl font-bold mb-5">Nuestras Clases</h1>
+            <div class="px-5 py-5 space-y-3">
+                <h2 class="text-3xl font-semibold text-white py-5">¡Superate a ti mismo!</h2>
+                <p class="mt-3 text-white text-lg py-3">Nuestras clases te ofrecen la atención y guía de entrenadores expertos que te ayudarán a alcanzar tus objetivos.</p>          
+            
+            <div className="space-y-3">
             {sortedClasses?.map((clase, index) => {
             if (clase.isActive === false) {
                     return null; // No mostrar la clase si isActive es false REVISAR 
@@ -61,11 +63,13 @@ const Classes = () => {
                         eventId={clase.Events.map((i) => i.id)}
                         handleUpdateClasses={handleUpdateClasses}
                     />
-                );
+                    );
                 })}
+                </div>
                 <ToastContainer autoClose={2000} theme="dark" />
                 </div>
         </div>
+        </section>   
     )
 };
 

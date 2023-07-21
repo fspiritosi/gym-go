@@ -2,11 +2,14 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useDispatch } from "react";
 import { getUserLogged } from "../../redux/actions";
-import { useEffect } from "react-redux";
-import { axios } from "axios";
+import { useEffect, useSelector } from "react-redux";
+import axios from "axios";
 
-const Modal = ({ isOpen, closeModal }) => {
-  let dispatch = useDispatch();
+const Modal = ({ isOpen, closeModal, eventId }) => {
+  const user = useSelector((state) => state.userLogged);
+  const event = user.Events.find((e) => e.id === eventId);
+  const coachId = event.Class.Coach.id;
+  console.log(coachId);
 
   const [input, setInput] = useState({
     rate: "",
@@ -31,13 +34,12 @@ const Modal = ({ isOpen, closeModal }) => {
     e.preventDefault();
     const { rate } = input;
 
-    // dispatch(
-    //   postReview({
-    //     userId: user.id,
-    //     eventId: coach.Activities.id,
-    //     rate: rate ? rate : 3,
-    //   })
-    // );
+    await axios.post("/reviews", {
+      rate: rate ? rate : 3,
+      eventId,
+      coachId,
+      userId: user.id,
+    });
   };
   return (
     <div>

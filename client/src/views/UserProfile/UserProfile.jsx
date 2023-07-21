@@ -62,6 +62,7 @@ const UserProfile = () => {
                 {user.Events.map((event) => (
                   <CardReservas
                     key={event.id}
+                    eventId={event.id}
                     date={event.date}
                     startTime={event.startTime}
                     endTime={event.endTime}

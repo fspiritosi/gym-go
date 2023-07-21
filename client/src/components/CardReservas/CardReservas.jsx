@@ -5,6 +5,7 @@ import "tailwindcss/tailwind.css";
 
 const CardReservas = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(props);
   return (
     <>
       <h3 class="text-xl bg-green.claro text-black px-2 font-bold mt-2">
@@ -32,6 +33,7 @@ const CardReservas = (props) => {
       <button onClick={() => setIsModalOpen(true)}>Calificar</button>
       <div>
         <Modal
+          eventId={props.eventId}
           isOpen={isModalOpen}
           closeModal={() => {
             setIsModalOpen(false);

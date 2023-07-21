@@ -10,10 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 import Sidebar from '../../components/FilterandSort/Siderbar';
 import 'tailwindcss/tailwind.css';
 
-
-
-
-
 const Activities = () => {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activities);
@@ -93,8 +89,10 @@ const Activities = () => {
 
   return (
 
-    <div className=" bg-gray-light w-full min-h-screen px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <div className="flex flex-col bg-gray-light w-full min-h-screen px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+
        <Sidebar/>
+
         <div className=" pt-9 mx-8 lg:items-center">
           <div className=" pb-10">
             <h2 className=" font-semibold text-3xl sm:text-4xl">Encuentra tu pasión por el fitness en nuestras diversas actividades</h2>

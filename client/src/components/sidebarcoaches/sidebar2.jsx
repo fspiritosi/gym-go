@@ -33,8 +33,9 @@ const Sidebar = () => {
     const selectedClassesNames = selectedClasse.map((c) => c.value);
     // console.log(selectedClassesNames);
     // console.log(selectedClasse);
-
+    
     if (selectedClassesNames.length > 0) {
+      // console.log(selectedClassesNames);
       dispatch(filterByTitle(selectedClassesNames));
     } else {
       console.log('No se seleccionaron actividades válidas.');
@@ -96,6 +97,25 @@ const Sidebar = () => {
     handleStartTimeFilter()
     handleDateFilter()
   }
+  
+  //Para que no se repitan las etiquetas de actividades en el select
+  const uniqueTitles = Array.from(new Set(allClasse.map((classItem) => classItem.Activity.title)));
+  const options = uniqueTitles.map((title) => ({ value: title, label: title }));
+
+  //Para que no se repitan las etiquetas de coaches en el select
+  const uniqueCoachNames = Array.from(new Set(allClasse.map((classItem) => classItem.Coach.firstName + " " + classItem.Coach.lastName)));
+  const optionsCoaches = uniqueCoachNames.map((coachName) => ({ value: coachName, label: coachName }));
+
+<Select
+  className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"} origin-left duration-200`}
+  multi
+  options={options}
+  onChange={(values) => {
+    setSelectedCoach(values);
+  }}
+  value={selectedCoach}
+/>
+
 
   return (
     <div className="flex flex-col md:flex-row ">
@@ -119,10 +139,10 @@ const Sidebar = () => {
           <div className="flex inline-flex">
             <img src={Actividad} className={`w-11 h-10 rounded-full duration-500 shadow-lg`} alt="" />
             <Select
-              className={`text-black w-70 text-sm items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
-              origin-left duration-200 `}
+            className={`text-black w-70 text-sm items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
+            origin-left duration-200 `}
               multi
-              options={allClasse.map((classItem) => ({ value: classItem.Activity.title, label: classItem.Activity.title }))}
+              options={options}
               onChange={(values) => {
                 // console.log('Valores seleccionados:', values);
                 setSelectedClasse(values);
@@ -143,10 +163,7 @@ const Sidebar = () => {
               className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
               origin-left duration-200`}
               multi
-              options={allClasse.map((classItem) => ({
-                value: classItem.Coach.firstName + " " + classItem.Coach.lastName,
-                label: classItem.Coach.firstName + " " + classItem.Coach.lastName,
-              }))}
+              options={optionsCoaches}
               onChange={(values) => {
                 // console.log('Valores seleccionados:', values);
                 setSelectedCoach(values);

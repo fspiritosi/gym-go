@@ -118,11 +118,11 @@ const Sidebar = () => {
 
 
   return (
-    <div className="flex flex-col md:flex-row ">
+    <div className="flex flex-col md:flex-row h-max ">
       <div className={`${open ? "w-72" : "w-20"} duration-300 h-90 p-10 pt-10 bg-gray-claro rounded-xl gap-9`}>
-        <img src={vector}
+        {/* <img src={vector}
           className={`absolute cursor-pointer rounded-full left-25 top-15 w-6   ${!open && 'rotate-180'} `}
-          onClick={() => setOpen(!open)} alt='' />
+          onClick={() => setOpen(!open)} alt='' /> */}
         <div className=" flex gap-x-7 items-center ">
           <img src={filtro}
             className={`cursor-pointer rounded-full duration-500 w-20 my-2 ${open && "rotate-[360dg]"}`}
@@ -212,14 +212,24 @@ const Sidebar = () => {
               className={`bg-gray hover:bg-gray-light hover:text-black text-sm rounded-md text-white font-semibold py-1 px-2 ${!open && "scale-0"}`}
               onClick={handleStartTimeFilter}>Buscar</button> */}
           </div>
-          <div className={`${!open && "scale-0"} w-70 h-11 flex justify-end`}>
+          {/* <div className={`${!open && "scale-0"} w-70 h-20 flex justify-end`}>
           <button className="bg-green-neon hover:bg-green text-black text-sm rounded-md font-semibold py-1 px-5"
-            onClick={handleButtonClick}
+            onClick={handleButtonClickhandleButtonClick}
           >Filtrar</button>
+          </div> */}
+          <div className={`${!open && "scale-0"} w-70 h-11 flex items-center justify-end`}>
+            <button className="bg-green-neon hover:bg-green text-black text-sm rounded-md font-semibold py-1 px-4"
+              onClick={handleButtonClick}>Filtrar</button>
+          </div>
+          <div className={`${!open && "scale-0"} w-70 h-11 flex items-center justify-center`}>
+            <button className="bg-green-neon hover:bg-green text-black text-sm rounded-md font-semibold py-2 px-5"
+              onClick={handleClearFilters}>Limpiar Filtros</button>
           </div>
           {/* Filtra por Dificultad */}
-          <div className={`${!open && "scale-0"} w-70 h-20 text-black flex items-center justify-center`}>
-            <label className="text-xs font-bold h-20 flex items-center justify-center">Filtar por Dificultad</label>
+            <div className={`${!open && "scale-0"} w-50 h-16 text-black flex items-center justify-center`}>
+            <h1 className="text-m font-semibold flex items-center justify-center">Selecciona la Dificultad</h1>
+            </div>
+          <div className={`${!open && "scale-0"} w-70 h-11 text-sm text-black font-semibold space-x-2 flex items-center justify-center`}>
             <label>Fácil
               <input
                 type="checkbox"
@@ -241,14 +251,14 @@ const Sidebar = () => {
                 checked={selectedDifficulty.hard}
                 onChange={handleDifficultyFilterChange}
               /></label>
+              </div>
           </div>
-          <div className={`${!open && "scale-0"} w-70 h-11 flex items-center justify-center`}>
+          {/* <div className={`${!open && "scale-0"} w-70 h-11 flex items-center justify-center`}>
             <button className="bg-green-neon hover:bg-green text-black text-sm rounded-md font-semibold py-2 px-5"
               onClick={handleClearFilters}>Limpiar Filtros</button>
-          </div>
+          </div> */}
         </div >
       </div>
-    </div>
   )
 }
 

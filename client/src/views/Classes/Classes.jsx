@@ -39,7 +39,7 @@ const Classes = () => {
         <div class="flex flex-col md:flex-row bg-black py-14">
             <Sidebar/>
             <div class="px-5 py-5 space-y-3">
-                <h2 class="text-3xl font-semibold text-white py-5">¡Superate a ti mismo!</h2>
+                <h2 class="text-4xl font-semibold text-white py-5">¡Superate a ti mismo!</h2>
                 <p class="mt-3 text-white text-lg py-3">Nuestras clases te ofrecen la atención y guía de entrenadores expertos que te ayudarán a alcanzar tus objetivos.</p>          
             
             <div className="space-y-3">

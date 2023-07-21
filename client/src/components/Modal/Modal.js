@@ -1,9 +1,9 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useDispatch } from "react";
-import { getUserLogged } from "../../redux/actions";
-import { useEffect, useSelector } from "react-redux";
 import axios from "axios";
+
+
 
 const Modal = ({ isOpen, closeModal, eventId }) => {
   const user = useSelector((state) => state.userLogged);
@@ -40,11 +40,14 @@ const Modal = ({ isOpen, closeModal, eventId }) => {
       coachId,
       userId: user.id,
     });
+    closeModal()    
+    alert("Calificación enviada")
+    
   };
   return (
-    <div>
+    <div className=" mx-8 mb-2">
       <AiOutlineClose
-        size={30}
+        size={20}
         color="#fff"
         onClick={closeModal}
         cursor={"pointer"}
@@ -69,7 +72,7 @@ const Modal = ({ isOpen, closeModal, eventId }) => {
           size="lg"
           onClick={handleSubmit}
         >
-          POST
+          Enviar
         </button>
       </div>
     </div>

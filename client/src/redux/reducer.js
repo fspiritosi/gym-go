@@ -29,6 +29,7 @@ const initialState = {
   allClasses: [],
   events: [],
   userLogged: [],
+  reviews: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -66,7 +67,7 @@ const rootReducer = (state = initialState, action) => {
       let diffFiltered = [];
 
       if (selectedDifficulty.length === 0) {
-        diffFiltered = allDifficultyClasses; 
+        diffFiltered = allDifficultyClasses;
       } else {
         diffFiltered = allDifficultyClasses.filter((el) =>
           selectedDifficulty.includes(el.difficulty)

@@ -1,9 +1,9 @@
 import React from "react";
-import CardProfesores from '../../components/CardProfesores/CardProfesores'
-import { getCoaches } from '../../redux/actions';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import 'tailwindcss/tailwind.css';
+import CardProfesores from "../../components/CardProfesores/CardProfesores";
+import { getCoaches } from "../../redux/actions";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "tailwindcss/tailwind.css";
 
 const Profesores = () => {
 
@@ -39,28 +39,25 @@ const Profesores = () => {
 		<div class="flex text-center md:text-left px-8 md:px-4 lg:px-8">
         {coaches.map((c, index) => {
            if (c.isActive === false) {
+
               return null; //no muestra los profesores si esta en false
             }
-          return (
-             <CardProfesores
-              key={index}
-              id={c.id}
-              profilePicture={c.profilePicture}
-              firstName={c.firstName}
-              lastName={c.lastName}
-              description={c.description}
-              reviews={c.Reviews}
-           />
-         )
-       })}			
-			</div>
-		</div>   
-     </section>    
-    
-   )
+            return (
+              <CardProfesores
+                key={index}
+                id={c.id}
+                profilePicture={c.profilePicture}
+                firstName={c.firstName}
+                lastName={c.lastName}
+                description={c.description}
+                reviews={c.Reviews}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Profesores;
-
-
-

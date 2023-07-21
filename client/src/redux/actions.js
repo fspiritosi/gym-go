@@ -21,6 +21,7 @@ export const GET_EVENTS = "GET_EVENTS";
 export const GET_USERLOGGED = "GET_USERLOGGED";
 export const GET_CLASS_NAME = "GET_CLASS_NAME";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
+export const GET_REVIEWS = "GET_REVIEWS";
 
 //All Activities
 export const getActivities = () => {
@@ -181,6 +182,43 @@ export const getUserLogged = (email, username) => {
         });
       });
   };
+};
+
+//Get Reviews
+export const getReviews = (currentUser) => {
+  let user;
+  if (currentUser) {
+    user = {
+      id: currentUser.id,
+      email: currentUser.email,
+    };
+  }
+  return async (dispatch) => {
+    await axios
+      .get(`/reviews`, user ? { params: user } : null)
+      .then((response) => response.data)
+      .then((data) => {
+        dispatch({ type: GET_REVIEWS, payload: data });
+      });
+  };
+};
+
+//Post Review
+export const postReview = (rate, userId, eventId) => async (dispatch) => {
+  return await axios.post(`/reviews`, { rate, userId, eventId });
+};
+// export const postReview = async (rate, userId, eventId) => {
+//   try {
+//     const response = await axios.post("/reviews", { rate, userId, eventId });
+//     return response.data;
+//   } catch (error) {
+//     throw new Error(`Error al crear la review: ${error.message}`);
+//   }
+// };
+
+//Delete Review
+export const deleteReview = (payload) => async (dispatch) => {
+  return await axios.delete(`/reviews`, { data: payload });
 };
 
 export function filterByCoach(payload) {

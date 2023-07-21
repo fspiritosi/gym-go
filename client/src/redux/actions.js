@@ -21,6 +21,7 @@ export const GET_EVENTS = "GET_EVENTS";
 export const GET_USERLOGGED = "GET_USERLOGGED";
 export const GET_CLASS_NAME = "GET_CLASS_NAME";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
+export const GET_REVIEWS = "GET_REVIEWS";
 
 //All Activities
 export const getActivities = () => {
@@ -181,6 +182,35 @@ export const getUserLogged = (email, username) => {
         });
       });
   };
+};
+
+//Get Reviews
+export const getReviews = (currentUser) => {
+  let user;
+  if (currentUser) {
+    user = {
+      id: currentUser.id,
+      email: currentUser.email,
+    };
+  }
+  return async (dispatch) => {
+    await axios
+      .get(`/reviews`, user ? { params: user } : null)
+      .then((response) => response.data)
+      .then((data) => {
+        dispatch({ type: GET_REVIEWS, payload: data });
+      });
+  };
+};
+
+//Post Review
+export const postReview = (payload) => async (dispatch) => {
+  return await axios.post(`/reviews`, payload);
+};
+
+//Delete Review
+export const deleteReview = (payload) => async (dispatch) => {
+  return await axios.delete(`/reviews`, { data: payload });
 };
 
 export function filterByCoach(payload) {

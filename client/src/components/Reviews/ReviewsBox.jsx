@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getReviews, postReview } from "../../Redux/actions/reviews";
-import uploadImageToCloudinary from "../../utils/Cloudinary/uploadImage";
+import { getReviews, postReview } from "../../redux/actions";
+//import uploadImageToCloudinary from "../../utils/Cloudinary/uploadImage";
+import { getUserLogged, getEvents } from "../../redux/actions";
 import Reviews from "./Reviews";
 import { LoginButton } from "../Login/LoginButton";
 import {
@@ -31,33 +32,42 @@ import {
 
 const ReviewsBox = () => {
   let { id } = useParams();
-  let user = JSON.parse(localStorage.getItem("MANGIARE_user"));
+  const user = useSelector((state) => state.userLogged);
+
   let dispatch = useDispatch();
-  const reviews = useSelector((state) => state.reviews.reviews);
+
+  const reviews = useSelector((state) => state.reviews);
+  const event = useSelector((state) => state.events);
   useEffect(() => {
     dispatch(getReviews());
   }, []);
-
+  useEffect(() => {
+    dispatch(getUserLogged(user.email, user.id));
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(getEvents(id));
+  }, []);
   let userReview =
     user &&
     reviews
       .filter((r) => r.userId === user.id)
-      .filter((r) => r.recipeId === parseInt(id));
+      .filter((r) => r.eventId === event.id);
 
   const [input, setInput] = useState({
     rate: "",
-    image: null,
-    comment: "",
+    //image: null,
+    //comment: "",
   });
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    if (name === "image") {
-      setInput({
-        ...input,
-        [name]: e.target.files[0],
-      });
-    } else if (name === "rate") {
+    // if (name === "image") {
+    //   setInput({
+    //     ...input,
+    //     [name]: e.target.files[0],
+    //   });
+    // } else
+    if (name === "rate") {
       setInput({
         ...input,
         [name]: parseInt(value),
@@ -72,27 +82,27 @@ const ReviewsBox = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { rate, image, comment } = input;
-
-    let imageUrl;
-    if (image) {
-      imageUrl = await uploadImageToCloudinary("reviews", image);
-    }
+    // const { rate, image, comment } = input;
+    const { rate } = input;
+    // let imageUrl;
+    // if (image) {
+    //   imageUrl = await uploadImageToCloudinary("reviews", image);
+    // }
 
     await dispatch(
       postReview({
-        userId: user ? parseInt(user.id) : 1,
-        recipeId: parseInt(id),
+        // userId: user.id,
+        // eventId: event.id,
         rate: rate ? rate : 3,
-        comment,
-        image: imageUrl ? imageUrl : null,
+        // comment,
+        // image: imageUrl ? imageUrl : null,
       })
     );
 
     setInput({
       rate: "",
-      image: null,
-      comment: "",
+      // image: null,
+      // comment: "",
     });
     dispatch(getReviews());
   };
@@ -100,11 +110,11 @@ const ReviewsBox = () => {
   return (
     <Box p={4}>
       {!user ? (
-        <Box className={s.reviewCreated}>
+        <Box className="">
           <p>Login to write a review</p>
-          <Button colorScheme="teal" variant="solid" size="lg">
+          {/* <Button colorScheme="teal" variant="solid" size="lg">
             <LoginButton />
-          </Button>
+          </Button> */}
         </Box>
       ) : userReview.length > 0 ? (
         <Box
@@ -139,7 +149,7 @@ const ReviewsBox = () => {
             />
             <span>⭐⭐⭐⭐⭐</span>
 
-            <input type="file" name="image" onChange={handleOnChange} />
+            {/* <input type="file" name="image" onChange={handleOnChange} /> */}
           </Box>
 
           <Center>
@@ -170,24 +180,25 @@ const ReviewsBox = () => {
             reviews
               .filter((r) => r.recipeId === parseInt(id))
               .map(
-                ({ comment, image, rate, userId, createdAt, recipeId }, i) => {
+                // ({ comment, image, rate, userId, createdAt, recipeId }, i) => {
+                ({ rate, userId, createdAt, eventId }, i) => {
                   return (
                     <Center>
                       <Reviews
                         key={i}
-                        comment={comment}
-                        image={image}
+                        // comment={comment}
+                        // image={image}
                         rate={rate}
                         userId={userId}
                         createdAt={createdAt}
-                        recipeId={recipeId}
+                        eventId={eventId}
                       />
                     </Center>
                   );
                 }
               )
           ) : (
-            <Box className={s.noRecipesDiv}>
+            <Box className="">
               <Text>No reviews yet. Write yours!</Text>
             </Box>
           )}

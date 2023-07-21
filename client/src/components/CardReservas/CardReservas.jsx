@@ -8,6 +8,7 @@ const CardReservas = (props) => {
   console.log(props);
   return (
     <>
+
       <h3 class="text-xl bg-green.claro text-black px-2 font-bold mt-2">
         Actividad:{" "}
         <span class=" text-lg font-medium">{props.activityTitle}</span>
@@ -41,6 +42,7 @@ const CardReservas = (props) => {
         />
       </div>
     </>
+
   );
 };
 

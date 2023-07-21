@@ -2,8 +2,7 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useDispatch } from "react";
 import axios from "axios";
-
-
+import { useSelector } from "react-redux";
 
 const Modal = ({ isOpen, closeModal, eventId }) => {
   const user = useSelector((state) => state.userLogged);
@@ -40,9 +39,8 @@ const Modal = ({ isOpen, closeModal, eventId }) => {
       coachId,
       userId: user.id,
     });
-    closeModal()    
-    alert("Calificación enviada")
-    
+    closeModal();
+    alert("Calificación enviada");
   };
   return (
     <div className=" mx-8 mb-2">

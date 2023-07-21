@@ -7,7 +7,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
-import styles from './CardClasses.module.css';
+import {FaWindowClose} from 'react-icons/fa'
+import backgroundImage from '../../Assets/backgraund/Fondo2.jpg'
+import Logo from "../../Assets/Logos/Logo.svg";
 
 Modal.setAppElement('#root');
 
@@ -17,10 +19,6 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     const { isAuthenticated, loginWithRedirect } = useAuth0();
 
     const user = useSelector((state) => state.userLogged);
-    console.log(user);
-    const credits = user.credits;
-    console.log(credits); // Imprime el valor de los créditos del usuario
-
 
     const handleReserva = (eventId, index) => {
         if (isAuthenticated) {
@@ -28,24 +26,13 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
             const event = eventQuota[index];
             const d = date[index];
             const isNotCredits = user.credits === 0;
-            console.log(isNotCredits); // Devuelve true si los créditos no son cero, o false si los créditos son cero
-
             const suscribed = eventQuota[index].includes(user.id);
-
-            console.log(`fecha ${d}`);
-            console.log(`evento id ${eventId[index]}`);
-            console.log(`username ${user.username}`);
-            console.log(`username ${user.email}`);
-            console.log(`user id ${user.id}`);
-            console.log(`array de usuarios inscritos ${event}`);
-            console.log(`Tiene creditos? ${isNotCredits}`);
-            console.log(`Esta suscrito? ${suscribed}`);
 
             if (event.length < quota && !suscribed) {
                 if (isNotCredits) {
                     toast.error('No tienes suficientes créditos');
                 } else {
-                    dispatch(putEvents(eventId[index], user.id, user.email ))
+                    dispatch(putEvents(eventId[index], user.id, user.email))
                         .then(() => {
                             handleUpdateClasses(); // Llamada a la función de actualización del componente padre
                             toast.success(`Registro a evento ${d} exitoso✅`);
@@ -82,41 +69,40 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     }
 
     return (
-        <div className={styles.cardContainer}>
-            <div className={styles.divs}>
-                <h4>{title}</h4>
-                <img src={imageA} alt='' className={styles.image} />
+        <div className="px-6 py-0 md:grid grid-cols-6 bg-gray-claro rounded-xl">
+            <div className="flex md:flex-row items-center space-x-2 ">
+                <img src={imageA} alt='' className="w-12 h-12 rounded-full" />
+                <h4 className="text-sm font-bold py-3 ">{title}</h4>
             </div>
-            <div className={styles.divs}>
-                <h4>{coachName}</h4>
-                <img src={imageC} alt='' className={styles.image} />
+            <div className="flex md:flex-row items-center space-x-2">
+                <img src={imageC} alt='' className="w-12 h-12 rounded-full" />
+                <h4 className="text-sm font-bold py-4 ">{coachName}</h4>
             </div>
-            <div className={styles.divs}>
-                <h4>{difficultyText}</h4>
+            <div className="flex md:flex-row items-center space-x-2">
+                <h4 className="text-sm font-bold mx-auto">{difficultyText}</h4>
             </div>
-            <div className={styles.divs}>
-                <h4>{startTime} - {endTime}</h4>
+            <div className="flex md:flex-row items-center space-x-2">
+                <h4 className="text-sm font-bold ">{startTime} a {endTime} hrs</h4>
             </div>
-            <div>
-
+            <div className="px-0.6 py-5 grid gap-2 grid-cols-3 w-72">
                 {date.map((event, index) => (
-                    <div key={index} className={styles.divbuttons}>
+                    <div key={index} className="flex md:flex-row items-center">
                         {isAuthenticated ? (
-                            <div>
-                                {eventQuota[index].includes(user.id) && <p>Suscrito</p>}
+                            <div className="flex md:flex-row items-center">
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
-                                    className={`${styles.eventButton} ${quota - eventQuota[index].length <= 0 ? styles.disabledButton : ''}`}
+                                    className={`px-3 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon hover:bg-green whitespace-nowrap truncate ${
+                                    quota - eventQuota[index].length <= 0 ? 'bg-white hover:bg-white shadow-lg' : '' } `}
                                 >
-                                    {event}
+                                {event}{eventQuota[index].includes(user.id) && <h5 className="text-xs bg-gray-claro rounded-xl ">Suscrito</h5>}
                                 </button>
-                                <h4>{quota - eventQuota[index].length} lugares disponibles</h4>
+                                {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
                             </div>
                         ) : (
-                            <div>
+                            <div className="flex md:flex-row items-center space-x-3">
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
-                                    className={styles.eventButton}
+                                    className="px-3 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon hover:bg-green whitespace-nowrap truncate"
                                 >
                                     {event}
                                 </button>
@@ -124,17 +110,26 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                         )}
                     </div>
                 ))}
-
             </div>
             <Modal
                 isOpen={showModal}
                 onRequestClose={closeModal}
-                className={`${styles.modalContent} ${styles.modalOverlay}`}
             >
-                <h2>Debes iniciar sesión o registrarte para suscribirte a este evento</h2>
-                <button onClick={handleModalLogin} className={styles.modalButton}>Iniciar sesión</button>
-                <button onClick={handleModalLogin} className={styles.modalButton}>Registrarse</button>
-                <button onClick={closeModal} className={styles.modalButton}>Cerrar</button>
+            <div class=" w bg-cover items-center justify-center rounded-t-md border-b-2 border-gray border-opacity-100 p-4 mt-16 h-96 grid " style={{ backgroundImage: `url(${backgroundImage})` }}> 
+            <img
+                className=" ml-1 flex justify-between w-40"
+                src={Logo}
+                alt="logo"
+            />
+                <h1 className='text-4xl font-semibold leading-normal text-white'>Debes iniciar sesión o registrarte para suscribirte a este evento</h1>
+                <button class="rounded-xl w-96 inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" 
+                onClick={handleModalLogin}>Iniciar sesión</button>
+                <button  class="rounded-xl w-96 inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" 
+                onClick={handleModalLogin}>Registrarse</button>
+                <button onClick={closeModal} className= ' ml-44 box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'>
+                <FaWindowClose color='white' className='w-8 h-8'/>
+                </button>
+                </div>
             </Modal>
         </div>
     );

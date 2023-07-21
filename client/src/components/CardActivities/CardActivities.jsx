@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const CardActivities = (props) => {
 
-  console.log(props); 
+  // console.log(props); 
   
    return (    
       <div class=" w-4/5 mx-auto rounded-lg shadow bg-gray-dark overflow-hidden">

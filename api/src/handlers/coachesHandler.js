@@ -11,7 +11,7 @@ const getAllCoachesHandler = async (req, res) => {
     const allCoaches = await getAllCoaches();
     res.status(200).json(allCoaches);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ error: error.message });
   };
 };
 
@@ -32,7 +32,7 @@ const createCoachHandler = async (req, res) => {
     const newCoach = await createCoach(firstName, lastName, profilePicture, description, education, workExperience, activities);
     res.status(201).json(newCoach);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ error: error.message });
   };
 };
 

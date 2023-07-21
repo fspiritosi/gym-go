@@ -1,11 +1,9 @@
-import React from 'react';
-import 'tailwindcss/tailwind.css';
+import React from "react";
+import "tailwindcss/tailwind.css";
 
-
-
-const Card = ({ id, firstName, profilePicture, description, lastName }) => {
-
-    
+const Card = ({ id, firstName, profilePicture, description, lastName, reviews }) => {
+  const sumRates = reviews.reduce((accumulator, review) => accumulator + review.rate, 0);
+  const avgRate = (sumRates / reviews.length).toFixed(2);
 
     return (
         <div class="my-4 px-1 w-1/5  md:w-1/5 lg:w-1/6 overflow-hiddden">
@@ -17,7 +15,7 @@ const Card = ({ id, firstName, profilePicture, description, lastName }) => {
             <p class="text-white text-center">{description}</p>
         </div>
     </div>
-    );
+  );
 };
 
 export default Card;

@@ -11,10 +11,6 @@ import GoalFilterDropdown from '../FilterandSort/GoalFilterDropdown';
 import FilterandSort from '../FilterandSort/FilterandSort'
 import 'tailwindcss/tailwind.css';
 
-
-
-
-
 const Activities = () => {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activities);

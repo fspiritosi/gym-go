@@ -24,9 +24,10 @@ import CreateCoach from "./views/Admin/scenes/Forms/createCoach";
 import CreateActivitie from "./views/Admin/scenes/Forms/createActivities";
 import UserProfile from "./views/UserProfile/UserProfile";
 import Sales from "./views/Admin/scenes/Tables/SalesData";
+import RequireAuth from "./components/RequireAuth";
 
-//axios.defaults.baseURL = "http://localhost:3001";
-axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
+axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 
 function App() {
   let location = useLocation();
@@ -35,35 +36,31 @@ function App() {
     <div className="App">
       {location.pathname.includes("/admin") ? undefined : <Nav />}
       <Routes>
+        {/* public routes */}
         <Route path="/" element={<Landing />} />
         <Route path="/activities" element={<ActivitiesV />} />
-        {/* este es un ejemplo de como proteger las rutas con el componente AutenticationGuard */}
-        {/* <Route
-          path="/activities"
-          element={<AuthenticationGuard component={<ActivitiesV />} />}
-        /> */}
         <Route path="/activity-detail/:id" element={<Detail />} />
         <Route path="/coaches" element={<Profesores />} />
         <Route path="/prices" element={<PaquetesClases />} />
         <Route path="/classes" element={<Classes />} />
         <Route path="/profile" element={<UserProfile />} />
-        <Route
-          path="/admin"
-          element={<AuthenticationGuard component={Admin} />}
-        >
-          <Route path="" element={<Dashboard />} />
-          <Route path="users" element={<Users />} />
-          <Route path="activities" element={<Activities />} />
-          <Route path="classes" element={<ClassesAdm />} />
-          <Route path="coaches" element={<Coaches />} />
-          <Route path="goals" element={<GoalsData />} />
-          <Route path="orders" element={<Sales />} />
-          orders
-          <Route path="usersCreate" element={<Form />} />
-          <Route path="coachesCreate" element={<CreateCoach />} />
-          <Route path="classesCreate" element={<ClassesForm />} />
-          <Route path="goalsCreate" element={<CreateGoals />} />
-          <Route path="activitiesCreate" element={<CreateActivitie />} />
+
+        {/* admin routes */}
+        <Route element={<RequireAuth allowedRole={"admin"} />}>
+          <Route path="/admin" element={<Admin />}>
+            <Route path="" element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="activities" element={<Activities />} />
+            <Route path="classes" element={<ClassesAdm />} />
+            <Route path="coaches" element={<Coaches />} />
+            <Route path="goals" element={<GoalsData />} />
+            <Route path="orders" element={<Sales />} />
+            <Route path="usersCreate" element={<Form />} />
+            <Route path="coachesCreate" element={<CreateCoach />} />
+            <Route path="classesCreate" element={<ClassesForm />} />
+            <Route path="goalsCreate" element={<CreateGoals />} />
+            <Route path="activitiesCreate" element={<CreateActivitie />} />
+          </Route>
         </Route>
       </Routes>
       {location.pathname.includes("/admin") ? undefined : <Footer />}

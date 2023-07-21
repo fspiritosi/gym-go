@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const CardActivities = (props) => {
 
-  console.log(props); 
+  // console.log(props); 
   
    return (    
       <div class=" w-4/5 mx-auto border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 border-gray-dark overflow-hidden hover:border-green-neon hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring">

@@ -11,6 +11,7 @@ import Reloj from "../../Assets/sidebar/hora.png"
 import Select from 'react-dropdown-select';
 import SearchBarClasses from "./searchbarclasses";
 
+
 import { filterByDifficulty, filterByTitle, filterByStartTime, filterByDate, filterByCoachName, clearFilters } from "../../redux/actions"
 
 const Sidebar = () => {
@@ -110,22 +111,22 @@ const Sidebar = () => {
 
 
   return (
-    <div className="flex flex-col md:flex-row h-max ">
-      <div className={`${open ? "w-72" : "w-20"} duration-300 h-90 p-10 pt-10 bg-gray-claro rounded-xl gap-9`}>
-        <div className=" flex gap-x-7 items-center ">
+    <div className="flex min-h-screen flex-col md:flex-row h-max ">
+      <div className={`duration-300 h-90 p-10 pt-10 bg-gray-dark rounded-xl gap-9`}>
+        <div className=" flex gap-x-4 mx-12 items-center ">
           <img src={filtro}
-            className={`cursor-pointer rounded-full duration-500 w-20 my-2 ${open && "rotate-[360dg]"}`}
+            className={`cursor-pointer rounded-full duration-500 w-16 my-2}`}
             alt='' />
-          <h1 className={` text-black origin-left font-medium text-x1 duration-200 my-2 text-black ${!open && "scale-0"}`}>Filtros</h1>
+          <h1 className={` text-white origin-left font-medium text-xl duration-200 my-2`}>Filtros</h1>
         </div>
-        <div className={`${!open && "scale-0"} w-60 h-11 my-2`} >
+        <div className={`w-60 h-11 my-2 mx-auto`} >
           <SearchBarClasses />
         </div>
-        <div className={`${!open && "scale-0"} w-70 h-15 `}>
-          <div className="flex inline-flex">
-            <img src={Actividad} className={`w-11 h-10 rounded-full duration-500 shadow-lg`} alt="" />
+        <div className={` w-70 h-15 `}>
+          <div className="inline-flex">            
+            <img src={Actividad} className={`w-11 h-10 rounded-full duration-500 mr-4 shadow-lg`} alt="" />
             <Select
-              className={`text-black w-70 text-sm items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
+              className={`text-black w-70 text-sm items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md 
             origin-left duration-200 `}
               multi
               options={options}
@@ -136,10 +137,10 @@ const Sidebar = () => {
               placeholder="Actividad"
             />
           </div>
-          <div className="flex inline-flex">
-            <img src={Profesor} className={`w-11 h-10 rounded-full duration-500 shadow-lg`} alt="" />
+          <div className="inline-flex">
+            <img src={Profesor} className={`w-11 h-10 rounded-full duration-500 mr-4 shadow-lg`} alt="" />
             <Select
-              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
+              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md
               origin-left duration-200`}
               multi
               options={optionsCoaches}
@@ -151,10 +152,10 @@ const Sidebar = () => {
             />
           </div>
 
-          <div className="flex inline-flex">
-            <img src={Calendario} className={`w-11 h-10 rounded-full duration-500 shadow-lg`} alt="" />
+          <div className="inline-flex">
+            <img src={Calendario} className={`w-11 h-10 rounded-full duration-500 mr-4 shadow-lg`} alt="" />
             <Select
-              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"}
+              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md
                 origin-left duration-200`}
               multi options={allClasse.map((classItem) => ({ value: classItem.startDate, label: classItem.startDate }))}
               onChange={(values) => {
@@ -164,11 +165,10 @@ const Sidebar = () => {
               placeholder="Fecha    "
             />
           </div>
-          <div className="flex inline-flex">
-            <img src={Reloj} className={`w-11 h-10 rounded-full duration-500 shadow-lg`} alt="" />
+          <div className=" inline-flex">
+            <img src={Reloj} className={`w-11 h-10 rounded-full duration-500 mr-4 shadow-lg`} alt="" />
             <Select
-              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md ${!open && "scale-0"
-                } origin-left duration-200`}
+              className={`text-black w-70 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-green-neon rounded-md origin-left duration-200`}
               multi
               options={allClasse.map((classItem) => ({ value: classItem.startTime, label: classItem.startTime }))}
               onChange={(values) => {
@@ -178,18 +178,18 @@ const Sidebar = () => {
               placeholder="Horario  "
             />
           </div>
-          <div className={`${!open && "scale-0"} w-70 h-11 flex items-center justify-end`}>
+          <div className={` w-70 h-11 flex items-center justify-center`}>
             <button className="bg-green-neon hover:bg-green text-black text-sm rounded-md font-semibold py-1 px-4"
               onClick={handleButtonClick}>Filtrar</button>
           </div>
-          <div className={`${!open && "scale-0"} w-70 h-11 flex items-center justify-center`}>
+          <div className={`w-70 h-11 flex items-center justify-center`}>
             <button className="bg-green-neon hover:bg-green text-black text-sm rounded-md font-semibold py-2 px-5"
               onClick={handleClearFilters}>Limpiar Filtros</button>
           </div>
-          <div className={`${!open && "scale-0"} w-50 h-16 text-black flex items-center justify-center`}>
+          <div className={` w-50 h-16 text-white flex items-center justify-center`}>
             <h1 className="text-m font-semibold flex items-center justify-center">Selecciona la Dificultad</h1>
           </div>
-          <div className={`${!open && "scale-0"} w-70 h-11 text-sm text-black font-semibold space-x-2 flex items-center justify-center`}>
+          <div className={`w-70 h-11 text-sm text-white font-semibold space-x-2 flex items-center justify-center`}>
             <label>Fácil
               <input
                 type="checkbox"

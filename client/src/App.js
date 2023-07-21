@@ -26,7 +26,6 @@ import Sales from "./views/Admin/scenes/Tables/SalesData";
 import RequireAuth from "./components/RequireAuth";
 import ReviewsData from "./views/Admin/scenes/Tables/ReviewsData";
 
-
 // axios.defaults.baseURL = "http://localhost:3001";
 axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 

@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
 import {FaWindowClose} from 'react-icons/fa'
-import backgroundImage from '../../Assets/backgraund/Fondo2.jpg'
+import backgroundImage from '../../Assets/backgraund/Fondo1.jpg'
 import Logo from "../../Assets/Logos/Logo.svg";
 
 Modal.setAppElement('#root');
@@ -69,20 +69,20 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     }
 
     return (
-        <div className="px-6 py-0 md:grid grid-cols-6 bg-gray-claro rounded-xl">
+        <div className="px-6 py-0 md:grid grid-cols-6 bg-gray-dark rounded-xl">
             <div className="flex md:flex-row items-center space-x-2 ">
-                <img src={imageA} alt='' className="w-12 h-12 rounded-full" />
-                <h4 className="text-sm font-bold py-3 ">{title}</h4>
+                <img src={imageA} alt='' className="w-16 h-16 rounded-full" />
+                <h4 className="text-lg text-white font-semibold py-3 ">{title}</h4>
             </div>
             <div className="flex md:flex-row items-center space-x-2">
-                <img src={imageC} alt='' className="w-12 h-12 rounded-full" />
-                <h4 className="text-sm font-bold py-4 ">{coachName}</h4>
+                <img src={imageC} alt='' className="w-16 h-16 rounded-full" />
+                <h4 className="text-lg text-white font-semibold py-4 ">{coachName}</h4>
             </div>
             <div className="flex md:flex-row items-center space-x-2">
-                <h4 className="text-sm font-bold mx-auto">{difficultyText}</h4>
+                <h4 className="text-lg text-white font-semibold mx-auto">{difficultyText}</h4>
             </div>
             <div className="flex md:flex-row items-center space-x-2">
-                <h4 className="text-sm font-bold ">{startTime} a {endTime} hrs</h4>
+                <h4 className="text-lg text-white font-semibold ">{startTime} a {endTime} hrs</h4>
             </div>
             <div className="px-0.6 py-5 grid gap-2 grid-cols-3 w-72">
                 {date.map((event, index) => (
@@ -122,11 +122,11 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
                 alt="logo"
             />
                 <h1 className='text-4xl font-semibold leading-normal text-white'>Debes iniciar sesión o registrarte para suscribirte a este evento</h1>
-                <button class="rounded-xl w-96 inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" 
+                <button class="rounded-xl w-64  mx-auto inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" 
                 onClick={handleModalLogin}>Iniciar sesión</button>
-                <button  class="rounded-xl w-96 inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" 
+                <button  class="rounded-xl w-64 mx-auto inline-block bg-green-neon px-6 pb-2 pt-2.5 text-xs font-semibold uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-green hover:border-2 hover:border-white active:bg-gray" 
                 onClick={handleModalLogin}>Registrarse</button>
-                <button onClick={closeModal} className= ' ml-44 box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'>
+                <button onClick={closeModal} className= ' mx-auto box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'>
                 <FaWindowClose color='white' className='w-8 h-8'/>
                 </button>
                 </div>

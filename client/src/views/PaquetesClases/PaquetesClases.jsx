@@ -17,7 +17,7 @@ const PaqueteClases = () => {
                 </div>               
             </div>
 
-            <div class=" grid gap-6 mt-16 px-8 -mx-6 sm:gap-8 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+            <div class=" grid gap-4 mt-16 mx-8 sm:gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
 
             {EjemploPC.map((p, index) => {
                     return ( 

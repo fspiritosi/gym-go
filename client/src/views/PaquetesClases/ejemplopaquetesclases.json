@@ -33,5 +33,12 @@
         "clases": 50,
         "price": 12000,
         "description": "" 
+    },
+    { 
+        "id": 6,
+        "title": "100 clases",
+        "clases": 100,
+        "price": 21000,
+        "description": ""
     }
 ]

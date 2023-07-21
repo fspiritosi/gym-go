@@ -36,7 +36,7 @@ const Classes = () => {
 
     return (
         <section >
-        <div class="flex flex-col md:flex-row bg-black py-14">
+        <div class="flex  min-h-screen flex-col md:flex-row bg-black py-14">
             <Sidebar/>
             <div class="px-5 py-5 space-y-3">
                 <h2 class="text-4xl font-semibold text-white py-5">¡Superate a ti mismo!</h2>

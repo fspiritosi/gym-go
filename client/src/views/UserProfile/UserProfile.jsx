@@ -32,15 +32,17 @@ const UserProfile = () => {
            <FaUserCircle className=" mx-auto mb-10 mt-24 w-24 h-24"/>      
           <span class=" mt-2 text-2xl font-semibold">{user.username}</span>
 
-          <div class=" my-14 py-10 px-10">      
-         <div className=" rounded-xl h-10 items-center pt-2 pb-10 hover:bg-green.claro bg-green-neon">
+          <div class=" my-14 py-10 px-10">
+            <div className="text-lg font-semibold mr-2 mb-10">Creditos disponibles: {user.credits}</div>   
+         <div className=" rounded-xl h-10 items-center  pt-2 pb-10 hover:bg-green.claro bg-green-neon">
          <Link to='/prices'>
          <span class="text-lg font-semibold mr-3 text-black">Comprar más</span>
           <button>
-            <SiShopee color="black" className="h-6 w-6 "/>    
+            <SiShopee color="black" className="h-6 w-6 "/> 
           </button>
           </Link>
-          </div>                       
+          </div>
+
          </div>
          </div>
 
@@ -70,7 +72,7 @@ const UserProfile = () => {
       </div>
          <div class=" min-h-screen rounded-lg bg-gray-dark lg:col-span-2">
          <div class=" mt-4 mb-4 items-center">
-         <span class="text-xl font-semibold mr-2 ">Mis Creditos</span> 
+         <span class="text-xl font-semibold mr-2 ">Mis Compras</span> 
         <button>
           <MdCreditScore color="white" className="h-6 w-6"/>           
         </button>               
@@ -81,7 +83,7 @@ const UserProfile = () => {
                    <CardCompras
                     key={purchase.orderId}
                      description={purchase.item.description}
-                     createdAt={purchase.item.createdAt}
+                     createdAt={purchase.createdAt}
                    />
                  ))
               }            

@@ -43,7 +43,7 @@ const SearchBarClasses = () => {
                     value={searchTerm}
                     onChange={handlerInputChange}
                 />
-                <button class=' ml-3' type="submit" onClick={handlerSubmit}><FaSearch /></button>
+                <button class=' ml-3' type="submit" onClick={handlerSubmit}><FaSearch color="white" /></button>
             </div>
         </div>
     )

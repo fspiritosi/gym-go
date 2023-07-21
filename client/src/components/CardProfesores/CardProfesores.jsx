@@ -1,11 +1,9 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
-import Modal from "../../components/Modal/Modal";
+
 import { useState } from "react";
 
 const Card = ({ id, firstName, profilePicture, description, lastName }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <div class="my-4 px-1 w-1/5  md:w-1/5 lg:w-1/6 overflow-hiddden">
       <div>
@@ -20,15 +18,6 @@ const Card = ({ id, firstName, profilePicture, description, lastName }) => {
           </b>
         </p>
         <p class="text-yellow-500">{description}</p>
-      </div>
-      <div>
-        <button onClick={() => setIsModalOpen(true)}>Calificar</button>
-        <Modal
-          isOpen={isModalOpen}
-          closeModal={() => {
-            setIsModalOpen(false);
-          }}
-        />
       </div>
     </div>
   );

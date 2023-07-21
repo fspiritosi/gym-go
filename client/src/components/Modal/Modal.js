@@ -2,14 +2,12 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useDispatch } from "react";
 import { getUserLogged } from "../../redux/actions";
-import { useSelector, useEffect } from "react-redux";
+import { useEffect } from "react-redux";
 import { axios } from "axios";
 
 const Modal = ({ isOpen, closeModal }) => {
   let dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUserLogged(user.email, user.nickname, user.id));
-  }, [dispatch]);
+
   const [input, setInput] = useState({
     rate: "",
   });
@@ -32,7 +30,7 @@ const Modal = ({ isOpen, closeModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { rate } = input;
-    axios.post("/reviews", { userId: user.id, eventId: coaches.Activities.id });
+
     // dispatch(
     //   postReview({
     //     userId: user.id,

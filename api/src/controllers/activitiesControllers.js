@@ -106,16 +106,7 @@ const createActivity = async (title, description, image, goals) => {
 };
 
 const updateActivity = async (id, title, description, image, goals, isActive) => {
-  console.log(
-    "este es el console.log: ",
-    id,
-    title,
-    description,
-    image,
-    goals,
-    isActive
-  );
-  const activity = await Activities.findByPk(id, {
+  let activity = await Activities.findByPk(id, {
     include: [
       {
         model: Goals,

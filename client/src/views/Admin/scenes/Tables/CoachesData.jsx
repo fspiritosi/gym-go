@@ -213,7 +213,7 @@ const Coaches = () => {
 
   return (
     <Box m="20px">
-      <Header title="PROFESORES" subtitle="Administra los prefesores" />
+      <Header title="PROFESORES" subtitle="Administra los profesores" />
       <Box
         m="40px 0 0 0"
         height="75vh"

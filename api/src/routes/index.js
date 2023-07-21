@@ -7,6 +7,7 @@ const eventsRouter = require("./eventsRouter");
 const userRouter = require("./userRouter");
 const mercadopagoRouter = require("./mercadopagoRouter");
 const ordersRouter = require("./ordersRouter");
+const reviewsRouter = require("./reviewsRouter");
 
 const mainRouter = Router();
 
@@ -18,5 +19,6 @@ mainRouter.use("/events", eventsRouter);
 mainRouter.use("/users", userRouter);
 mainRouter.use("/mercadopago", mercadopagoRouter);
 mainRouter.use("/orders", ordersRouter);
+mainRouter.use("/reviews", reviewsRouter);
 
 module.exports = mainRouter;

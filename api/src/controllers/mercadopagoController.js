@@ -9,7 +9,7 @@ const createPreference = (description, price, quantity) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:3000/prices",
+      success: "http://localhost:3000/profile",
       failure: "http://localhost:3000/prices",
       pending: "http://localhost:3000/prices",
     },

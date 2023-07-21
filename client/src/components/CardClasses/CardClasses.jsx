@@ -69,39 +69,40 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
     }
 
     return (
-        <div className="px-6 py-0 grid grid-cols-6 bg-gray-claro rounded-xl">
-            <div className="flex items-center space-x-2 ">
+        <div className="px-6 py-0 md:grid grid-cols-6 bg-gray-claro rounded-xl">
+            <div className="flex md:flex-row items-center space-x-2 ">
                 <img src={imageA} alt='' className="w-12 h-12 rounded-full" />
                 <h4 className="text-sm font-bold py-3 ">{title}</h4>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex md:flex-row items-center space-x-2">
                 <img src={imageC} alt='' className="w-12 h-12 rounded-full" />
                 <h4 className="text-sm font-bold py-4 ">{coachName}</h4>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex md:flex-row items-center space-x-2">
                 <h4 className="text-sm font-bold mx-auto">{difficultyText}</h4>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex md:flex-row items-center space-x-2">
                 <h4 className="text-sm font-bold ">{startTime} a {endTime} hrs</h4>
             </div>
-            {/* <h5 className="text-xs bg-gray-claro">Proximas Fechas</h5> */}
+            {/* <div className="flex flex-row items-center w-10 h-5">
+            <h5 className="text-sm font-bold mx-auto">Proximas Fechas</h5>
+            </div> */}
             <div className="px-0.6 py-5 grid gap-2 grid-cols-3 w-72">
                 {date.map((event, index) => (
-                    <div key={index} className="flex flex-row items-center">
+                    <div key={index} className="flex md:flex-row items-center">
                         {isAuthenticated ? (
-                            <div className="flex flex-row items-center">
+                            <div className="flex md:flex-row items-center">
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
-                                    className={`px-3 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon hover:bg-green ${
-                                        quota - eventQuota[index].length <= 0 ? 'bg-gray-claro' : ''
-                                    } whitespace-nowrap truncate `}
+                                    className={`px-3 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon hover:bg-green whitespace-nowrap truncate ${
+                                    quota - eventQuota[index].length <= 0 ? 'bg-white hover:bg-white shadow-lg' : '' } `}
                                 >
-                                {event}{eventQuota[index].includes(user.id) && <h5 className="text-xs bg-gray-claro">Suscrito</h5>}
+                                {event}{eventQuota[index].includes(user.id) && <h5 className="text-xs bg-gray-claro rounded-xl ">Suscrito</h5>}
                                 </button>
                                 {/* <h4>{quota - eventQuota[index].length} lugares disponibles</h4> */}
                             </div>
                         ) : (
-                            <div className="flex flex-row items-center space-x-3">
+                            <div className="flex md:flex-row items-center space-x-3">
                                 <button
                                     onClick={() => handleReserva(eventId, index)}
                                     className="px-3 py-2 text-black text-xs font-semibold rounded-xl shadow-lg bg-green-neon hover:bg-green whitespace-nowrap truncate"

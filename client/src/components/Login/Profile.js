@@ -8,12 +8,15 @@ import "tailwindcss/tailwind.css";
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, isAuthenticated, isLoading, logout, loginWithRedirect } =
-    useAuth0();
+  const { user, isAuthenticated, isLoading, logout, loginWithRedirect } = useAuth0();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserLogged(user.email, user.nickname));
+    if (user) {
+      dispatch(getUserLogged(user.email, user.nickname));
+    } else {
+      return
+    }
   }, [dispatch]);
 
   const toggleDropdown = () => {

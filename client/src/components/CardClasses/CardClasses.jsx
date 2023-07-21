@@ -84,9 +84,6 @@ const CardClasses = ({ eventId, title, difficulty, date, startTime, endTime, eve
             <div className="flex md:flex-row items-center space-x-2">
                 <h4 className="text-sm font-bold ">{startTime} a {endTime} hrs</h4>
             </div>
-            {/* <div className="flex flex-row items-center w-10 h-5">
-            <h5 className="text-sm font-bold mx-auto">Proximas Fechas</h5>
-            </div> */}
             <div className="px-0.6 py-5 grid gap-2 grid-cols-3 w-72">
                 {date.map((event, index) => (
                     <div key={index} className="flex md:flex-row items-center">

@@ -45,7 +45,7 @@ const Classes = () => {
             <div className="space-y-3">
             {sortedClasses?.map((clase, index) => {
             if (clase.isActive === false) {
-                    return null; // No mostrar la clase si isActive es false REVISAR 
+                    return null; // No mostrar la clase si isActive es false
                 }
                 return (
                     <CardClasses

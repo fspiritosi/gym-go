@@ -1,39 +1,62 @@
-import { Box, Typography, useTheme} from '@mui/material';
+import { Box, Typography, Button,useTheme} from '@mui/material';
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from '../../../../theme';
-import { mockDataTeam } from "../../data/mockData";
+// import { mockDataTeam } from "../../data/mockData";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 
 import AdminPanelSettingsOutlined from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
+// import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../adminComponentes/Header";
 
 const Users = () => {
+  const [user, setUsers] = useState([]);
+ 
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
 
+    const changeRole = async (id, role) => {
+      await axios.put(`/users/${id}`, role);
+      getUsers();
+    };
     const colums = [
-      { field: "id", headerName: "ID" },
       {
-        field: "name",
-        headerName: "Name",
+        field: "username",
+        headerName: "Username",
         flex: 1,
         cellClassName: "name-column--cell",
       },
       {
-        field: "age",
-        headerName: "Age",
-        type: "number",
-        headerAlign: "left",
-        align: "left",
+        field: "email",
+        headerName: "Email",
       },
-      { field: "phone", headerName: "Phone Number", flex: 1 },
-      { field: "email", headerName: "Email", flex: 1 },
       {
-        field: "access",
-        headerName: "Access Level",
+        field: "credits",
+        headerName: "Creditos Disponibles",
         flex: 1,
-        renderCell: ({ row: { access } }) => {
+        headerAlign: "center",
+        align: "center",
+        type: "number",
+      },
+      {
+        field: "purchases",
+        headerName: "Compras Totales",
+        flex: 1,
+        headerAlign: "center",
+        align: "center",
+        renderCell: ({ row: { purchases } }) => {
+          return <Box>{purchases ? purchases.length : 0}</Box>;
+        },
+      },
+      {
+        field: "role",
+        headerName: "Rol de Usuario",
+        flex: 1,
+        headerAlign: "center",
+        align: "center",
+        renderCell: ({ row: { role, id } }) => {
           return (
             <Box
               width="60%"
@@ -42,23 +65,56 @@ const Users = () => {
               display="flex"
               justifyContent="center"
               backgroundColor={
-                access === "admin"
-                  ? colors.greenAccent[600]
-                  : colors.greenAccent[700]
+                role === "admin"
+                  ? colors.greenAccent[500]
+                  : colors.redAccent[500]
               }
               borderRadius="4px"
             >
-              {access === "admin" && <AdminPanelSettingsOutlined />}
-              {access === "manager" && <SecurityOutlinedIcon />}
-              {access === "user" && <LockOpenOutlinedIcon />}
-              <Typography color={colors.grey[100]} sx={{ m: "5px" }}>
-                {access}
-              </Typography>
+              {role === "admin" && (
+                <Button
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                  onClick={() => {
+                    changeRole(id, { role: "user" });
+                  }}
+                >
+                  <AdminPanelSettingsOutlined />
+                </Button>
+              )}
+              {role === "user" && (
+                <Button
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                  onClick={() => {
+                    changeRole(id, { role: "admin" });
+                  }}
+                >
+                  <LockOpenOutlinedIcon />
+                </Button>
+              )}
             </Box>
           );
         },
       },
     ];
+
+    const getUsers = async () => {
+      const allUsers= await axios.get("/users");
+      setUsers(allUsers.data);
+    };
+    useEffect(() => {
+      getUsers();
+    }, []);
+
 
     return (
       <Box m="20px">
@@ -95,10 +151,7 @@ const Users = () => {
             },
           }}
         >
-          <DataGrid
-            rows={mockDataTeam}
-            columns={colums}
-          />
+          <DataGrid rows={user} columns={colums} />
         </Box>
       </Box>
     );

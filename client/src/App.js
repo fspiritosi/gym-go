@@ -23,8 +23,9 @@ import GoalsData from "./views/Admin/scenes/Tables/GoalsData";
 import CreateCoach from "./views/Admin/scenes/Forms/createCoach";
 import CreateActivitie from "./views/Admin/scenes/Forms/createActivities";
 import UserProfile from "./views/UserProfile/UserProfile";
+import Sales from "./views/Admin/scenes/Tables/SalesData";
 
-// axios.defaults.baseURL = "http://localhost:3001";
+//axios.defaults.baseURL = "http://localhost:3001";
 axios.defaults.baseURL = "https://gym-go-production.up.railway.app";
 
 function App() {
@@ -32,9 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname.includes("/admin") ? undefined : (
-        <Nav />
-      )}
+      {location.pathname.includes("/admin") ? undefined : <Nav />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/activities" element={<ActivitiesV />} />
@@ -58,6 +57,8 @@ function App() {
           <Route path="classes" element={<ClassesAdm />} />
           <Route path="coaches" element={<Coaches />} />
           <Route path="goals" element={<GoalsData />} />
+          <Route path="orders" element={<Sales />} />
+          orders
           <Route path="usersCreate" element={<Form />} />
           <Route path="coachesCreate" element={<CreateCoach />} />
           <Route path="classesCreate" element={<ClassesForm />} />
@@ -65,9 +66,7 @@ function App() {
           <Route path="activitiesCreate" element={<CreateActivitie />} />
         </Route>
       </Routes>
-      {location.pathname.includes("/admin") ? undefined : (
-        <Footer />
-      )}
+      {location.pathname.includes("/admin") ? undefined : <Footer />}
     </div>
   );
 }

@@ -17,7 +17,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className="flex fixed justify-between bg-gray text-white w-screen">
+    <nav className="flex fixed justify-between z-50 bg-gray text-white w-screen">
       <div className="px-5 xl:px-12 py-3 flex w-full items-center">
         <Link to="/">
           <img
